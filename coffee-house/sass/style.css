@@ -1,5 +1,47 @@
-h1 {
-  color: forestgreen;
-  font-size: 50px;
-  background: #FF9900;
+@import url("https://fonts.cdnfonts.com/css/inter");
+body {
+  background-color: #E1D4C9;
+  font-family: "Inter", sans-serif;
+  color: #403F3D;
+}
+
+a {
+  color: inherit;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  margin: auto;
+  width: 1360px;
+}
+
+.header__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navigation {
+  display: flex;
+}
+
+.navigation__link {
+  list-style: none;
+  padding: 0 10px;
+  cursor: pointer;
 }/*# sourceMappingURL=style.css.map */

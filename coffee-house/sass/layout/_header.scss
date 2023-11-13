@@ -1,0 +1,15 @@
+.header__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navigation {
+    display: flex;
+}
+
+.navigation__link {
+    list-style: none;
+    padding: 0 10px;
+    cursor: pointer;
+}

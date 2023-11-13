@@ -1,7 +1,12 @@
+//Abstract
 @import "abstracts/constants";
 
-h1 {
-    color: forestgreen;
-    font-size: 50px;
-    background: $color-primary;
-}
+//Base
+@import "base/base";
+@import "base/normalize";
+
+//Components
+
+//Layout
+@import "layout/container";
+@import "layout/header";
