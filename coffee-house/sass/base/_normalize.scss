@@ -6,10 +6,26 @@ body {
     margin: 0;
 }
 
+ul {
+    padding: 0;
+    margin: 0;
+}
+
 li {
     list-style: none;
+    padding: 0;
 }
+
 
 a {
     text-decoration: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+h1 {
+    margin: 0;;
 }
