@@ -1,0 +1,9 @@
+.btn {
+    transition: all 0.7s ease;
+}
+.btn:hover {
+    background: $color-background-container;
+    path {
+        stroke: $color-text-light;
+} 
+}
