@@ -11,14 +11,14 @@
         padding-right: 630px;
 }
     &__title {
-        margin-bottom: $margin-inside-component;
+        margin-bottom: $gap;
         &-accent {
             @include font(72px, 600, 105%, italic);
             color: $color-text-accent;
         }
 }
     &__text {
-        margin-bottom: $margin-inside-component;
+        margin-bottom: $gap;
     }
    
 }
@@ -50,8 +50,6 @@
             opacity: 1;
         }
     }
-    
-   
 }
 
 

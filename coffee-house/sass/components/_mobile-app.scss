@@ -1,0 +1,41 @@
+.mobile-app {
+    display: flex;
+    align-items: center;
+    gap: 100px;
+    margin-bottom: $margin-between-components;
+    &__content {
+        display: flex;
+        flex-direction: column;
+        width: 630px;
+        gap: $gap;
+    }
+    &__buttons {
+        display: flex;
+        gap: 20px;
+    }
+}
+
+.mal {
+        display: inline-block;
+        width: 200px;
+        padding: 12px 20px;
+        border-radius: 100px;
+        border: 1px solid $color-border-dark;
+        background: transparent;
+        
+}
+
+.mal-container {
+    align-items:center;
+    justify-content: start;
+}
+
+.mal-btn-text {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.mal-1 {
+    @include font($size: 10px, $height: 140%)
+}

@@ -26,6 +26,15 @@ img {
     max-width: 100%;
 }
 
-h1,h2,h3 {
+h1,h2,h3,p {
     margin: 0;;
+}
+
+button {
+    padding: 0;
+    border: none;
+    font-family: inherit;
+    color: inherit;
+    background-color: transparent;
+    cursor: pointer;
 }

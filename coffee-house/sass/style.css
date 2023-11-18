@@ -1,4 +1,8 @@
 @import url("https://fonts.cdnfonts.com/css/inter");
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "Inter", sans-serif;
   background-color: #E1D4C9;
@@ -9,7 +13,7 @@ body {
   font-style: normal;
 }
 
-a, li {
+a, li, button {
   color: inherit;
   font-size: 16px;
   font-weight: 600;
@@ -50,6 +54,20 @@ h3 {
   margin-left: 8px;
 }
 
+.icon__play-market {
+  background-image: url("/coffee-house/img/play-market.svg");
+  width: 36px;
+  height: 36px;
+  margin-right: 8px;
+}
+
+.icon__apple {
+  background-image: url("/coffee-house/img/apple.svg");
+  width: 36px;
+  height: 36px;
+  margin-right: 8px;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -77,8 +95,17 @@ img {
   max-width: 100%;
 }
 
-h1, h2, h3 {
+h1, h2, h3, p {
   margin: 0;
+}
+
+button {
+  padding: 0;
+  border: none;
+  font-family: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .enjoy {
@@ -209,12 +236,20 @@ h1, h2, h3 {
 .btn {
   transition: all 0.7s ease;
 }
+.btn path {
+  stroke: #403F3D;
+  fill: #403F3D;
+  transition: all 1.5s ease;
+}
 
 .btn:hover {
   background: #665F55;
+  color: #E1D4C9;
 }
 .btn:hover path {
   stroke: #E1D4C9;
+  fill: #E1D4C9;
+  transition: all 1.7s ease;
 }
 
 .about {
@@ -247,16 +282,13 @@ h1, h2, h3 {
   flex-direction: column;
   gap: 40px;
 }
-
-.about__item {
+.about__items-column .about__item {
   width: 660px;
   height: 430px;
   border-radius: 20px;
   overflow: hidden;
-  margin: 0 auto;
 }
-
-.item-big {
+.about__items-column .item-big {
   height: 590px;
 }
 
@@ -265,13 +297,54 @@ h1, h2, h3 {
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
-  border-radius: 20px;
   transform: scale(1.1);
   transition: 0.8s;
 }
 .about__item > img:hover {
   transform: scale(1);
-  transition: 0.8s;
+}
+
+.mobile-app {
+  display: flex;
+  align-items: center;
+  gap: 100px;
+  margin-bottom: 100px;
+}
+.mobile-app__content {
+  display: flex;
+  flex-direction: column;
+  width: 630px;
+  gap: 40px;
+}
+.mobile-app__buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.mal {
+  display: inline-block;
+  width: 200px;
+  padding: 12px 20px;
+  border-radius: 100px;
+  border: 1px solid #665F55;
+  background: transparent;
+}
+
+.mal-container {
+  align-items: center;
+  justify-content: start;
+}
+
+.mal-btn-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.mal-1 {
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 140%;
+  font-style: normal;
 }
 
 .wrapper {
@@ -281,7 +354,7 @@ h1, h2, h3 {
 
 .container {
   margin: auto;
-  width: 1360px;
+  max-width: 1360px;
 }
 
 .header__container {
