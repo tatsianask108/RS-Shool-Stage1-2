@@ -141,6 +141,7 @@ h1, h2, h3 {
   align-items: center;
   gap: 40px;
   text-align: center;
+  margin-bottom: 100px;
 }
 .favorite-coffee__title-accent {
   font-size: 60px;
@@ -214,6 +215,63 @@ h1, h2, h3 {
 }
 .btn:hover path {
   stroke: #E1D4C9;
+}
+
+.about {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 100px;
+}
+.about__title {
+  font-size: 59.8px;
+  font-weight: 600;
+  line-height: 125%;
+  font-style: normal;
+  text-align: left;
+  margin-bottom: 40px;
+}
+.about__title-accent {
+  font-size: 59.9px;
+  font-weight: 600;
+  line-height: 125%;
+  font-style: italic;
+  color: #B0907A;
+}
+
+.about__items {
+  display: flex;
+  gap: 40px;
+}
+.about__items-column {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.about__item {
+  width: 660px;
+  height: 430px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.item-big {
+  height: 590px;
+}
+
+.about__item > img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 20px;
+  transform: scale(1.1);
+  transition: 0.8s;
+}
+.about__item > img:hover {
+  transform: scale(1);
+  transition: 0.8s;
 }
 
 .wrapper {

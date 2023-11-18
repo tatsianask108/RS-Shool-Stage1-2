@@ -5,20 +5,20 @@
     height: 644px;
     border-radius: 40px;
     padding: 100px;
-    margin-bottom: 100px;
+    margin-bottom: $margin-between-components;
     &__content {
         color: $color-text-light;
         padding-right: 630px;
 }
     &__title {
-        margin-bottom: 40px;
+        margin-bottom: $margin-inside-component;
         &-accent {
             @include font(72px, 600, 105%, italic);
             color: $color-text-accent;
         }
 }
     &__text {
-        margin-bottom: 40px;
+        margin-bottom: $margin-inside-component;
     }
    
 }
