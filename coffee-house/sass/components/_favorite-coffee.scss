@@ -5,10 +5,6 @@
     gap: $gap;
     text-align: center;
     margin-bottom: $margin-between-components;
-    &__title-accent {
-            @include font(60px, 600, 105%, italic);
-            color: $color-text-accent;
-        }
     &__controls {
             display: flex;
             gap: 12px;

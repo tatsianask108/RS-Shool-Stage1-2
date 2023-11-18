@@ -2,14 +2,10 @@
 display: flex;
 flex-direction: column;
 margin-bottom: $margin-between-components;
-&__title {
-    @include font ($size: 59.8px);
+.h2__title {
+    @include font ($size: 59.9px);
     text-align: left;
     margin-bottom: 40px;
-    &-accent {
-        @include font ($size: 59.9px, $style: italic);
-        color: $color-text-accent;
-    }
 }
 }
 
