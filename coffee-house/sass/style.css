@@ -59,7 +59,6 @@ button {
   font-family: inherit;
   color: inherit;
   background-color: transparent;
-  cursor: pointer;
 }
 
 h1 {
@@ -112,18 +111,6 @@ h3 {
   margin-left: 8px;
 }
 
-.icon__play-market {
-  background-image: url("/coffee-house/img/play-market.svg");
-  width: 36px;
-  height: 36px;
-}
-
-.icon__apple {
-  background-image: url("/coffee-house/img/apple.svg");
-  width: 36px;
-  height: 36px;
-}
-
 .icon-map {
   background-image: url("/coffee-house/img/map.svg");
   width: 20px;
@@ -143,6 +130,11 @@ h3 {
   vertical-align: top;
 }
 
+.icon-tag {
+  width: 30px;
+  height: 30px;
+}
+
 .btn, .link {
   transition: all 0.7s ease;
 }
@@ -157,6 +149,10 @@ h3 {
 .btn:hover path {
   stroke: #E1D4C9;
   transition: all 1.7s ease;
+}
+
+.disabled {
+  pointer-events: none;
 }
 
 .link {
@@ -473,4 +469,57 @@ h3 {
 
 .footer-after:after {
   background-color: #E1D4C9;
+}
+
+.offer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 40px;
+  text-align: center;
+  padding: 0 280px;
+  margin-bottom: 40px;
+}
+.offer__tabs {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 125%;
+  font-style: normal;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.tag {
+  cursor: pointer;
+  padding: 8px 16px 8px 8px;
+  border: 1px solid #C1B6AD;
+  transition: all 0.7s ease;
+}
+.tag:hover, .tag__selected {
+  color: #E1D4C9;
+  background-color: #665F55;
+  border-color: #665F55;
+}
+.tag:hover rect, .tag__selected rect {
+  fill: #E1D4C9;
+  transition: all 1.7s ease;
+}
+.tag__selected {
+  pointer-events: none;
+}
+
+.grid {
+  display: grid;
+  gap: 40px;
+  row-gap: 40px;
+  padding-top: 40px;
+  grid-template-columns: repeat(4, 310px);
+  grid-template-rows: repeat(2, 506px);
+}
+
+.description {
+  display: grid;
+  grid-template-rows: 30px 72px 30px;
+  gap: 12px;
 }/*# sourceMappingURL=style.css.map */

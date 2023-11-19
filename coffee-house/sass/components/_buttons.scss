@@ -14,3 +14,7 @@
         transition: all 1.7s ease;
 } 
 }
+
+.disabled {
+    pointer-events: none;
+}
