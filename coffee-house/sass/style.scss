@@ -1,21 +1,23 @@
 //Abstract
-@import "abstracts/constants";
+@import "abstracts/variables";
 @import "abstracts/mixins";
 
 //Base
 @import "base/base";
-@import "base/icons";
 @import "base/normalize";
 @import "base/typography";
 
 //Components
-@import "components/enjoy";
-@import "components/favorite-coffee";
+@import "components/icons";
 @import "components/buttons";
-@import "components/about";
-@import "components/mobile-app";
+@import "components/links";
+
 
 //Layout
 @import "layout/container";
 @import "layout/header";
+@import "layout/enjoy";
+@import "layout/favorite-coffee";
+@import "layout/about";
+@import "layout/mobile-app";
 @import "layout/footer";

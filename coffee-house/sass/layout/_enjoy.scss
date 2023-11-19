@@ -24,15 +24,7 @@
 }
 
 .enjoy__link {
-    display: inline-block;
     padding: 20px 65px;
-    background-color: $color-background-body;
-    border-radius: 100px;
-    color: $color-text-dark;
-    &-container {
-        display: flex;
-        justify-content: center;
-    }
     &-text {
         transition: all 0.7s ease;
         position: relative;

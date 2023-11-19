@@ -5,14 +5,14 @@
     margin: 20px 0;
 }
 
-.logo {
-    pointer-events: none;
-}
+// .logo {
+//     pointer-events: none;
+// }
 .navigation {
     display: flex;
     justify-content: space-between;
     align-items: start;
-    gap: 40px;
+    gap: $gap;
 }
 
 .navigation__link, .menu-link {

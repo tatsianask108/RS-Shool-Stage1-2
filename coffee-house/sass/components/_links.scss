@@ -1,0 +1,11 @@
+.link {
+    display: inline-block;
+    background-color: $color-background-body;
+    border-radius: 100px;
+    color: $color-text-dark;
+    &-container {
+        display: flex;
+        justify-content: center;
+        align-items:center;
+    }
+}

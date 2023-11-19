@@ -21,51 +21,6 @@ a, li, button {
   font-style: normal;
 }
 
-.icon {
-  cursor: pointer;
-  display: inline-block;
-  margin-right: 8px;
-}
-
-.icon_coffee-cup {
-  background-image: url("/coffee-house/img/coffee-cup.svg");
-  width: 18px;
-  height: 19px;
-  margin-right: 0;
-  margin-left: 8px;
-}
-
-.icon__play-market {
-  background-image: url("/coffee-house/img/play-market.svg");
-  width: 36px;
-  height: 36px;
-}
-
-.icon__apple {
-  background-image: url("/coffee-house/img/apple.svg");
-  width: 36px;
-  height: 36px;
-}
-
-.icon-map {
-  background-image: url("/coffee-house/img/map.svg");
-  width: 20px;
-  height: 20px;
-}
-
-.icon-phone {
-  background-image: url("/coffee-house/img/phone.svg");
-  width: 20px;
-  height: 20px;
-}
-
-.icon-clock {
-  background-image: url("/coffee-house/img/clock.svg");
-  width: 20px;
-  height: 20px;
-  vertical-align: top;
-}
-
 * {
   box-sizing: border-box;
 }
@@ -143,6 +98,123 @@ h3 {
   font-style: normal;
 }
 
+.icon {
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.icon_coffee-cup {
+  background-image: url("/coffee-house/img/coffee-cup.svg");
+  width: 18px;
+  height: 19px;
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+.icon__play-market {
+  background-image: url("/coffee-house/img/play-market.svg");
+  width: 36px;
+  height: 36px;
+}
+
+.icon__apple {
+  background-image: url("/coffee-house/img/apple.svg");
+  width: 36px;
+  height: 36px;
+}
+
+.icon-map {
+  background-image: url("/coffee-house/img/map.svg");
+  width: 20px;
+  height: 20px;
+}
+
+.icon-phone {
+  background-image: url("/coffee-house/img/phone.svg");
+  width: 20px;
+  height: 20px;
+}
+
+.icon-clock {
+  background-image: url("/coffee-house/img/clock.svg");
+  width: 20px;
+  height: 20px;
+  vertical-align: top;
+}
+
+.btn, .link {
+  transition: all 0.7s ease;
+}
+.btn path, .link path {
+  transition: all 1.5s ease;
+}
+
+.btn:hover {
+  background: #665F55;
+  color: #E1D4C9;
+}
+.btn:hover path {
+  stroke: #E1D4C9;
+  transition: all 1.7s ease;
+}
+
+.link {
+  display: inline-block;
+  background-color: #E1D4C9;
+  border-radius: 100px;
+  color: #403F3D;
+}
+.link-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper {
+  margin: auto;
+  width: 1360px;
+}
+
+.container {
+  margin: auto;
+  max-width: 1360px;
+}
+
+.header__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 40px;
+}
+
+.navigation__link, .menu-link {
+  list-style: none;
+  cursor: pointer;
+}
+.navigation__link:after, .menu-link:after {
+  content: "";
+  display: block;
+  height: 2px;
+  width: 100%;
+  background-color: #403F3D;
+  opacity: 0;
+  transition: all 0.7s ease;
+  transform: scale(0);
+  transform-origin: center;
+}
+.navigation__link:hover:after, .menu-link:hover:after {
+  opacity: 1;
+  transform: scale(1);
+}
+
 .enjoy {
   background-image: url(/coffee-house/img/enjoy.jpg);
   background-position: center;
@@ -171,15 +243,7 @@ h3 {
 }
 
 .enjoy__link {
-  display: inline-block;
   padding: 20px 65px;
-  background-color: #E1D4C9;
-  border-radius: 100px;
-  color: #403F3D;
-}
-.enjoy__link-container {
-  display: flex;
-  justify-content: center;
 }
 .enjoy__link-text {
   transition: all 0.7s ease;
@@ -261,25 +325,6 @@ h3 {
   margin-bottom: 16px;
 }
 
-.btn {
-  transition: all 0.7s ease;
-}
-.btn path {
-  stroke: #403F3D;
-  fill: #403F3D;
-  transition: all 1.5s ease;
-}
-
-.btn:hover {
-  background: #665F55;
-  color: #E1D4C9;
-}
-.btn:hover path {
-  stroke: #E1D4C9;
-  fill: #E1D4C9;
-  transition: all 1.7s ease;
-}
-
 .about {
   display: flex;
   flex-direction: column;
@@ -308,6 +353,7 @@ h3 {
   height: 430px;
   border-radius: 20px;
   overflow: hidden;
+  cursor: pointer;
 }
 .about__items-column .item-big {
   height: 590px;
@@ -337,83 +383,32 @@ h3 {
   width: 630px;
   gap: 40px;
 }
-.mobile-app__buttons {
+.mobile-app__links {
   display: flex;
   gap: 20px;
 }
-
-.mal {
-  display: inline-block;
+.mobile-app__link {
   width: 200px;
   padding: 12px 20px;
-  border-radius: 100px;
   border: 1px solid #665F55;
-  background: transparent;
 }
-
-.mal-container {
-  align-items: center;
+.mobile-app__link-container {
   justify-content: start;
 }
-
-.mal-btn-text {
-  display: flex;
-  flex-direction: column;
-}
-
-.mal-1 {
+.mobile-app__link-text {
+  display: block;
   font-size: 10px;
   font-weight: 600;
   line-height: 140%;
   font-style: normal;
 }
-
-.wrapper {
-  margin: auto;
-  width: 1360px;
+.mobile-app__link:hover {
+  background: #665F55;
+  color: #E1D4C9;
 }
-
-.container {
-  margin: auto;
-  max-width: 1360px;
-}
-
-.header__container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 20px 0;
-}
-
-.logo {
-  pointer-events: none;
-}
-
-.navigation {
-  display: flex;
-  justify-content: space-between;
-  align-items: start;
-  gap: 40px;
-}
-
-.navigation__link, .menu-link {
-  list-style: none;
-  cursor: pointer;
-}
-.navigation__link:after, .menu-link:after {
-  content: "";
-  display: block;
-  height: 2px;
-  width: 100%;
-  background-color: #403F3D;
-  opacity: 0;
-  transition: all 0.7s ease;
-  transform: scale(0);
-  transform-origin: center;
-}
-.navigation__link:hover:after, .menu-link:hover:after {
-  opacity: 1;
-  transform: scale(1);
+.mobile-app__link:hover path {
+  fill: #E1D4C9;
+  transition: all 1.7s ease;
 }
 
 .footer {
@@ -427,31 +422,53 @@ h3 {
   display: flex;
   justify-content: space-between;
 }
-.footer__left-column {
+.footer__column {
   display: flex;
   flex-direction: column;
   gap: 40px;
   flex-basis: 46%;
 }
+.footer__column-right {
+  justify-content: center;
+}
+.footer__column-right > h3 {
+  margin-left: 3px;
+}
+.footer__links {
+  display: flex;
+  gap: 12px;
+}
+.footer__links > * {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: 1px solid #C1B6AD;
+}
+.footer__links > *:hover {
+  background-color: #E1D4C9;
+}
+.footer__links > *:hover path {
+  stroke: #403F3D;
+}
 
-.footer-contacts {
+.footer__contacts {
   font-size: 16px;
   font-weight: 600;
   line-height: 150%;
   font-style: normal;
   display: flex;
   flex-direction: column;
-  gap: 16px;
   align-self: flex-start;
   align-items: start;
+  gap: 16px;
+  margin-left: 4px;
+  margin-top: -5px;
 }
-.footer-contacts > a {
+.footer__contacts > a {
   align-self: flex-start;
-}
-
-.right {
-  justify-content: center;
-  width: 150px;
 }
 
 .footer-after:after {

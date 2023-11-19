@@ -1,8 +1,8 @@
-.btn {
+.btn, .link {
     transition: all 0.7s ease;
     path {
-        stroke: $color-text-dark;
-        fill: $color-text-dark;
+        // stroke: $color-text-dark;
+        // fill: $color-text-dark;
         transition: all 1.5s ease;
 } 
 }
@@ -11,7 +11,6 @@
     color: $color-text-light;
     path {
         stroke: $color-text-light;
-        fill: $color-text-light;
         transition: all 1.7s ease;
 } 
 }
