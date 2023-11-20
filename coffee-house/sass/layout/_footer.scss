@@ -1,0 +1,70 @@
+.footer {
+    padding: 100px;
+    background: $color-background-container;
+    color: $color-text-light;
+    border-radius: 40px;
+    margin-bottom: 40px;
+    &__content {
+        display: flex;
+        justify-content: space-between;
+        
+        
+    }
+    &__column {
+        display: flex;
+        flex-direction: column;
+        gap: $gap;
+        flex-basis: 46%;
+        &-right {
+            justify-content: center;
+        }
+
+        // PIXEL PERFECT
+        &-right > h3 {
+            margin-left: 3px;
+        }
+        
+    }
+    &__links {
+        display: flex;
+        gap: 12px;
+    }
+    &__links > * {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+        border: 1px solid $color-border-light;
+        &:hover {
+            background-color: $color-background-body;
+            path {
+                stroke: $color-text-dark;
+            }
+        }
+    }
+}
+
+.footer__contacts {
+    @include font($height: 150%);
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    align-items: start;
+    gap: 16px;
+    & > a {
+        align-self: flex-start;
+    }
+    
+     // PIXEL PERFECT
+     margin-left: 4px;
+     margin-top: -5px;
+
+}
+
+.footer-after {
+    &:after {
+        background-color: $color-text-light;
+}
+}

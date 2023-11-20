@@ -1,0 +1,38 @@
+.header__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+}
+
+// .logo {
+//     pointer-events: none;
+// }
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: $gap;
+}
+
+.navigation__link, .menu-link {
+    list-style: none;
+    cursor: pointer;
+    &:after {
+        content: '';
+        display: block;
+        height: 2px;
+        width: 100%;
+        background-color: $color-text-dark;
+        opacity: 0;
+        transition: all 0.7s ease;
+        transform: scale(0);
+        transform-origin: center;
+
+    }
+    &:hover:after {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+

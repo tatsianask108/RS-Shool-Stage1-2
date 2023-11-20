@@ -1,0 +1,39 @@
+.icon {
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 8px;
+
+}
+
+.icon_coffee-cup {
+    background-image: url('/coffee-house/img/icons/coffee-cup.svg');
+    width: 18px;
+    height: 19px;
+    margin-right: 0;
+    margin-left: 8px;
+}
+
+.icon-map {
+    background-image: url('/coffee-house/img//icons/footer/map.svg');
+    width: 20px;
+    height: 20px;
+
+}
+
+.icon-phone {
+    background-image: url('/coffee-house/img//icons/footer/phone.svg');
+    width: 20px;
+    height: 20px;
+}
+
+.icon-clock {
+    background-image: url('/coffee-house/img//icons/footer/clock.svg');
+    width: 20px;
+    height: 20px;
+    vertical-align: top;
+}
+
+.icon-tag {
+    width: 30px;
+    height: 30px;
+}
