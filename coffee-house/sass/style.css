@@ -104,7 +104,7 @@ h3 {
 }
 
 .icon_coffee-cup {
-  background-image: url("/coffee-house/img/coffee-cup.svg");
+  background-image: url("/coffee-house/img/icons/coffee-cup.svg");
   width: 18px;
   height: 19px;
   margin-right: 0;
@@ -112,19 +112,19 @@ h3 {
 }
 
 .icon-map {
-  background-image: url("/coffee-house/img/map.svg");
+  background-image: url("/coffee-house/img//icons/footer/map.svg");
   width: 20px;
   height: 20px;
 }
 
 .icon-phone {
-  background-image: url("/coffee-house/img/phone.svg");
+  background-image: url("/coffee-house/img//icons/footer/phone.svg");
   width: 20px;
   height: 20px;
 }
 
 .icon-clock {
-  background-image: url("/coffee-house/img/clock.svg");
+  background-image: url("/coffee-house/img//icons/footer/clock.svg");
   width: 20px;
   height: 20px;
   vertical-align: top;
@@ -344,18 +344,19 @@ h3 {
   flex-direction: column;
   gap: 40px;
 }
-.about__items-column .about__item {
+.about__items-column .item-big {
+  height: 590px;
+}
+
+.img-wrapper {
   width: 660px;
   height: 430px;
   border-radius: 20px;
   overflow: hidden;
   cursor: pointer;
 }
-.about__items-column .item-big {
-  height: 590px;
-}
 
-.about__item > img {
+.img-wrapper > img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
@@ -363,7 +364,7 @@ h3 {
   transform: scale(1.1);
   transition: 0.8s;
 }
-.about__item > img:hover {
+.img-wrapper > img:hover {
   transform: scale(1);
 }
 
@@ -471,6 +472,14 @@ h3 {
   background-color: #E1D4C9;
 }
 
+.menu-link__on-menu-page {
+  pointer-events: none;
+}
+.menu-link__on-menu-page:after {
+  opacity: 1;
+  transform: scale(1);
+}
+
 .offer {
   display: flex;
   flex-direction: column;
@@ -480,10 +489,10 @@ h3 {
   padding: 0 280px;
   margin-bottom: 40px;
 }
-.offer__tabs {
+.offer__tags {
   font-size: 16px;
   font-weight: 600;
-  line-height: 125%;
+  line-height: 150%;
   font-style: normal;
   display: flex;
   justify-content: center;
@@ -509,17 +518,31 @@ h3 {
   pointer-events: none;
 }
 
-.grid {
+.cards {
   display: grid;
   gap: 40px;
   row-gap: 40px;
-  padding-top: 40px;
   grid-template-columns: repeat(4, 310px);
   grid-template-rows: repeat(2, 506px);
+  margin-bottom: 100px;
+}
+.cards .card {
+  border: 1px solid #C1B6AD;
+  border-radius: 40px;
+  cursor: pointer;
+}
+.cards .card:hover .img-wrapper > img {
+  transform: scale(1);
+}
+.cards .img-wrapper {
+  width: inherit;
+  height: inherit;
+  border-radius: 40px;
 }
 
-.description {
+.card__description {
   display: grid;
   grid-template-rows: 30px 72px 30px;
   gap: 12px;
+  padding: 20px;
 }/*# sourceMappingURL=style.css.map */

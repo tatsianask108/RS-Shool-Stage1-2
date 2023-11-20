@@ -1,3 +1,10 @@
+.menu-link__on-menu-page {
+    pointer-events: none;
+    &:after {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
 .offer {
     display: flex;
     flex-direction: column;
@@ -5,8 +12,8 @@
     gap: $gap;
     text-align: center;
     padding: 0 280px;
-    &__tabs {
-        @include font($weight: 600);
+    &__tags {
+        @include font($weight: 600, $height: 150%);
         display: flex;
         justify-content: center;
         gap: 16px;
@@ -43,17 +50,34 @@
 //     }
 // }
 
-.grid {
+.cards {
     display: grid;
     gap: 40px;
     row-gap: 40px;
-    padding-top: 40px;
     grid-template-columns: repeat(4, 310px);
     grid-template-rows: repeat(2, 506px);
+    margin-bottom: $margin-between-components;
+    .card {
+        border: 1px solid $color-border-light;
+        border-radius: 40px;
+        cursor: pointer;
+        &:hover {
+            .img-wrapper > img {
+                transform: scale(1.0);
+            }
+        }
+    }
+
+    .img-wrapper {
+        width: inherit;
+        height: inherit;
+        border-radius: 40px;
+    }
 }
 
-.description {
+.card__description {
     display: grid;
     grid-template-rows: 30px 72px 30px;
     gap: 12px;
+    padding: 20px;
 }

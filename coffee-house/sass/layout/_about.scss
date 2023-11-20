@@ -16,20 +16,23 @@ margin-bottom: $margin-between-components;
     display: flex;
     flex-direction: column;
     gap: $gap;
-    .about__item {
-        width: 660px;
-        height: 430px;
-        border-radius: 20px;
-        overflow: hidden;
-        cursor: pointer;
-    }
+    
     .item-big {
     height: 590px;
     }
 }
 }
 
-.about__item > img {
+
+.img-wrapper {
+    width: 660px;
+    height: 430px;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.img-wrapper > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
