@@ -6,16 +6,33 @@
     border-radius: 40px;
     padding: 100px;
     margin-bottom: $margin-between-components;
+    @include laptop {
+        padding: 100px 60px;
+    }
+    @include mobile {
+        padding: 60px 16px;
+    }
+
     &__content {
         color: $color-text-light;
-        padding-right: 630px;
-}
+        width: 46%;
+        @include laptop {
+            width: 100%;
+        }
+
     &__title {
         margin-bottom: $gap;
         &-accent {
             @include font(72px, 600, 105%, italic);
             color: $color-text-accent;
+            @include mobile {
+                @include font ($size: 42px, $height: 115%, $style: italic);
+            }
         }
+        @include mobile {
+            @include font ($size: 42px, $height: 115%);
+        }
+
 }
     &__text {
         margin-bottom: $gap;
@@ -43,5 +60,4 @@
         }
     }
 }
-
-
+}

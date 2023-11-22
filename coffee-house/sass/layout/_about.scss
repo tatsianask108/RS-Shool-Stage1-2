@@ -6,26 +6,45 @@ margin-bottom: $margin-between-components;
     @include font ($size: 59.9px);
     text-align: left;
     margin-bottom: 40px;
+    @include mobile {
+        @include font ($size: 32px);
+    }
+
 }
 }
 
 .about__items {
    display: flex;
+   justify-content: center;
+   align-items: center;
    gap: $gap;
    &-column {
     display: flex;
     flex-direction: column;
+    width: 100%;
     gap: $gap;
     
     .item-big {
     height: 590px;
     }
 }
+@include pre-tablet {
+    flex-wrap: wrap;
+    
+}
+}
+
+.about__img-hidden {
+    @include pre-tablet {
+        display: none;
+    
+    }
+
 }
 
 
 .img-wrapper {
-    width: 660px;
+    width: 100%;
     height: 430px;
     border-radius: 20px;
     overflow: hidden;
@@ -41,4 +60,11 @@ margin-bottom: $margin-between-components;
     &:hover {
         transform: scale(1.0);
     }
+    @include pre-tablet {
+        transform: scale(1.05);
+    }
+    @include mobile {
+        transform: scale(1.23);
+    }
+
 }
