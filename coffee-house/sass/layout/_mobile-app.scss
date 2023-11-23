@@ -12,6 +12,10 @@
     &__links {
         display: flex;
         gap: 20px;
+        @include mobile {
+            flex-direction: column;
+        }
+
     }
     &__link {
         width: 200px;
@@ -24,14 +28,25 @@
             display: block;
             @include font($size: 10px, $height: 140%)
         }
-        &:hover {
-            background: $color-background-container;
-            color: $color-text-light;
-            path {
-                // stroke: $color-text-light;
-                fill: $color-text-light;
-                transition: all 1.7s ease;
-        } 
+        @media (hover: hover) {
+            &:hover {
+                background: $color-background-container;
+                color: $color-text-light;
+                path {
+                    fill: $color-text-light;
+                    transition: all 1.7s ease;
+            } 
+            }
         }
+
+    }
+    @include tablet {
+        flex-direction: column;
+        &__content {
+            width: 100%;
+        }
+    }
+    @include mobile {
+        gap: 40px;
     }
 }

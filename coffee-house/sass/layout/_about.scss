@@ -57,9 +57,12 @@ margin-bottom: $margin-between-components;
     object-fit: cover;
     transform: scale(1.1);
     transition: 0.8s;
-    &:hover {
-        transform: scale(1.0);
+    @media (hover: hover) {
+        &:hover {
+            transform: scale(1.0);
+        }
     }
+
     @include pre-tablet {
         transform: scale(1.05);
     }
