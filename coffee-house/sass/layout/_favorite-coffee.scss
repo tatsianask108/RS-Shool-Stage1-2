@@ -27,14 +27,14 @@
     align-items: center;
     gap: $gap;
     &__btn {
-    display: flex;
-    width: 60px;
-    height: 60px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 100px;
-    border: 1px solid $color-border-dark;
-    background: transparent;
+    // display: flex;
+    // width: 60px;
+    // height: 60px;
+    // justify-content: center;
+    // align-items: center;
+    // border-radius: 100px;
+    // border: 1px solid $color-border-dark;
+    // background: transparent;
     @include mobile {
         display: none;
     }

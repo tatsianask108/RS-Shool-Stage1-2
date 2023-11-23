@@ -82,20 +82,21 @@
     grid-template-columns: repeat(auto-fill, minmax(250px, 310px));
     grid-template-rows: repeat(2, 506px);
     justify-content:center;
+   &__container {
     margin-bottom: $margin-between-components;
-    // @include pre-tablet {
-    //     grid-template-columns: repeat(2, minmax(150px, 310px));
-    // }
-    .card {
-        @include tablet {
-            &:nth-child(n+5) {
-                display: none;
-            }
-            .img-wrapper > img {
-                transform: scale(1.1);
-            }
+   }}
+    @include tablet {
+        .card:nth-child(n+5) {
+            display: none;
         }
-      
+        .refresh-btn {
+            display: flex;
+        }
+        .img-wrapper > img {
+            transform: scale(1.1);
+        }
+    }
+    .card {
         border: 1px solid $color-border-light;
         border-radius: 40px;
         cursor: pointer;
@@ -113,7 +114,7 @@
         height: inherit;
         border-radius: 40px;
     }
-}
+
 
 .card__description {
     display: grid;
