@@ -770,15 +770,24 @@ h3 {
 .cards {
   display: grid;
   gap: 40px;
-  row-gap: 40px;
-  grid-template-columns: repeat(4, 310px);
+  width: 100%;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 310px));
   grid-template-rows: repeat(2, 506px);
+  justify-content: center;
   margin-bottom: 100px;
 }
 .cards .card {
   border: 1px solid #C1B6AD;
   border-radius: 40px;
   cursor: pointer;
+}
+@media (max-width: 768px) {
+  .cards .card:nth-child(n+5) {
+    display: none;
+  }
+  .cards .card .img-wrapper > img {
+    transform: scale(1.1);
+  }
 }
 @media (hover: hover) {
   .cards .card:hover .img-wrapper > img {

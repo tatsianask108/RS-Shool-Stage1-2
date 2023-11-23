@@ -78,11 +78,24 @@
 .cards {
     display: grid;
     gap: 40px;
-    row-gap: 40px;
-    grid-template-columns: repeat(4, 310px);
+    width: 100%;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 310px));
     grid-template-rows: repeat(2, 506px);
+    justify-content:center;
     margin-bottom: $margin-between-components;
+    // @include pre-tablet {
+    //     grid-template-columns: repeat(2, minmax(150px, 310px));
+    // }
     .card {
+        @include tablet {
+            &:nth-child(n+5) {
+                display: none;
+            }
+            .img-wrapper > img {
+                transform: scale(1.1);
+            }
+        }
+      
         border: 1px solid $color-border-light;
         border-radius: 40px;
         cursor: pointer;
