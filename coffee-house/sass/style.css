@@ -810,12 +810,12 @@ h3 {
   cursor: pointer;
 }
 @media (hover: hover) {
-  .card:hover .img-wrapper > img {
+  .card:hover .img-wrapper_cards > img {
     transform: scale(1);
   }
 }
 
-.img-wrapper {
+.img-wrapper_cards {
   width: inherit;
   height: inherit;
   border-radius: 40px;
