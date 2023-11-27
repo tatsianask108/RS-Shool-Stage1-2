@@ -800,7 +800,7 @@ h3 {
   .refresh-btn {
     display: flex;
   }
-  .img-wrapper > img {
+  .img-wrapper_cards > img {
     transform: scale(1.1);
   }
 }
