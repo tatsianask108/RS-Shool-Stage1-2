@@ -27,19 +27,27 @@
     align-items: center;
     gap: $gap;
     &__btn {
-    display: flex;
-    width: 60px;
-    height: 60px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 100px;
-    border: 1px solid $color-border-dark;
-    background: transparent;
+    // display: flex;
+    // width: 60px;
+    // height: 60px;
+    // justify-content: center;
+    // align-items: center;
+    // border-radius: 100px;
+    // border: 1px solid $color-border-dark;
+    // background: transparent;
+    @include mobile {
+        display: none;
+    }
+
     }
     &__inner-wrapper {
         width: 1152px;
         display: flex;
         justify-content: center;
+        @include laptop {
+            width: max-content;
+        }
+
     }
 }
 
@@ -58,5 +66,9 @@
         @include font ($weight:400, $height: 150%);
         margin-bottom: 16px;
     }
+    @include mobile {
+        max-width: 348px;
+    }
+
 }
 

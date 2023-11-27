@@ -5,6 +5,18 @@
     margin: 20px 0;
 }
 
+.header__menu-link, nav {
+    // display: flex;
+    // gap: 336px;
+    // @include laptop {
+
+    //     gap: 40px;
+    // }
+    @include tablet {
+        display: none;
+    }
+}
+
 // .logo {
 //     pointer-events: none;
 // }
@@ -18,21 +30,24 @@
 .navigation__link, .menu-link {
     list-style: none;
     cursor: pointer;
-    &:after {
-        content: '';
-        display: block;
-        height: 2px;
-        width: 100%;
-        background-color: $color-text-dark;
-        opacity: 0;
-        transition: all 0.7s ease;
-        transform: scale(0);
-        transform-origin: center;
-
+    @media (hover: hover) {
+        &:after {
+            content: '';
+            display: block;
+            height: 2px;
+            width: 100%;
+            background-color: $color-text-dark;
+            opacity: 0;
+            transition: all 0.7s ease;
+            transform: scale(0);
+            transform-origin: center;
+    
+        }
+        &:hover:after {
+            opacity: 1;
+            transform: scale(1);
+        }
     }
-    &:hover:after {
-        opacity: 1;
-        transform: scale(1);
-    }
+   
 }
 

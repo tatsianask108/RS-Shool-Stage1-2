@@ -22,6 +22,10 @@
         // PIXEL PERFECT
         &-right > h3 {
             margin-left: 3px;
+            @include tablet {
+                margin-left: 0;
+                margin-top: 3px;
+            }
         }
         
     }
@@ -35,13 +39,29 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: transparent;
+        background-color: $color-background-container;
         border: 1px solid $color-border-light;
-        &:hover {
-            background-color: $color-background-body;
-            path {
-                stroke: $color-text-dark;
+        @media (hover: hover) {
+            &:hover {
+                background-color: $color-background-body;
+                path {
+                    stroke: $color-text-dark;
+                }
             }
+        }
+        
+    }
+    @include tablet {
+        padding: 100px 60px;
+        &__content {
+            flex-direction: column;
+            gap: 100px;
+        }
+    }
+    @include mobile {
+        padding: 60px 16px;
+        .footer__content {
+            gap: $gap;
         }
     }
 }
@@ -60,6 +80,13 @@
      // PIXEL PERFECT
      margin-left: 4px;
      margin-top: -5px;
+     @include tablet {
+        margin-left: 0px;
+        margin-top: 0;
+     }
+     @include tablet {
+        margin-top: -6px;
+     }
 
 }
 

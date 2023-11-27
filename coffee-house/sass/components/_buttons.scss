@@ -1,3 +1,13 @@
+.btn {
+    display: flex;
+    width: 60px;
+    height: 60px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    border: 1px solid $color-border-dark;
+    background: transparent;
+}
 .btn, .link {
     transition: all 0.7s ease;
     path {
@@ -6,15 +16,51 @@
         transition: all 1.5s ease;
 } 
 }
-.btn:hover {
-    background: $color-background-container;
-    color: $color-text-light;
-    path {
-        stroke: $color-text-light;
-        transition: all 1.7s ease;
-} 
+@media (hover: hover) {
+    .btn:hover {
+        background: $color-background-container;
+        color: $color-text-light;
+        path {
+            stroke: $color-text-light;
+            transition: all 1.7s ease;
+    } 
+    }
 }
+
 
 .disabled {
     pointer-events: none;
+}
+
+.burger-btn {
+    display: none;
+    width: 44px;
+    height: 44px;
+    padding: 18px 14px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    border: 1px solid $color-border-dark;
+    background: transparent;
+    .lines-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+    }
+    .burger__line {
+        display: block;
+        width: 16px;
+        height: 1px;
+        background-color: $color-text-dark;
+        border-radius: 1.5px;
+    }
+    @include tablet {
+        display: flex;
+    }
+}
+
+.refresh-btn {
+    display: none;
+    margin-top: 40px;
 }

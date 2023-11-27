@@ -14,11 +14,17 @@ h3 {
 
 .h2__title {
     @include font($size: 60px);
+    @include mobile {
+        @include font ($size: 32px);
+    }
 }
 
 .h2__title-accent {
     @include font ($size: 60px, $weight: 600, $height: 125%, $style: italic);
     color:$color-text-accent;
+    @include mobile {
+        @include font ($size: 32px, $style: italic);
+    }
 }
 
 .font-caption {
