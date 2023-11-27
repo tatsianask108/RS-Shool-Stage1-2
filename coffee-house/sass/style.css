@@ -300,13 +300,8 @@ h3 {
 }
 
 .enjoy {
-  background-image: url(../img/enjoy.jpg);
-  background-position: center;
-  background-size: cover;
-  height: -moz-max-content;
-  height: max-content;
-  border-radius: 40px;
   padding: 100px;
+  position: relative;
   margin-bottom: 100px;
 }
 @media (max-width: 1360px) {
@@ -385,6 +380,18 @@ h3 {
   .enjoy__link .enjoy__link-text {
     right: 0;
   }
+}
+
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -100;
+  border-radius: 40px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .favorite-coffee {
