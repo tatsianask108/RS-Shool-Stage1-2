@@ -60,7 +60,8 @@
         color: $color-text-light;
         background-color: $color-background-container;
         border-color: $color-background-container;
-        pointer-events: none;
+        // pointer-events: none;
+        cursor: default;
         rect {
             fill: $color-background-body;
             transition: all 1.7s ease;

@@ -847,7 +847,7 @@ h3 {
   color: #E1D4C9;
   background-color: #665F55;
   border-color: #665F55;
-  pointer-events: none;
+  cursor: default;
 }
 .tag__selected rect {
   fill: #E1D4C9;
