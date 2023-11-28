@@ -4,14 +4,14 @@ function burgerFunction() {
     const navItems = nav?.querySelectorAll("a");
 
     burgerBtn.addEventListener("click", () => {
-        nav.classList.toggle("nav--active");
+        nav.classList.toggle("nav--visible");
         burgerBtn.classList.toggle("burger--active");
 
 
         navItems.forEach(el => {
             el.addEventListener('click', () => {
                 burgerBtn?.classList.remove('burger--active');
-                nav?.classList.remove('nav--active');
+                nav?.classList.remove('nav--visible');
             });
         });
 

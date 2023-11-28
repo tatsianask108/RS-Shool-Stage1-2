@@ -262,6 +262,8 @@ h3 {
 .wrapper {
   margin: 0 auto;
   max-width: 1360px;
+  overflow: hidden;
+  position: relative;
 }
 @media (max-width: 1360px) {
   .wrapper {
@@ -289,27 +291,6 @@ h3 {
   margin: 20px 0;
 }
 
-@media (max-width: 768px) {
-  .nav {
-    position: absolute;
-    left: 0;
-    top: 100px;
-    height: calc(100vh - 100px);
-    overflow-y: auto;
-    z-index: 1;
-    flex-direction: column;
-    background-color: #E1D4C9;
-    transition: transform 0.6s ease-in-out, visibility 0.6s ease-in-out;
-    transform: translateX(100%);
-    visibility: hidden;
-  }
-}
-
-.nav--active {
-  transform: none;
-  visibility: visible;
-}
-
 .nav {
   display: flex;
   justify-content: space-between;
@@ -324,10 +305,18 @@ h3 {
 @media (max-width: 768px) {
   .nav {
     justify-content: flex-start;
-    align-items: center;
     text-align: center;
     padding: 60px 40px;
     gap: 100px;
+    position: absolute;
+    left: 100%;
+    top: 100px;
+    height: calc(100vh - 100px);
+    z-index: 1;
+    flex-direction: column;
+    background-color: #E1D4C9;
+    transition: transform 0.6s ease-in-out, visibility 0.6s ease-in-out;
+    transform: translateX(0);
   }
   .nav > * a {
     font-size: 32px;
@@ -340,6 +329,10 @@ h3 {
   .nav {
     padding: 60px 16px;
   }
+}
+
+.nav--visible {
+  transform: translateX(-100%);
 }
 
 .navigation {
