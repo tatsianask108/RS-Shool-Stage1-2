@@ -1,3 +1,6 @@
+import { Card } from './js/Card.js';
+import json from './products.json' assert  { type: 'json' };
+
 function burgerFunction() {
     const burgerBtn = document.getElementById("burger-btn");
     const nav = document.getElementById("nav");
@@ -29,8 +32,29 @@ const switchTags = () => {
                 tag.classList.remove('tag__selected');
             })
             clickedTag.classList.add('tag__selected');
+
+            // filterCardsByCategory(clickedTag.innerText)
         }
     })
 }
 
 switchTags();
+
+const generateCards = (data) => {
+    let cards = [];
+    json.forEach(card => {
+        cards.push(new Card(card))
+    });
+    console.log(cards)
+    return cards;
+}
+
+const renderCards = () => {
+    const gridContainer = document.querySelector('[data-grid]');
+    gridContainer.innerHTML = '';
+    generateCards(json).forEach(card => {
+        gridContainer.append(card.createCard())
+    })
+}
+renderCards();
+
