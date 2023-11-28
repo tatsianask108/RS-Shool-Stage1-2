@@ -802,6 +802,11 @@ h3 {
     transform: scale(1);
   }
 }
+@media (max-width: 768px) {
+  .menu-link__on-menu-page:after {
+    opacity: 0;
+  }
+}
 
 .h1 {
   display: none;
