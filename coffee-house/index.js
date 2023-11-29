@@ -1,5 +1,6 @@
-import { Card } from './js/Card.js';
 import json from './products.json' assert  { type: 'json' };
+
+const DEFAULT_TAG = 'coffee';
 
 function burgerFunction() {
     const burgerBtn = document.getElementById("burger-btn");
@@ -18,43 +19,66 @@ function burgerFunction() {
         });
     })
 }
-
 burgerFunction();
 
-
-const switchTags = () => {
-    const tagsContainer = document.querySelector('[data-tags]');
-    const tags = tagsContainer.querySelectorAll('div')
-    tagsContainer.addEventListener('click', (e) => {
-        if (e.target.closest("div")) {
-            const clickedTag = e.target.closest("div");
-            tags.forEach(tag => {
-                tag.classList.remove('tag__selected');
-            })
-            clickedTag.classList.add('tag__selected');
-
-            // filterCardsByCategory(clickedTag.innerText)
-        }
+const switchClickedTag = (clickedTag, tags) => {
+    // console.log('clickedTag', clickedTag);
+    tags.forEach(tag => {
+        tag.classList.remove('tag__selected');
     })
-}
+    clickedTag.classList.add('tag__selected');
 
-switchTags();
+    return clickedTag?.dataset?.tag;
+};
 
-const generateCards = (data) => {
-    let cards = [];
-    json.forEach(card => {
-        cards.push(new Card(card))
+const addTagsListeners = () => {
+    const tagsContainer = document.getElementById('offerTags');
+    const tags = tagsContainer.querySelectorAll('div');
+
+    tagsContainer.addEventListener('click', (e) => {
+        if (!e.target.closest("div")) {
+            return;
+        }
+        const tagName = switchClickedTag(e.target.closest("div"), tags);
+
+        // console.log('tagName', tagName);
+
+        renderCardsList(tagName);
     });
-    console.log(cards)
-    return cards;
 }
 
-const renderCards = () => {
+addTagsListeners();
+
+
+const createCardElement = (cardJson) => {
+    let card = document.createElement('div');
+    card.className = 'card';
+    card.setAttribute('data-category', cardJson.category)
+
+    card.innerHTML =
+        `<div class="img-wrapper img-wrapper_cards">
+            <img src="img/menu-page/coffee/coffee-1.jpg" alt="coffee">
+        </div>
+        <div class="card__description">
+            <h3>${cardJson.name}</h3>
+            <p class="card__description-p">${cardJson.description}</p>
+            <h3>${cardJson.price}</h3>
+        </div>`
+    //console.log(card);
+
+    return card;
+}
+
+const renderCardsList = (filterTag = DEFAULT_TAG) => {
     const gridContainer = document.querySelector('[data-grid]');
     gridContainer.innerHTML = '';
-    generateCards(json).forEach(card => {
-        gridContainer.append(card.createCard())
+
+    json.filter(card => card?.category === filterTag).forEach(cardJson => {
+        const cardElement = createCardElement(cardJson);
+        gridContainer.append(cardElement);
     })
 }
-renderCards();
+
+renderCardsList();
+
 
