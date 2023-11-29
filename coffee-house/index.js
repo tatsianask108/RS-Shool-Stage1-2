@@ -57,7 +57,7 @@ const createCardElement = (cardJson) => {
 
     card.innerHTML =
         `<div class="img-wrapper img-wrapper_cards">
-            <img src="img/menu-page/coffee/coffee-1.jpg" alt="coffee">
+            <img src="${cardJson.urlToImg}" alt="${cardJson.category}-image">
         </div>
         <div class="card__description">
             <h3>${cardJson.name}</h3>
