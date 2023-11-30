@@ -1,25 +1,10 @@
+import { burgerFunction } from './js/burger.js';
 import json from './products.json' assert  { type: 'json' };
 
 const DEFAULT_TAG = 'coffee';
+const gridContainer = document.getElementById('gridContainer');
+const loadMoreBtn = document.getElementById('loadMore');
 
-function burgerFunction() {
-    const burgerBtn = document.getElementById("burger-btn");
-    const nav = document.getElementById("nav");
-    const navItems = nav?.querySelectorAll("a");
-
-    burgerBtn.addEventListener("click", () => {
-        nav.classList.toggle("nav--visible");
-        burgerBtn.classList.toggle("burger--active");
-
-        navItems.forEach(el => {
-            el.addEventListener('click', () => {
-                burgerBtn?.classList.remove('burger--active');
-                nav?.classList.remove('nav--visible');
-            });
-        });
-    })
-}
-burgerFunction();
 
 const switchClickedTag = (clickedTag, tags) => {
     // console.log('clickedTag', clickedTag);
@@ -29,11 +14,12 @@ const switchClickedTag = (clickedTag, tags) => {
     clickedTag.classList.add('tag__selected');
 
     return clickedTag?.dataset?.tag;
-};
+}
 
 const addTagsListeners = () => {
     const tagsContainer = document.getElementById('offerTags');
     const tags = tagsContainer.querySelectorAll('div');
+    // console.log(tags)
 
     tagsContainer.addEventListener('click', (e) => {
         if (!e.target.closest("div")) {
@@ -45,6 +31,7 @@ const addTagsListeners = () => {
 
         renderCardsList(tagName);
     });
+
 }
 
 addTagsListeners();
@@ -69,16 +56,47 @@ const createCardElement = (cardJson) => {
     return card;
 }
 
+const addLoadMoreBtnListeners = () => {
+    const cards = gridContainer.querySelectorAll('.card');
+
+    loadMoreBtn?.addEventListener('click', () => {
+        cards?.forEach(card => card.classList.remove('card--hidden'));
+        loadMoreBtn.classList.remove('refresh-btn--visible')
+    })
+
+}
+const showMenuLayout = () => {
+    const cards = gridContainer.querySelectorAll('.card');
+
+    if (window.innerWidth <= 768 && cards.length > 4) {
+        cards.forEach((el, index) => index >= 4 ? el.classList.add('card--hidden') : null);
+        loadMoreBtn.classList.add('refresh-btn--visible');
+    } else {
+        cards.forEach(el => el.classList.remove('card--hidden'));
+        loadMoreBtn.classList.remove('refresh-btn--visible');
+    }
+
+}
+
+
 const renderCardsList = (filterTag = DEFAULT_TAG) => {
-    const gridContainer = document.querySelector('[data-grid]');
+    // const gridContainer = document.getElementById('gridContainer');
     gridContainer.innerHTML = '';
 
     json.filter(card => card?.category === filterTag).forEach(cardJson => {
         const cardElement = createCardElement(cardJson);
         gridContainer.append(cardElement);
     })
+
+    showMenuLayout()
+    window.addEventListener('resize', showMenuLayout);
+    addLoadMoreBtnListeners();
 }
 
 renderCardsList();
+
+
+
+
 
 

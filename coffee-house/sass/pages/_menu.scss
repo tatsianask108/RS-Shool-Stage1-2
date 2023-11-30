@@ -92,12 +92,12 @@
     margin-bottom: $margin-between-components;
    }}
     @include tablet {
-        .card:nth-child(n+5) {
-            display: none;
-        }
-        .refresh-btn {
-            display: flex;
-        }
+        // .card:nth-child(n+5) {
+        //     display: none;
+        // }
+        // .refresh-btn {
+        //     display: flex;
+        // }
         .img-wrapper_cards > img {
             transform: scale(1.1);
         }
@@ -106,6 +106,9 @@
         border: 1px solid $color-border-light;
         border-radius: 40px;
         cursor: pointer;
+        &--hidden {
+            display: none;
+        }
         @media (hover: hover) {
             &:hover {
                 .img-wrapper_cards > img {

@@ -89,4 +89,7 @@
 .refresh-btn {
     display: none;
     margin-top: 40px;
+    &--visible {
+        display: flex;
+    }
 }
