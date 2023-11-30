@@ -11,6 +11,29 @@
 </head>
 
 <body>
+    <!-- <div class="overlay" style="z-index: 15">
+        <div class="modal">
+            <div class="img-wrapper img-wrapper_cards">
+                <img src="${cardJson.urlToImg}" alt="${cardJson.category}-image">
+            </div>
+            <div class="modal__description">
+                <h3>${cardJson.name}</h3>
+                <p class="card__description-p">${cardJson.description}</p>
+                <div>Size</div>
+                <div class="modal__tag">
+                    <div class="modal__circle">${cardJson.sizes[0].toUpperCase()}</div>
+                    <span class="modal__tag-text">${cardJson.sizes.s.size}</span>
+                </div>
+
+
+                <div>
+                    <div>Additives</div>
+                    <div class="additives__tags modal__tags"></div>
+                </div>
+                <h3>Total: ${cardJson.price}</h3>
+            </div>
+        </div>
+    </div> -->
     <div class="wrapper">
         <header class="header">
             <div class="header__container">
@@ -260,6 +283,7 @@
         </footer>
     </div>
     <script src="./index.js" type="module"></script>
+    <script src="./js/modal.js" type="module"></script>
 </body>
 
 </html>

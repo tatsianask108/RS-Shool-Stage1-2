@@ -40,7 +40,6 @@
         }
     }
     &__tags {
-        @include font($weight: 600, $height: 150%);
         display: flex;
         justify-content: center;
         gap: 14px;
@@ -56,6 +55,8 @@
     padding: 8px 16px 8px 8px;
     border: 1px solid $color-border-light;
     transition: all 0.7s ease;
+    width: max-content;
+    @include font($weight: 600, $height: 150%);
     &__selected {
         color: $color-text-light;
         background-color: $color-background-container;

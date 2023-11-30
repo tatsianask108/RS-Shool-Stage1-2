@@ -2,8 +2,8 @@ import { burgerFunction } from './js/burger.js';
 import json from './products.json' assert  { type: 'json' };
 
 const DEFAULT_TAG = 'coffee';
-const gridContainer = document.getElementById('gridContainer');
-const loadMoreBtn = document.getElementById('loadMore');
+const gridContainer = document?.getElementById('gridContainer');
+const loadMoreBtn = document?.getElementById('loadMore');
 
 
 const switchClickedTag = (clickedTag, tags) => {
@@ -18,10 +18,10 @@ const switchClickedTag = (clickedTag, tags) => {
 
 const addTagsListeners = () => {
     const tagsContainer = document.getElementById('offerTags');
-    const tags = tagsContainer.querySelectorAll('div');
+    const tags = tagsContainer?.querySelectorAll('div');
     // console.log(tags)
 
-    tagsContainer.addEventListener('click', (e) => {
+    tagsContainer?.addEventListener('click', (e) => {
         if (!e.target.closest("div")) {
             return;
         }
@@ -80,7 +80,7 @@ const showMenuLayout = () => {
 
 
 const renderCardsList = (filterTag = DEFAULT_TAG) => {
-    // const gridContainer = document.getElementById('gridContainer');
+    const gridContainer = document?.getElementById('gridContainer');
     gridContainer.innerHTML = '';
 
     json.filter(card => card?.category === filterTag).forEach(cardJson => {
@@ -94,9 +94,5 @@ const renderCardsList = (filterTag = DEFAULT_TAG) => {
 }
 
 renderCardsList();
-
-
-
-
 
 
