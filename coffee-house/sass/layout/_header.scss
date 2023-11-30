@@ -36,17 +36,19 @@ $header-height: 99px;
         & >*a {
             @include font ($size: 32px, $height: 125%); 
         } 
+        &--visible {
+            transform: translateX(-100%);
+            // visibility: visible;
+          }
     }
+
     @include mobile {
         padding: 60px 16px;
     }
 
 }
 
-.nav--visible {
-    transform: translateX(-100%);
-    // visibility: visible;
-  }
+
 
 .navigation {
     display: flex;

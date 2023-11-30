@@ -327,15 +327,14 @@ h3 {
     line-height: 125%;
     font-style: normal;
   }
+  .nav--visible {
+    transform: translateX(-100%);
+  }
 }
 @media (max-width: 715px) {
   .nav {
     padding: 60px 16px;
   }
-}
-
-.nav--visible {
-  transform: translateX(-100%);
 }
 
 .navigation {
