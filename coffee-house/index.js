@@ -1,9 +1,13 @@
 import { burgerFunction } from './js/burger.js';
-import json from './products.json' assert  { type: 'json' };
+import { fetcher } from './js/fetcher.js';
+import { renderProductForm } from './js/product-form.js'
+import {renderModal} from "./js/modal.js";
 
 const DEFAULT_TAG = 'coffee';
 const gridContainer = document?.getElementById('gridContainer');
 const loadMoreBtn = document?.getElementById('loadMore');
+
+burgerFunction()
 
 
 const switchClickedTag = (clickedTag, tags) => {
@@ -82,9 +86,18 @@ const showMenuLayout = () => {
 const renderCardsList = (filterTag = DEFAULT_TAG) => {
     const gridContainer = document?.getElementById('gridContainer');
     gridContainer.innerHTML = '';
+    
+    let json = fetcher.getProducts();
 
     json.filter(card => card?.category === filterTag).forEach(cardJson => {
         const cardElement = createCardElement(cardJson);
+        // в event listener передается функция, а не её результат
+        // чтобы задать параметр для функции, которая передается как переменная, нужно использовать свойство bind
+        cardElement.addEventListener('click', (e) => {
+            const productForm = renderProductForm(cardJson);
+            renderModal(productForm);
+            e.preventDefault();
+        })
         gridContainer.append(cardElement);
     })
 
@@ -94,5 +107,4 @@ const renderCardsList = (filterTag = DEFAULT_TAG) => {
 }
 
 renderCardsList();
-
 

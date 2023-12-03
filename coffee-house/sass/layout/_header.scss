@@ -25,12 +25,12 @@ $header-height: 99px;
         position: absolute;
         left: 100%;
         top: 100px;
-        height: calc(100vh - $header-height);
+        min-height: calc(100vh - $header-height);
         z-index: 1;
         background-color: $color-background-body;
         transform: translateX(0);
         transition: transform 0.6s ease-in-out;
-        & >*a {
+        a {
             @include font ($size: 32px, $height: 125%); 
         } 
         &--visible {

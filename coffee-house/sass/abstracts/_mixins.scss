@@ -7,13 +7,15 @@
 
 @mixin laptop {
     @media (max-width: $content-width) {@content;}
+    // check it
+}
+
+@mixin pre-tablet {
+    @media (max-width: $pre-tablet) {@content;}
 }
 
 @mixin tablet {
     @media (max-width: $tablet-width) {@content;}
-}
-@mixin pre-tablet {
-    @media (max-width: $pre-tablet) {@content;}
 }
 
 @mixin mobile {

@@ -7,24 +7,24 @@
     border-radius: 100px;
     border: 1px solid $color-border-dark;
     background: transparent;
+
+    &:hover {
+        @media (hover: hover) {
+            background: $color-background-container;
+            color: $color-text-light;
+            path {
+                    stroke: $color-text-light;
+                    transition: all 1.7s ease;
+            } 
+        }
+    }
 }
 .btn, .link {
     transition: all 0.7s ease;
-    path {
-        transition: all 1.5s ease;
-} 
-}
-@media (hover: hover) {
-    .btn:hover {
-        background: $color-background-container;
-        color: $color-text-light;
         path {
-            stroke: $color-text-light;
-            transition: all 1.7s ease;
+            transition: all 1.5s ease;
     } 
-    }
 }
-
 
 .disabled {
     pointer-events: none;

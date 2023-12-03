@@ -3,6 +3,12 @@
     display: inline-block;
     margin-right: 8px;
 
+    &-phone {
+        background-image: url(../img/icons/footer/phone.svg);
+        width: 20px;
+        height: 20px;
+    }
+
 }
 
 .icon_coffee-cup {
@@ -32,12 +38,6 @@
     width: 20px;
     height: 20px;
 
-}
-
-.icon-phone {
-    background-image: url(../img/icons/footer/phone.svg);
-    width: 20px;
-    height: 20px;
 }
 
 .icon-clock {

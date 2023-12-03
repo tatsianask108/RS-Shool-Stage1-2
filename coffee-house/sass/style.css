@@ -9,7 +9,7 @@ body {
   color: #403F3D;
   font-size: 16px;
   font-weight: 400;
-  line-height: 150%;
+  line-height: 1.5;
   font-style: normal;
   scroll-behavior: smooth;
 }
@@ -18,7 +18,7 @@ a, li, button {
   color: inherit;
   font-size: 16px;
   font-weight: 600;
-  line-height: 150%;
+  line-height: 1.5;
   font-style: normal;
 }
 
@@ -123,6 +123,11 @@ h3 {
   display: inline-block;
   margin-right: 8px;
 }
+.icon-phone {
+  background-image: url(../img/icons/footer/phone.svg);
+  width: 20px;
+  height: 20px;
+}
 
 .icon_coffee-cup {
   background-image: url(../img/icons/coffee-cup.svg);
@@ -152,12 +157,6 @@ h3 {
   height: 20px;
 }
 
-.icon-phone {
-  background-image: url(../img/icons/footer/phone.svg);
-  width: 20px;
-  height: 20px;
-}
-
 .icon-clock {
   background-image: url(../img/icons/footer/clock.svg);
   width: 20px;
@@ -180,14 +179,6 @@ h3 {
   border: 1px solid #665F55;
   background: transparent;
 }
-
-.btn, .link {
-  transition: all 0.7s ease;
-}
-.btn path, .link path {
-  transition: all 1.5s ease;
-}
-
 @media (hover: hover) {
   .btn:hover {
     background: #665F55;
@@ -198,6 +189,14 @@ h3 {
     transition: all 1.7s ease;
   }
 }
+
+.btn, .link {
+  transition: all 0.7s ease;
+}
+.btn path, .link path {
+  transition: all 1.5s ease;
+}
+
 .disabled {
   pointer-events: none;
 }
@@ -274,9 +273,12 @@ h3 {
   justify-content: center;
 }
 
+.product-modal {
+  display: flex;
+}
+
 .modal {
   position: relative;
-  display: flex;
   border-radius: 40px;
   padding: 16px;
   background-color: #E1D4C9;
@@ -312,7 +314,10 @@ h3 {
   line-height: 150%;
   font-style: normal;
 }
-.modal__tag__selected {
+.modal__tag input {
+  display: none;
+}
+.modal__tag.selected {
   color: #E1D4C9;
   background-color: #665F55;
   border-color: #665F55;
@@ -394,13 +399,13 @@ h3 {
     position: absolute;
     left: 100%;
     top: 100px;
-    height: calc(100vh - 99px);
+    min-height: calc(100vh - 99px);
     z-index: 1;
     background-color: #E1D4C9;
     transform: translateX(0);
     transition: transform 0.6s ease-in-out;
   }
-  .nav > * a {
+  .nav a {
     font-size: 32px;
     font-weight: 600;
     line-height: 125%;
