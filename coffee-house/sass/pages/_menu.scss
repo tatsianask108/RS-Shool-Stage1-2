@@ -1,9 +1,21 @@
 .menu-link__on-menu-page {
-    pointer-events: none;
+    cursor: default;
     &:after {
         opacity: 1;
         transform: scale(1);
     }
+    @media (hover: none) {
+        &:after {
+            content: '';
+            display: block;
+            height: 2px;
+            width: 100%;
+            background-color: $color-text-dark;
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
 }
 
 .h1 {
@@ -13,14 +25,23 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: $gap;
     text-align: center;
-    padding: 0 280px;
+    h2 {
+        width: 60%;
+        @include pre-tablet {
+            width: 100%;
+        }
+    }
     &__tags {
         @include font($weight: 600, $height: 150%);
         display: flex;
         justify-content: center;
-        gap: 16px;
+        gap: 14px;
+        @include mobile {
+            gap: 6px;
+        }
     }
     margin-bottom: $gap;
 }
@@ -30,54 +51,70 @@
     padding: 8px 16px 8px 8px;
     border: 1px solid $color-border-light;
     transition: all 0.7s ease;
-    &:hover, &__selected {
+    &__selected {
         color: $color-text-light;
         background-color: $color-background-container;
         border-color: $color-background-container;
+        pointer-events: none;
         rect {
             fill: $color-background-body;
             transition: all 1.7s ease;
         }
     }
-    &__selected {
-        pointer-events: none;
-    }
-}
-
-// .tag__selected {
-//     color: $color-text-light;
-//     background-color: $color-background-container;
-//     pointer-events: none;
-//     rect {
-//         fill: $color-background-body;
-//         transition: all 1.7s ease;
-//     }
-// }
-
-.cards {
-    display: grid;
-    gap: 40px;
-    row-gap: 40px;
-    grid-template-columns: repeat(4, 310px);
-    grid-template-rows: repeat(2, 506px);
-    margin-bottom: $margin-between-components;
-    .card {
-        border: 1px solid $color-border-light;
-        border-radius: 40px;
-        cursor: pointer;
+    @media (hover: hover) {
         &:hover {
-            .img-wrapper > img {
-                transform: scale(1.0);
+            color: $color-text-light;
+            background-color: $color-background-container;
+            border-color: $color-background-container;
+            rect {
+                fill: $color-background-body;
+                transition: all 1.7s ease;
             }
         }
     }
 
-    .img-wrapper {
+}
+
+.cards {
+    display: grid;
+    gap: 40px;
+    width: 100%;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 310px));
+    grid-template-rows: repeat(2, 506px);
+    justify-content:center;
+   &__container {
+    margin-bottom: $margin-between-components;
+   }}
+    @include tablet {
+        .card:nth-child(n+5) {
+            display: none;
+        }
+        .refresh-btn {
+            display: flex;
+        }
+        .img-wrapper_cards > img {
+            transform: scale(1.1);
+        }
+    }
+    .card {
+        border: 1px solid $color-border-light;
+        border-radius: 40px;
+        cursor: pointer;
+        @media (hover: hover) {
+            &:hover {
+                .img-wrapper_cards > img {
+                    transform: scale(1.0);
+                }
+            }
+        }
+    }
+
+    .img-wrapper_cards {
         width: inherit;
         height: inherit;
         border-radius: 40px;
     }
-}
+
 
 .card__description {
     display: grid;

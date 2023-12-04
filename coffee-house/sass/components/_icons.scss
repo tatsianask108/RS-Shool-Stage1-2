@@ -1,5 +1,5 @@
 .icon {
-    cursor: pointer;
+    // cursor: pointer;
     display: inline-block;
     margin-right: 8px;
 
@@ -11,6 +11,11 @@
     height: 19px;
     margin-right: 0;
     margin-left: 8px;
+}
+
+.icon__apple,
+.icon__play-market {
+    height: 36px;
 }
 
 .icon-map {
