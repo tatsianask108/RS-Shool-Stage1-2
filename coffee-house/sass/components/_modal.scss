@@ -8,10 +8,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 40px;
 }
 
 .product-modal {
     display: flex;
+    align-items: flex-start;
 }
 
 .modal {
@@ -23,16 +25,42 @@
     height: max-content;
     overflow: auto;
     
+    .form__alert {
+        display: flex;
+        @include font(10px, $height: 1.4);
+        padding: 12px 0;
+        span:nth-child(2) {
+            flex: 1 0 0;
+        }
+       
+        
+    }
     &__description {
         display: flex;
         flex-direction: column;
         gap: 20px;
         padding-left: 20px;
+
+        .description {
+            margin-top: -8px;
+        }
+        .total-price {
+            display: flex;
+            justify-content: space-between;
+        }
+        .line:before {
+            content: "";
+            display: block;
+            height: 1px;
+            width: 100%;
+            background-color: $color-border-light;
+        }
     }
     &__tags {
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
+        margin-top: 8px;
     }
     &__tag {
     display: flex;
@@ -40,7 +68,7 @@
     align-items: center;
     border-radius: 100px;
     cursor: pointer;
-    padding: 8px 16px 8px 8px;
+    padding: 7px 15px 7px 7px;
     border: 1px solid $color-border-light;
     width: max-content;
     transition: all 0.7s ease;

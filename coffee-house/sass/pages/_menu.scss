@@ -123,6 +123,12 @@
         width: inherit;
         height: inherit;
         border-radius: 40px;
+        // 
+        flex-shrink: 0;
+    }
+
+    .img-wrapper_cards > img{
+        width: 310px;
     }
 
 
