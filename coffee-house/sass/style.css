@@ -281,7 +281,7 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 20px;
 }
 
 .product-modal {
@@ -314,7 +314,6 @@ h3 {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding-left: 20px;
 }
 .modal__description .description {
   margin-top: -8px;
@@ -356,10 +355,15 @@ h3 {
   display: none;
 }
 .modal__tag.selected {
-  color: #E1D4C9;
   background-color: #665F55;
   border-color: #665F55;
   cursor: default;
+}
+.modal__tag.selected .modal__tag-text {
+  color: #E1D4C9;
+}
+.modal__tag.selected .modal__circle {
+  background: #E1D4C9;
 }
 @media (hover: hover) {
   .modal__tag:hover {
@@ -1036,6 +1040,15 @@ h3 {
   height: inherit;
   border-radius: 40px;
   flex-shrink: 0;
+}
+
+.modal__img {
+  margin-right: 20px;
+}
+@media (max-width: 715px) {
+  .modal__img {
+    display: none;
+  }
 }
 
 .img-wrapper_cards > img {

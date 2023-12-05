@@ -123,8 +123,15 @@
         width: inherit;
         height: inherit;
         border-radius: 40px;
-        // 
         flex-shrink: 0;
+      
+    }
+
+    .modal__img {
+        margin-right: 20px;
+        @include mobile {
+            display: none;
+        }
     }
 
     .img-wrapper_cards > img{

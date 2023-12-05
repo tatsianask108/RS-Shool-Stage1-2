@@ -3,11 +3,12 @@ export { renderProductForm };
 
 const renderProductForm = (cardJson) => {
     let productForm = document.createElement('form');
+    productForm.setAttribute('href', '!#')
 
     productForm.className = 'product-modal';
 
     productForm.innerHTML =
-        `<div class="img-wrapper img-wrapper_cards">
+        `<div class="img-wrapper img-wrapper_cards modal__img">
             <img src="${cardJson.urlToImg}" alt="${cardJson.category}-image">
         </div>
         <div class="modal__description">
@@ -17,7 +18,7 @@ const renderProductForm = (cardJson) => {
             <div>
                 <div>Size</div>
                 <div class="modal__tags">
-                    <label class="modal__tag">
+                    <label class="modal__tag selected">
                         <div class="modal__circle">S</div>
                         <input type="radio" name="sizes" value="s">
                         <span class="modal__tag-text">${cardJson.sizes.s.size}</span>
@@ -91,4 +92,8 @@ const initActions = (form) => {
 
         form.querySelector('[data-role=price]').innerHTML = '$' + ((+form.productData.price + additional_price).toFixed(2));
     });
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+    })
 }

@@ -8,7 +8,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 40px;
+    padding: 20px;
 }
 
 .product-modal {
@@ -39,7 +39,7 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
-        padding-left: 20px;
+
 
         .description {
             margin-top: -8px;
@@ -79,7 +79,12 @@
     }
 
     &.selected {
-        color: $color-text-light;
+        .modal__tag-text {
+            color: $color-text-light;
+        }
+        .modal__circle {
+            background: $color-background-body;
+        }
         background-color: $color-background-container;
         border-color: $color-background-container;
         cursor: default;
