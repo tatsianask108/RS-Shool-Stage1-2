@@ -9,14 +9,21 @@
             display: flex;
             gap: 12px;
         } 
-    &__controls>* {
+    &__controls input {
+            -webkit-appearance: none;
             width: 40px;
             height: 4px;
             border-radius: 100px;
             background: $color-border-light;
+
+            &::-webkit-slider-thumb {
+                -webkit-appearance: none;
+            }
         }
-    &__controls>*:first-child {
+        
+        .control-active {
             background: $color-border-dark;
+            transition: 1s;
         }
     }
    
@@ -27,7 +34,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    // gap: $gap;
+    @include mobile {
+        justify-content: center;
+    }
     &__btn {
     @include mobile {
         display: none;
@@ -35,22 +44,17 @@
 
     }
     &__inner-wrapper {
-        // width: 1152px;
-
-        width: 480px;
+        max-width: 480px;
         overflow: hidden;
-
         display: flex;
-        // justify-content: center;
-        // @include laptop {
-        //     width: max-content;
-        // }
+        
 
     }
 }
 
 .slider__content {
     display: flex;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
     width: 480px;
@@ -71,11 +75,8 @@
 }
 
 
-
 .slider-line {
     position: relative;
-    // left: -480px;
-    // left: 0;
     display: flex;
     transition: 1s;
 }
