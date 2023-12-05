@@ -613,10 +613,10 @@ h3 {
 }
 
 .slider {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 40px;
 }
 @media (max-width: 715px) {
   .slider__btn {
@@ -624,15 +624,9 @@ h3 {
   }
 }
 .slider__inner-wrapper {
-  width: 1152px;
+  width: 480px;
+  overflow: hidden;
   display: flex;
-  justify-content: center;
-}
-@media (max-width: 1360px) {
-  .slider__inner-wrapper {
-    width: -moz-max-content;
-    width: max-content;
-  }
 }
 
 .slider__content {
@@ -658,6 +652,12 @@ h3 {
   .slider__content {
     max-width: 348px;
   }
+}
+
+.slider-line {
+  position: relative;
+  display: flex;
+  transition: 1s;
 }
 
 .about {

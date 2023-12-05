@@ -22,31 +22,29 @@
    
 
 .slider {
+    
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: $gap;
+    // gap: $gap;
     &__btn {
-    // display: flex;
-    // width: 60px;
-    // height: 60px;
-    // justify-content: center;
-    // align-items: center;
-    // border-radius: 100px;
-    // border: 1px solid $color-border-dark;
-    // background: transparent;
     @include mobile {
         display: none;
     }
 
     }
     &__inner-wrapper {
-        width: 1152px;
+        // width: 1152px;
+
+        width: 480px;
+        overflow: hidden;
+
         display: flex;
-        justify-content: center;
-        @include laptop {
-            width: max-content;
-        }
+        // justify-content: center;
+        // @include laptop {
+        //     width: max-content;
+        // }
 
     }
 }
@@ -72,3 +70,12 @@
 
 }
 
+
+
+.slider-line {
+    position: relative;
+    // left: -480px;
+    // left: 0;
+    display: flex;
+    transition: 1s;
+}
