@@ -9,22 +9,23 @@
             display: flex;
             gap: 12px;
         } 
-    &__controls input {
-            -webkit-appearance: none;
+    .progress__container {
             width: 40px;
             height: 4px;
             border-radius: 100px;
             background: $color-border-light;
+    }
 
-            &::-webkit-slider-thumb {
-                -webkit-appearance: none;
-            }
-        }
-        
-        .control-active {
-            background: $color-border-dark;
-            transition: 1s;
-        }
+    .progress {
+        width: 0;
+        background: $color-border-dark;
+        border-radius: 5px;
+        height: inherit;
+    }
+        // .control-active {
+        //     background: $color-border-dark;
+        //     transition: 1s;
+        // }
     }
    
 
@@ -80,3 +81,20 @@
     display: flex;
     transition: 1s;
 }
+
+// .progress__container {
+//     width: 100%;
+//     height: 10px;
+//     border-radius: 5px;
+//     margin-top: 50px;
+//     background: #e4ecf3;
+//     display: flex;
+//     align-items: center;
+//     cursor: pointer;
+// }
+
+// .progress {
+//     background: rgb(148, 148, 218);
+//     border-radius: 5px;
+//     height: inherit;
+// } 

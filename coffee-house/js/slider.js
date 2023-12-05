@@ -9,11 +9,9 @@ let sliderLine = document.querySelector('.slider-line'),
     controlsContainer = document.querySelector('.favorite-coffee__controls'),
 
     currentSlide = 0,
-    isPaused = false;
+    isPaused = false,
+    sliderInterval;
 
-
-//automatic change
-let timerId;
 
 
 function initSlider() {
@@ -21,22 +19,20 @@ function initSlider() {
     nextButton.addEventListener('click', nextSlide);
     prevButton.addEventListener('click', prevSlide);
 
-
-
-
     setActiveSlide(0);
+    pauseSlider();
 }
+
 
 function nextSlide() {
-    clearInterval(timerId);
+    clearInterval(sliderInterval);
     setActiveSlide(currentSlide === slidesCount - 1 ? 0 : currentSlide + 1);
-    // isPaused = false;
-
 }
+
+
 function prevSlide() {
-    clearInterval(timerId);
+    clearInterval(sliderInterval);
     setActiveSlide(currentSlide === 0 ? slidesCount - 1 : currentSlide - 1);
-    // isPaused = false;
 }
 
 function setActiveSlide(index = 0) {
@@ -46,48 +42,75 @@ function setActiveSlide(index = 0) {
     sliderLine.style.left = -position + '%';
     currentSlide = index;
 
-    timerId = setInterval(() => {
+
+    sliderInterval = setInterval(() => {
         if (!isPaused) {
             nextSlide();
         }
     }, 3000);
 
-    // console.log(timerId)
 
-    for (let [key, control] of Object.entries(controlsContainer.children)) {
+    // for (let [key, control] of Object.entries(controlsContainer.children)) {
 
-        if (key == index) {
-            control.classList.add('control-active')
+    //     if (key == index) {
+    //         control.firstElementChild.style.width = 0;
+    //         move(control.firstElementChild)
+    //     }
+    // }
+
+
+}
+
+function pauseSlider() {
+    let mediaQuery = window.matchMedia("(hover: none)");
+
+    function handleTabletChange(mediaQuery) {
+
+        if (mediaQuery.matches) {
+            sliderContent.forEach((item) => item.addEventListener('touchstart', () => {
+                isPaused = true;
+                console.log('touchstart')
+            }))
+            sliderContent.forEach((item) => item.addEventListener('touchend', () => {
+                isPaused = false;
+                console.log('touchend')
+            }))
         } else {
-            control.classList.remove('control-active');
+            sliderContent.forEach((item) => item.onmouseenter = () => {
+                isPaused = true;
+                console.log('pause')
+            })
+
+            sliderContent.forEach((item) => item.onmouseleave = () => {
+                isPaused = false;
+                console.log('play')
+            })
         }
+
     }
-    pauseInterval()
 
-}
+    handleTabletChange(mediaQuery)
 
-function pauseInterval() {
-
-    sliderContent.forEach((item) => item.onmouseenter = () => {
-        isPaused = true;
-        console.log('pause')
+    mediaQuery.addEventListener('change', () => {
+        handleTabletChange(mediaQuery)
     })
-
-    sliderContent.forEach((item) => item.onmouseleave = () => {
-        isPaused = false;
-        console.log('play')
-    })
-
-    // sliderContent.forEach((item) => item.addEventListener('touchstart', () => {
-    //     isPaused = true;
-    //     console.log('touchstart')
-    // }))
-    // sliderContent.forEach((item) => item.addEventListener('touchend', () => {
-    //     isPaused = false;
-    //     console.log('touchend')
-    // }))
-
 }
-
 
 initSlider()
+
+
+// function move(element) {
+//     let width = 0;
+//     let id = setInterval(frame, 30);
+//     function frame() {
+//         if (width == 100) {
+//             element.style.width = 0;
+//             clearInterval(id);
+//         } else if (!isPaused) {
+//             width++;
+//             element.style.width = width + '%';
+//         }
+//     }
+// }
+
+

@@ -602,19 +602,17 @@ h3 {
   display: flex;
   gap: 12px;
 }
-.favorite-coffee__controls input {
-  -webkit-appearance: none;
+.favorite-coffee .progress__container {
   width: 40px;
   height: 4px;
   border-radius: 100px;
   background: #C1B6AD;
 }
-.favorite-coffee__controls input::-webkit-slider-thumb {
-  -webkit-appearance: none;
-}
-.favorite-coffee .control-active {
+.favorite-coffee .progress {
+  width: 0;
   background: #665F55;
-  transition: 1s;
+  border-radius: 5px;
+  height: inherit;
 }
 
 .slider {
