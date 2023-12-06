@@ -618,6 +618,10 @@ h3 {
   border-radius: 5px;
   height: inherit;
 }
+.favorite-coffee .control-active {
+  background: #665F55;
+  transition: 1s;
+}
 
 .slider {
   width: 100%;

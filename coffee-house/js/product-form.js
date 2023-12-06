@@ -3,7 +3,7 @@ export { renderProductForm };
 
 const renderProductForm = (cardJson) => {
     let productForm = document.createElement('form');
-    productForm.setAttribute('href', '!#')
+    productForm.setAttribute('action', '#')
 
     productForm.className = 'product-modal';
 
@@ -92,8 +92,4 @@ const initActions = (form) => {
 
         form.querySelector('[data-role=price]').innerHTML = '$' + ((+form.productData.price + additional_price).toFixed(2));
     });
-
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-    })
 }
