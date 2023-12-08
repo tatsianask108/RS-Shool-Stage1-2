@@ -14,6 +14,36 @@
             height: 4px;
             border-radius: 100px;
             background: $color-border-light;
+            position: relative;
+            overflow: hidden;
+
+            &:after {
+                content: "";
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 0;
+                height: 100%;
+                background: $color-border-dark;
+            }
+
+            @keyframes pauseAnimation {
+                0% { width: 0%; } 
+                100% { width: 100%; } 
+            }
+
+            &.control-active {
+                &:after {
+                    width: 100%;
+                    animation: pauseAnimation 4s ease;
+                }
+            }
+            &.paused {
+                &:after {
+                    animation-play-state: paused;
+                }
+            }
     }
 
     .progress {
@@ -22,10 +52,7 @@
         border-radius: 5px;
         height: inherit;
     }
-        .control-active {
-            background: $color-border-dark;
-            transition: 1s;
-        }
+    
     }
    
 
@@ -58,7 +85,10 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 480px;
+    //width: 480px;
+    min-width: 100%;
+    position: relative;
+
     &-img {
         margin-bottom: 20px;
     }
@@ -69,9 +99,6 @@
         @include font ($weight:400, $height: 150%);
         margin-bottom: 16px;
     }
-    @include mobile {
-        max-width: 348px;
-    }
 
 }
 
@@ -80,6 +107,7 @@
     position: relative;
     display: flex;
     transition: 1s;
+    max-width: 100%;;
 }
 
 // .progress__container {
