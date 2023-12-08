@@ -36,7 +36,7 @@
             &.control-active {
                 &:after {
                     width: 100%;
-                    animation: pauseAnimation 4s ease;
+                    animation: pauseAnimation 5s linear;
                 }
             }
             &.paused {

@@ -17,11 +17,18 @@ const renderModal = (content) => {
 }
 
 
-const closeModal = (e) => {
+const closeModal = () => {
     document.addEventListener('click', (e) => {
         if (e.target.classList.contains('overlay') || e.target.classList.contains('form-btn')) {
-            document.querySelector('.overlay').remove();
-            document.body.classList.remove('stop-scroll')
+            document.body.classList.remove('stop-scroll');
+
+            //плавное закрытие модального окна
+            let overlay = document.querySelector('.overlay');
+            overlay.classList.remove('smooth');
+            setTimeout(() => {
+                overlay.remove();
+            }, 400);
+
         }
     })
 }

@@ -6,8 +6,7 @@ body {
     font-family: 'Inter', sans-serif;
     background-color: $color-background-body;
     color: $color-text-dark;
-    @include font(16px, 400, 1.5); 
-    scroll-behavior: smooth;         
+    @include font(16px, 400, 1.5);        
 }
 
 a, li, button {

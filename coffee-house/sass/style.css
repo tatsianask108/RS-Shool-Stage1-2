@@ -11,7 +11,6 @@ body {
   font-weight: 400;
   line-height: 1.5;
   font-style: normal;
-  scroll-behavior: smooth;
 }
 
 a, li, button {
@@ -276,12 +275,23 @@ h3 {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.253);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 40px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+@media (max-width: 715px) {
+  .overlay {
+    padding: 20px;
+  }
+}
+
+.smooth {
+  opacity: 1;
 }
 
 .product-modal {
@@ -634,7 +644,7 @@ h3 {
 }
 .favorite-coffee .progress__container.control-active:after {
   width: 100%;
-  animation: pauseAnimation 4s ease;
+  animation: pauseAnimation 5s linear;
 }
 .favorite-coffee .progress__container.paused:after {
   animation-play-state: paused;

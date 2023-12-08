@@ -63,7 +63,7 @@ const renderProductForm = (cardJson) => {
                     <span>The cost is not final. Download our mobile app to see the final price and place your order. Earn loyalty points and enjoy your favorite coffee with up to 20% discount.</span>
                 </div>
             </div>
-            <button class="btn form-btn">Close</button>
+            <button type="button" class="btn form-btn">Close</button>
             
         </div>`;
 
@@ -78,7 +78,7 @@ const renderProductForm = (cardJson) => {
  * @returns {void} - This function doesn't return anything.
  */
 const initActions = (form) => {
-    form.addEventListener('change', function (e) {
+    form.addEventListener('change', function () {
         let additional_price = 0;
 
         Array.from(form.elements).forEach((el) => { /** @param {HTMLElement} el */
@@ -92,4 +92,5 @@ const initActions = (form) => {
 
         form.querySelector('[data-role=price]').innerHTML = '$' + ((+form.productData.price + additional_price).toFixed(2));
     });
+
 }

@@ -1,7 +1,7 @@
 import { burgerFunction } from './js/burger.js';
 import { fetcher } from './js/fetcher.js';
 import { renderProductForm } from './js/product-form.js'
-import {renderModal} from "./js/modal.js";
+import { renderModal } from "./js/modal.js";
 
 const DEFAULT_TAG = 'coffee';
 const gridContainer = document?.getElementById('gridContainer');
@@ -82,11 +82,15 @@ const showMenuLayout = () => {
 
 }
 
+const modalClassAdder = () => {
+    let overlay = document.querySelector('.overlay')
+    overlay.classList.add('smooth');
+}
 
 const renderCardsList = (filterTag = DEFAULT_TAG) => {
     const gridContainer = document?.getElementById('gridContainer');
     gridContainer.innerHTML = '';
-    
+
     let json = fetcher.getProducts();
 
     json.filter(card => card?.category === filterTag).forEach(cardJson => {
@@ -96,7 +100,8 @@ const renderCardsList = (filterTag = DEFAULT_TAG) => {
         cardElement.addEventListener('click', (e) => {
             const productForm = renderProductForm(cardJson);
             renderModal(productForm);
-            e.preventDefault();
+            setTimeout(modalClassAdder, 100)
+            // e.preventDefault();
         })
         gridContainer.append(cardElement);
     })
@@ -104,7 +109,11 @@ const renderCardsList = (filterTag = DEFAULT_TAG) => {
     showMenuLayout()
     window.addEventListener('resize', showMenuLayout);
     addLoadMoreBtnListeners();
+
 }
 
 renderCardsList();
+
+
+
 
