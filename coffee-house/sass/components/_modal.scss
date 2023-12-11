@@ -1,0 +1,127 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.253);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    opacity: 0;
+    transition: opacity .5s ease-in-out;
+    @include mobile {
+        padding: 20px;
+    }
+}
+
+.smooth {
+    opacity: 1;
+}
+
+.product-modal {
+    display: flex;
+    align-items: flex-start;
+}
+
+.modal {
+    position: relative;
+    border-radius: 40px;
+    padding: 16px;
+    background-color: $color-background-body;
+    max-width: 800px;
+    height: max-content;
+    overflow: auto;
+    
+    .form__alert {
+        display: flex;
+        @include font(10px, $height: 1.4);
+        padding: 12px 0;
+        span:nth-child(2) {
+            flex: 1 0 0;
+        }
+       
+        
+    }
+    &__description {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+
+        .description {
+            margin-top: -8px;
+        }
+        .total-price {
+            display: flex;
+            justify-content: space-between;
+        }
+        .line:before {
+            content: "";
+            display: block;
+            height: 1px;
+            width: 100%;
+            background-color: $color-border-light;
+        }
+    }
+    &__tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 8px;
+    }
+    &__tag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    cursor: pointer;
+    padding: 7px 15px 7px 7px;
+    border: 1px solid $color-border-light;
+    width: max-content;
+    transition: all 0.7s ease;
+    @include font($weight: 600, $height: 150%);
+
+    input {
+        display: none;
+    }
+
+    &.selected {
+        .modal__tag-text {
+            color: $color-text-light;
+        }
+        .modal__circle {
+            background: $color-background-body;
+        }
+        background-color: $color-background-container;
+        border-color: $color-background-container;
+        cursor: default;
+    }
+
+    @media (hover: hover) {
+        &:hover {
+            .modal__tag-text {
+                color: $color-text-light;
+            }
+            .modal__circle {
+                background: $color-background-body;
+            }
+            background-color: $color-background-container;
+            border-color: $color-background-container;
+        }
+    }
+}
+&__circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background: $color-border-light;
+    border-radius: 100px;
+    margin-right: 8px;
+
+}
+
+}

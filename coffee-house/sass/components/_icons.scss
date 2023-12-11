@@ -3,6 +3,20 @@
     display: inline-block;
     margin-right: 8px;
 
+    &-phone {
+        background-image: url(../img/icons/footer/phone.svg);
+        width: 20px;
+        height: 20px;
+    }
+
+    &-info {
+        background-image: url(../img/icons/info.svg);
+        width: 16px;
+        height: 16px;
+    }
+        
+    
+
 }
 
 .icon_coffee-cup {
@@ -11,6 +25,15 @@
     height: 19px;
     margin-right: 0;
     margin-left: 8px;
+}
+
+.icon_coffee-cup-tablet {
+    @include tablet {
+        background-image: url(../img/icons/coffee-cup-burger.svg);
+        width: 40px;
+        height: 40px;
+        vertical-align: sub;
+    }
 }
 
 .icon__apple,
@@ -23,12 +46,6 @@
     width: 20px;
     height: 20px;
 
-}
-
-.icon-phone {
-    background-image: url(../img/icons/footer/phone.svg);
-    width: 20px;
-    height: 20px;
 }
 
 .icon-clock {

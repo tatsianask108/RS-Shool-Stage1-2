@@ -17,26 +17,25 @@
                 <div class="header__logo">
                     <a href="./index.html" class="logo"><img src="img/icons/logo.svg" alt="header__logo"></a>
                 </div>
-                <nav class="header__nav">
-                    <ul class="navigation">
-                        <li class="navigation__link"><a href="./index.html#favorite-coffee">Favorite coffee</a></li>
-                        <li class="navigation__link"><a href="./index.html#about">About</a></li>
-                        <li class="navigation__link"><a href="./index.html#mobile-app">Mobile app</a></li>
-                        <li class="navigation__link"><a href="#footer">Contact us</a></li>
-                    </ul>
-                </nav>
-                <div class="header__menu-link">
-                    <a href="./menu.html" target="_blank" class="menu-link menu-link__on-menu-page">
-                        <span>Menu</span>
-                        <span class="icon icon_coffee-cup"></span>
-                    </a>
+                <div class="nav" id="nav">
+                    <nav class="header__nav">
+                        <ul class="navigation">
+                            <li class="navigation__link"><a href="./index.html#favorite-coffee">Favorite coffee</a></li>
+                            <li class="navigation__link"><a href="./index.html#about">About</a></li>
+                            <li class="navigation__link"><a href="./index.html#mobile-app">Mobile app</a></li>
+                            <li class="navigation__link"><a href="#footer">Contact us</a></li>
+                        </ul>
+                    </nav>
+                    <div class="header__menu-link">
+                        <a class="menu-link menu-link__on-menu-page">
+                            <span>Menu</span>
+                            <span class="icon icon_coffee-cup icon_coffee-cup-tablet"></span>
+                        </a>
+                    </div>
                 </div>
-                <button class="burger-btn">
-                    <span class="lines-wrapper">
-                        <span class="burger__line"></span>
-                        <span class="burger__line"></span>
-                    </span>
-
+                <button class="burger-btn" id="burger-btn">
+                    <span class="burger__line"></span>
+                    <span class="burger__line"></span>
                 </button>
             </div>
         </header>
@@ -44,8 +43,8 @@
         <div class="offer">
             <h2 class="h2__title">Behind each of our cups hides an <span class="h2__title-accent">amazing
                     surprise</span></h2>
-            <div class="offer__tags">
-                <button class="tag link tag__selected">
+            <div class="offer__tags" id="offerTags">
+                <div class="tag link tag__selected" data-tag="coffee">
                     <span class="link-container">
                         <span class="icon icon-tag">
                             <svg width="31" height="30" viewBox="0 0 31 30" fill="none"
@@ -63,8 +62,8 @@
                         </span>
                         <span>Coffee</span>
                     </span>
-                </button>
-                <span class="tag link">
+                </div>
+                <div class="tag link" data-tag="tea">
                     <span class="link-container">
                         <span class="icon icon-tag">
                             <svg width="31" height="30" viewBox="0 0 31 30" fill="none"
@@ -82,8 +81,8 @@
                         </span>
                         <span>Tea</span>
                     </span>
-                </span>
-                <span class="tag link">
+                </div>
+                <div class="tag link" data-tag="dessert">
                     <span class="link-container">
                         <span class="icon icon-tag">
                             <svg width="31" height="30" viewBox="0 0 31 30" fill="none"
@@ -101,12 +100,12 @@
                         </span>
                         <span>Dessert</span>
                     </span>
-                </span>
+                </div>
             </div>
         </div>
         <div class="cards__container container">
-            <div class="cards">
-                <div class="card">
+            <div class="cards" id="gridContainer">
+                <!-- <div class="card">
                     <div class="img-wrapper img-wrapper_cards">
                         <img src="img/menu-page/coffee/coffee-1.jpg" alt="coffee">
                     </div>
@@ -188,9 +187,9 @@
                         <p>Fragrant black coffee with cognac and whipped cream</p>
                         <h3>$6.50</h3>
                     </div>
-                </div>
+                </div> -->
             </div>
-            <button class="refresh-btn btn">
+            <button class="refresh-btn btn" id="loadMore">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="refresh">
                         <path id="Ellipse"
@@ -260,6 +259,8 @@
             </div>
         </footer>
     </div>
+    <script src="./index.js" type="module"></script>
+    <script src="./js/menu-page.js" type="module"></script>
 </body>
 
 </html>

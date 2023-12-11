@@ -7,6 +7,10 @@
     @media (max-width: 415px) {
         padding: 0 16px;
     }
+
+    // to hide burger menu without horizontal scroll
+    overflow: hidden;
+    position: relative;
 }
 .container {
     margin: 0 auto;
