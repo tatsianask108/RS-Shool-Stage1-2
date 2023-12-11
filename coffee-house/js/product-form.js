@@ -20,7 +20,7 @@ const renderProductForm = (cardJson) => {
                 <div class="modal__tags">
                     <label class="modal__tag selected">
                         <div class="modal__circle">S</div>
-                        <input type="radio" name="sizes" value="s">
+                        <input type="radio" name="sizes" value="s" checked>
                         <span class="modal__tag-text">${cardJson.sizes.s.size}</span>
                     </label>
                     <label class="modal__tag">
@@ -80,7 +80,7 @@ const renderProductForm = (cardJson) => {
 const initActions = (form) => {
     form.addEventListener('change', function () {
         let additional_price = 0;
-
+        console.log((form.elements))
         Array.from(form.elements).forEach((el) => { /** @param {HTMLElement} el */
             if (el.checked) {
                 additional_price += +form.productData[el.name][el.value]['add-price'];
