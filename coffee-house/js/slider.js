@@ -9,8 +9,8 @@ const
 let
     currentSlide = 0,
     sliderInterval,
-    slider_interval_time = 0, // хранится время, когда начался интервал
-    slider_interval_paused_at = 0; // во сколько остановился интервал
+    sliderIntervalTime = 0, // хранится время, когда начался интервал
+    sliderIntervalPausedAt = 0; // во сколько остановился интервал
 
 
 
@@ -24,15 +24,15 @@ function initSlider() {
 }
 
 function setPauseState(state) {
-    console.log("Is paused: " + state);
+    // console.log("Is paused: " + state);
     let control = Array.from(sliderControls.children).find((el) => el.classList.contains('control-active'));
     if (control) {
         if (state) { // если пауза
             control.classList.add('paused');
-            slider_interval_paused_at = stopSliderInterval(); // останавливаем интервал и получаем значение, на котором он остановился (например 2 секунды до ховера)
+            sliderIntervalPausedAt = stopSliderInterval(); // останавливаем интервал и получаем значение, на котором он остановился (например 2 секунды до ховера)
         } else { // если отмена паузы
             control.classList.remove('paused');
-            setSliderInterval(slider_interval_paused_at); // возобновляем интервал с пропуском времени (например 2 секунды, следовательно этот интервал будет 4 - 2 секунды)
+            setSliderInterval(sliderIntervalPausedAt); // возобновляем интервал с пропуском времени (например 2 секунды, следовательно этот интервал будет 4 - 2 секунды)
         }
     }
 }
@@ -67,17 +67,17 @@ function setActiveSlide(index = 0) {
 }
 
 
-function setSliderInterval(start_time = 0) {
-    slider_interval_time = performance.now() - start_time; // время начала интервала (текущее время) минус секунды, после паузы
-    console.log(start_time, slider_interval_time);
+function setSliderInterval(startTime = 0) {
+    sliderIntervalTime = performance.now() - startTime; // время начала интервала (текущее время) минус секунды, после паузы
+    // console.log(start_time, slider_interval_time);
     sliderInterval = setInterval(() => {
         nextSlide();
-    }, 5000 - start_time); // текущий интервал равен 4 секунды минус время после паузы
+    }, 5000 - startTime); // текущий интервал равен 4 секунды минус время после паузы
 }
 
 function stopSliderInterval() {
     clearInterval(sliderInterval);
-    return performance.now() - slider_interval_time; // возвращает разницу текущего времени и времени, когда был запущен интервал
+    return performance.now() - sliderIntervalTime; // возвращает разницу текущего времени и времени, когда был запущен интервал
 }
 
 
@@ -87,11 +87,11 @@ function initPausesAndSwipes() {
 }
 
 function initPauseOnDesktop() {
-    slides.forEach((item) => item.onmouseenter = () => {
+    slides.forEach((item) => item.onmouseover = () => {
         setPauseState(true);
     })
 
-    slides.forEach((item) => item.onmouseleave = () => {
+    slides.forEach((item) => item.onmouseout = () => {
         setPauseState(false);
     })
 }
@@ -106,26 +106,26 @@ function initPauseAndSwipeOnMobile() {
         }
 
         if (touchendX < touchstartX) {
-            console.log('next')
+            // console.log('next')
             nextSlide()
         }
         if (touchendX > touchstartX) {
-            console.log('prev')
+            // console.log('prev')
             prevSlide()
         }
     }
 
     slides.forEach(slide => slide.addEventListener("touchstart", (e) => {
         setPauseState(true);
-        console.log('touchstart')
+        // console.log('touchstart')
         touchstartX = e.changedTouches[0].screenX;
         e.preventDefault();
-    }))
+    }, { passive: false }))
 
 
     slides.forEach(slide => slide.addEventListener("touchend", (e) => {
         setPauseState(false);
-        console.log('touchend')
+        // console.log('touchend')
         touchendX = e.changedTouches[0].screenX;
         checkDirection();
     }))
@@ -134,8 +134,3 @@ function initPauseAndSwipeOnMobile() {
 
 
 initSlider()
-
-
-
-
-

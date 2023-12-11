@@ -2,6 +2,13 @@
 html {
   scroll-behavior: smooth;
 }
+html ::-webkit-scrollbar {
+  background-color: #E1D4C9;
+  width: 2px;
+}
+html ::-webkit-scrollbar-thumb {
+  background-color: #665F55;
+}
 
 body {
   font-family: "Inter", sans-serif;
