@@ -17,30 +17,32 @@
                 <div class="header__logo">
                     <a class=" logo"><img src="img/icons/logo.svg" alt="header__logo"></a>
                 </div>
-                <nav>
-                    <ul class="navigation">
-                        <li class="navigation__link"><a href="#favorite-coffee">Favorite coffee</a></li>
-                        <li class="navigation__link"><a href="#about">About</a></li>
-                        <li class="navigation__link"><a href="#mobile-app">Mobile app</a></li>
-                        <li class="navigation__link"><a href="#footer">Contact us</a></li>
-                    </ul>
-                </nav>
-                <div class="header__menu-link">
-                    <a href="./menu.html" target="_blank" class="menu-link">
-                        <span>Menu</span>
-                        <span class="icon icon_coffee-cup "></span>
-                    </a>
+                <div class="nav" id="nav">
+                    <nav class="header__nav">
+                        <ul class="navigation">
+                            <li class="navigation__link"><a href="#favorite-coffee">Favorite coffee</a></li>
+                            <li class="navigation__link"><a href="#about">About</a></li>
+                            <li class="navigation__link"><a href="#mobile-app">Mobile app</a></li>
+                            <li class="navigation__link"><a href="#footer">Contact us</a></li>
+                        </ul>
+                    </nav>
+                    <div class="header__menu-link">
+                        <a href="./menu.html" class="menu-link">
+                            <span>Menu</span>
+                            <span class="icon icon_coffee-cup icon_coffee-cup-tablet"></span>
+                        </a>
+                    </div>
                 </div>
-                <button class="burger-btn">
-                    <span class="lines-wrapper">
-                        <span class="burger__line"></span>
-                        <span class="burger__line"></span>
-                    </span>
-
+                <button class="burger-btn" id="burger-btn">
+                    <span class="burger__line"></span>
+                    <span class="burger__line"></span>
                 </button>
             </div>
         </header>
         <section class="enjoy">
+            <video autoplay muted loop class="bg-video">
+                <source src="./video.mp4" type="video/mp4">
+            </video>
             <div class="enjoy__content">
                 <h1 class="enjoy__title"><span class="enjoy__title-accent">Enjoy </span>premium coffee at our charming
                     cafe
@@ -48,7 +50,7 @@
                 <div class="enjoy__text">With its inviting atmosphere and delicious coffee options, the Coffee House
                     Resource is a popular destination for coffee lovers and those seeking a warm and inviting space to
                     enjoy their favorite beverage.</div>
-                <a href="./menu.html" target="_blank" class="enjoy__link link">
+                <a href="./menu.html" class="enjoy__link link">
                     <span class="enjoy__link-container link-container">
                         <span class="enjoy__link-text">Menu</span>
                         <span class="icon icon_coffee-cup"></span>
@@ -60,34 +62,65 @@
             <h2 class="h2__title">Choose your <span class="h2__title-accent">favorite</span>
                 coffee</h2>
             <div class="slider">
-                <button class="btn slider__btn"><svg class="arrow-left" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                <button class="btn slider__btn" id="btn-left"><svg class="arrow-left" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="arrow-left">
                             <path id="Vector" d="M18.5 12H6M6 12L12 6M6 12L12 18" stroke="#403F3D"
                                 stroke-linecap="round" stroke-linejoin="round" />
                         </g>
                     </svg></button>
                 <div class="slider__inner-wrapper">
-                    <div class="slider__content">
-                        <div class="slider__content-img"><img src="img/coffee-slider-1.png" alt=""></div>
-                        <h3 class="slider__content-title">S’mores Frappuccino</h3>
-                        <div class="slider__content-text">This new drink takes an espresso and mixes it with brown sugar
-                            and cinnamon before being topped with oat milk.</div>
-                        <h3 class="slider__content-price">$5.50</h3>
+
+                    <div class="slider-line" id="slider-line">
+
+                        <div class="slider__content">
+                            <div class="slider__content-img"><img oncontextmenu='return false;'
+                                    src="img/coffee-slider-1.png" alt="coffee"></div>
+                            <h3 class="slider__content-title">S’mores Frappuccino</h3>
+                            <div class="slider__content-text">This new drink takes an espresso and mixes it with brown
+                                sugar
+                                and cinnamon before being topped with oat milk.</div>
+                            <h3 class="slider__content-price">$5.50</h3>
+                        </div>
+                        <div class="slider__content">
+                            <div class="slider__content-img"><img src="img/coffee-slider-2.png" alt="coffee"></div>
+                            <h3 class="slider__content-title">Caramel Macchiato</h3>
+                            <div class="slider__content-text">Fragrant and unique classic espresso with rich
+                                caramel-peanut
+                                syrup, with cream under whipped thick foam.</div>
+                            <h3 class="slider__content-price">$5.00</h3>
+                        </div>
+                        <div class="slider__content">
+                            <div class="slider__content-img"><img src="img/coffee-slider-3.png" alt="coffee"></div>
+                            <h3 class="slider__content-title">Ice coffee</h3>
+                            <div class="slider__content-text">A popular summer drink that tones and invigorates.
+                                Prepared
+                                from coffee, milk and ice.</div>
+                            <h3 class="slider__content-price">$4.50</h3>
+                        </div>
+
                     </div>
+
                 </div>
-                <button class="btn slider__btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
+                <button class="btn slider__btn" id="btn-right"><svg width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="arrow-right">
                             <path d="M6 12H18.5M18.5 12L12.5 6M18.5 12L12.5 18" stroke="#403F3D" stroke-linecap="round"
                                 stroke-linejoin="round" />
                         </g>
                     </svg></button>
             </div>
-            <div class="favorite-coffee__controls">
-                <div></div>
-                <div></div>
-                <div></div>
+
+            <div class="favorite-coffee__controls" id="slider-controls">
+                <div class="progress__container">
+                    <div class="progress"></div>
+                </div>
+                <div class="progress__container">
+                    <div class="progress"></div>
+                </div>
+                <div class="progress__container">
+                    <div class="progress"></div>
+                </div>
             </div>
         </section>
         <section class="about" id="about">
@@ -234,6 +267,8 @@
             </div>
         </footer>
     </div>
+    <script src="./index.js" type="module"></script>
+    <script src="./js/slider.js" type="module"></script>
 </body>
 
 </html>

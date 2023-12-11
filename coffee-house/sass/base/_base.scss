@@ -1,28 +1,27 @@
 @import url('https://fonts.cdnfonts.com/css/inter');
 html {
     scroll-behavior: smooth;
+    ::-webkit-scrollbar {
+        background-color: $color-background-body;
+        width: 2px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background-color: $color-border-dark;
     }
+    }
+   
 body {
     font-family: 'Inter', sans-serif;
     background-color: $color-background-body;
     color: $color-text-dark;
-    @include font(16px, 400, 150%);                                           
+    @include font(16px, 400, 1.5);        
 }
 
 a, li, button {
     color: inherit;
-    @include font($weight: 600, $height: 150%);
+    @include font($weight: 600, $height: 1.5);
 }
 
-// h1 {    
-//     @include font(72px, 600, 105%);
-// }
-
-// h2 {
-//     @include font($size: 60px);
-     
-// }
-
-// h3 {
-//     @include font ($size: 24px)
-// }
+.stop-scroll {
+    overflow: hidden;
+}
