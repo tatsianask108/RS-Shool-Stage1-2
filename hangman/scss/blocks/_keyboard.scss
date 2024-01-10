@@ -12,8 +12,6 @@
     padding: 5px;
     background: rgb(24, 24, 24);
     text-transform: uppercase;
-    // text-align: center;
-    // width: calc(100% / 11 - 10px);
     cursor: pointer;
     &:hover {
       background: rgba(24, 24, 24, 0.384);
@@ -24,3 +22,4 @@
     width: 100%;
   }
 }
+

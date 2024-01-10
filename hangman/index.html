@@ -27,15 +27,22 @@
               <li class="character"></li>
               <li class="character"></li>
             </ul>
-            <p class="hint">
-              Hint: Lorem ipsum dolor sit amet consectetur adipisicing.
+            <p class="hint">Hint: Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+            <p class="guesses-text">
+              Incorrect guesses: <span class="guesses-counter">0 / 4</span>
             </p>
-            <p class="guesses-text">Incorrect guesses: <span class="guesses-counter">0 / 4</span></p>
           </div>
           <div class="keyboard" id="keyboard"></div>
         </div>
       </div>
     </main>
     <script src="app.js"></script>
+    <div class="overlay">
+      <div class="modal">
+        <p>You won the game!</p>
+        <p>Secret word:</p>
+        <button class="modal__btn">Play again</button>
+      </div>
+    </div>
   </body>
 </html>
