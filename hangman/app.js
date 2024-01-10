@@ -8,6 +8,7 @@ const engKeyboard = [
 let currentWord = word;
 let mistakesCount = 0;
 
+
 const keyboard = document.getElementById("keyboard");
 const hiddenWord = document.getElementById("word");
 
@@ -43,6 +44,24 @@ const pickRandomWord = () => {
 
 pickRandomWord();
 
+const renderModal = (gameResult) => {
+  const overlay = document.createElement("div"),
+    modal = document.createElement("div"),
+    text = document.createElement("p"),
+    button = document.createElement("button");
+
+  overlay.className = "overlay";
+  modal.className = "modal";
+
+  text.innerHTML = `You ${gameResult} the game!<br />Secret word: ${currentWord}`;
+  button.className = "modal__btn";
+  button.innerText = "Play again";
+
+  modal.append(text, button);
+  overlay.append(modal);
+  document.body.append(overlay);
+};
+
 const initGame = (button, character) => {
   button.classList.add("disabled");
   if (currentWord.includes(character)) {
@@ -58,20 +77,18 @@ const initGame = (button, character) => {
     }`;
     mistakesCount++;
     if (mistakesCount === currentWord.length) {
-      showFailModal();
+      const gameResult = "loose";
+      renderModal(gameResult);
     }
   }
 };
 
 const addListeners = () => {
   keyboard.addEventListener("click", (e) => {
-    initGame(e.target, e.target.innerText.toLowerCase());
+    if (e.target.nodeName === "BUTTON") {
+      initGame(e.target, e.target.innerText.toLowerCase());
+    }
   });
 };
 
 addListeners();
-
-const showFailModal = () => {
-  const overlay = document.querySelector(".overlay").classList.remove("hidden");
-  overlay.querySelector;
-};
