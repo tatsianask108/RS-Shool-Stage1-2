@@ -10,6 +10,8 @@
     border-radius: 10px;
     margin: 5px;
     padding: 5px;
+    color: #f8f8f8;
+    font-size: 1.3rem;
     background: rgb(24, 24, 24);
     text-transform: uppercase;
     cursor: pointer;
@@ -17,9 +19,12 @@
       background: rgba(24, 24, 24, 0.384);
     }
   }
+  .disabled {
+    cursor: default;
+    opacity: 0.5;
+  }
   .new-line {
     clear: both;
     width: 100%;
   }
 }
-
