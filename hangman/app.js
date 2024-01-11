@@ -52,6 +52,7 @@ const renderModal = (gameResult) => {
     button = document.createElement("button");
 
   overlay.className = "overlay";
+  overlay.id = "overlay";
   modal.className = "modal";
 
   text.innerHTML = `You ${gameResult} the game!<br />Secret word: ${currentWord}`;
@@ -69,12 +70,12 @@ const restartGame = () => {
       hiddenWord.innerHTML = "";
       container.innerHTML = "";
       const buttons = keyboard.querySelectorAll(".keyboard__btn");
-      buttons.forEach((button) => (button.className = "keyboard__btn"));
+      buttons.forEach((button) => button.classList.remove("disabled"));
       console.clear();
       currentWord = "";
       mistakesCount = 0;
       correctCount = 0;
-      const modal = document.querySelector(".overlay");
+      const modal = document.getElementById("overlay");
       modal.remove();
       pickRandomWord();
     }
@@ -96,6 +97,7 @@ const initGame = (button, character) => {
       currentWord.length
     }`;
     mistakesCount++;
+    console.log(mistakesCount);
     addBodyPart(mistakesCount);
   }
 
@@ -117,7 +119,7 @@ const addBodyPart = (bodyPart) => {
 
   container.append(part);
 };
-const addListeners = () => {
+const addVirtualListener = () => {
   keyboard.addEventListener("click", (e) => {
     if (e.target.nodeName === "BUTTON") {
       initGame(e.target, e.target.innerText.toLowerCase());
@@ -125,4 +127,19 @@ const addListeners = () => {
   });
 };
 
-addListeners();
+addVirtualListener();
+
+const addKeypressListener = () => {
+  document.addEventListener("keypress", (e) => {
+    console.log(e);
+    if (engKeyboard.includes(e.keyCode)) {
+      const button = Array.from(keyboard.children).filter((el) => el.innerHTML === e.key);
+      if (button[0].classList.contains("disabled")) {
+        return;
+      }
+      initGame(button[0], e.key);
+    }
+  });
+};
+
+addKeypressListener();

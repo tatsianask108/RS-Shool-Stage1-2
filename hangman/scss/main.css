@@ -99,6 +99,7 @@
 .keyboard .disabled {
   cursor: default;
   opacity: 0.5;
+  pointer-events: none;
 }
 .keyboard .new-line {
   clear: both;
