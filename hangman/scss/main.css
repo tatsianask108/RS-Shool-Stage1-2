@@ -4,10 +4,11 @@
   box-sizing: border-box;
 }
 
-img {
-  max-width: 100%;
+@media (max-width: 500px) {
+  img {
+    max-width: 100%;
+  }
 }
-
 .body {
   color: #f8f8f8;
   background: rgb(51, 51, 51);
@@ -30,10 +31,6 @@ img {
     flex-direction: column;
     justify-content: center;
   }
-}
-
-.gallows {
-  margin: 20px;
 }
 
 .quiz {
@@ -146,4 +143,54 @@ img {
 
 .hidden {
   display: none;
+}
+
+.gallows {
+  margin: 20px;
+  position: relative;
+}
+
+.wrapper {
+  top: 20%;
+  left: 65%;
+  position: absolute;
+}
+
+.body-parts-container {
+  max-width: 250px;
+  min-width: 150px;
+  height: 450px;
+  position: relative;
+}
+.body-parts-container .body-part-1 {
+  max-width: 70px;
+  position: absolute;
+  top: 0;
+  right: 42%;
+  z-index: 1;
+}
+.body-parts-container .body-part-2 {
+  position: absolute;
+  top: 10%;
+  right: 50%;
+}
+.body-parts-container .body-part-3 {
+  position: absolute;
+  top: 20%;
+  right: 50%;
+}
+.body-parts-container .body-part-4 {
+  position: absolute;
+  top: 20%;
+  left: 48%;
+}
+.body-parts-container .body-part-5 {
+  position: absolute;
+  top: 38%;
+  right: 50%;
+}
+.body-parts-container .body-part-6 {
+  position: absolute;
+  top: 38%;
+  left: 48%;
 }/*# sourceMappingURL=main.css.map */

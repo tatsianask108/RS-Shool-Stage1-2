@@ -11,6 +11,7 @@ let correctCount = 0;
 
 const keyboard = document.getElementById("keyboard");
 const hiddenWord = document.getElementById("word");
+const container = document.querySelector(".body-parts-container");
 
 const initKeyboard = () => {
   for (let i = 0; i < engKeyboard.length; i++) {
@@ -66,6 +67,7 @@ const restartGame = () => {
   document.addEventListener("click", (e) => {
     if (e.target.classList.contains("modal__btn")) {
       hiddenWord.innerHTML = "";
+      container.innerHTML = "";
       const buttons = keyboard.querySelectorAll(".keyboard__btn");
       buttons.forEach((button) => (button.className = "keyboard__btn"));
       console.clear();
@@ -94,6 +96,7 @@ const initGame = (button, character) => {
       currentWord.length
     }`;
     mistakesCount++;
+    addBodyPart(mistakesCount);
   }
 
   if (mistakesCount === currentWord.length) {
@@ -107,6 +110,13 @@ const initGame = (button, character) => {
   }
 };
 
+const addBodyPart = (bodyPart) => {
+  const part = document.createElement("img");
+  part.classList = `body-part-${bodyPart}`;
+  part.src = `assets/img/body-part-${bodyPart}.png`;
+
+  container.append(part);
+};
 const addListeners = () => {
   keyboard.addEventListener("click", (e) => {
     if (e.target.nodeName === "BUTTON") {
