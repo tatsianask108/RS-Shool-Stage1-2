@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+img {
+  max-width: 100%;
+}
+
 .body {
   color: #f8f8f8;
   background: rgb(51, 51, 51);

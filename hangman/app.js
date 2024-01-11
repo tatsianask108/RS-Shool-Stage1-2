@@ -7,7 +7,7 @@ const engKeyboard = [
 
 let currentWord = word;
 let mistakesCount = 0;
-
+let correctCount = 0;
 
 const keyboard = document.getElementById("keyboard");
 const hiddenWord = document.getElementById("word");
@@ -29,7 +29,7 @@ const initKeyboard = () => {
 initKeyboard();
 
 const pickRandomWord = () => {
-  const { word, hint } = hints[Math.round(Math.random() * hints.length)];
+  const { word, hint } = hints[Math.floor(Math.random() * hints.length)];
   currentWord = word;
   console.log(word);
   document.getElementById("hint").innerText = hint;
@@ -62,6 +62,23 @@ const renderModal = (gameResult) => {
   document.body.append(overlay);
 };
 
+const restartGame = () => {
+  document.addEventListener("click", (e) => {
+    if (e.target.classList.contains("modal__btn")) {
+      hiddenWord.innerHTML = "";
+      const buttons = keyboard.querySelectorAll(".keyboard__btn");
+      buttons.forEach((button) => (button.className = "keyboard__btn"));
+      console.clear();
+      currentWord = "";
+      mistakesCount = 0;
+      correctCount = 0;
+      const modal = document.querySelector(".overlay");
+      modal.remove();
+      pickRandomWord();
+    }
+  });
+};
+
 const initGame = (button, character) => {
   button.classList.add("disabled");
   if (currentWord.includes(character)) {
@@ -69,6 +86,7 @@ const initGame = (button, character) => {
       if (letter === character) {
         hiddenWord.children[index].innerText = letter;
         hiddenWord.children[index].classList.add("character--guessed");
+        correctCount++;
       }
     });
   } else {
@@ -76,10 +94,16 @@ const initGame = (button, character) => {
       currentWord.length
     }`;
     mistakesCount++;
-    if (mistakesCount === currentWord.length) {
-      const gameResult = "loose";
-      renderModal(gameResult);
-    }
+  }
+
+  if (mistakesCount === currentWord.length) {
+    renderModal("loose");
+    restartGame();
+  }
+
+  if (correctCount === currentWord.length) {
+    renderModal("won");
+    restartGame();
   }
 };
 

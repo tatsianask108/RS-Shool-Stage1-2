@@ -9,7 +9,7 @@ const hints = [
   //   word: "PHOTOSYNTHESIS",
   //   hint: "The process by which green plants and some other organisms use sunlight to synthesize foods",
   // },
-  // { word: "loop", hint: "A control flow statement for iterating over a sequence of instructions" },
+  { word: "loop", hint: "A control flow statement for iterating over a sequence of instructions" },
   // {
   //   word: "cordyceps",
   //   hint: "A type of parasitic fungus that primarily infects insects",
