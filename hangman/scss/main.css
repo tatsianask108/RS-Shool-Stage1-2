@@ -4,11 +4,15 @@
   box-sizing: border-box;
 }
 
-@media (max-width: 500px) {
+img {
+  max-width: 100%;
+}
+@media (max-width: 600px) {
   img {
-    max-width: 100%;
+    width: 150px;
   }
 }
+
 .body {
   color: #f8f8f8;
   background: rgb(51, 51, 51);
@@ -39,7 +43,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 50px;
+  gap: 30px;
 }
 
 .content {
@@ -50,6 +54,12 @@
   gap: 40px;
   font-size: 1rem;
 }
+@media (max-width: 600px) {
+  .content {
+    font-size: 0.8rem;
+    gap: 20px;
+  }
+}
 .content .guesses-counter {
   color: rgb(104, 114, 187);
   font-weight: 900;
@@ -58,10 +68,12 @@
 .word {
   list-style: none;
   display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 20px;
 }
 .word .character {
-  min-width: 30px;
+  width: 30px;
   border-bottom: 2px solid #f8f8f8;
   color: rgb(104, 114, 187);
   font-weight: 900;
@@ -69,6 +81,14 @@
   text-transform: uppercase;
   margin-top: 50px;
   margin-bottom: 30px;
+}
+@media (max-width: 600px) {
+  .word .character {
+    width: 10px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 1rem;
+  }
 }
 .word .character--guessed {
   border-bottom: 2px solid transparent;
@@ -92,6 +112,17 @@
   background: rgb(24, 24, 24);
   text-transform: uppercase;
   cursor: pointer;
+}
+@media (max-width: 600px) {
+  .keyboard__btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    line-height: 10px;
+    margin: 2px;
+    padding: 0px;
+  }
 }
 .keyboard__btn:hover {
   background: rgba(24, 24, 24, 0.384);
@@ -130,7 +161,7 @@
   padding: 30px;
   background: rgb(104, 114, 187);
   max-width: 800px;
-  min-width: 400px;
+  min-width: 350px;
   height: -moz-max-content;
   height: max-content;
   overflow: auto;
