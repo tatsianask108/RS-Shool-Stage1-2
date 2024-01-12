@@ -33,35 +33,65 @@ let currentWord;
 let mistakesCount = 0;
 let guessedCount = 0;
 
-const app = document.getElementById("app");
+const body = document.getElementById("body");
 
 const initApp = () => {
+  const createElement = (elTag, elClass, elId, elInnerText, elSrc) => {
+    const element = document.createElement(elTag);
+    if (elClass) element.classList.add(elClass);
+    if (elId) element.id = elId;
+    if (elInnerText) element.innerText = elInnerText;
+    if (elSrc) element.src = elSrc;
+
+    return element;
+  };
+
+  const container = document.createElement("div");
   const gallows = document.createElement("div");
   const quiz = document.createElement("div");
 
+  container.classList.add("container");
+
   // gallows
   gallows.classList.add("gallows");
-  gallows.innerHTML = `
-    <img class="gallows-img" src="./assets/img/gallows.png" alt="gallows" />
-    <div class="wrapper">
-      <div class="body-parts-container" id="body-parts-container">
-      </div>
-    </div>`;
+  gallows.append(createElement("img", "gallows-img", null, null, "./assets/img/gallows.png"));
+  const wrapper = createElement("div", "wrapper", null, null);
+  gallows.append(wrapper);
+  wrapper.append(createElement("div", "body-parts-container", "body-parts-container", null, null));
+  // gallows.innerHTML = `
+  //   <img class="gallows-img" src="./assets/img/gallows.png" alt="gallows" />
+  //   <div class="wrapper">
+  //     <div class="body-parts-container" id="body-parts-container">
+  //     </div>
+  //   </div>`;
 
   quiz.classList.add("quiz");
-  quiz.innerHTML = `
-    <div class="content">
-      <h1>Hangman Game</h1>
-      <ul class="word" id="word"></ul>
-      <p class="hint">Hint: <span id="hint"></span></p>
-      <p class="guesses-text">
-        Incorrect guesses: <span class="guesses-counter" id="guesses-counter"></span>
-      </p>
-    </div>
-    <div class="keyboard" id="keyboard"></div>`;
+  const content = createElement("div", "content", null, null, null);
+  quiz.append(content);
+  quiz.append(createElement("div", "keyboard", "keyboard", null, null));
+  content.append(createElement("h1", null, null, "Hangman Game", null));
+  content.append(createElement("ul", "word", "word", null, null));
+  const hint = createElement("p", "hint", null, "Hint: ", null);
+  content.append(hint);
+  hint.append(createElement("span", null, "hint", null, null));
+  createElement();
+  const guessesText = createElement("p", "guesses-text", null, "Incorrect guesses: ", null);
+  content.append(guessesText);
+  guessesText.append(createElement("span", "guesses-counter", "guesses-counter", null, null));
+  // quiz.innerHTML = `
+  //   <div class="content">
+  //     <h1>Hangman Game</h1>
+  //     <ul class="word" id="word"></ul>
+  //     <p class="hint">Hint: <span id="hint"></span></p>
+  //     <p class="guesses-text">
+  //       Incorrect guesses: <span class="guesses-counter" id="guesses-counter"></span>
+  //     </p>
+  //   </div>
+  //   <div class="keyboard" id="keyboard"></div>`;
 
-  app.append(gallows);
-  app.append(quiz);
+  body.prepend(container);
+  container.append(gallows);
+  container.append(quiz);
 };
 initApp();
 
