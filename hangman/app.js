@@ -1,23 +1,56 @@
-import { hints } from "./hints.js";
+import { hints } from "./js/hints.js";
 
 const engKeyboard = [
-  113, 119, 101, 114, 116, 121, 117, 105, 111, 112, 97, 115, 100, 102, 103, 104, 106, 107, 108, 122,
-  120, 99, 118, 98, 110, 109,
+  'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P',
+  'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L',
+  'Z', 'X', 'C', 'V', 'B', 'N', 'M'
 ];
 
-let currentWord = word;
+let currentWord;
 let mistakesCount = 0;
-let correctCount = 0;
+let guessedCount = 0;
+
+const app = document.getElementById('app');
+
+const initApp = () => {
+  const gallows = document.createElement('div');
+  const quiz = document.createElement('div');
+
+  // gallows
+  gallows.classList.add('gallows');
+  gallows.innerHTML = `
+    <img src="./assets/img/gallows.png" alt="gallows" />
+    <div class="wrapper">
+      <div class="body-parts-container" id="body-parts-container">
+      </div>
+    </div>`;
+
+  quiz.classList.add('quiz');
+  quiz.innerHTML = `
+    <div class="content">
+      <h1>Hangman Game</h1>
+      <ul class="word" id="word"></ul>
+      <p class="hint">Hint: <span id="hint"></span></p>
+      <p class="guesses-text">
+        Incorrect guesses: <span class="guesses-counter" id="guesses-counter"></span>
+      </p>
+    </div>
+    <div class="keyboard" id="keyboard"></div>`;
+
+  app.append(gallows);
+  app.append(quiz);
+}
+initApp();
 
 const keyboard = document.getElementById("keyboard");
 const hiddenWord = document.getElementById("word");
-const container = document.querySelector(".body-parts-container");
+const container = document.getElementById("body-parts-container");
 
 const initKeyboard = () => {
   for (let i = 0; i < engKeyboard.length; i++) {
     const button = document.createElement("button");
     button.classList.add("keyboard__btn");
-    button.innerText = String.fromCharCode(engKeyboard[i]);
+    button.innerText = engKeyboard[i];
     if (i === 10 || i === 19) {
       const newLiner = document.createElement("div");
       newLiner.classList.add("new-line");
@@ -26,13 +59,12 @@ const initKeyboard = () => {
     keyboard.append(button);
   }
 };
-
 initKeyboard();
 
 const pickRandomWord = () => {
   const { word, hint } = hints[Math.floor(Math.random() * hints.length)];
-  currentWord = word;
-  console.log(word);
+  currentWord = word.toUpperCase();
+  console.log(currentWord);
   document.getElementById("hint").innerText = hint;
   document.getElementById("guesses-counter").innerText = `0 / ${word.length}`;
 
@@ -44,6 +76,20 @@ const pickRandomWord = () => {
 };
 
 pickRandomWord();
+
+const restartGame = () => {
+  hiddenWord.innerHTML = "";
+  container.innerHTML = "";
+  const buttons = keyboard.querySelectorAll(".keyboard__btn");
+  buttons.forEach((button) => button.classList.remove("disabled"));
+  console.clear();
+  mistakesCount = 0;
+  guessedCount = 0;
+  const modal = document.getElementById("overlay");
+  console.log(modal)
+  modal.remove();
+  pickRandomWord();
+};
 
 const renderModal = (gameResult) => {
   const overlay = document.createElement("div"),
@@ -58,57 +104,41 @@ const renderModal = (gameResult) => {
   text.innerHTML = `You ${gameResult} the game!<br />Secret word: ${currentWord}`;
   button.className = "modal__btn";
   button.innerText = "Play again";
+  button.id = 'play-again-button'
 
   modal.append(text, button);
   overlay.append(modal);
   document.body.append(overlay);
+
+  button.addEventListener('click', restartGame);
 };
 
-const restartGame = () => {
-  document.addEventListener("click", (e) => {
-    if (e.target.classList.contains("modal__btn")) {
-      hiddenWord.innerHTML = "";
-      container.innerHTML = "";
-      const buttons = keyboard.querySelectorAll(".keyboard__btn");
-      buttons.forEach((button) => button.classList.remove("disabled"));
-      console.clear();
-      currentWord = "";
-      mistakesCount = 0;
-      correctCount = 0;
-      const modal = document.getElementById("overlay");
-      modal.remove();
-      pickRandomWord();
-    }
-  });
-};
 
-const initGame = (button, character) => {
+
+
+const gameStep = (button, character) => {
   button.classList.add("disabled");
   if (currentWord.includes(character)) {
     [...currentWord].forEach((letter, index) => {
       if (letter === character) {
         hiddenWord.children[index].innerText = letter;
         hiddenWord.children[index].classList.add("character--guessed");
-        correctCount++;
+        guessedCount++;
       }
     });
   } else {
-    document.getElementById("guesses-counter").innerText = `${mistakesCount + 1} / ${
-      currentWord.length
-    }`;
+    document.getElementById("guesses-counter").innerText = `${mistakesCount + 1} / ${currentWord.length
+      }`;
     mistakesCount++;
-    console.log(mistakesCount);
     addBodyPart(mistakesCount);
   }
 
   if (mistakesCount === currentWord.length) {
     renderModal("loose");
-    restartGame();
   }
 
-  if (correctCount === currentWord.length) {
+  if (guessedCount === currentWord.length) {
     renderModal("won");
-    restartGame();
   }
 };
 
@@ -119,27 +149,29 @@ const addBodyPart = (bodyPart) => {
 
   container.append(part);
 };
-const addVirtualListener = () => {
+const addClickListener = () => {
   keyboard.addEventListener("click", (e) => {
     if (e.target.nodeName === "BUTTON") {
-      initGame(e.target, e.target.innerText.toLowerCase());
+      gameStep(e.target, e.target.innerText);
     }
   });
 };
 
-addVirtualListener();
+addClickListener();
 
 const addKeypressListener = () => {
-  document.addEventListener("keypress", (e) => {
-    console.log(e);
-    if (engKeyboard.includes(e.keyCode)) {
-      const button = Array.from(keyboard.children).filter((el) => el.innerHTML === e.key);
+  document.addEventListener("keydown", (e) => {
+    const pressed_key = e.key.toUpperCase();
+    // console.log(e);
+    if (engKeyboard.includes(pressed_key)) {
+      const button = Array.from(keyboard.children).filter((el) => el.innerHTML === pressed_key);
       if (button[0].classList.contains("disabled")) {
         return;
       }
-      initGame(button[0], e.key);
+      gameStep(button[0], e.key);
     }
   });
 };
 
 addKeypressListener();
+

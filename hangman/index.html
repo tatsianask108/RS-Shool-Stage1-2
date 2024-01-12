@@ -12,43 +12,7 @@
     />
     <link rel="stylesheet" href="./scss/main.css" />
   </head>
-  <body class="body">
-    <main>
-      <div class="container">
-        <div class="gallows">
-          <img src="./assets/img/gallows.png" alt="gallows" />
-          <div class="wrapper">
-            <div class="body-parts-container">
-              <!-- <img class="body-part-1"src="assets/img/body-part-1.png" alt="head" />
-              <img class="body-part-2" src="assets/img/body-part-2.png" alt="body" />
-              <img class="body-part-3" src="assets/img/body-part-3.png" alt="body" />
-              <img class="body-part-4" src="assets/img/body-part-4.png" alt="body" />
-              <img class="body-part-5" src="assets/img/body-part-5.png" alt="body" />
-              <img class="body-part-6" src="assets/img/body-part-6.png" alt="body" /> -->
-            </div>
-          </div>
-          
-        </div>
-        <div class="quiz">
-          <div class="content">
-            <h1>Hangman Game</h1>
-            <ul class="word" id="word"></ul>
-            <p class="hint">Hint: <span id="hint"></span></p>
-            <p class="guesses-text">
-              Incorrect guesses: <span class="guesses-counter" id="guesses-counter"></span>
-            </p>
-          </div>
-          <div class="keyboard" id="keyboard"></div>
-        </div>
-      </div>
-    </main>
-    <!-- <div class="overlay hidden">
-      <div class="modal">
-        <p>You won the game!<br />Secret word:</p>
-        <button class="modal__btn">Play again</button>
-      </div>
-    </div> -->
-    <script src="./hints.js" type="module"></script>
+  <body class="container body" id="app">
     <script src="./app.js" type="module"></script>
   </body>
 </html>
