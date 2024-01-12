@@ -114,9 +114,7 @@ const renderModal = (gameResult) => {
 };
 
 
-
-
-const gameStep = (button, character) => {
+const playGameStep = (button, character) => {
   button.classList.add("disabled");
   if (currentWord.includes(character)) {
     [...currentWord].forEach((letter, index) => {
@@ -152,26 +150,23 @@ const addBodyPart = (bodyPart) => {
 const addClickListener = () => {
   keyboard.addEventListener("click", (e) => {
     if (e.target.nodeName === "BUTTON") {
-      gameStep(e.target, e.target.innerText);
+      playGameStep(e.target, e.target.innerText);
     }
   });
 };
-
 addClickListener();
 
 const addKeypressListener = () => {
-  document.addEventListener("keydown", (e) => {
+  document.addEventListener("keyup", (e) => {
     const pressed_key = e.key.toUpperCase();
-    // console.log(e);
     if (engKeyboard.includes(pressed_key)) {
       const button = Array.from(keyboard.children).filter((el) => el.innerHTML === pressed_key);
       if (button[0].classList.contains("disabled")) {
         return;
       }
-      gameStep(button[0], e.key);
+      playGameStep(button[0], pressed_key);
     }
   });
 };
-
 addKeypressListener();
 

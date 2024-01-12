@@ -1,12 +1,12 @@
 export { hints };
 
 const hints = [
-  { word: "Potter", hint: "Surname of the famous fictional wizard with a lightning-shaped scar" },
+  { word: "potter", hint: "Surname of the famous fictional wizard with a lightning-shaped scar" },
   { word: "sahara", hint: "Largest desert in the world" },
-  { word: "ARISTOTLE", hint: "Famous ancient Greek philosopher" },
+  { word: "aristotle", hint: "Famous ancient Greek philosopher" },
   { word: "yen", hint: "The currency used in Japan" },
   {
-    word: "PHOTOSYNTHESIS",
+    word: "photosynthesis",
     hint: "The process by which green plants and some other organisms use sunlight to synthesize foods",
   },
   { word: "loop", hint: "A control flow statement for iterating over a sequence of instructions" },
