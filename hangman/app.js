@@ -42,7 +42,7 @@ const initApp = () => {
   // gallows
   gallows.classList.add("gallows");
   gallows.innerHTML = `
-    <img src="./assets/img/gallows.png" alt="gallows" />
+    <img class="gallows-img" src="./assets/img/gallows.png" alt="gallows" />
     <div class="wrapper">
       <div class="body-parts-container" id="body-parts-container">
       </div>
@@ -87,7 +87,8 @@ initKeyboard();
 const pickRandomWord = () => {
   const { word, hint } = hints[Math.floor(Math.random() * hints.length)];
   currentWord = word.toUpperCase();
-  console.log(currentWord);
+  console.log("♡ Make sure, you are using english keyboard ♡");
+  console.log("correct word: " + currentWord);
   document.getElementById("hint").innerText = hint;
   document.getElementById("guesses-counter").innerText = `0 / 6`;
 
