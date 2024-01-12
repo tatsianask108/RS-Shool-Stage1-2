@@ -1,23 +1,46 @@
 import { hints } from "./js/hints.js";
 
 const engKeyboard = [
-  'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P',
-  'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L',
-  'Z', 'X', 'C', 'V', 'B', 'N', 'M'
+  "Q",
+  "W",
+  "E",
+  "R",
+  "T",
+  "Y",
+  "U",
+  "I",
+  "O",
+  "P",
+  "A",
+  "S",
+  "D",
+  "F",
+  "G",
+  "H",
+  "J",
+  "K",
+  "L",
+  "Z",
+  "X",
+  "C",
+  "V",
+  "B",
+  "N",
+  "M",
 ];
 
 let currentWord;
 let mistakesCount = 0;
 let guessedCount = 0;
 
-const app = document.getElementById('app');
+const app = document.getElementById("app");
 
 const initApp = () => {
-  const gallows = document.createElement('div');
-  const quiz = document.createElement('div');
+  const gallows = document.createElement("div");
+  const quiz = document.createElement("div");
 
   // gallows
-  gallows.classList.add('gallows');
+  gallows.classList.add("gallows");
   gallows.innerHTML = `
     <img src="./assets/img/gallows.png" alt="gallows" />
     <div class="wrapper">
@@ -25,7 +48,7 @@ const initApp = () => {
       </div>
     </div>`;
 
-  quiz.classList.add('quiz');
+  quiz.classList.add("quiz");
   quiz.innerHTML = `
     <div class="content">
       <h1>Hangman Game</h1>
@@ -39,7 +62,7 @@ const initApp = () => {
 
   app.append(gallows);
   app.append(quiz);
-}
+};
 initApp();
 
 const keyboard = document.getElementById("keyboard");
@@ -66,7 +89,7 @@ const pickRandomWord = () => {
   currentWord = word.toUpperCase();
   console.log(currentWord);
   document.getElementById("hint").innerText = hint;
-  document.getElementById("guesses-counter").innerText = `0 / ${word.length}`;
+  document.getElementById("guesses-counter").innerText = `0 / 6`;
 
   for (let i = 0; i < word.length; i++) {
     const character = document.createElement("li");
@@ -86,7 +109,7 @@ const restartGame = () => {
   mistakesCount = 0;
   guessedCount = 0;
   const modal = document.getElementById("overlay");
-  console.log(modal)
+  console.log(modal);
   modal.remove();
   pickRandomWord();
 };
@@ -104,15 +127,14 @@ const renderModal = (gameResult) => {
   text.innerHTML = `You ${gameResult} the game!<br />Secret word: ${currentWord}`;
   button.className = "modal__btn";
   button.innerText = "Play again";
-  button.id = 'play-again-button'
+  button.id = "play-again-button";
 
   modal.append(text, button);
   overlay.append(modal);
   document.body.append(overlay);
 
-  button.addEventListener('click', restartGame);
+  button.addEventListener("click", restartGame);
 };
-
 
 const playGameStep = (button, character) => {
   button.classList.add("disabled");
@@ -125,13 +147,12 @@ const playGameStep = (button, character) => {
       }
     });
   } else {
-    document.getElementById("guesses-counter").innerText = `${mistakesCount + 1} / ${currentWord.length
-      }`;
+    document.getElementById("guesses-counter").innerText = `${mistakesCount + 1} / 6`;
     mistakesCount++;
     addBodyPart(mistakesCount);
   }
 
-  if (mistakesCount === currentWord.length) {
+  if (mistakesCount === 6) {
     renderModal("loose");
   }
 
@@ -169,4 +190,3 @@ const addKeypressListener = () => {
   });
 };
 addKeypressListener();
-
