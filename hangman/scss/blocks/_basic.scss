@@ -1,3 +1,4 @@
+$color-accent: rgb(104, 114, 187);
 * {
   margin: 0;
   padding: 0;
@@ -51,14 +52,22 @@ img {
   justify-content: center;
   align-items: center;
   gap: 20px;
-  font-size: 1rem;
+  font-size: 1.5rem;
   padding: 10px;
   @media (max-width: 600px) {
     font-size: 0.8rem;
     gap: 20px;
   }
+  .hint {
+    color: $color-accent;
+    font-weight: 900;
+    &-question {
+      color: #f8f8f8;
+      font-weight: 400;
+    }
+  }
   .guesses-counter {
-    color: rgb(104, 114, 187);
+    color: $color-accent;
     font-weight: 900;
   }
 }
@@ -81,7 +90,7 @@ img {
       font-size: 1rem;
     }
     border-bottom: 2px solid #f8f8f8;
-    color: rgb(104, 114, 187);
+    color: $color-accent;
     font-weight: 900;
     font-size: 2rem;
     text-transform: uppercase;
@@ -89,6 +98,7 @@ img {
     margin-bottom: 30px;
     &--guessed {
       border-bottom: 2px solid transparent;
+      margin-top: 0px;
     }
   }
 }

@@ -73,7 +73,7 @@ const initApp = () => {
   content.append(createElement("ul", "word", "word", null, null));
   const hint = createElement("p", "hint", null, "Hint: ", null);
   content.append(hint);
-  hint.append(createElement("span", null, "hint", null, null));
+  hint.append(createElement("span", "hint-question", "hint", null, null));
   createElement();
   const guessesText = createElement("p", "guesses-text", null, "Incorrect guesses: ", null);
   content.append(guessesText);
@@ -140,7 +140,6 @@ const restartGame = () => {
   mistakesCount = 0;
   guessedCount = 0;
   const modal = document.getElementById("overlay");
-  console.log(modal);
   modal.remove();
   pickRandomWord();
 };

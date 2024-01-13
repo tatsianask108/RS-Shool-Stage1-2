@@ -56,7 +56,7 @@ img {
   justify-content: center;
   align-items: center;
   gap: 20px;
-  font-size: 1rem;
+  font-size: 1.5rem;
   padding: 10px;
 }
 @media (max-width: 600px) {
@@ -64,6 +64,14 @@ img {
     font-size: 0.8rem;
     gap: 20px;
   }
+}
+.content .hint {
+  color: rgb(104, 114, 187);
+  font-weight: 900;
+}
+.content .hint-question {
+  color: #f8f8f8;
+  font-weight: 400;
 }
 .content .guesses-counter {
   color: rgb(104, 114, 187);
@@ -97,6 +105,7 @@ img {
 }
 .word .character--guessed {
   border-bottom: 2px solid transparent;
+  margin-top: 0px;
 }
 
 .keyboard {
@@ -110,6 +119,7 @@ img {
   line-height: 35px;
   border: none;
   border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   margin: 5px;
   padding: 5px;
   color: #f8f8f8;
@@ -117,6 +127,9 @@ img {
   background: rgb(24, 24, 24);
   text-transform: uppercase;
   cursor: pointer;
+}
+.keyboard__btn:hover {
+  background: rgba(24, 24, 24, 0.384);
 }
 @media (max-width: 600px) {
   .keyboard__btn {
@@ -128,9 +141,6 @@ img {
     margin: 2px;
     padding: 0px;
   }
-}
-.keyboard__btn:hover {
-  background: rgba(24, 24, 24, 0.384);
 }
 .keyboard .disabled {
   cursor: default;
@@ -175,7 +185,9 @@ img {
   cursor: pointer;
   text-transform: uppercase;
   padding: 10px;
+  border: none;
   border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 
 .hidden {
