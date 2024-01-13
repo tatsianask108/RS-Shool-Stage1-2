@@ -1,29 +1,35 @@
 export { hints };
 
 const hints = [
-  { word: "potter", hint: "Surname of the famous fictional wizard with a lightning-shaped scar" },
-  { word: "sahara", hint: "Largest desert in the world" },
-  { word: "aristotle", hint: "Famous ancient Greek philosopher" },
-  { word: "yen", hint: "The currency used in Japan" },
   {
-    word: "photosynthesis",
-    hint: "The process by which green plants and some other organisms use sunlight to synthesize foods",
+    word: 'potter',
+    hint: 'Surname of the famous fictional wizard with a lightning-shaped scar',
   },
-  { word: "loop", hint: "A control flow statement for iterating over a sequence of instructions" },
+  { word: 'sahara', hint: 'Largest desert in the world' },
+  { word: 'aristotle', hint: 'Famous ancient Greek philosopher' },
+  { word: 'yen', hint: 'The currency used in Japan' },
   {
-    word: "cordyceps",
-    hint: "A type of parasitic fungus that primarily infects insects",
+    word: 'photosynthesis',
+    hint: 'The process by which green plants and some other organisms use sunlight to synthesize foods',
   },
   {
-    word: "ant",
-    hint: "Insect",
+    word: 'loop',
+    hint: 'A control flow statement for iterating over a sequence of instructions',
   },
   {
-    word: "pigeon",
-    hint: "Bird, commonly grey color, lives in cities",
+    word: 'cordyceps',
+    hint: 'A type of parasitic fungus that primarily infects insects',
   },
   {
-    word: "toaster",
-    hint: "Household item(kitchen)",
+    word: 'ant',
+    hint: 'Insect',
+  },
+  {
+    word: 'pigeon',
+    hint: 'Bird, commonly grey color, lives in cities',
+  },
+  {
+    word: 'toaster',
+    hint: 'Household item(kitchen)',
   },
 ];
