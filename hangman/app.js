@@ -1,4 +1,4 @@
-import { hints } from './js/hints.js';
+import hints from './js/hints.js';
 
 // prettier-ignore
 const engKeyboard = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M'];
@@ -110,7 +110,7 @@ const pickRandomWord = () => {
   const { word, hint } = hints[Math.floor(Math.random() * hints.length)];
   currentWord = word.toUpperCase();
   console.log('♡ Make sure, you are using english keyboard ♡');
-  console.log('correct word: ' + currentWord);
+  console.log(`correct word: ${currentWord}`);
   document.getElementById('hint').innerText = hint;
   document.getElementById('guesses-counter').innerText = `0 / 6`;
 
@@ -137,10 +137,10 @@ const restartGame = () => {
 };
 
 const renderModal = (gameResult) => {
-  const overlay = document.createElement('div'),
-    modal = document.createElement('div'),
-    text = document.createElement('p'),
-    button = document.createElement('button');
+  const overlay = document.createElement('div');
+  const modal = document.createElement('div');
+  const text = document.createElement('p');
+  const button = document.createElement('button');
 
   overlay.className = 'overlay';
   overlay.id = 'overlay';
@@ -156,6 +156,19 @@ const renderModal = (gameResult) => {
   document.body.append(overlay);
 
   button.addEventListener('click', restartGame);
+};
+
+const addBodyPart = (bodyPart) => {
+  const part = document.createElement('img');
+  part.classList = `body-part-${bodyPart}`;
+  part.src = `assets/img/body-part-${bodyPart}.png`;
+
+  container.append(part);
+};
+
+const blockKeyboard = () => {
+  const buttons = keyboard.querySelectorAll('.keyboard__btn');
+  buttons.forEach((button) => button.classList.add('disabled'));
 };
 
 const playGameStep = (button, character) => {
@@ -186,18 +199,6 @@ const playGameStep = (button, character) => {
   }
 };
 
-const blockKeyboard = () => {
-  const buttons = keyboard.querySelectorAll('.keyboard__btn');
-  buttons.forEach((button) => button.classList.add('disabled'));
-};
-
-const addBodyPart = (bodyPart) => {
-  const part = document.createElement('img');
-  part.classList = `body-part-${bodyPart}`;
-  part.src = `assets/img/body-part-${bodyPart}.png`;
-
-  container.append(part);
-};
 const addClickListener = () => {
   keyboard.addEventListener('click', (e) => {
     if (e.target.nodeName === 'BUTTON') {
@@ -209,15 +210,15 @@ addClickListener();
 
 const addKeypressListener = () => {
   document.addEventListener('keyup', (e) => {
-    const pressed_key = e.key.toUpperCase();
-    if (engKeyboard.includes(pressed_key)) {
+    const pressedKey = e.key.toUpperCase();
+    if (engKeyboard.includes(pressedKey)) {
       const button = Array.from(keyboard.children).filter(
-        (el) => el.innerHTML === pressed_key
+        (el) => el.innerHTML === pressedKey
       );
       if (button[0].classList.contains('disabled')) {
         return;
       }
-      playGameStep(button[0], pressed_key);
+      playGameStep(button[0], pressedKey);
     }
   });
 };

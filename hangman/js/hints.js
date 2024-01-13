@@ -1,5 +1,3 @@
-export { hints };
-
 const hints = [
   {
     word: 'potter',
@@ -33,3 +31,5 @@ const hints = [
     hint: 'Household item(kitchen)',
   },
 ];
+
+export default hints;
