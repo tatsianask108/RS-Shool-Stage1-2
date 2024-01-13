@@ -177,11 +177,18 @@ const playGameStep = (button, character) => {
 
   if (mistakesCount === 6) {
     renderModal('loose');
+    blockKeyboard();
   }
 
   if (guessedCount === currentWord.length) {
     renderModal('won');
+    blockKeyboard();
   }
+};
+
+const blockKeyboard = () => {
+  const buttons = keyboard.querySelectorAll('.keyboard__btn');
+  buttons.forEach((button) => button.classList.add('disabled'));
 };
 
 const addBodyPart = (bodyPart) => {
