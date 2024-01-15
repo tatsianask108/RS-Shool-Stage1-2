@@ -28,16 +28,21 @@ initKeyboard();
 
 const pickRandomWord = () => {
   const { word, hint } = hints[Math.floor(Math.random() * hints.length)];
-  currentWord = word.toUpperCase();
-  console.log('♡ Make sure, you are using english keyboard ♡');
-  console.log(`correct word: ${currentWord}`);
-  document.getElementById('hint').innerText = hint;
-  document.getElementById('guesses-counter').innerText = `0 / 6`;
+  if (word === sessionStorage.getItem('myPrevWordOh')) {
+    pickRandomWord();
+  } else {
+    sessionStorage.setItem('myPrevWordOh', word);
+    currentWord = word.toUpperCase();
+    console.log('♡ Make sure, you are using english keyboard ♡');
+    console.log(`correct word: ${currentWord}`);
+    document.getElementById('hint').innerText = hint;
+    document.getElementById('guesses-counter').innerText = `0 / 6`;
 
-  for (let i = 0; i < word.length; i++) {
-    const character = document.createElement('li');
-    character.classList.add('character');
-    hiddenWord.append(character);
+    for (let i = 0; i < word.length; i++) {
+      const character = document.createElement('li');
+      character.classList.add('character');
+      hiddenWord.append(character);
+    }
   }
 };
 
