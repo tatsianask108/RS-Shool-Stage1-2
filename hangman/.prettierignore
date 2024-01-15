@@ -1,0 +1,5 @@
+# ignored by default
+# **/.git
+# **/.svn
+# **/.hg
+# **/node_modules

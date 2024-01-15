@@ -1,0 +1,80 @@
+.gallows {
+  margin: 20px;
+  position: relative;
+}
+
+.gallows-img {
+  max-width: 80%;
+  @media (max-width: 1100px) {
+    width: 150px;
+  }
+}
+.wrapper {
+  top: 20%;
+  left: 50%;
+  @media (max-width: 1100px) {
+    left: 20%;
+  }
+  position: absolute;
+}
+
+.body-parts-container {
+  max-width: 250px;
+  min-width: 150px;
+  height: 450px;
+  position: relative;
+  @media (max-width: 1100px) {
+    .body-part-1,
+    .body-part-2,
+    .body-part-3,
+    .body-part-4,
+    .body-part-5,
+    .body-part-6 {
+      height: 50px;
+    }
+  }
+  .body-part-1 {
+    max-width: 70px;
+    position: absolute;
+    top: 0;
+    right: 42%;
+    z-index: 1;
+  }
+  .body-part-2 {
+    position: absolute;
+    top: 10%;
+    right: 50%;
+  }
+  .body-part-3 {
+    position: absolute;
+    top: 20%;
+    right: 50%;
+    @media (max-width: 1100px) {
+      top: 13%;
+    }
+  }
+  .body-part-4 {
+    position: absolute;
+    top: 20%;
+    left: 48%;
+    @media (max-width: 1100px) {
+      top: 13%;
+    }
+  }
+  .body-part-5 {
+    position: absolute;
+    top: 38%;
+    right: 50%;
+    @media (max-width: 1100px) {
+      top: 20%;
+    }
+  }
+  .body-part-6 {
+    position: absolute;
+    top: 38%;
+    left: 48%;
+    @media (max-width: 1100px) {
+      top: 20%;
+    }
+  }
+}

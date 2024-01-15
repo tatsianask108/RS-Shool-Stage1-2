@@ -1,0 +1,45 @@
+.keyboard {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  &__btn {
+    width: 50px;
+    height: 50px;
+    line-height: 35px;
+    border: none;
+    border-radius: 10px;
+    box-shadow:
+      rgba(0, 0, 0, 0.4) 0px 2px 4px,
+      rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+      rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    margin: 5px;
+    padding: 5px;
+    color: #f8f8f8;
+    font-size: 1.3rem;
+    background: rgb(24, 24, 24);
+    text-transform: uppercase;
+    cursor: pointer;
+    &:hover {
+      background: rgba(24, 24, 24, 0.384);
+    }
+    @media (max-width: 600px) {
+      width: 28px;
+      height: 28px;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      line-height: 10px;
+      margin: 2px;
+      padding: 0px;
+    }
+  }
+  .disabled {
+    cursor: default;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .new-line {
+    clear: both;
+    width: 100%;
+  }
+}

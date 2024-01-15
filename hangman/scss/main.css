@@ -1,0 +1,289 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+}
+
+.body {
+  color: #f8f8f8;
+  background: rgb(73, 72, 72);
+  font-family: Lato, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0.1rem;
+  height: 100vh;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media (max-width: 1200px) {
+  .container {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .container h1 {
+    font-size: 2rem;
+  }
+}
+
+.quiz {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 30px;
+  width: 50%;
+}
+@media (max-width: 1200px) {
+  .quiz {
+    width: 100%;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  font-size: 1.5rem;
+  padding: 10px;
+}
+@media (max-width: 600px) {
+  .content {
+    font-size: 0.8rem;
+    gap: 20px;
+  }
+}
+.content .hint {
+  color: rgb(104, 114, 187);
+  font-weight: 900;
+}
+.content .hint-question {
+  color: #f8f8f8;
+  font-weight: 400;
+}
+.content .guesses-counter {
+  color: rgb(104, 114, 187);
+  font-weight: 900;
+}
+
+.word {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.word .character {
+  width: 20px;
+  border-bottom: 2px solid #f8f8f8;
+  color: rgb(104, 114, 187);
+  font-weight: 900;
+  font-size: 2rem;
+  text-transform: uppercase;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+@media (max-width: 600px) {
+  .word .character {
+    width: 10px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 1rem;
+  }
+}
+.word .character--guessed {
+  border-bottom: 2px solid transparent;
+  margin-top: 0px;
+}
+
+.keyboard {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.keyboard__btn {
+  width: 50px;
+  height: 50px;
+  line-height: 35px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  margin: 5px;
+  padding: 5px;
+  color: #f8f8f8;
+  font-size: 1.3rem;
+  background: rgb(24, 24, 24);
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.keyboard__btn:hover {
+  background: rgba(24, 24, 24, 0.384);
+}
+@media (max-width: 600px) {
+  .keyboard__btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    line-height: 10px;
+    margin: 2px;
+    padding: 0px;
+  }
+}
+.keyboard .disabled {
+  cursor: default;
+  opacity: 0.5;
+  pointer-events: none;
+}
+.keyboard .new-line {
+  clear: both;
+  width: 100%;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.568);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  gap: 20px;
+  position: relative;
+  border-radius: 10px;
+  padding: 30px;
+  background: rgb(104, 114, 187);
+  max-width: 800px;
+  min-width: 350px;
+  height: -moz-max-content;
+  height: max-content;
+  overflow: auto;
+}
+.modal__btn {
+  cursor: pointer;
+  text-transform: uppercase;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.hidden {
+  display: none;
+}
+
+.gallows {
+  margin: 20px;
+  position: relative;
+}
+
+.gallows-img {
+  max-width: 80%;
+}
+@media (max-width: 1100px) {
+  .gallows-img {
+    width: 150px;
+  }
+}
+
+.wrapper {
+  top: 20%;
+  left: 50%;
+  position: absolute;
+}
+@media (max-width: 1100px) {
+  .wrapper {
+    left: 20%;
+  }
+}
+
+.body-parts-container {
+  max-width: 250px;
+  min-width: 150px;
+  height: 450px;
+  position: relative;
+}
+@media (max-width: 1100px) {
+  .body-parts-container .body-part-1,
+  .body-parts-container .body-part-2,
+  .body-parts-container .body-part-3,
+  .body-parts-container .body-part-4,
+  .body-parts-container .body-part-5,
+  .body-parts-container .body-part-6 {
+    height: 50px;
+  }
+}
+.body-parts-container .body-part-1 {
+  max-width: 70px;
+  position: absolute;
+  top: 0;
+  right: 42%;
+  z-index: 1;
+}
+.body-parts-container .body-part-2 {
+  position: absolute;
+  top: 10%;
+  right: 50%;
+}
+.body-parts-container .body-part-3 {
+  position: absolute;
+  top: 20%;
+  right: 50%;
+}
+@media (max-width: 1100px) {
+  .body-parts-container .body-part-3 {
+    top: 13%;
+  }
+}
+.body-parts-container .body-part-4 {
+  position: absolute;
+  top: 20%;
+  left: 48%;
+}
+@media (max-width: 1100px) {
+  .body-parts-container .body-part-4 {
+    top: 13%;
+  }
+}
+.body-parts-container .body-part-5 {
+  position: absolute;
+  top: 38%;
+  right: 50%;
+}
+@media (max-width: 1100px) {
+  .body-parts-container .body-part-5 {
+    top: 20%;
+  }
+}
+.body-parts-container .body-part-6 {
+  position: absolute;
+  top: 38%;
+  left: 48%;
+}
+@media (max-width: 1100px) {
+  .body-parts-container .body-part-6 {
+    top: 20%;
+  }
+}/*# sourceMappingURL=main.css.map */
