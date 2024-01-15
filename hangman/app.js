@@ -91,8 +91,9 @@ const blockKeyboard = () => {
   buttons.forEach((button) => button.classList.add('disabled'));
 };
 
-const playGameStep = (button, character) => {
+const playGameStep = (button) => {
   button.classList.add('disabled');
+  const character = button.innerText;
   if (currentWord.includes(character)) {
     [...currentWord].forEach((letter, index) => {
       if (letter === character) {
@@ -119,9 +120,14 @@ const playGameStep = (button, character) => {
 };
 
 const addClickListener = () => {
-  keyboard.addEventListener('click', (e) => {
-    if (e.target.nodeName === 'BUTTON') {
-      playGameStep(e.target, e.target.innerText);
+  const NODE_NAME_BUTTON = 'BUTTON';
+
+  keyboard.addEventListener('click', (event) => {
+    const { target } = event;
+    const { nodeName = '' } = target;
+
+    if (nodeName === NODE_NAME_BUTTON) {
+      playGameStep(target);
     }
   });
 };
@@ -135,7 +141,7 @@ const addKeypressListener = () => {
       if (button[0].classList.contains('disabled')) {
         return;
       }
-      playGameStep(button[0], pressedKey);
+      playGameStep(button[0]);
     }
   });
 };
