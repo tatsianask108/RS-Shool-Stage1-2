@@ -9,9 +9,8 @@
   align-items: center;
   justify-content: center;
   padding: 40px;
-  // @include mobile {
-  //     padding: 20px;
-  // }
+  backdrop-filter: blur(5px);
+  z-index: 2;
 }
 
 .modal {
