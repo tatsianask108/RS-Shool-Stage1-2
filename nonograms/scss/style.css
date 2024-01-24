@@ -1,32 +1,70 @@
+* {
+  box-sizing: border-box;
+}
+
 .container {
   width: -moz-fit-content;
   width: fit-content;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  border: 1px solid black;
 }
 
-.clues-top {
+.clues-top,
+.clues-left {
   background-color: rgba(22, 22, 22, 0.1215686275);
 }
 
+.grid {
+  border: 2px solid black;
+}
+
 .grid,
-.clues-top {
-  border: 1px solid black;
-  width: -moz-fit-content;
-  width: fit-content;
+.clues-top,
+.clues-left {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  text-align: center;
 }
 .grid .row,
-.clues-top .row {
+.clues-top .row,
+.clues-left .row {
   display: flex;
-  width: -moz-fit-content;
-  width: fit-content;
+  justify-content: end;
+  min-height: 20px;
+  width: 100%;
+}
+.grid .row--game,
+.clues-top .row--game,
+.clues-left .row--game {
+  border-top: 1px solid white;
+}
+.grid .row--left,
+.clues-top .row--left,
+.clues-left .row--left {
+  border-top: 1px solid rgba(0, 0, 0, 0.5);
 }
 .grid .row .cell,
-.clues-top .row .cell {
+.clues-top .row .cell,
+.clues-left .row .cell {
   width: 20px;
   height: 20px;
+}
+.grid .row .cell--game,
+.clues-top .row .cell--game,
+.clues-left .row .cell--game {
   border-right: 1px solid rgba(0, 0, 0, 0.5);
   border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
-.grid .row .cell.checked,
-.clues-top .row .cell.checked {
+.grid .row .cell--game.checked,
+.clues-top .row .cell--game.checked,
+.clues-left .row .cell--game.checked {
   background-color: black;
+}
+.grid .row .cell--top,
+.clues-top .row .cell--top,
+.clues-left .row .cell--top {
+  border-right: 1px solid rgba(0, 0, 0, 0.5);
 }/*# sourceMappingURL=style.css.map */
