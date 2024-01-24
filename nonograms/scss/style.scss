@@ -1,0 +1,29 @@
+.container {
+  width: fit-content;
+}
+.clues-top {
+  background-color: #1616161f;
+}
+.grid,
+.clues-top {
+  // display: flex;
+  // flex-direction: column;
+  border: 1px solid black;
+  width: fit-content;
+  .row {
+    display: flex;
+    width: fit-content;
+
+    .cell {
+      width: 20px;
+      height: 20px;
+
+      border-right: 1px solid rgba(0, 0, 0, 0.5);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+
+      &.checked {
+        background-color: black;
+      }
+    }
+  }
+}

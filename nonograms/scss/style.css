@@ -1,0 +1,32 @@
+.container {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.clues-top {
+  background-color: rgba(22, 22, 22, 0.1215686275);
+}
+
+.grid,
+.clues-top {
+  border: 1px solid black;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.grid .row,
+.clues-top .row {
+  display: flex;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.grid .row .cell,
+.clues-top .row .cell {
+  width: 20px;
+  height: 20px;
+  border-right: 1px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+.grid .row .cell.checked,
+.clues-top .row .cell.checked {
+  background-color: black;
+}/*# sourceMappingURL=style.css.map */
