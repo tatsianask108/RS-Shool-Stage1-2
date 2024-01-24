@@ -1,3 +1,5 @@
+import renderModal from "./js/modal.js";
+
 const cluesTop = [
   // [0, 0, 0, 0, 0],
   // [0, 0, 0, 0, 0],
@@ -33,17 +35,17 @@ const game = [
 const createGrid = () => {
   const grid = document.createElement("div");
   grid.className = "grid";
+  grid.id = "grid";
 
-  // create game
   for (let i = 0; i < solution.length; i++) {
     const row = document.createElement("div");
-    row.classList.add("row", "row--game");
+    row.classList.add("row", "row-game");
 
     grid.appendChild(row);
 
     for (let j = 0; j < solution[i].length; j++) {
       const cell = document.createElement("div");
-      cell.className = "cell cell--game";
+      cell.className = "cell cell-game";
       cell.dataset.row = i;
       cell.dataset.column = j;
 
@@ -64,7 +66,7 @@ const createCluesTop = () => {
   cluesTopElement.className = "clues-top";
 
   // create clues top
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < 3; i++) {
     const row = document.createElement("div");
     row.className = "row";
 
@@ -72,7 +74,7 @@ const createCluesTop = () => {
 
     for (let j = 0; j < 5; j++) {
       const cell = document.createElement("div");
-      cell.classList.add("cell", "cell--top");
+      cell.classList.add("cell", "cell-top");
       if (cluesTop[i][j] !== 0) {
         cell.innerText = cluesTop[i][j];
       }
@@ -88,10 +90,9 @@ const createCluesLeft = () => {
   const cluesLeftElement = document.createElement("div");
   cluesLeftElement.className = "clues-left";
 
-  // create clues left
   for (let i = 0; i < 5; i++) {
     const row = document.createElement("div");
-    row.classList.add("row", "row--left");
+    row.classList.add("row", "row-left");
 
     cluesLeftElement.appendChild(row);
 
@@ -110,12 +111,11 @@ const createCluesLeft = () => {
 
 const createEmptyGrid = () => {
   const emptyGridElement = document.createElement("div");
-  emptyGridElement.className = "empty-grid";
   return emptyGridElement;
 };
 
 const checkEndGame = () => {
-  const cells = document.querySelectorAll(".cell.cell--game");
+  const cells = document.querySelectorAll(".cell.cell-game");
 
   for (const cell of cells) {
     if (
@@ -126,13 +126,14 @@ const checkEndGame = () => {
     }
   }
   setTimeout(() => {
-    alert("Great! You have solved the nonogram!");
+    renderModal();
     document.querySelector(".container").remove();
-    startGame();
-  }, "500");
+    renderGameField();
+    addGridListeners();
+  }, "400");
 };
 
-const startGame = () => {
+const renderGameField = () => {
   const body = document.querySelector("body");
   const container = document.createElement("div");
   container.className = "container";
@@ -148,9 +149,14 @@ const startGame = () => {
   container.appendChild(cluesTopElement);
   container.appendChild(cluesLeftElement);
   container.appendChild(grid);
+};
 
+renderGameField();
+
+const addGridListeners = () => {
+  const grid = document.getElementById("grid");
   grid.addEventListener("click", (e) => {
-    if (e.target.classList.contains("cell--game")) {
+    if (e.target.classList.contains("cell-game")) {
       const rowIndex = e.target.dataset.row;
       const columnIndex = e.target.dataset.column;
 
@@ -166,6 +172,17 @@ const startGame = () => {
       checkEndGame();
     }
   });
+
+  grid.addEventListener("contextmenu", (e) => {
+    e.preventDefault();
+    if (e.target.classList.contains("crossed")) {
+      e.target.classList.remove("crossed");
+      e.target.innerHTML = "";
+    } else {
+      e.target.classList.add("crossed");
+      e.target.innerHTML = "✖";
+    }
+  });
 };
 
-startGame();
+addGridListeners();

@@ -1,7 +1,3 @@
-* {
-  box-sizing: border-box;
-}
-
 .container {
   width: -moz-fit-content;
   width: fit-content;
@@ -36,14 +32,14 @@
   min-height: 20px;
   width: 100%;
 }
-.grid .row--game,
-.clues-top .row--game,
-.clues-left .row--game {
+.grid .row-game,
+.clues-top .row-game,
+.clues-left .row-game {
   border-top: 1px solid white;
 }
-.grid .row--left,
-.clues-top .row--left,
-.clues-left .row--left {
+.grid .row-left,
+.clues-top .row-left,
+.clues-left .row-left {
   border-top: 1px solid rgba(0, 0, 0, 0.5);
 }
 .grid .row .cell,
@@ -51,20 +47,108 @@
 .clues-left .row .cell {
   width: 20px;
   height: 20px;
+  line-height: 1.2;
 }
-.grid .row .cell--game,
-.clues-top .row .cell--game,
-.clues-left .row .cell--game {
+.grid .row .cell-game,
+.clues-top .row .cell-game,
+.clues-left .row .cell-game {
   border-right: 1px solid rgba(0, 0, 0, 0.5);
   border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
-.grid .row .cell--game.checked,
-.clues-top .row .cell--game.checked,
-.clues-left .row .cell--game.checked {
+.grid .row .cell-game.checked,
+.clues-top .row .cell-game.checked,
+.clues-left .row .cell-game.checked {
   background-color: black;
 }
-.grid .row .cell--top,
-.clues-top .row .cell--top,
-.clues-left .row .cell--top {
+.grid .row .cell-top,
+.clues-top .row .cell-top,
+.clues-left .row .cell-top {
   border-right: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.568);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  z-index: 2;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  gap: 20px;
+  position: relative;
+  border-radius: 10px;
+  padding: 30px;
+  background: rgb(107, 146, 107);
+  max-width: 800px;
+  min-width: 350px;
+  height: -moz-max-content;
+  height: max-content;
+  overflow: auto;
+}
+.modal__btn {
+  cursor: pointer;
+  text-transform: uppercase;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.hidden {
+  display: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style: none;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+h1, h2, h3, p {
+  margin: 0;
+}
+
+button {
+  padding: 0;
+  border: none;
+  font-family: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
 }/*# sourceMappingURL=style.css.map */
