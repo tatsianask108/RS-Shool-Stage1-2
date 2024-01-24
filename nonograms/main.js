@@ -47,6 +47,11 @@ const createGrid = () => {
       cell.dataset.row = i;
       cell.dataset.column = j;
 
+      if (solution[i][j] === 1) {
+        Object.assign(cell, { secretValue: 1 });
+      } else {
+        Object.assign(cell, { secretValue: 0 });
+      }
       row.appendChild(cell);
     }
   }
@@ -110,7 +115,21 @@ const createEmptyGrid = () => {
 };
 
 const checkEndGame = () => {
+  const cells = document.querySelectorAll(".cell.cell--game");
 
+  for (const cell of cells) {
+    if (
+      (cell.secretValue === 1 && !cell.classList.contains("checked")) ||
+      (cell.secretValue === 0 && cell.classList.contains("checked"))
+    ) {
+      return false;
+    }
+  }
+  setTimeout(() => {
+    alert("Great! You have solved the nonogram!");
+    document.querySelector(".container").remove();
+    startGame();
+  }, "500");
 };
 
 const startGame = () => {
@@ -144,7 +163,7 @@ const startGame = () => {
       }
 
       e.target.classList.toggle("checked");
-      // checkEndGame();
+      checkEndGame();
     }
   });
 };
