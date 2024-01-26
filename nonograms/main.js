@@ -1,4 +1,5 @@
 import renderModal from "./js/modal.js";
+import { startTimer, resetTimer } from "./js/timer.js";
 import { solution, cluesLeft, cluesTop } from "./js/clues-generators.js";
 
 const game = solution.map((row) => {
@@ -95,8 +96,10 @@ const checkEndGame = () => {
       return false;
     }
   }
+  const gameTimer = document.getElementById("game-timer").innerText;
   setTimeout(() => {
-    renderModal();
+    renderModal(gameTimer);
+    resetTimer();
     document.querySelector(".container").remove();
     renderGameField();
     addGridListeners();
@@ -109,6 +112,7 @@ const resetGame = () => {
     el.classList.remove("crossed", "checked");
     el.innerText = "";
   });
+  resetTimer();
 };
 
 const renderGameField = () => {
@@ -163,6 +167,10 @@ const addGridListeners = () => {
       }
     }
   });
+
+  grid.addEventListener("pointerup", () => {
+    startTimer();
+  });
 };
 
 addGridListeners();
@@ -175,6 +183,11 @@ const renderButtons = () => {
 
   body.appendChild(resetBtn);
   resetBtn.addEventListener("click", resetGame);
+
+  const gameTimer = document.createElement("div");
+  gameTimer.id = "game-timer";
+  gameTimer.innerText = "00 : 00";
+  body.append(gameTimer);
 };
 
 renderButtons();

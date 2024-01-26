@@ -1,4 +1,4 @@
-const renderModal = () => {
+const renderModal = (gameTime) => {
   const overlay = document.createElement("div");
   const modal = document.createElement("div");
   const text = document.createElement("p");
@@ -8,7 +8,7 @@ const renderModal = () => {
   overlay.id = "overlay";
   modal.className = "modal";
 
-  text.innerHTML = "Great! You have solved the nonogram!";
+  text.innerHTML = `Great! You have solved the nonogram in ${gameTime} seconds!`;
   button.className = "modal__btn";
   button.innerText = "Play again";
   button.id = "play-again-button";
