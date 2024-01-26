@@ -34,90 +34,12 @@
       }
     ]
   },
-
   {
-    "name": "Kahlua coffee",
-    "description": "Classic coffee with milk and Kahlua liqueur under a cap of frothed milk",
-    "price": "7.00",
-    "category": "coffee",
-    "urlToImg": "img/menu-page/coffee/coffee-2.jpg",
-    "sizes": {
-      "s": {
-        "size": "200 ml",
-        "add-price": "0.00"
-      },
-      "m": {
-        "size": "300 ml",
-        "add-price": "0.50"
-      },
-      "l": {
-        "size": "400 ml",
-        "add-price": "1.00"
-      }
-    },
-    "additives": [
-      {
-        "name": "Sugar",
-        "add-price": "0.50"
-      },
-      {
-        "name": "Cinnamon",
-        "add-price": "0.50"
-      },
-      {
-        "name": "Syrup",
-        "add-price": "0.50"
-      }
-    ]
+  "name": "letter T",
+  "scheme": "[0, 1, 1, 0, 1],[0, 1, 1, 0, 1],[0, 1, 1, 0, 1],[0, 1, 1, 0, 1],[0, 1, 1, 0, 1],"
   },
-
   {
-    "name": "Honey raf",
-    "description": "Espresso with frothed milk, cream and aromatic honey",
-    "price": "5.50",
-    "category": "coffee",
-    "urlToImg": "img/menu-page/coffee/coffee-3.jpg",
-    "sizes": {
-      "s": {
-        "size": "200 ml",
-        "add-price": "0.00"
-      },
-      "m": {
-        "size": "300 ml",
-        "add-price": "0.50"
-      },
-      "l": {
-        "size": "400 ml",
-        "add-price": "1.00"
-      }
-    },
-    "additives": [
-      {
-        "name": "Sugar",
-        "add-price": "0.50"
-      },
-      {
-        "name": "Cinnamon",
-        "add-price": "0.50"
-      },
-      {
-        "name": "Syrup",
-        "add-price": "0.50"
-      }
-    ]
+  "name": "simple face",
+  "scheme": "[1, 1, 1, 1, 1], [0, 0, 1, 0, 0], [0, 0, 1, 0, 0],[0, 0, 1, 0, 0], [0, 0, 1, 0, 0],"
   }
-]
-
-// 5 * 5
-
-[
-  [0, 1, 1, 0, 1],
-  [0, 1, 1, 0, 1],
-  [0, 1, 1, 0, 1],
-  [0, 1, 1, 0, 1],
-  [0, 1, 1, 0, 1],
-],
-// top clues
-[
-  [5, 4, 1, ]
 ]

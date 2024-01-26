@@ -1,38 +1,13 @@
 import renderModal from "./js/modal.js";
+import { solution, cluesLeft, cluesTop } from "./js/clues-generators.js";
 
-const cluesTop = [
-  // [0, 0, 0, 0, 0],
-  // [0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0],
-  [0, 1, 0, 1, 0],
-  [0, 1, 1, 1, 0],
-];
 
-const cluesLeft = [
-  [0, 0, 0, 0, 0],
-  [0, 0, 0, 1, 1],
-  [0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 3],
-  [0, 0, 0, 0, 0],
-];
-
-const solution = [
-  [0, 0, 0, 0, 0],
-  [0, 1, 0, 1, 0],
-  [0, 0, 0, 0, 0],
-  [0, 1, 1, 1, 0],
-  [0, 0, 0, 0, 0],
-];
-
-const game = [
-  [0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0],
-];
+const game = solution.map((row) => {
+  return Array(row.length).fill(0);
+});
 
 const createGrid = () => {
+  console.log(solution);
   const grid = document.createElement("div");
   grid.className = "grid";
   grid.id = "grid";
@@ -65,22 +40,18 @@ const createCluesTop = () => {
   const cluesTopElement = document.createElement("div");
   cluesTopElement.className = "clues-top";
 
-  // create clues top
-  for (let i = 0; i < 3; i++) {
-    const row = document.createElement("div");
-    row.className = "row";
+  for (let col = 0; col < cluesTop.length; col++) {
+    const cellElement = document.createElement("div");
 
-    cluesTopElement.appendChild(row);
+    for (let row = 0; row < cluesTop.length; row++) {
+      const rowElement = document.createElement("div");
 
-    for (let j = 0; j < 5; j++) {
-      const cell = document.createElement("div");
-      cell.classList.add("cell", "cell-top");
-      if (cluesTop[i][j] !== 0) {
-        cell.innerText = cluesTop[i][j];
+      if (cluesTop[row][col] !== 0) {
+        rowElement.innerText = cluesTop[row][col];
+        cellElement.appendChild(rowElement);
       }
-
-      row.appendChild(cell);
     }
+    cluesTopElement.appendChild(cellElement);
   }
 
   return cluesTopElement;
@@ -90,13 +61,13 @@ const createCluesLeft = () => {
   const cluesLeftElement = document.createElement("div");
   cluesLeftElement.className = "clues-left";
 
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < cluesLeft.length; i++) {
     const row = document.createElement("div");
     row.classList.add("row", "row-left");
 
     cluesLeftElement.appendChild(row);
 
-    for (let j = 0; j < 5; j++) {
+    for (let j = 0; j < cluesLeft.length; j++) {
       if (cluesLeft[i][j] !== 0) {
         const cell = document.createElement("div");
         cell.classList.add("cell");
@@ -134,7 +105,7 @@ const checkEndGame = () => {
 };
 
 const renderGameField = () => {
-  const body = document.querySelector("body");
+  const body = document.body;
   const container = document.createElement("div");
   container.className = "container";
 

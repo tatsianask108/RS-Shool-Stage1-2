@@ -66,6 +66,18 @@
   border-right: 1px solid rgba(0, 0, 0, 0.5);
 }
 
+.clues-top {
+  flex-direction: row;
+}
+.clues-top > div {
+  flex: 1;
+  border-right: 1px solid rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  height: 100%;
+}
+
 .overlay {
   position: fixed;
   top: 0;
