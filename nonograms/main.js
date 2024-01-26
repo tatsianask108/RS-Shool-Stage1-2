@@ -1,13 +1,12 @@
 import renderModal from "./js/modal.js";
 import { solution, cluesLeft, cluesTop } from "./js/clues-generators.js";
 
-
 const game = solution.map((row) => {
   return Array(row.length).fill(0);
 });
 
 const createGrid = () => {
-  console.log(solution);
+  // console.log(solution);
   const grid = document.createElement("div");
   grid.className = "grid";
   grid.id = "grid";
@@ -104,6 +103,14 @@ const checkEndGame = () => {
   }, "400");
 };
 
+const resetGame = () => {
+  const cells = document.querySelectorAll(".cell.cell-game");
+  cells.forEach((el) => {
+    el.classList.remove("crossed", "checked");
+    el.innerText = "";
+  });
+};
+
 const renderGameField = () => {
   const body = document.body;
   const container = document.createElement("div");
@@ -146,14 +153,28 @@ const addGridListeners = () => {
 
   grid.addEventListener("contextmenu", (e) => {
     e.preventDefault();
-    if (e.target.classList.contains("crossed")) {
-      e.target.classList.remove("crossed");
-      e.target.innerHTML = "";
-    } else {
-      e.target.classList.add("crossed");
-      e.target.innerHTML = "✖";
+    if (e.target.classList.contains("cell-game")) {
+      if (e.target.classList.contains("crossed")) {
+        e.target.classList.remove("crossed");
+        e.target.innerHTML = "";
+      } else {
+        e.target.classList.add("crossed");
+        e.target.innerHTML = "✖";
+      }
     }
   });
 };
 
 addGridListeners();
+
+const renderButtons = () => {
+  const body = document.body;
+  const resetBtn = document.createElement("button");
+  resetBtn.id = "reset-btn";
+  resetBtn.innerText = "Reset Game";
+
+  body.appendChild(resetBtn);
+  resetBtn.addEventListener("click", resetGame);
+};
+
+renderButtons();
