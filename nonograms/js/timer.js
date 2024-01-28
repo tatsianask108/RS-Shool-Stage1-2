@@ -39,5 +39,8 @@ const resetTimer = () => {
   document.getElementById("game-timer").textContent = "00 : 00";
 };
 
- // TBD const stopTimer = () => {}
-export { startTimer, resetTimer };
+const pauseTimer = () => {
+  clearInterval(interval);
+};
+
+export { startTimer, resetTimer, pauseTimer };

@@ -1,13 +1,12 @@
 import renderModal from "./js/modal.js";
-import { startTimer, resetTimer } from "./js/timer.js";
+import { startTimer, resetTimer, pauseTimer } from "./js/timer.js";
 import { solution, cluesLeft, cluesTop } from "./js/clues-generators.js";
 
-const game = solution.map((row) => {
+let game = solution.map((row) => {
   return Array(row.length).fill(0);
 });
 
-const createGrid = () => {
-  // console.log(solution);
+const createGrid = (preset) => {
   const grid = document.createElement("div");
   grid.className = "grid";
   grid.id = "grid";
@@ -23,6 +22,10 @@ const createGrid = () => {
       cell.className = "cell cell-game";
       cell.dataset.row = i;
       cell.dataset.column = j;
+
+      if (preset && preset[i][j] === 1) {
+        cell.classList.add("checked");
+      }
 
       if (solution[i][j] === 1) {
         Object.assign(cell, { secretValue: 1 });
@@ -47,7 +50,7 @@ const createCluesTop = () => {
       const rowElement = document.createElement("div");
 
       if (cluesTop[row][col] !== 0) {
-        rowElement.innerText = cluesTop[row][col];
+        rowElement.textContent = cluesTop[row][col];
         cellElement.appendChild(rowElement);
       }
     }
@@ -71,7 +74,7 @@ const createCluesLeft = () => {
       if (cluesLeft[i][j] !== 0) {
         const cell = document.createElement("div");
         cell.classList.add("cell");
-        cell.innerText = cluesLeft[i][j];
+        cell.textContent = cluesLeft[i][j];
         row.appendChild(cell);
       }
     }
@@ -96,8 +99,11 @@ const checkEndGame = () => {
       return false;
     }
   }
-  const gameTimer = document.getElementById("game-timer").innerText;
+  const gameTimer = document.getElementById("game-timer").textContent;
   setTimeout(() => {
+    // renderModal(gameTimer, () => {
+    //   createGrid
+    // });
     renderModal(gameTimer);
     resetTimer();
     document.querySelector(".container").remove();
@@ -110,19 +116,26 @@ const resetGame = () => {
   const cells = document.querySelectorAll(".cell.cell-game");
   cells.forEach((el) => {
     el.classList.remove("crossed", "checked");
-    el.innerText = "";
+    el.textContent = "";
   });
   resetTimer();
 };
 
-const renderGameField = () => {
+const renderGameField = (preset) => {
   const body = document.body;
+  const gameField = document.getElementById("game-field");
+
+  if (gameField) {
+    gameField.remove();
+  }
+
   const container = document.createElement("div");
+  container.id = "game-field";
   container.className = "container";
 
-  body.appendChild(container);
+  body.prepend(container);
 
-  const grid = createGrid();
+  const grid = createGrid(preset);
   const cluesTopElement = createCluesTop();
   const cluesLeftElement = createCluesLeft();
   const emptyGrid = createEmptyGrid();
@@ -175,19 +188,49 @@ const addGridListeners = () => {
 
 addGridListeners();
 
+const showSolution = () => {
+  pauseTimer();
+  renderGameField(solution);
+  const buttons = document.querySelectorAll("button");
+  console.log(buttons);
+  buttons.forEach((btn) => btn.classList.add("btn-disabled"));
+};
+
 const renderButtons = () => {
   const body = document.body;
-  const resetBtn = document.createElement("button");
-  resetBtn.id = "reset-btn";
-  resetBtn.innerText = "Reset Game";
-
-  body.appendChild(resetBtn);
-  resetBtn.addEventListener("click", resetGame);
 
   const gameTimer = document.createElement("div");
   gameTimer.id = "game-timer";
-  gameTimer.innerText = "00 : 00";
+  gameTimer.textContent = "00 : 00";
   body.append(gameTimer);
+
+  const resetBtn = document.createElement("button");
+  resetBtn.id = "reset-btn";
+  resetBtn.textContent = "Reset Game";
+  body.append(resetBtn);
+  resetBtn.addEventListener("click", resetGame);
+
+  const showSolutionBtn = document.createElement("button");
+  showSolutionBtn.id = "show-solution-btn";
+  showSolutionBtn.textContent = "Show Solution";
+  body.append(showSolutionBtn);
+  showSolutionBtn.addEventListener("click", () => {
+    showSolution();
+  });
+
+  const saveBtn = document.createElement("button");
+  saveBtn.id = "save-btn";
+  saveBtn.textContent = "Save Game";
+  body.append(saveBtn);
+  saveBtn.addEventListener("click", () => {
+    console.log(game);
+    localStorage.setItem("currentGame", JSON.stringify(game));
+  });
+
 };
 
 renderButtons();
+
+// function startGame() {
+//   addGridListeners();
+// }
