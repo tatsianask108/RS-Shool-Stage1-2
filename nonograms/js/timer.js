@@ -12,21 +12,32 @@ const updateTimer = () => {
   const gameTimer = document.getElementById("game-timer");
 
   milliseconds += 10;
-  seconds = milliseconds == 1000 ? (seconds + 1) % 60 : seconds;
-  minutes = seconds == 0 && milliseconds == 0 ? (minutes + 1) % 60 : minutes;
-  hours = minutes == 0 && seconds == 0 && milliseconds == 0 ? hours + 1 : hours;
-  milliseconds = milliseconds == 1000 ? 0 : milliseconds;
+  if (milliseconds === 1000) {
+    milliseconds = 0;
+    seconds++;
 
-  let m = String(minutes).padStart(2, "0");
-  let s = String(seconds).padStart(2, "0");
+    if (seconds === 60) {
+      seconds = 0;
+      minutes++;
 
-  gameTimer.innerHTML = `${m} : ${s}`;
+      // if (minutes === 60) {
+      //   minutes = 0;
+      //   hours++; || alert('game over')
+      // }
+    }
+  }
+
+  let min = String(minutes).padStart(2, "0");
+  let sec = String(seconds).padStart(2, "0");
+
+  gameTimer.textContent = `${min} : ${sec}`;
 };
 
 const resetTimer = () => {
   clearInterval(interval);
   [milliseconds, seconds, minutes, hours] = [0, 0, 0, 0];
-  document.getElementById("game-timer").innerText = "00 : 00";
+  document.getElementById("game-timer").textContent = "00 : 00";
 };
 
+ // TBD const stopTimer = () => {}
 export { startTimer, resetTimer };
