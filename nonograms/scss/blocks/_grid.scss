@@ -1,3 +1,7 @@
+body {
+  padding: 30px;
+}
+
 .container {
   width: fit-content;
   display: grid;
@@ -13,7 +17,6 @@
 .grid {
   border: 2px solid black;
 }
-
 
 .grid,
 .clues-top,

@@ -33,9 +33,12 @@ h1,h2,h3,p {
 
 button {
   padding: 0;
-  // border: none;
   font-family: inherit;
   color: inherit;
   background-color: transparent;
   cursor: pointer;
+}
+
+input {
+  display: none;
 }

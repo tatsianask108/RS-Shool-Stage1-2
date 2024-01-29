@@ -1,8 +1,4 @@
-import nonograms from "./matrixes.js";
-
-const solution = nonograms[Math.floor(Math.random() * nonograms.length)].scheme;
-
-const cluesLeftGenerator = (matrix) => {
+const leftCluesGenerator = (matrix) => {
   const result = matrix.map((row) => {
     let sum = 0;
     const rowResult = [];
@@ -37,13 +33,11 @@ const cluesLeftGenerator = (matrix) => {
     return cluesLeft;
   };
 
-  // Call the function to fill the arrays
   const cluesLeft = fillArrays(result);
   return cluesLeft;
 };
 
-
-function cluesTopGenerator(matrix) {
+const topCluesGenerator = (matrix) => {
   let res = matrix.map((row) => {
     return Array(row.length).fill(0);
   });
@@ -62,9 +56,6 @@ function cluesTopGenerator(matrix) {
     }
   }
   return res;
-}
+};
 
-const cluesLeft = cluesLeftGenerator(solution);
-const cluesTop = cluesTopGenerator(solution);
-
-export { solution, cluesLeft, cluesTop };
+export { leftCluesGenerator, topCluesGenerator };

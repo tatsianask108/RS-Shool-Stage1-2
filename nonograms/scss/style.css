@@ -1,3 +1,7 @@
+body {
+  padding: 30px;
+}
+
 .container {
   width: -moz-fit-content;
   width: fit-content;
@@ -164,7 +168,43 @@ button {
   cursor: pointer;
 }
 
+input {
+  display: none;
+}
+
+button {
+  margin: 5px;
+}
+
 .btn-disabled {
   pointer-events: none;
   opacity: 0.7;
+}
+
+.levels-container,
+.titles-container {
+  display: flex;
+}
+
+.level {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  border-radius: 100px;
+  cursor: pointer;
+  padding: 7px 15px 7px 7px;
+  border: 1px solid #c1b6ad;
+  width: -moz-max-content;
+  width: max-content;
+  transition: all 0.7s ease;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 150%;
+  font-style: normal;
+}
+
+input[type=radio]:checked + label {
+  background-color: #665f55;
+  border-color: #665f55;
 }/*# sourceMappingURL=style.css.map */
