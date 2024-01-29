@@ -8,7 +8,7 @@ body {
   display: grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto auto;
-  border: 1px solid black;
+  outline: 2px solid rgb(0, 0, 0);
 }
 
 .clues-top,
@@ -16,8 +16,12 @@ body {
   background-color: rgba(22, 22, 22, 0.1215686275);
 }
 
+.clues-top > div:nth-child(5n+5) {
+  border-right: 2px black solid;
+}
+
 .grid {
-  border: 2px solid black;
+  outline: 2px solid black;
 }
 
 .grid,
@@ -36,15 +40,15 @@ body {
   min-height: 20px;
   width: 100%;
 }
-.grid .row-game,
-.clues-top .row-game,
-.clues-left .row-game {
-  border-top: 1px solid white;
-}
 .grid .row-left,
 .clues-top .row-left,
 .clues-left .row-left {
   border-top: 1px solid rgba(0, 0, 0, 0.5);
+}
+.grid .row:nth-child(5n+5),
+.clues-top .row:nth-child(5n+5),
+.clues-left .row:nth-child(5n+5) {
+  border-bottom: 2px black solid;
 }
 .grid .row .cell,
 .clues-top .row .cell,
@@ -68,6 +72,11 @@ body {
 .clues-top .row .cell-top,
 .clues-left .row .cell-top {
   border-right: 1px solid rgba(0, 0, 0, 0.5);
+}
+.grid .row .cell:nth-child(5n+5),
+.clues-top .row .cell:nth-child(5n+5),
+.clues-left .row .cell:nth-child(5n+5) {
+  border-right: 2px black solid;
 }
 
 .clues-top {
