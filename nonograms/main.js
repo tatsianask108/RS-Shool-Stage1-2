@@ -1,13 +1,34 @@
+import { DEFAULT_LEVEL } from "./js/constants.js";
 import nonograms from "./js/nonograms-source.js";
 import { leftCluesGenerator, topCluesGenerator } from "./js/clues-generators.js";
-import { startTimer, resetTimer, pauseTimer } from "./js/timer.js";
+import { startTimer, pauseTimer, resetTimer } from "./js/timer.js";
 import renderModal from "./js/modal.js";
 
-const playedNonogram = nonograms[Math.floor(Math.random() * nonograms.length)];
-const solution = playedNonogram.scheme;
-let game = solution.map((row) => {
-  return Array(row.length).fill(0);
-});
+// const playedNonogram = nonograms[Math.floor(Math.random() * nonograms.length)];
+// const solution = playedNonogram.scheme;
+// const levelId = playedNonogram.levelId;
+
+let curLevel = DEFAULT_LEVEL;
+let curPicture;
+
+let solution;
+let game;
+
+const createRandomGame = () => {
+  const playedNonogram = nonograms[Math.floor(Math.random() * nonograms.length)];
+  curLevel = playedNonogram.level;
+  curPicture = playedNonogram.title;
+  solution = playedNonogram.scheme;
+  // console.log(curLevel, curPicture);
+
+  document.querySelector(`#form-levels #${curLevel}`).checked = true;
+
+  renderTitlesList(curLevel);
+
+  document.querySelector(`#form-titles #${curPicture}`).checked = true;
+
+  renderGameField(solution, false);
+};
 
 //create levels and titles
 const createLevels = () => {
@@ -34,10 +55,9 @@ const createLevels = () => {
 };
 const createTitlesList = (chosenLevel) => {
   const filteredNonograms = nonograms.filter((nonogram) => nonogram.level === chosenLevel);
-  console.log(chosenLevel);
   const titlesContainer = document.createElement("form");
   titlesContainer.classList.add("titles-container");
-  titlesContainer.id = "titles-form";
+  titlesContainer.id = "form-titles";
 
   for (let i = 0; i < filteredNonograms.length; i++) {
     const input = document.createElement("input");
@@ -61,24 +81,24 @@ const createTitlesList = (chosenLevel) => {
 };
 
 //create grid
-const createGrid = (preset) => {
+const createGrid = (matrix) => {
   const grid = document.createElement("div");
   grid.className = "grid";
   grid.id = "grid";
 
-  for (let i = 0; i < solution.length; i++) {
+  for (let i = 0; i < matrix.length; i++) {
     const row = document.createElement("div");
     row.classList.add("row", "row-game");
 
     grid.appendChild(row);
 
-    for (let j = 0; j < solution[i].length; j++) {
+    for (let j = 0; j < matrix[i].length; j++) {
       const cell = document.createElement("div");
       cell.className = "cell cell-game";
       cell.dataset.row = i;
       cell.dataset.column = j;
 
-      if (preset && preset[i][j] === 1) {
+      if (matrix && matrix[i][j] === 1) {
         cell.classList.add("checked");
       }
 
@@ -94,7 +114,7 @@ const createGrid = (preset) => {
   return grid;
 };
 
-const createCluesTop = () => {
+const createCluesTop = (solution) => {
   const cluesTop = topCluesGenerator(solution);
   const cluesTopElement = document.createElement("div");
   cluesTopElement.className = "clues-top";
@@ -116,7 +136,7 @@ const createCluesTop = () => {
   return cluesTopElement;
 };
 
-const createCluesLeft = () => {
+const createCluesLeft = (solution) => {
   const cluesLeft = leftCluesGenerator(solution);
   const cluesLeftElement = document.createElement("div");
   cluesLeftElement.className = "clues-left";
@@ -151,10 +171,9 @@ const renderLevels = () => {
   const levelsContainer = createLevels();
   document.body.prepend(levelsContainer);
 };
-renderLevels();
 
 const renderTitlesList = (value) => {
-  const titlesForm = document.getElementById("titles-form");
+  const titlesForm = document.getElementById("form-titles");
   const levelsForm = document.getElementById("form-levels");
 
   if (titlesForm) {
@@ -162,10 +181,25 @@ const renderTitlesList = (value) => {
   }
   const titlesContainer = createTitlesList(value);
   levelsForm.after(titlesContainer);
-};
-renderTitlesList("easy");
 
-const renderGameField = (preset) => {
+  titlesContainer.addEventListener("change", (e) => {
+    const chosenPicture = e.target.value;
+    curPicture = chosenPicture;
+
+    console.log("curLevel", curLevel, "curPicture", curPicture);
+
+    solution = nonograms.filter(
+      (nonogram) => nonogram.level === curLevel && nonogram.title === curPicture
+    )[0].scheme;
+
+    console.log("solution", solution);
+
+    renderGameField(solution, false);
+  });
+};
+
+const renderGameField = (solution, shouldShowSolution) => {
+  console.log("solution", solution, "shouldShowSolution", shouldShowSolution);
   const gameField = document.getElementById("game-field");
 
   if (gameField) {
@@ -176,20 +210,27 @@ const renderGameField = (preset) => {
   container.id = "game-field";
   container.className = "container";
 
-  const titlesForm = document.getElementById("titles-form");
+  const titlesForm = document.getElementById("form-titles");
   titlesForm.after(container);
 
-  const grid = createGrid(preset);
-  const cluesTopElement = createCluesTop();
-  const cluesLeftElement = createCluesLeft();
+  // create empty game
+  game = solution.map((row) => {
+    return Array(row.length).fill(0);
+  });
+
+  const grid = createGrid(shouldShowSolution ? solution : game);
+  // console.log("solution", solution);
+  const cluesTopElement = createCluesTop(solution);
+  const cluesLeftElement = createCluesLeft(solution);
   const emptyGrid = createEmptyGrid();
 
   container.appendChild(emptyGrid);
   container.appendChild(cluesTopElement);
   container.appendChild(cluesLeftElement);
   container.appendChild(grid);
+
+  addGridListeners();
 };
-renderGameField();
 
 const renderButtons = () => {
   const body = document.body;
@@ -198,6 +239,10 @@ const renderButtons = () => {
   randomGameBtn.id = "random-game-btn";
   randomGameBtn.textContent = "Random Game";
   body.prepend(randomGameBtn);
+
+  randomGameBtn.addEventListener("click", () => {
+    createRandomGame();
+  });
 
   const savedGameBtn = document.createElement("button");
   savedGameBtn.id = "saved-game-btn";
@@ -236,14 +281,10 @@ const renderButtons = () => {
   //   const currentGame = JSON.parse(localStorage.getItem("currentGame"));
   //   game = currentGame;
   //   console.log(game);
-  //   renderGameField(game);
   //   addGridListeners();
   // });
 };
-renderButtons();
 // render page layout
-
-
 
 //check every game step
 const checkEndGame = () => {
@@ -264,13 +305,10 @@ const checkEndGame = () => {
     // });
     renderModal(gameTimer);
     resetTimer();
-    renderGameField();
     addGridListeners();
   }, "400");
 };
 //check every game step
-
-
 
 const resetGame = () => {
   const cells = document.querySelectorAll(".cell.cell-game");
@@ -283,20 +321,12 @@ const resetGame = () => {
 
 const showSolution = () => {
   pauseTimer();
-  renderGameField(solution);
-  const buttons = document.querySelectorAll("button");
-  buttons.forEach((btn) => btn.classList.add("btn-disabled"));
+  renderGameField(solution, true);
+  // const buttons = document.querySelectorAll("button");
+  // buttons.forEach((btn) => btn.classList.add("btn-disabled"));
 };
 
 const addGridListeners = () => {
-  const formLevels = document.getElementById("form-levels");
-  formLevels.addEventListener("change", (e) => {
-    const chosenLevel = e.target.value;
-    renderTitlesList(chosenLevel);
-    // addEventListeners();
-    // startGame();
-  });
-
   const grid = document.getElementById("grid");
   grid.addEventListener("click", (e) => {
     if (e.target.classList.contains("cell-game")) {
@@ -333,7 +363,6 @@ const addGridListeners = () => {
     startTimer();
   });
 };
-addGridListeners();
 
 const addButtonsListeners = () => {
   const resetBtn = document.getElementById("reset-btn");
@@ -342,4 +371,30 @@ const addButtonsListeners = () => {
   const showSolutionBtn = document.getElementById("show-solution-btn");
   showSolutionBtn.addEventListener("click", showSolution);
 };
-addButtonsListeners();
+
+const createTip = () => {
+  ///
+};
+
+const addFormListener = () => {
+  const formLevels = document.getElementById("form-levels");
+  formLevels.addEventListener("change", (e) => {
+    const chosenLevel = e.target.value;
+    curLevel = chosenLevel;
+
+    console.log("curLevel", curLevel);
+    renderTitlesList(chosenLevel);
+  });
+};
+
+const startGame = () => {
+  renderLevels();
+  // renderTitlesList(curLevel);
+  createTip();
+  renderButtons();
+
+  addFormListener();
+  addButtonsListeners();
+};
+
+startGame();
