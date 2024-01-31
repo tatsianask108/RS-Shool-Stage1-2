@@ -194,6 +194,7 @@ const renderTitlesList = (value) => {
 
     console.log("solution", solution);
 
+    resetTimer();
     renderGameField(solution, false);
   });
 };
@@ -230,11 +231,11 @@ const renderGameField = (solution, shouldShowSolution) => {
   container.appendChild(grid);
 
   addGridListeners();
+  renderAdditionalButtons();
 };
 
-const renderButtons = () => {
+const renderGameCreationButtons = () => {
   const body = document.body;
-
   const randomGameBtn = document.createElement("button");
   randomGameBtn.id = "random-game-btn";
   randomGameBtn.textContent = "Random Game";
@@ -244,39 +245,10 @@ const renderButtons = () => {
     createRandomGame();
   });
 
-  const savedGameBtn = document.createElement("button");
-  savedGameBtn.id = "saved-game-btn";
-  savedGameBtn.textContent = "Continue Saved Game";
-  randomGameBtn.after(savedGameBtn);
-
-  const gameTimer = document.createElement("div");
-  gameTimer.id = "game-timer";
-  gameTimer.textContent = "00 : 00";
-  body.append(gameTimer);
-
-  const resetBtn = document.createElement("button");
-  resetBtn.id = "reset-btn";
-  resetBtn.textContent = "Reset Game";
-  body.append(resetBtn);
-
-  const showSolutionBtn = document.createElement("button");
-  showSolutionBtn.id = "show-solution-btn";
-  showSolutionBtn.textContent = "Show Solution";
-  body.append(showSolutionBtn);
-
-  const saveBtn = document.createElement("button");
-  saveBtn.id = "save-btn";
-  saveBtn.textContent = "Save Game";
-  body.append(saveBtn);
-  saveBtn.addEventListener("click", () => {
-    console.log(game);
-    localStorage.setItem("currentGame", JSON.stringify(game));
-  });
-
-  // const continueBtn = document.createElement("button");
-  // continueBtn.id = "continue-btn";
-  // continueBtn.textContent = "Continue Game";
-  // body.append(continueBtn);
+  const continueGameBtn = document.createElement("button");
+  continueGameBtn.id = "continue-game-btn";
+  continueGameBtn.textContent = "Continue Saved Game";
+  randomGameBtn.after(continueGameBtn);
   // continueBtn.addEventListener("click", () => {
   //   const currentGame = JSON.parse(localStorage.getItem("currentGame"));
   //   game = currentGame;
@@ -284,10 +256,50 @@ const renderButtons = () => {
   //   addGridListeners();
   // });
 };
+const renderAdditionalButtons = () => {
+  const body = document.body;
+  let additionalButtons = document.getElementById("additional-buttons");
+
+  if (additionalButtons) {
+    additionalButtons.remove();
+  }
+
+  additionalButtons = document.createElement("div");
+  additionalButtons.classList.add("additional-buttons");
+  additionalButtons.id = "additional-buttons";
+
+  const gameTimer = document.createElement("div");
+  gameTimer.id = "game-timer";
+  gameTimer.textContent = "00 : 00";
+  additionalButtons.append(gameTimer);
+
+  const resetBtn = document.createElement("button");
+  resetBtn.id = "reset-btn";
+  resetBtn.textContent = "Reset Game";
+  additionalButtons.append(resetBtn);
+  resetBtn.addEventListener("click", resetGame);
+
+  const showSolutionBtn = document.createElement("button");
+  showSolutionBtn.id = "show-solution-btn";
+  showSolutionBtn.textContent = "Show Solution";
+  additionalButtons.append(showSolutionBtn);
+  showSolutionBtn.addEventListener("click", showSolution);
+
+  const saveBtn = document.createElement("button");
+  saveBtn.id = "save-btn";
+  saveBtn.textContent = "Save Game";
+  additionalButtons.append(saveBtn);
+  saveBtn.addEventListener("click", () => {
+    console.log(game);
+    localStorage.setItem("currentGame", JSON.stringify(game));
+  });
+
+  body.append(additionalButtons);
+};
 // render page layout
 
 //check every game step
-const checkEndGame = () => {
+const checkGameEnd = () => {
   const cells = document.querySelectorAll(".cell.cell-game");
 
   for (const cell of cells) {
@@ -300,12 +312,14 @@ const checkEndGame = () => {
   }
   const gameTimer = document.getElementById("game-timer").textContent;
   setTimeout(() => {
-    // renderModal(gameTimer, () => {
-    //   newGame()...
-    // });
     renderModal(gameTimer);
-    resetTimer();
-    addGridListeners();
+    pauseTimer();
+    const grid = document.getElementById("grid");
+    grid.classList.add("grid-disabled");
+    const additionalButtons = document.getElementById("additional-buttons");
+    additionalButtons
+      .querySelectorAll("button")
+      .forEach((btn) => btn.classList.add("btn-disabled"));
   }, "400");
 };
 //check every game step
@@ -322,6 +336,8 @@ const resetGame = () => {
 const showSolution = () => {
   pauseTimer();
   renderGameField(solution, true);
+  const grid = document.getElementById("grid");
+  grid.classList.add("grid-disabled");
   // const buttons = document.querySelectorAll("button");
   // buttons.forEach((btn) => btn.classList.add("btn-disabled"));
 };
@@ -342,7 +358,7 @@ const addGridListeners = () => {
       }
 
       e.target.classList.toggle("checked");
-      checkEndGame();
+      checkGameEnd();
     }
   });
 
@@ -364,17 +380,9 @@ const addGridListeners = () => {
   });
 };
 
-const addButtonsListeners = () => {
-  const resetBtn = document.getElementById("reset-btn");
-  resetBtn.addEventListener("click", resetGame);
-
-  const showSolutionBtn = document.getElementById("show-solution-btn");
-  showSolutionBtn.addEventListener("click", showSolution);
-};
-
-const createTip = () => {
-  ///
-};
+// const createTip = () => {
+//   ///
+// };
 
 const addFormListener = () => {
   const formLevels = document.getElementById("form-levels");
@@ -389,12 +397,9 @@ const addFormListener = () => {
 
 const startGame = () => {
   renderLevels();
-  // renderTitlesList(curLevel);
-  createTip();
-  renderButtons();
-
+  // createTip();
+  renderGameCreationButtons();
   addFormListener();
-  addButtonsListeners();
 };
 
 startGame();

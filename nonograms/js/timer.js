@@ -36,7 +36,10 @@ const updateTimer = () => {
 const resetTimer = () => {
   clearInterval(interval);
   [milliseconds, seconds, minutes, hours] = [0, 0, 0, 0];
-  document.getElementById("game-timer").textContent = "00 : 00";
+  const gameTimer = document.getElementById("game-timer");
+  if(gameTimer) {
+    gameTimer.textContent = "00 : 00";
+  } 
 };
 
 const pauseTimer = () => {
