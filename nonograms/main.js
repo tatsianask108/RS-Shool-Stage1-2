@@ -1,24 +1,19 @@
-import { DEFAULT_LEVEL } from "./js/constants.js";
 import nonograms from "./js/nonograms-source.js";
 import { leftCluesGenerator, topCluesGenerator } from "./js/clues-generators.js";
 import { startTimer, pauseTimer, resetTimer } from "./js/timer.js";
 import renderModal from "./js/modal.js";
+import { blockAdditionalButtons } from "./js/utilities.js";
 
-// const playedNonogram = nonograms[Math.floor(Math.random() * nonograms.length)];
-// const solution = playedNonogram.scheme;
-// const levelId = playedNonogram.levelId;
-
-let curLevel = DEFAULT_LEVEL;
+let curLevel;
 let curPicture;
-
 let solution;
 let game;
 
-const createRandomGame = () => {
-  const playedNonogram = nonograms[Math.floor(Math.random() * nonograms.length)];
-  curLevel = playedNonogram.level;
-  curPicture = playedNonogram.title;
-  solution = playedNonogram.scheme;
+const playRandomGame = () => {
+  const playedNonogramObj = nonograms[Math.floor(Math.random() * nonograms.length)];
+  curLevel = playedNonogramObj.level;
+  curPicture = playedNonogramObj.title;
+  solution = playedNonogramObj.scheme;
   // console.log(curLevel, curPicture);
 
   document.querySelector(`#form-levels #${curLevel}`).checked = true;
@@ -30,6 +25,19 @@ const createRandomGame = () => {
   renderGameField(solution, false);
 };
 
+const playSavedGame = () => {
+  game = JSON.parse(localStorage.getItem("savedGameState"));
+  solution = JSON.parse(localStorage.getItem("savedGameSolution"));
+  curLevel = localStorage.getItem("savedGameLevel");
+  curPicture = localStorage.getItem("savedGamePicture");
+
+  document.querySelector(`#form-levels #${curLevel}`).checked = true;
+  renderTitlesList(curLevel);
+  document.querySelector(`#form-titles #${curPicture}`).checked = true;
+
+  console.log(game);
+  renderGameField(solution, false);
+};
 //create levels and titles
 const createLevels = () => {
   const levelsContainer = document.createElement("form");
@@ -53,6 +61,7 @@ const createLevels = () => {
   `;
   return levelsContainer;
 };
+
 const createTitlesList = (chosenLevel) => {
   const filteredNonograms = nonograms.filter((nonogram) => nonogram.level === chosenLevel);
   const titlesContainer = document.createElement("form");
@@ -215,6 +224,7 @@ const renderGameField = (solution, shouldShowSolution) => {
   titlesForm.after(container);
 
   // create empty game
+  // if (!game) {}
   game = solution.map((row) => {
     return Array(row.length).fill(0);
   });
@@ -242,19 +252,16 @@ const renderGameCreationButtons = () => {
   body.prepend(randomGameBtn);
 
   randomGameBtn.addEventListener("click", () => {
-    createRandomGame();
+    playRandomGame();
   });
 
   const continueGameBtn = document.createElement("button");
   continueGameBtn.id = "continue-game-btn";
   continueGameBtn.textContent = "Continue Saved Game";
   randomGameBtn.after(continueGameBtn);
-  // continueBtn.addEventListener("click", () => {
-  //   const currentGame = JSON.parse(localStorage.getItem("currentGame"));
-  //   game = currentGame;
-  //   console.log(game);
-  //   addGridListeners();
-  // });
+  continueGameBtn.addEventListener("click", () => {
+    playSavedGame();
+  });
 };
 const renderAdditionalButtons = () => {
   const body = document.body;
@@ -291,7 +298,10 @@ const renderAdditionalButtons = () => {
   additionalButtons.append(saveBtn);
   saveBtn.addEventListener("click", () => {
     console.log(game);
-    localStorage.setItem("currentGame", JSON.stringify(game));
+    localStorage.setItem("savedGameState", JSON.stringify(game));
+    localStorage.setItem("savedGameSolution", JSON.stringify(solution));
+    localStorage.setItem("savedGameLevel", curLevel);
+    localStorage.setItem("savedGamePicture", curPicture);
   });
 
   body.append(additionalButtons);
@@ -299,7 +309,7 @@ const renderAdditionalButtons = () => {
 // render page layout
 
 //check every game step
-const checkGameEnd = () => {
+const checkWin = () => {
   const cells = document.querySelectorAll(".cell.cell-game");
 
   for (const cell of cells) {
@@ -316,10 +326,7 @@ const checkGameEnd = () => {
     pauseTimer();
     const grid = document.getElementById("grid");
     grid.classList.add("grid-disabled");
-    const additionalButtons = document.getElementById("additional-buttons");
-    additionalButtons
-      .querySelectorAll("button")
-      .forEach((btn) => btn.classList.add("btn-disabled"));
+    blockAdditionalButtons();
   }, "400");
 };
 //check every game step
@@ -338,8 +345,7 @@ const showSolution = () => {
   renderGameField(solution, true);
   const grid = document.getElementById("grid");
   grid.classList.add("grid-disabled");
-  // const buttons = document.querySelectorAll("button");
-  // buttons.forEach((btn) => btn.classList.add("btn-disabled"));
+  blockAdditionalButtons();
 };
 
 const addGridListeners = () => {
@@ -358,7 +364,7 @@ const addGridListeners = () => {
       }
 
       e.target.classList.toggle("checked");
-      checkGameEnd();
+      checkWin();
     }
   });
 
@@ -380,26 +386,30 @@ const addGridListeners = () => {
   });
 };
 
-// const createTip = () => {
-//   ///
-// };
-
 const addFormListener = () => {
   const formLevels = document.getElementById("form-levels");
   formLevels.addEventListener("change", (e) => {
     const chosenLevel = e.target.value;
     curLevel = chosenLevel;
 
-    console.log("curLevel", curLevel);
     renderTitlesList(chosenLevel);
   });
 };
 
 const startGame = () => {
   renderLevels();
-  // createTip();
   renderGameCreationButtons();
+  renderTitlesList("easy");
   addFormListener();
+  const defaultNonogramObj = nonograms.filter((nonogram) => nonogram.level === "easy")[0];
+  solution = defaultNonogramObj.scheme;
+  curLevel = defaultNonogramObj.level;
+  curPicture = defaultNonogramObj.title;
+
+  document.querySelector(`#form-levels #${curLevel}`).checked = true;
+  document.querySelector(`#form-titles #${curPicture}`).checked = true;
+
+  renderGameField(solution, false);
 };
 
 startGame();
