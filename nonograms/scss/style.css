@@ -1,5 +1,38 @@
 body {
-  padding: 30px;
+  background-image: url(/nonograms/assets/img/bg.png);
+}
+
+header,
+footer {
+  display: flex;
+  justify-content: space-between;
+  background: rgba(126, 126, 194, 0.5058823529);
+  padding: 20px;
+  align-items: center;
+}
+
+footer {
+  gap: 15px;
+  justify-content: center;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.nav__list {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+  white-space: nowrap;
 }
 
 .container {
@@ -13,7 +46,7 @@ body {
 
 .clues-top,
 .clues-left {
-  background-color: rgba(22, 22, 22, 0.1215686275);
+  background-color: #e6e6e6;
 }
 
 .clues-top > div:nth-child(5n+5) {
@@ -21,6 +54,7 @@ body {
 }
 
 .grid {
+  background-color: #fff;
   outline: 2px solid black;
 }
 .grid-disabled {
@@ -140,6 +174,18 @@ body {
   display: none;
 }
 
+.modal__content {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  text-transform: uppercase;
+}
+
+.score_column p {
+  padding: 5px;
+  border-bottom: 1px solid black;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -168,7 +214,9 @@ img {
   max-width: 100%;
 }
 
-h1, h2, h3, p {
+h1,
+h2,
+h3 {
   margin: 0;
 }
 

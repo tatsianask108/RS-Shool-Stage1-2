@@ -1,0 +1,35 @@
+body {
+  background-image: url(/nonograms/assets/img/bg.png);
+}
+
+header,
+footer {
+  display: flex;
+  justify-content: space-between;
+  background: #7e7ec281;
+  padding: 20px;
+  align-items: center;
+}
+
+footer {
+  gap: 15px;
+  justify-content: center;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+}
+.nav__list {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+  white-space: nowrap;
+}

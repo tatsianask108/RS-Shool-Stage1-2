@@ -1,13 +1,42 @@
+import { DEFAULT_LEVEL } from "./js/constants.js";
 import nonograms from "./js/nonograms-source.js";
 import { leftCluesGenerator, topCluesGenerator } from "./js/clues-generators.js";
 import { startTimer, pauseTimer, resetTimer } from "./js/timer.js";
+import renderScoreModal from "./js/score-modal.js";
 import renderModal from "./js/modal.js";
-import { blockAdditionalButtons } from "./js/utilities.js";
+import { blockAdditionalButtons, setWinToLocalStorage } from "./js/utilities.js";
 
 let curLevel;
 let curPicture;
 let solution;
 let game;
+
+const renderPageTemplate = () => {
+  const template = `<header>
+  <h1>Nonograms</h1>
+  <nav class="nav">
+    <ul class="nav__list">
+      <li class="nav__item">
+        <h2 id="score-table">Score Table</h2>
+      </li>
+      <li class="nav__item">
+        <h2>Theme</h2>
+      </li>
+    </ul>
+  </nav>
+</header>
+<main>
+<div id="main-container" class="main-container">
+</div>
+</main>
+<footer>
+  <span>2024</span>
+  <a href="https://github.com/tatsianask108" target="_blank">Tatsiana(GitHub)</a>
+</footer>`;
+
+  document.body.insertAdjacentHTML("afterbegin", template);
+  document.getElementById("score-table").addEventListener("click", renderScoreModal);
+};
 
 const playRandomGame = () => {
   const playedNonogramObj = nonograms[Math.floor(Math.random() * nonograms.length)];
@@ -38,6 +67,7 @@ const playSavedGame = () => {
   console.log(game);
   renderGameField(solution, false);
 };
+
 //create levels and titles
 const createLevels = () => {
   const levelsContainer = document.createElement("form");
@@ -178,7 +208,8 @@ const createEmptyGrid = () => {
 // render page layout
 const renderLevels = () => {
   const levelsContainer = createLevels();
-  document.body.prepend(levelsContainer);
+  const main = document.getElementById("main-container");
+  main.append(levelsContainer);
 };
 
 const renderTitlesList = (value) => {
@@ -209,7 +240,8 @@ const renderTitlesList = (value) => {
 };
 
 const renderGameField = (solution, shouldShowSolution) => {
-  console.log("solution", solution, "shouldShowSolution", shouldShowSolution);
+  console.clear();
+  console.log("↓ Nonogram solution ↓", solution, "shouldShowSolution", shouldShowSolution);
   const gameField = document.getElementById("game-field");
 
   if (gameField) {
@@ -245,12 +277,12 @@ const renderGameField = (solution, shouldShowSolution) => {
 };
 
 const renderGameCreationButtons = () => {
-  const body = document.body;
+  const gameCreationButtonsContainer = document.createElement("div");
+  gameCreationButtonsContainer.id = "game-creation-buttons";
+
   const randomGameBtn = document.createElement("button");
   randomGameBtn.id = "random-game-btn";
   randomGameBtn.textContent = "Random Game";
-  body.prepend(randomGameBtn);
-
   randomGameBtn.addEventListener("click", () => {
     playRandomGame();
   });
@@ -258,13 +290,16 @@ const renderGameCreationButtons = () => {
   const continueGameBtn = document.createElement("button");
   continueGameBtn.id = "continue-game-btn";
   continueGameBtn.textContent = "Continue Saved Game";
-  randomGameBtn.after(continueGameBtn);
   continueGameBtn.addEventListener("click", () => {
     playSavedGame();
   });
+
+  gameCreationButtonsContainer.append(randomGameBtn);
+  gameCreationButtonsContainer.append(continueGameBtn);
+  const main = document.getElementById("main-container");
+  main.append(gameCreationButtonsContainer);
 };
 const renderAdditionalButtons = () => {
-  const body = document.body;
   let additionalButtons = document.getElementById("additional-buttons");
 
   if (additionalButtons) {
@@ -304,7 +339,8 @@ const renderAdditionalButtons = () => {
     localStorage.setItem("savedGamePicture", curPicture);
   });
 
-  body.append(additionalButtons);
+  const main = document.getElementById("main-container");
+  main.append(additionalButtons);
 };
 // render page layout
 
@@ -327,6 +363,7 @@ const checkWin = () => {
     const grid = document.getElementById("grid");
     grid.classList.add("grid-disabled");
     blockAdditionalButtons();
+    setWinToLocalStorage(gameTimer, curLevel, curPicture);
   }, "400");
 };
 //check every game step
@@ -373,10 +410,15 @@ const addGridListeners = () => {
     if (e.target.classList.contains("cell-game")) {
       if (e.target.classList.contains("crossed")) {
         e.target.classList.remove("crossed");
+
         e.target.innerHTML = "";
       } else {
         e.target.classList.add("crossed");
         e.target.innerHTML = "✖";
+      }
+      if (e.target.classList.contains("checked")) {
+        e.target.classList.remove("checked");
+        e.target.classList.add("crossed");
       }
     }
   });
@@ -396,11 +438,7 @@ const addFormListener = () => {
   });
 };
 
-const startGame = () => {
-  renderLevels();
-  renderGameCreationButtons();
-  renderTitlesList("easy");
-  addFormListener();
+const initGameOnLoad = () => {
   const defaultNonogramObj = nonograms.filter((nonogram) => nonogram.level === "easy")[0];
   solution = defaultNonogramObj.scheme;
   curLevel = defaultNonogramObj.level;
@@ -408,7 +446,23 @@ const startGame = () => {
 
   document.querySelector(`#form-levels #${curLevel}`).checked = true;
   document.querySelector(`#form-titles #${curPicture}`).checked = true;
+};
 
+const initLocalStorage = () => {
+  const scoreList = localStorage.getItem("tatskScoreList");
+  if (!scoreList) {
+    localStorage.setItem("tatskScoreList", "[]");
+  }
+};
+
+const startGame = () => {
+  renderPageTemplate();
+  renderGameCreationButtons();
+  renderLevels();
+  renderTitlesList(DEFAULT_LEVEL);
+  addFormListener();
+  initGameOnLoad();
+  initLocalStorage();
   renderGameField(solution, false);
 };
 

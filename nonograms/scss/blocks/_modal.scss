@@ -45,3 +45,15 @@
 .hidden {
   display: none;
 }
+
+.modal__content {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  text-transform: uppercase;
+}
+
+.score_column p {
+  padding: 5px;
+  border-bottom: 1px solid black;
+}
