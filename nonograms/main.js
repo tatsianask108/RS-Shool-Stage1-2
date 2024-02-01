@@ -290,6 +290,11 @@ const renderGameCreationButtons = () => {
   const continueGameBtn = document.createElement("button");
   continueGameBtn.id = "continue-game-btn";
   continueGameBtn.textContent = "Continue Saved Game";
+
+  const isSavedGame = localStorage.getItem("savedGameLevel");
+  if (!isSavedGame) {
+    continueGameBtn.className = "btn-disabled";
+  }
   continueGameBtn.addEventListener("click", () => {
     playSavedGame();
   });
@@ -299,6 +304,7 @@ const renderGameCreationButtons = () => {
   const main = document.getElementById("main-container");
   main.append(gameCreationButtonsContainer);
 };
+
 const renderAdditionalButtons = () => {
   let additionalButtons = document.getElementById("additional-buttons");
 
@@ -333,6 +339,7 @@ const renderAdditionalButtons = () => {
   additionalButtons.append(saveBtn);
   saveBtn.addEventListener("click", () => {
     console.log(game);
+    document.getElementById("continue-game-btn").classList.remove("btn-disabled");
     localStorage.setItem("savedGameState", JSON.stringify(game));
     localStorage.setItem("savedGameSolution", JSON.stringify(solution));
     localStorage.setItem("savedGameLevel", curLevel);
