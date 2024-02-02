@@ -1,3 +1,5 @@
+import resetGame from "../main.js";
+
 let [milliseconds, seconds, minutes, hours] = [0, 0, 0, 0];
 let interval = null;
 
@@ -20,17 +22,19 @@ const updateTimer = () => {
       seconds = 0;
       minutes++;
 
-      // if (minutes === 60) {
-      //   minutes = 0;
-      //   hours++; || alert('game over')
-      // }
+      if (minutes === 60) {
+        minutes = 0;
+        // hours++;
+        alert('Time to have a rest, you\'ve been playing nonograms too long...');
+         resetGame();
+      }
     }
   }
 
   let min = String(minutes).padStart(2, "0");
   let sec = String(seconds).padStart(2, "0");
 
-  gameTimer.textContent = `${min} : ${sec}`;
+  gameTimer.textContent = `${min}:${sec}`;
 };
 
 const resetTimer = () => {
@@ -38,7 +42,7 @@ const resetTimer = () => {
   [milliseconds, seconds, minutes, hours] = [0, 0, 0, 0];
   const gameTimer = document.getElementById("game-timer");
   if(gameTimer) {
-    gameTimer.textContent = "00 : 00";
+    gameTimer.textContent = "00:00";
   } 
 };
 

@@ -13,4 +13,19 @@ const setWinToLocalStorage = (gameTimer, curLevel, curPicture) => {
   localStorage.setItem("tatskScoreList", JSON.stringify(scoreList));
 };
 
-export { blockAdditionalButtons, setWinToLocalStorage };
+const formatTimeToSeconds = (time) => {
+  let formattedTime = time.split(":");
+  return (formattedTime = Number(formattedTime[0]) * 60 + Number(formattedTime[1]));
+};
+
+const formatTimeToMinutes = (seconds) => {
+  let min = Math.floor(seconds / 60);
+  let sec = seconds - min * 60;
+
+  min = String(min).padStart(2, "0");
+  sec = String(sec).padStart(2, "0");
+
+  return `${min}:${sec}`;
+};
+
+export { blockAdditionalButtons, setWinToLocalStorage, formatTimeToSeconds, formatTimeToMinutes };

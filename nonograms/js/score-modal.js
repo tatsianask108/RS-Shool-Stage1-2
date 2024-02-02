@@ -1,3 +1,5 @@
+import { formatTimeToMinutes } from './utilities.js';
+
 const renderScoreModal = () => {
   const overlay = document.createElement("div");
   const modal = document.createElement("div");
@@ -33,10 +35,9 @@ const renderScoreModal = () => {
     timeContainer.className = "score_column";
     timeContainer.textContent = "time";
 
-    const scoreData = JSON.parse(localStorage.getItem("tatskScoreList")).sort((a, b) => {
-      console.log("test");
-      return Math.random() > 0.5 ? -1 : 1;
-    });
+    const scoreData = JSON.parse(localStorage.getItem("tatskScoreList")).sort(
+      (a, b) => a.time - b.time
+    );
 
     scoreData.forEach((item) => {
       const pictureNameElement = document.createElement("p");
@@ -46,7 +47,8 @@ const renderScoreModal = () => {
       levelElement.textContent = item.level;
 
       const timeElement = document.createElement("p");
-      timeElement.textContent = item.time;
+      const formattedTime = formatTimeToMinutes(item.time);
+      timeElement.textContent = formattedTime;
 
       pictureNameContainer.append(pictureNameElement);
       levelContainer.append(levelElement);

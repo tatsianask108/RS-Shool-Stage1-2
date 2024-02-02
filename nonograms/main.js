@@ -4,7 +4,7 @@ import { leftCluesGenerator, topCluesGenerator } from "./js/clues-generators.js"
 import { startTimer, pauseTimer, resetTimer } from "./js/timer.js";
 import renderScoreModal from "./js/score-modal.js";
 import renderModal from "./js/modal.js";
-import { blockAdditionalButtons, setWinToLocalStorage } from "./js/utilities.js";
+import { blockAdditionalButtons, setWinToLocalStorage, formatTimeToSeconds } from "./js/utilities.js";
 
 let curLevel;
 let curPicture;
@@ -322,7 +322,7 @@ const renderAdditionalButtons = () => {
 
   const gameTimer = document.createElement("div");
   gameTimer.id = "game-timer";
-  gameTimer.textContent = "00 : 00";
+  gameTimer.textContent = "00:00";
   additionalButtons.append(gameTimer);
 
   const resetBtn = document.createElement("button");
@@ -368,13 +368,14 @@ const checkWin = () => {
     }
   }
   const gameTimer = document.getElementById("game-timer").textContent;
+  const formattedTime = formatTimeToSeconds(gameTimer);
   setTimeout(() => {
-    renderModal(gameTimer);
+    renderModal(formattedTime);
     pauseTimer();
     const grid = document.getElementById("grid");
     grid.classList.add("grid-disabled");
     blockAdditionalButtons();
-    setWinToLocalStorage(gameTimer, curLevel, curPicture);
+    setWinToLocalStorage(formattedTime, curLevel, curPicture);
   }, "400");
 };
 //check every game step
@@ -387,6 +388,8 @@ const resetGame = () => {
   });
   resetTimer();
 };
+
+export default resetGame;
 
 const showSolution = () => {
   pauseTimer();
