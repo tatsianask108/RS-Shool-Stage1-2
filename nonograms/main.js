@@ -4,12 +4,21 @@ import { leftCluesGenerator, topCluesGenerator } from "./js/clues-generators.js"
 import { startTimer, pauseTimer, resetTimer } from "./js/timer.js";
 import renderScoreModal from "./js/score-modal.js";
 import renderModal from "./js/modal.js";
-import { blockAdditionalButtons, setWinToLocalStorage, formatTimeToSeconds } from "./js/utilities.js";
+import {
+  blockAdditionalButtons,
+  setWinToLocalStorage,
+  formatTimeToSeconds,
+} from "./js/utilities.js";
 
 let curLevel;
 let curPicture;
 let solution;
 let game;
+
+const audioMarkCell = new Audio("/nonograms/assets/sounds/mark-cell.wav");
+const audioCrossCell = new Audio("/nonograms/assets/sounds/cross.wav");
+const audioErase = new Audio("/nonograms/assets/sounds/rub-scratch-sound.mp3");
+const audioWinGame = new Audio("/nonograms/assets/sounds/win-game.wav");
 
 const renderPageTemplate = () => {
   const template = `<header>
@@ -120,9 +129,9 @@ const createTitlesList = (chosenLevel) => {
 
 //create grid
 /**
- * 
+ *
  * @param {*} preset Matrix of the Saved Game or Game Solution
- * @returns 
+ * @returns
  */
 const createGrid = (solution, preset) => {
   const grid = document.createElement("div");
@@ -142,7 +151,7 @@ const createGrid = (solution, preset) => {
       cell.dataset.column = j;
 
       if (preset && preset[i][j] === 1) {
-        cell.classList.add("checked");
+        cell.classList.add("marked");
       }
 
       if (solution[i][j] === 1) {
@@ -361,8 +370,8 @@ const checkWin = () => {
 
   for (const cell of cells) {
     if (
-      (cell.secretValue === 1 && !cell.classList.contains("checked")) ||
-      (cell.secretValue === 0 && cell.classList.contains("checked"))
+      (cell.secretValue === 1 && !cell.classList.contains("marked")) ||
+      (cell.secretValue === 0 && cell.classList.contains("marked"))
     ) {
       return false;
     }
@@ -371,6 +380,7 @@ const checkWin = () => {
   const formattedTime = formatTimeToSeconds(gameTimer);
   setTimeout(() => {
     renderModal(formattedTime);
+    audioWinGame.play();
     pauseTimer();
     const grid = document.getElementById("grid");
     grid.classList.add("grid-disabled");
@@ -383,7 +393,7 @@ const checkWin = () => {
 const resetGame = () => {
   const cells = document.querySelectorAll(".cell.cell-game");
   cells.forEach((el) => {
-    el.classList.remove("crossed", "checked");
+    el.classList.remove("crossed", "marked");
     el.textContent = "";
   });
   resetTimer();
@@ -414,24 +424,33 @@ const addGridListeners = () => {
         game[rowIndex][columnIndex] = 0;
       }
 
-      e.target.classList.toggle("checked");
+      if (e.target.classList.contains("marked")) {
+        e.target.classList.remove("marked");
+        audioErase.play();
+      } else {
+        e.target.classList.add("marked");
+        audioMarkCell.play();
+      }
+      // e.target.classList.toggle("marked");
       checkWin();
     }
   });
 
   grid.addEventListener("contextmenu", (e) => {
     e.preventDefault();
+
     if (e.target.classList.contains("cell-game")) {
       if (e.target.classList.contains("crossed")) {
         e.target.classList.remove("crossed");
-
         e.target.innerHTML = "";
+        audioErase.play();
       } else {
         e.target.classList.add("crossed");
         e.target.innerHTML = "✖";
+        audioCrossCell.play();
       }
-      if (e.target.classList.contains("checked")) {
-        e.target.classList.remove("checked");
+      if (e.target.classList.contains("marked")) {
+        e.target.classList.remove("marked");
         e.target.classList.add("crossed");
       }
     }

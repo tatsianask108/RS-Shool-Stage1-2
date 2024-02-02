@@ -100,9 +100,9 @@ footer {
   border-right: 1px solid rgba(0, 0, 0, 0.5);
   border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
-.grid .row .cell-game.checked,
-.clues-top .row .cell-game.checked,
-.clues-left .row .cell-game.checked {
+.grid .row .cell-game.marked,
+.clues-top .row .cell-game.marked,
+.clues-left .row .cell-game.marked {
   background-color: black;
 }
 .grid .row .cell-top,
