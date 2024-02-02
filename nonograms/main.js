@@ -15,10 +15,14 @@ let curPicture;
 let solution;
 let game;
 
-const audioMarkCell = new Audio("/nonograms/assets/sounds/mark-cell.wav");
-const audioCrossCell = new Audio("/nonograms/assets/sounds/cross.wav");
-const audioErase = new Audio("/nonograms/assets/sounds/rub-scratch-sound.mp3");
-const audioWinGame = new Audio("/nonograms/assets/sounds/win-game.wav");
+
+const sounds = {
+  audioMarkCell: new Audio("/nonograms/assets/sounds/mark-cell.wav"),
+  audioCrossCell: new Audio("/nonograms/assets/sounds/cross.wav"),
+  audioErase: new Audio("/nonograms/assets/sounds/rub-scratch-sound.mp3"),
+  audioWinGame: new Audio("/nonograms/assets/sounds/win-game.wav"),
+};
+
 
 const renderPageTemplate = () => {
   const template = `<header>
@@ -30,6 +34,12 @@ const renderPageTemplate = () => {
       </li>
       <li class="nav__item">
         <h2>Theme</h2>
+      </li>
+      <li class="nav__item">
+      <input type="checkbox" name="sounds" id="sounds-input">
+      <label for="sounds" >
+    <div class="sound-icon sound-on" id="sound-icon"></div>
+    </label>
       </li>
     </ul>
   </nav>
@@ -45,6 +55,10 @@ const renderPageTemplate = () => {
 
   document.body.insertAdjacentHTML("afterbegin", template);
   document.getElementById("score-table").addEventListener("click", renderScoreModal);
+  const soundsInput = document.getElementById("sounds-input");
+  soundsInput.addEventListener("change", (e) => {
+    console.log(sounds);
+  });
 };
 
 const playRandomGame = () => {
@@ -380,7 +394,9 @@ const checkWin = () => {
   const formattedTime = formatTimeToSeconds(gameTimer);
   setTimeout(() => {
     renderModal(formattedTime);
-    audioWinGame.play();
+
+    sounds.audioWinGame.play();
+
     pauseTimer();
     const grid = document.getElementById("grid");
     grid.classList.add("grid-disabled");
@@ -398,7 +414,6 @@ const resetGame = () => {
   });
   resetTimer();
 };
-
 export default resetGame;
 
 const showSolution = () => {
@@ -426,10 +441,10 @@ const addGridListeners = () => {
 
       if (e.target.classList.contains("marked")) {
         e.target.classList.remove("marked");
-        audioErase.play();
+        sounds.audioErase.play();
       } else {
         e.target.classList.add("marked");
-        audioMarkCell.play();
+        sounds.audioMarkCell.play();
       }
       // e.target.classList.toggle("marked");
       checkWin();
@@ -443,11 +458,11 @@ const addGridListeners = () => {
       if (e.target.classList.contains("crossed")) {
         e.target.classList.remove("crossed");
         e.target.innerHTML = "";
-        audioErase.play();
+        sounds.audioErase.play();
       } else {
         e.target.classList.add("crossed");
         e.target.innerHTML = "✖";
-        audioCrossCell.play();
+        sounds.audioCrossCell.play();
       }
       if (e.target.classList.contains("marked")) {
         e.target.classList.remove("marked");

@@ -35,6 +35,12 @@ footer {
   white-space: nowrap;
 }
 
+.sound-icon {
+  height: 50px;
+  width: 50px;
+  background: center/contain no-repeat url(/nonograms/assets/img/sound-on.png);
+}
+
 .container {
   width: -moz-fit-content;
   width: fit-content;
