@@ -51,7 +51,7 @@ const playRandomGame = () => {
 
   document.querySelector(`#form-titles #${curPicture}`).checked = true;
 
-  renderGameField(solution, false);
+  renderGameField(solution);
 };
 
 const playSavedGame = () => {
@@ -65,9 +65,8 @@ const playSavedGame = () => {
   document.querySelector(`#form-titles #${curPicture}`).checked = true;
 
   console.log(game);
-  renderGameField(solution, false);
+  renderGameField(solution, game);
 };
-
 //create levels and titles
 const createLevels = () => {
   const levelsContainer = document.createElement("form");
@@ -120,24 +119,29 @@ const createTitlesList = (chosenLevel) => {
 };
 
 //create grid
-const createGrid = (matrix) => {
+/**
+ * 
+ * @param {*} preset Matrix of the Saved Game or Game Solution
+ * @returns 
+ */
+const createGrid = (solution, preset) => {
   const grid = document.createElement("div");
   grid.className = "grid";
   grid.id = "grid";
 
-  for (let i = 0; i < matrix.length; i++) {
+  for (let i = 0; i < solution.length; i++) {
     const row = document.createElement("div");
     row.classList.add("row", "row-game");
 
     grid.appendChild(row);
 
-    for (let j = 0; j < matrix[i].length; j++) {
+    for (let j = 0; j < solution[i].length; j++) {
       const cell = document.createElement("div");
       cell.className = "cell cell-game";
       cell.dataset.row = i;
       cell.dataset.column = j;
 
-      if (matrix && matrix[i][j] === 1) {
+      if (preset && preset[i][j] === 1) {
         cell.classList.add("checked");
       }
 
@@ -239,9 +243,9 @@ const renderTitlesList = (value) => {
   });
 };
 
-const renderGameField = (solution, shouldShowSolution) => {
+const renderGameField = (solution, preset) => {
   console.clear();
-  console.log("↓ Nonogram solution ↓", solution, "shouldShowSolution", shouldShowSolution);
+  console.log("↓ Nonogram solution ↓", solution);
   const gameField = document.getElementById("game-field");
 
   if (gameField) {
@@ -261,7 +265,7 @@ const renderGameField = (solution, shouldShowSolution) => {
     return Array(row.length).fill(0);
   });
 
-  const grid = createGrid(shouldShowSolution ? solution : game);
+  const grid = createGrid(solution, preset);
   // console.log("solution", solution);
   const cluesTopElement = createCluesTop(solution);
   const cluesLeftElement = createCluesLeft(solution);
@@ -386,7 +390,7 @@ const resetGame = () => {
 
 const showSolution = () => {
   pauseTimer();
-  renderGameField(solution, true);
+  renderGameField(solution, solution);
   const grid = document.getElementById("grid");
   grid.classList.add("grid-disabled");
   blockAdditionalButtons();
@@ -470,7 +474,7 @@ const startGame = () => {
   addFormListener();
   initGameOnLoad();
   initLocalStorage();
-  renderGameField(solution, false);
+  renderGameField(solution);
 };
 
 startGame();
