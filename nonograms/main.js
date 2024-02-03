@@ -24,31 +24,34 @@ const sounds = {
 };
 
 const renderPageTemplate = () => {
-  const template = `<header>
+  const template = `<header class="header">
   <h1>Nonograms</h1>
   <nav class="nav">
     <ul class="nav__list">
       <li class="nav__item">
-        <h2 id="score-table">Score Table</h2>
+        <h3 id="score-table">Score Table</h3>
       </li>
       <li class="nav__item">
-        <h2>Theme</h2>
+      <div class="icon icon-theme" id="theme-icon"></div>
       </li>
       <li class="nav__item">
       <input type="checkbox" name="sounds" id="sounds-state">
-      <label for="sounds-state" >
-    <div class="sound-on" id="sound-icon"></div>
+      <label for="sounds-state" class="nav__item-label">
+    <div class="icon icon-sound-on" id="sound-icon"></div>
     </label>
       </li>
     </ul>
   </nav>
 </header>
 <main>
-<div id="main-container" class="main-container">
+<div id="main-container" class="main__container">
 </div>
 </main>
-<footer>
-  <a href="https://github.com/tatsianask108" target="_blank">Tatsiana(GitHub)</a>
+<footer class="footer"> 
+  <a class="footer__link" href="https://github.com/tatsianask108" target="_blank">
+  <span class="icon icon-github"></span>
+  <span>Tatsiana(GitHub)</span>
+  </a>
 </footer>`;
 
   document.body.insertAdjacentHTML("afterbegin", template);
@@ -91,17 +94,17 @@ const createLevels = () => {
   levelsContainer.classList.add("levels-container");
   levelsContainer.innerHTML = `
   <input type="radio" name="level" value="easy" id="easy">
-  <label for="easy" class="level">
+  <label for="easy" class="level level_easy">
     <span>easy(5x5)</span>
   </label>
 
   <input type="radio" name="level" value="medium" id="medium">
-  <label for="medium" class="level">
+  <label for="medium" class="level level_medium">
     <span>medium(10x10)</span>
   </label>
 
   <input type="radio" name="level" value="hard" id="hard">
-  <label for="hard" class="level">
+  <label for="hard" class="level level_hard">
     <span>hard(15x15)</span>
   </label>
   `;
@@ -177,21 +180,40 @@ const createGrid = (solution, preset) => {
 const createCluesTop = (solution) => {
   const cluesTop = topCluesGenerator(solution);
   const cluesTopElement = document.createElement("div");
+
+  const colsArray = [];
+  let maxCells = 0;
+
   cluesTopElement.className = "clues-top";
 
   for (let col = 0; col < cluesTop.length; col++) {
-    const cellElement = document.createElement("div");
+    const collElement = document.createElement("div");
+    collElement.className = "coll";
 
     for (let row = 0; row < cluesTop.length; row++) {
-      const rowElement = document.createElement("div");
+      const cell = document.createElement("div");
+      cell.className = "cell";
 
       if (cluesTop[row][col] !== 0) {
-        rowElement.textContent = cluesTop[row][col];
-        cellElement.appendChild(rowElement);
+        cell.textContent = cluesTop[row][col];
+        collElement.appendChild(cell);
       }
     }
-    cluesTopElement.appendChild(cellElement);
+
+    colsArray.push(collElement);
+    if (collElement.children.length > maxCells) {
+      maxCells = collElement.children.length;
+    }
   }
+
+  colsArray.map((column) => {
+    for (let i = column.children.length; i < maxCells; i++) {
+      let emptyCell = document.createElement("div");
+      emptyCell.className = "cell empty";
+      column.prepend(emptyCell);
+    }
+    cluesTopElement.appendChild(column);
+  });
 
   return cluesTopElement;
 };
@@ -210,10 +232,16 @@ const createCluesLeft = (solution) => {
     for (let j = 0; j < cluesLeft.length; j++) {
       if (cluesLeft[i][j] !== 0) {
         const cell = document.createElement("div");
-        cell.classList.add("cell");
+        cell.classList.add("cell", "cell-clues-left");
         cell.textContent = cluesLeft[i][j];
         row.appendChild(cell);
       }
+    }
+
+    if (!row.children.length) {
+      const cell = document.createElement("div");
+      cell.classList.add("cell");
+      row.appendChild(cell);
     }
   }
 
@@ -261,7 +289,7 @@ const renderTitlesList = (value) => {
 };
 
 const renderGameField = (solution, preset) => {
-  // console.clear();
+  console.clear();
   console.log("↓ Nonogram solution ↓", solution);
   const gameField = document.getElementById("game-field");
 
@@ -443,7 +471,14 @@ const addGridListeners = () => {
         e.target.classList.add("marked");
         sounds.audioMarkCell.play();
       }
-      // e.target.classList.toggle("marked");
+
+      if (e.target.classList.contains('crossed')) {
+        e.target.classList.remove("crossed");
+        e.target.textContent = '';
+        e.target.classList.add("marked");
+        sounds.audioMarkCell.play();
+
+      }
       checkWin();
     }
   });

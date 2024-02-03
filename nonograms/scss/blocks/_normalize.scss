@@ -21,6 +21,10 @@ a {
   cursor: pointer;
 }
 
+a:visited {
+  color: inherit;
+}
+
 img {
   display: block;
   max-width: 100%;
@@ -38,6 +42,7 @@ button {
   color: inherit;
   background-color: transparent;
   cursor: pointer;
+  border: none;
 }
 
 input {

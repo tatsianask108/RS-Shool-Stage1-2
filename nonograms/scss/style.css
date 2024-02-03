@@ -1,22 +1,10 @@
-body {
+.body {
   background-image: url(/nonograms/assets/img/bg.png);
+  font-family: "Poppins";
+  color: #297491;
 }
 
-header,
-footer {
-  display: flex;
-  justify-content: space-between;
-  background: rgba(126, 126, 194, 0.5058823529);
-  padding: 20px;
-  align-items: center;
-}
-
-footer {
-  gap: 15px;
-  justify-content: center;
-}
-
-.main-container {
+.main__container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,120 +12,142 @@ footer {
   padding: 0 20px;
 }
 
+.header,
+.footer {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(135, 214, 228, 0.6980392157);
+  padding: 15px 30px;
+  align-items: center;
+}
+@media (max-width: 600px) {
+  .header,
+  .footer {
+    padding: 15px;
+  }
+}
+
+.footer {
+  justify-content: center;
+}
+.footer__link {
+  display: flex;
+  align-items: center;
+}
+
 .nav__list {
   display: flex;
   justify-content: space-between;
   gap: 30px;
   align-items: center;
-  list-style: none;
-  margin: 0;
-  padding-left: 0;
-  white-space: nowrap;
+}
+@media (max-width: 600px) {
+  .nav__list {
+    gap: 10px;
+  }
+}
+.nav__item {
+  cursor: pointer;
+}
+.nav__item-label {
+  cursor: pointer;
 }
 
-.sound-on {
+.icon {
   height: 40px;
   width: 40px;
+}
+.icon-sound-on {
   background: center/contain no-repeat url(/nonograms/assets/img/sound-on.png);
 }
-
-.sound-off {
-  height: 40px;
-  width: 40px;
+.icon-sound-off {
   background: center/contain no-repeat url(/nonograms/assets/img/sound-off.png);
+}
+.icon-theme {
+  background: center/contain no-repeat url(/nonograms/assets/img/moon.png);
+}
+.icon-github {
+  display: inline-block;
+  margin-right: 10px;
+  background: center/contain no-repeat url(/nonograms/assets/img/github.png);
 }
 
 .container {
+  font-size: 24px;
   width: -moz-fit-content;
   width: fit-content;
   display: grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto auto;
-  outline: 2px solid rgb(0, 0, 0);
-}
-
-.clues-top,
-.clues-left {
-  background-color: #e6e6e6;
-}
-
-.clues-top > div:nth-child(5n+5) {
-  border-right: 2px black solid;
+  background-color: #fff;
 }
 
 .grid {
-  background-color: #fff;
-  outline: 2px solid black;
+  display: flex;
+  flex-direction: column;
 }
 .grid-disabled {
   pointer-events: none;
 }
 
-.grid,
+.row {
+  display: flex;
+  justify-content: end;
+  min-height: 25px;
+  width: 100%;
+  border-bottom: 1px black solid;
+}
+.row:nth-child(1) {
+  border-top: 2px solid black;
+}
+.row:nth-child(5n+5) {
+  border-bottom: 2px black solid;
+}
+.row-game {
+  border-left: 2px solid black;
+}
+
+.cell {
+  width: 1.25em;
+  min-height: 1.25em;
+  line-height: 1.25em;
+  border-right: 1px solid rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+.cell-game.marked {
+  background-color: black;
+}
+.cell-clues-left {
+  border: none;
+}
+.cell:nth-child(5n+5) {
+  border-right: 2px black solid;
+}
+
 .clues-top,
 .clues-left {
   display: flex;
   flex-direction: column;
   align-items: end;
   text-align: center;
-}
-.grid .row,
-.clues-top .row,
-.clues-left .row {
-  display: flex;
-  justify-content: end;
-  min-height: 20px;
-  width: 100%;
-}
-.grid .row-left,
-.clues-top .row-left,
-.clues-left .row-left {
-  border-top: 1px solid rgba(0, 0, 0, 0.5);
-}
-.grid .row:nth-child(5n+5),
-.clues-top .row:nth-child(5n+5),
-.clues-left .row:nth-child(5n+5) {
-  border-bottom: 2px black solid;
-}
-.grid .row .cell,
-.clues-top .row .cell,
-.clues-left .row .cell {
-  width: 20px;
-  height: 20px;
-  line-height: 1.2;
-}
-.grid .row .cell-game,
-.clues-top .row .cell-game,
-.clues-left .row .cell-game {
-  border-right: 1px solid rgba(0, 0, 0, 0.5);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
-}
-.grid .row .cell-game.marked,
-.clues-top .row .cell-game.marked,
-.clues-left .row .cell-game.marked {
-  background-color: black;
-}
-.grid .row .cell-top,
-.clues-top .row .cell-top,
-.clues-left .row .cell-top {
-  border-right: 1px solid rgba(0, 0, 0, 0.5);
-}
-.grid .row .cell:nth-child(5n+5),
-.clues-top .row .cell:nth-child(5n+5),
-.clues-left .row .cell:nth-child(5n+5) {
-  border-right: 2px black solid;
+  background-color: #e6e6e6;
 }
 
 .clues-top {
   flex-direction: row;
 }
-.clues-top > div {
+.clues-top > .coll {
   flex: 1;
-  border-right: 1px solid rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   justify-content: end;
   height: 100%;
+}
+.clues-top > .coll:nth-child(1) {
+  border-left: 2px solid black;
+}
+.clues-top > .coll:nth-child(5n+5) > .cell {
+  border-right: 2px black solid;
 }
 
 .overlay {
@@ -165,7 +175,7 @@ footer {
   position: relative;
   border-radius: 10px;
   padding: 30px;
-  background: rgb(107, 146, 107);
+  background: #bbe4ec;
   max-width: 800px;
   min-width: 350px;
   height: -moz-max-content;
@@ -221,6 +231,10 @@ a {
   cursor: pointer;
 }
 
+a:visited {
+  color: inherit;
+}
+
 img {
   display: block;
   max-width: 100%;
@@ -238,6 +252,7 @@ button {
   color: inherit;
   background-color: transparent;
   cursor: pointer;
+  border: none;
 }
 
 input {
@@ -245,12 +260,19 @@ input {
 }
 
 button {
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  padding: 5px;
+  background-color: #fff;
+  font-size: 20px;
+  font-weight: 400;
   margin: 5px;
+  box-shadow: -5px -5px 5px -5px rgba(34, 60, 80, 0.6) inset;
 }
 
 .btn-disabled {
   pointer-events: none;
-  opacity: 0.7;
+  opacity: 0.5;
 }
 
 .levels-container,
@@ -262,21 +284,31 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px;
-  border-radius: 100px;
+  margin: 5px;
+  border-radius: 10px;
   cursor: pointer;
-  padding: 7px 15px 7px 7px;
+  padding: 5px;
   border: 1px solid #c1b6ad;
-  width: -moz-max-content;
-  width: max-content;
+  background: #fff;
   transition: all 0.7s ease;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   line-height: 150%;
-  font-style: normal;
+}
+.level_easy {
+  border: 1px solid #31c48d;
+  color: #31c48d;
+}
+.level_medium {
+  border: 1px solid #f4c12c;
+  color: #f4c12c;
+}
+.level_hard {
+  border: 1px solid #d13939;
+  color: #d13939;
 }
 
 input[type=radio]:checked + label {
-  background-color: #665f55;
-  border-color: #665f55;
+  background-color: #bbe4ec;
+  border-color: #bbe4ec;
 }/*# sourceMappingURL=style.css.map */

@@ -1,46 +1,72 @@
-body {
+.body {
   background-image: url(/nonograms/assets/img/bg.png);
+  font-family: "Poppins";
+  color: $text-color-accent;
 }
 
-header,
-footer {
-  display: flex;
-  justify-content: space-between;
-  background: #7e7ec281;
-  padding: 20px;
-  align-items: center;
-}
-
-footer {
-  gap: 15px;
-  justify-content: center;
-}
-
-.main-container {
+.main__container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 0 20px;
 }
-.nav__list {
+
+.header,
+.footer {
   display: flex;
   justify-content: space-between;
-  gap: 30px;
+  background-color: $accent-color-opacity;
+  padding: 15px 30px;
   align-items: center;
-  list-style: none;
-  margin: 0;
-  padding-left: 0;
-  white-space: nowrap;
+  @media (max-width: 600px) {
+    padding: 15px;
+  }
+
 }
 
-.sound-on {
-  height: 40px;
-  width: 40px;
-  background: center / contain no-repeat url(/nonograms/assets/img/sound-on.png);
+.footer {
+  justify-content: center;
+  &__link {
+    display: flex;
+    align-items: center;
+  }
 }
-.sound-off {
+
+.nav {
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    align-items: center;
+
+    @media (max-width: 600px) {
+      gap: 10px;
+    }
+  }
+  &__item {
+    cursor: pointer;
+    &-label {
+      cursor: pointer;
+    }
+  }
+}
+
+.icon {
   height: 40px;
   width: 40px;
-  background: center / contain no-repeat url(/nonograms/assets/img/sound-off.png);
+  &-sound-on {
+    background: center / contain no-repeat url(/nonograms/assets/img/sound-on.png);
+  }
+  &-sound-off {
+    background: center / contain no-repeat url(/nonograms/assets/img/sound-off.png);
+  }
+  &-theme {
+    background: center / contain no-repeat url(/nonograms/assets/img/moon.png);
+  }
+  &-github {
+    display: inline-block;
+    margin-right: 10px;
+    background: center / contain no-repeat url(/nonograms/assets/img/github.png);
+  }
 }

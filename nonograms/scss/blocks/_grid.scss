@@ -1,75 +1,78 @@
 .container {
+  font-size: 24px;
   width: fit-content;
   display: grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto auto;
-  outline: 2px solid rgb(0, 0, 0);
-}
-.clues-top,
-.clues-left {
-  background-color: #e6e6e6;
-}
-
-.clues-top > div:nth-child(5n + 5) {
-  border-right: 2px black solid;
+  background-color: $color-background;
 }
 
 .grid {
-  background-color: #fff;
-  outline: 2px solid black;
+  display: flex;
+  flex-direction: column;
   &-disabled {
     pointer-events: none;
   }
-  // border-left: 2px solid black;
 }
 
-.grid,
+.row {
+  display: flex;
+  justify-content: end;
+  min-height: 25px;
+  width: 100%;
+  border-bottom: 1px black solid;
+  &:nth-child(1) {
+    border-top: 2px solid black;
+  }
+  &:nth-child(5n + 5) {
+    border-bottom: 2px black solid;
+  }
+  &-game {
+    border-left: 2px solid black;
+  }
+}
+
+.cell {
+  width: 1.25em;
+  min-height: 1.25em;
+  line-height: 1.25em;
+  border-right: 1px solid rgba(0, 0, 0, 0.5);
+  text-align: center;
+  &-game {
+    &.marked {
+      background-color: black;
+    }
+  }
+
+  &-clues-left {
+    border: none;
+  }
+  &:nth-child(5n + 5) {
+    border-right: 2px black solid;
+  }
+}
+
 .clues-top,
 .clues-left {
   display: flex;
   flex-direction: column;
   align-items: end;
   text-align: center;
-  //
+  background-color: $color-background-accent;
+}
 
-  .row {
-    display: flex;
-    justify-content: end;
-    min-height: 20px;
-    width: 100%;
-    &-left {
-      border-top: 1px solid rgba(0, 0, 0, 0.5);
+.clues-top {
+  flex-direction: row;
+  > .coll {
+    flex: 1;
+    &:nth-child(1) {
+      border-left: 2px solid black;
     }
     &:nth-child(5n + 5) {
-      border-bottom: 2px black solid;
-    }
-
-    .cell {
-      width: 20px;
-      height: 20px;
-      line-height: 1.2;
-      &-game {
-        border-right: 1px solid rgba(0, 0, 0, 0.5);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.5);
-        &.marked {
-          background-color: black;
-        }
-      }
-      &-top {
-        border-right: 1px solid rgba(0, 0, 0, 0.5);
-      }
-      &:nth-child(5n + 5) {
+      > .cell {
         border-right: 2px black solid;
       }
     }
-  }
-}
-.clues-top {
-  flex-direction: row;
-  > div {
-    flex: 1;
-    border-right: 1px solid rgba(0, 0, 0, 0.5);
-    // border-left: 1px solid rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
     justify-content: end;

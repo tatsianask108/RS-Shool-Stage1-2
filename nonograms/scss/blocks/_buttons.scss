@@ -1,10 +1,17 @@
 button {
+  border: 1px solid $color-background-accent;
+  border-radius: 10px;
+  padding: 5px;
+  background-color: $color-background;
+  font-size: 20px;
+  font-weight: 400;
   margin: 5px;
+  box-shadow: -5px -5px 5px -5px rgba(34, 60, 80, 0.6) inset;
 }
 
 .btn-disabled {
   pointer-events: none;
-  opacity: 0.7;
+  opacity: 0.5;
 }
 
 .levels-container,
@@ -16,22 +23,31 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px;
-  border-radius: 100px;
+  margin: 5px;
+  border-radius: 10px;
   cursor: pointer;
-  padding: 7px 15px 7px 7px;
+  padding: 5px;
   border: 1px solid #c1b6ad;
-  width: -moz-max-content;
-  width: max-content;
+  background: $color-background;
   transition: all 0.7s ease;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   line-height: 150%;
-  font-style: normal;
-  // cursor: default;
+  &_easy {
+    border: 1px solid $text-color-easy;
+    color: $text-color-easy;
+  }
+  &_medium {
+    border: 1px solid $text-color-medium;
+    color: $text-color-medium;
+  }
+  &_hard {
+    border: 1px solid $text-color-hard;
+    color: $text-color-hard;
+  }
 }
 
 input[type="radio"]:checked + label {
-  background-color: #665f55;
-  border-color: #665f55;
+  background-color: $accent-color;
+  border-color: $accent-color;
 }
