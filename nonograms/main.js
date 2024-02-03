@@ -9,12 +9,12 @@ import {
   setWinToLocalStorage,
   formatTimeToSeconds,
 } from "./js/utilities.js";
+import { sounds, soundsHandler } from "./js/sounds.js";
 
 let curLevel;
 let curPicture;
 let solution;
 let game;
-
 
 const sounds = {
   audioMarkCell: new Audio("/nonograms/assets/sounds/mark-cell.wav"),
@@ -22,7 +22,6 @@ const sounds = {
   audioErase: new Audio("/nonograms/assets/sounds/rub-scratch-sound.mp3"),
   audioWinGame: new Audio("/nonograms/assets/sounds/win-game.wav"),
 };
-
 
 const renderPageTemplate = () => {
   const template = `<header>
@@ -36,9 +35,9 @@ const renderPageTemplate = () => {
         <h2>Theme</h2>
       </li>
       <li class="nav__item">
-      <input type="checkbox" name="sounds" id="sounds-input">
-      <label for="sounds" >
-    <div class="sound-icon sound-on" id="sound-icon"></div>
+      <input type="checkbox" name="sounds" id="sounds-state">
+      <label for="sounds-state" >
+    <div class="sound-on" id="sound-icon"></div>
     </label>
       </li>
     </ul>
@@ -49,16 +48,11 @@ const renderPageTemplate = () => {
 </div>
 </main>
 <footer>
-  <span>2024</span>
   <a href="https://github.com/tatsianask108" target="_blank">Tatsiana(GitHub)</a>
 </footer>`;
 
   document.body.insertAdjacentHTML("afterbegin", template);
   document.getElementById("score-table").addEventListener("click", renderScoreModal);
-  const soundsInput = document.getElementById("sounds-input");
-  soundsInput.addEventListener("change", (e) => {
-    console.log(sounds);
-  });
 };
 
 const playRandomGame = () => {
@@ -267,7 +261,7 @@ const renderTitlesList = (value) => {
 };
 
 const renderGameField = (solution, preset) => {
-  console.clear();
+  // console.clear();
   console.log("↓ Nonogram solution ↓", solution);
   const gameField = document.getElementById("game-field");
 
@@ -343,10 +337,13 @@ const renderAdditionalButtons = () => {
   additionalButtons.classList.add("additional-buttons");
   additionalButtons.id = "additional-buttons";
 
-  const gameTimer = document.createElement("div");
+  const timerContainer = document.createElement("div");
+  timerContainer.textContent = "Timer: ";
+  const gameTimer = document.createElement("span");
   gameTimer.id = "game-timer";
   gameTimer.textContent = "00:00";
-  additionalButtons.append(gameTimer);
+  timerContainer.append(gameTimer);
+  additionalButtons.append(timerContainer);
 
   const resetBtn = document.createElement("button");
   resetBtn.id = "reset-btn";
@@ -512,6 +509,7 @@ const startGame = () => {
   initGameOnLoad();
   initLocalStorage();
   renderGameField(solution);
+  soundsHandler();
 };
 
 startGame();

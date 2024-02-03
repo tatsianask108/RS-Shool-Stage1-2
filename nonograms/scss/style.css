@@ -35,10 +35,16 @@ footer {
   white-space: nowrap;
 }
 
-.sound-icon {
-  height: 50px;
-  width: 50px;
+.sound-on {
+  height: 40px;
+  width: 40px;
   background: center/contain no-repeat url(/nonograms/assets/img/sound-on.png);
+}
+
+.sound-off {
+  height: 40px;
+  width: 40px;
+  background: center/contain no-repeat url(/nonograms/assets/img/sound-off.png);
 }
 
 .container {
