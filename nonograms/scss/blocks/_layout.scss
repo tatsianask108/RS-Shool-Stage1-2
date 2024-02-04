@@ -4,7 +4,7 @@ html {
   }
 }
 .body {
-  background-image: url(/assets/img/bg.png);
+  background-image: url(../assets/img/bg.png);
   font-family: "Poppins";
   color: $text-color-accent;
 }
@@ -60,17 +60,17 @@ html {
   height: 40px;
   width: 40px;
   &-sound-on {
-    background: center / contain no-repeat url(/assets/img/sound-on.png);
+    background: center / contain no-repeat url(../assets/img/sound-on.png);
   }
   &-sound-off {
-    background: center / contain no-repeat url(/assets/img/sound-off.png);
+    background: center / contain no-repeat url(../assets/img/sound-off.png);
   }
   &-theme {
-    background: center / contain no-repeat url(/assets/img/moon.png);
+    background: center / contain no-repeat url(../assets/img/moon.png);
   }
   &-github {
     display: inline-block;
     margin-right: 10px;
-    background: center / contain no-repeat url(/assets/img/github.png);
+    background: center / contain no-repeat url(../assets/img/github.png);
   }
 }
