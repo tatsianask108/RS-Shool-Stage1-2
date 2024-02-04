@@ -10,7 +10,7 @@ const renderScoreModal = () => {
   overlay.id = "overlay";
   modal.className = "modal";
   content.className = "modal__content";
-  button.className = "modal__btn";
+  button.className = "btn modal__btn";
   button.textContent = "close";
   button.id = "close_modal";
 

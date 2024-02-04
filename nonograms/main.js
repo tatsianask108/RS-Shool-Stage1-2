@@ -327,6 +327,7 @@ const renderGameCreationButtons = () => {
   const randomGameBtn = document.createElement("button");
   randomGameBtn.id = "random-game-btn";
   randomGameBtn.textContent = "Random Game";
+  randomGameBtn.classList.add('btn');
   randomGameBtn.addEventListener("click", () => {
     playRandomGame();
   });
@@ -334,6 +335,7 @@ const renderGameCreationButtons = () => {
   const continueGameBtn = document.createElement("button");
   continueGameBtn.id = "continue-game-btn";
   continueGameBtn.textContent = "Continue Saved Game";
+  continueGameBtn.classList.add('btn');
 
   const isSavedGame = localStorage.getItem("savedGameLevel");
   if (!isSavedGame) {
@@ -359,7 +361,7 @@ const renderAdditionalButtons = () => {
   additionalButtons = document.createElement("div");
   additionalButtons.classList.add("additional-buttons");
   additionalButtons.id = "additional-buttons";
-
+ 
   const timerContainer = document.createElement("div");
   timerContainer.textContent = "Timer: ";
   const gameTimer = document.createElement("span");
@@ -371,18 +373,21 @@ const renderAdditionalButtons = () => {
   const resetBtn = document.createElement("button");
   resetBtn.id = "reset-btn";
   resetBtn.textContent = "Reset Game";
+  resetBtn.classList.add('btn');
   additionalButtons.append(resetBtn);
   resetBtn.addEventListener("click", resetGame);
 
   const showSolutionBtn = document.createElement("button");
   showSolutionBtn.id = "show-solution-btn";
   showSolutionBtn.textContent = "Show Solution";
+  showSolutionBtn.classList.add('btn');
   additionalButtons.append(showSolutionBtn);
   showSolutionBtn.addEventListener("click", showSolution);
 
   const saveBtn = document.createElement("button");
   saveBtn.id = "save-btn";
   saveBtn.textContent = "Save Game";
+  saveBtn.classList.add('btn');
   additionalButtons.append(saveBtn);
   saveBtn.addEventListener("click", () => {
     console.log(game);

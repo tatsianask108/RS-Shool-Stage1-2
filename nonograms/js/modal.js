@@ -9,7 +9,7 @@ const renderModal = (gameTime) => {
   modal.className = "modal";
 
   text.innerHTML = `Great! You have solved the nonogram in ${gameTime} seconds!`;
-  button.className = "modal__btn";
+  button.className = "btn modal__btn";
   button.innerText = "OK";
 
   modal.append(text, button);
