@@ -5,7 +5,7 @@
 }
 
 .body {
-  background-image: url(/nonograms/assets/img/bg.png);
+  background-image: url(/assets/img/bg.png);
   font-family: "Poppins";
   color: #297491;
 }
@@ -64,18 +64,18 @@
   width: 40px;
 }
 .icon-sound-on {
-  background: center/contain no-repeat url(/nonograms/assets/img/sound-on.png);
+  background: center/contain no-repeat url(/assets/img/sound-on.png);
 }
 .icon-sound-off {
-  background: center/contain no-repeat url(/nonograms/assets/img/sound-off.png);
+  background: center/contain no-repeat url(/assets/img/sound-off.png);
 }
 .icon-theme {
-  background: center/contain no-repeat url(/nonograms/assets/img/moon.png);
+  background: center/contain no-repeat url(/assets/img/moon.png);
 }
 .icon-github {
   display: inline-block;
   margin-right: 10px;
-  background: center/contain no-repeat url(/nonograms/assets/img/github.png);
+  background: center/contain no-repeat url(/assets/img/github.png);
 }
 
 .container {
