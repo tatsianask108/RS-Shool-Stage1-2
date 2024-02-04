@@ -1,0 +1,29 @@
+:root {
+  --accent-color-opacity: #87d6e4b2;
+  --accent-color: #bbe4ec;
+  --levels: #bbe4ec;
+  --button-border: #e6e6e6;
+  --modal-btn-text: #297491;
+  --text-color-accent: #297491;
+  --color-background: #fff;
+  --grid-background: #fff;
+  --clues-bg: #e6e6e6;
+  --clues-text: #297491;
+  --cell: #7a7a7a;
+  --box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6);
+}
+
+.dark-theme {
+  --accent-color-opacity: #25162996;
+  --accent-color: #251629;
+  --text-color-accent: #9cbac0;
+  --button-border: #000000;
+  --levels: #2c2e2f;
+  --cell: #000000;
+  --grid-background: #494949;
+  --clues-bg: #979797;
+  --clues-text: #000000;
+  --color-background: #000000;
+  --modal-btn-text: #222222;
+  --box-shadow: 5px 5px 5px -5px rgba(11, 11, 11, 0.6);
+}

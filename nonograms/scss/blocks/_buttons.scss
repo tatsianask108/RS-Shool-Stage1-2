@@ -1,12 +1,16 @@
 button {
-  border: 1px solid $color-background-accent;
+  border: 1px solid var(--button-border);
   border-radius: 10px;
   padding: 5px;
-  background-color: $color-background;
-  font-size: 1.2rem;
+  background-color: var(--color-background);
+  font-size: 1rem;
   font-weight: 400;
   margin: 5px;
-  box-shadow: -5px -5px 5px -5px rgba(34, 60, 80, 0.6) inset;
+  box-shadow: var( --box-shadow);
+  &:hover {
+    transform: translateY(-1px);
+    transition: 0.1s;
+  }
 }
 
 .btn-disabled {
@@ -27,8 +31,8 @@ button {
   border-radius: 10px;
   cursor: pointer;
   padding: 5px;
-  border: 1px solid #c1b6ad;
-  background: $color-background;
+  border: 1px solid var(--button-border);
+  background: var(--color-background);
   transition: all 0.7s ease;
   font-size: 0.8rem;
   font-weight: 600;
@@ -45,9 +49,14 @@ button {
     border: 1px solid $text-color-hard;
     color: $text-color-hard;
   }
+  &:hover {
+    transform: translateY(-1px);
+    transition: 0.1s;
+  }
 }
 
 input[type="radio"]:checked + label {
-  background-color: $accent-color;
-  border-color: $accent-color;
+  background-color: var(--levels);
+  border-color: var(--levels);
+  box-shadow: var( --box-shadow);
 }

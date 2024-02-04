@@ -1,12 +1,35 @@
 html {
+  height: 100%;
   @media (max-width: 600px) {
     font-size: 3vw;
   }
 }
 .body {
-  background-image: url(../assets/img/bg.png);
+  background-color: var(--color-background);
+  color: var(--text-color-accent);
   font-family: "Poppins";
-  color: $text-color-accent;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.body {
+  &:before {
+    content: "";
+    position: fixed;
+    left: 0;
+    top: 1;
+    width: 100%;
+    height: 100%;
+    background-image: url(/assets/img/bg.png);
+    z-index: -1;
+  }
+  &.dark-theme {
+    &:before {
+      opacity: 0.1;
+    }
+  }
 }
 
 .main__container {
@@ -21,7 +44,7 @@ html {
 .footer {
   display: flex;
   justify-content: space-between;
-  background-color: $accent-color-opacity;
+  background-color: var(--accent-color-opacity);
   padding: 15px 30px;
   align-items: center;
   @media (max-width: 600px) {
@@ -34,6 +57,10 @@ html {
   &__link {
     display: flex;
     align-items: center;
+    &:hover {
+      transform: translateY(-1px);
+      transition: 0.1s;
+    }
   }
 }
 
@@ -50,6 +77,10 @@ html {
   }
   &__item {
     cursor: pointer;
+    &:hover {
+      transform: translateY(-1px);
+      transition: 0.1s;
+    }
     &-label {
       cursor: pointer;
     }
@@ -60,17 +91,24 @@ html {
   height: 40px;
   width: 40px;
   &-sound-on {
-    background: center / contain no-repeat url(../assets/img/sound-on.png);
+    background: center / contain no-repeat url(/assets/img/sound-on.png);
   }
   &-sound-off {
-    background: center / contain no-repeat url(../assets/img/sound-off.png);
+    background: center / contain no-repeat url(/assets/img/sound-off.png);
   }
   &-theme {
-    background: center / contain no-repeat url(../assets/img/moon.png);
+    .light-theme & {
+      background: center/contain no-repeat url(/assets/img/moon.png);
+    }
+    .dark-theme & {
+      background: center/contain no-repeat url(/assets/img/sun.png);
+    }
+
+    background: center / contain no-repeat url(/assets/img/theme.png);
   }
   &-github {
     display: inline-block;
     margin-right: 10px;
-    background: center / contain no-repeat url(../assets/img/github.png);
+    background: center / contain no-repeat url(/assets/img/github.png);
   }
 }
