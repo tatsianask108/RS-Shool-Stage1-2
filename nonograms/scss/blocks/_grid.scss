@@ -35,7 +35,7 @@
   width: 1.25em;
   min-height: 1.25em;
   line-height: 1.25em;
-  border-right: 1px solid var(--cell);
+  border-right: 1px solid black;
   text-align: center;
   &-game {
     &.marked {
@@ -48,7 +48,7 @@
 }
 
 .grid .cell:nth-child(5n + 5) {
-  border-right: 2px black solid;
+  border-right: 2px solid black;
 }
 
 .clues-top,
