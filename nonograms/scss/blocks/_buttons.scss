@@ -1,0 +1,53 @@
+button {
+  border: 1px solid $color-background-accent;
+  border-radius: 10px;
+  padding: 5px;
+  background-color: $color-background;
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin: 5px;
+  box-shadow: -5px -5px 5px -5px rgba(34, 60, 80, 0.6) inset;
+}
+
+.btn-disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.levels-container,
+.titles-container {
+  display: flex;
+}
+
+.level {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 5px;
+  border: 1px solid #c1b6ad;
+  background: $color-background;
+  transition: all 0.7s ease;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 150%;
+  &_easy {
+    border: 1px solid $text-color-easy;
+    color: $text-color-easy;
+  }
+  &_medium {
+    border: 1px solid $text-color-medium;
+    color: $text-color-medium;
+  }
+  &_hard {
+    border: 1px solid $text-color-hard;
+    color: $text-color-hard;
+  }
+}
+
+input[type="radio"]:checked + label {
+  background-color: $accent-color;
+  border-color: $accent-color;
+}

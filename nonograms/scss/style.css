@@ -1,0 +1,319 @@
+@media (max-width: 600px) {
+  html {
+    font-size: 3vw;
+  }
+}
+
+.body {
+  background-image: url(/nonograms/assets/img/bg.png);
+  font-family: "Poppins";
+  color: #297491;
+}
+
+.main__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.header,
+.footer {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(135, 214, 228, 0.6980392157);
+  padding: 15px 30px;
+  align-items: center;
+}
+@media (max-width: 600px) {
+  .header,
+  .footer {
+    padding: 15px;
+  }
+}
+
+.footer {
+  justify-content: center;
+}
+.footer__link {
+  display: flex;
+  align-items: center;
+}
+
+.nav__list {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  align-items: center;
+}
+@media (max-width: 600px) {
+  .nav__list {
+    gap: 10px;
+  }
+}
+.nav__item {
+  cursor: pointer;
+}
+.nav__item-label {
+  cursor: pointer;
+}
+
+.icon {
+  height: 40px;
+  width: 40px;
+}
+.icon-sound-on {
+  background: center/contain no-repeat url(/nonograms/assets/img/sound-on.png);
+}
+.icon-sound-off {
+  background: center/contain no-repeat url(/nonograms/assets/img/sound-off.png);
+}
+.icon-theme {
+  background: center/contain no-repeat url(/nonograms/assets/img/moon.png);
+}
+.icon-github {
+  display: inline-block;
+  margin-right: 10px;
+  background: center/contain no-repeat url(/nonograms/assets/img/github.png);
+}
+
+.container {
+  font-size: 1.1rem;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  background-color: #fff;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+}
+.grid-disabled {
+  pointer-events: none;
+}
+
+.row {
+  display: flex;
+  justify-content: end;
+  min-height: 25px;
+  width: 100%;
+  border-bottom: 1px black solid;
+}
+.row:nth-child(1) {
+  border-top: 2px solid black;
+}
+.row:nth-child(5n+5) {
+  border-bottom: 2px black solid;
+}
+.row-game {
+  border-left: 2px solid black;
+}
+
+.cell {
+  width: 1.25em;
+  min-height: 1.25em;
+  line-height: 1.25em;
+  border-right: 1px solid rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+.cell-game.marked {
+  background-color: black;
+}
+.cell-clues-left {
+  border: none;
+}
+
+.grid .cell:nth-child(5n+5) {
+  border-right: 2px black solid;
+}
+
+.clues-top,
+.clues-left {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  text-align: center;
+  background-color: #e6e6e6;
+}
+
+.clues-top {
+  flex-direction: row;
+}
+.clues-top > .coll {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  height: 100%;
+}
+.clues-top > .coll:nth-child(1) {
+  border-left: 2px solid black;
+}
+.clues-top > .coll:nth-child(5n+5) > .cell {
+  border-right: 2px black solid;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.568);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  z-index: 2;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  gap: 20px;
+  position: relative;
+  border-radius: 10px;
+  padding: 30px;
+  background: #bbe4ec;
+  max-width: 800px;
+  min-width: 350px;
+  height: -moz-max-content;
+  height: max-content;
+  overflow: auto;
+}
+.modal__btn {
+  cursor: pointer;
+  text-transform: uppercase;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.hidden {
+  display: none;
+}
+
+.modal__content {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  text-transform: uppercase;
+}
+
+.score_column p {
+  padding: 5px;
+  border-bottom: 1px solid black;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style: none;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a:visited {
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+
+button {
+  padding: 0;
+  font-family: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+}
+
+input {
+  display: none;
+}
+
+button {
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  padding: 5px;
+  background-color: #fff;
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin: 5px;
+  box-shadow: -5px -5px 5px -5px rgba(34, 60, 80, 0.6) inset;
+}
+
+.btn-disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.levels-container,
+.titles-container {
+  display: flex;
+}
+
+.level {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 5px;
+  border: 1px solid #c1b6ad;
+  background: #fff;
+  transition: all 0.7s ease;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 150%;
+}
+.level_easy {
+  border: 1px solid #31c48d;
+  color: #31c48d;
+}
+.level_medium {
+  border: 1px solid #f4c12c;
+  color: #f4c12c;
+}
+.level_hard {
+  border: 1px solid #d13939;
+  color: #d13939;
+}
+
+input[type=radio]:checked + label {
+  background-color: #bbe4ec;
+  border-color: #bbe4ec;
+}/*# sourceMappingURL=style.css.map */
