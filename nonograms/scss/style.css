@@ -1,3 +1,6 @@
+html {
+  height: 100%;
+}
 @media (max-width: 600px) {
   html {
     font-size: 3vw;
@@ -5,9 +8,27 @@
 }
 
 .body {
-  background-image: url(../assets/img/bg.png);
+  background-color: var(--color-background);
+  color: var(--text-color-accent);
   font-family: "Poppins";
-  color: #297491;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.body:before {
+  content: "";
+  position: fixed;
+  left: 0;
+  top: 1;
+  width: 100%;
+  height: 100%;
+  background-image: url(/assets/img/bg.png);
+  z-index: -1;
+}
+.body.dark-theme:before {
+  opacity: 0.1;
 }
 
 .main__container {
@@ -22,7 +43,7 @@
 .footer {
   display: flex;
   justify-content: space-between;
-  background-color: rgba(135, 214, 228, 0.6980392157);
+  background-color: var(--accent-color-opacity);
   padding: 15px 30px;
   align-items: center;
 }
@@ -40,6 +61,10 @@
   display: flex;
   align-items: center;
 }
+.footer__link:hover {
+  transform: translateY(-1px);
+  transition: 0.1s;
+}
 
 .nav__list {
   display: flex;
@@ -55,6 +80,10 @@
 .nav__item {
   cursor: pointer;
 }
+.nav__item:hover {
+  transform: translateY(-1px);
+  transition: 0.1s;
+}
 .nav__item-label {
   cursor: pointer;
 }
@@ -64,18 +93,24 @@
   width: 40px;
 }
 .icon-sound-on {
-  background: center/contain no-repeat url(../assets/img/sound-on.png);
+  background: center/contain no-repeat url(/assets/img/sound-on.png);
 }
 .icon-sound-off {
-  background: center/contain no-repeat url(../assets/img/sound-off.png);
+  background: center/contain no-repeat url(/assets/img/sound-off.png);
 }
 .icon-theme {
-  background: center/contain no-repeat url(../assets/img/moon.png);
+  background: center/contain no-repeat url(/assets/img/theme.png);
+}
+.light-theme .icon-theme {
+  background: center/contain no-repeat url(/assets/img/moon.png);
+}
+.dark-theme .icon-theme {
+  background: center/contain no-repeat url(/assets/img/sun.png);
 }
 .icon-github {
   display: inline-block;
   margin-right: 10px;
-  background: center/contain no-repeat url(../assets/img/github.png);
+  background: center/contain no-repeat url(/assets/img/github.png);
 }
 
 .container {
@@ -83,12 +118,12 @@
   display: grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto auto;
-  background-color: #fff;
 }
 
 .grid {
   display: flex;
   flex-direction: column;
+  background-color: var(--grid-background);
 }
 .grid-disabled {
   pointer-events: none;
@@ -115,11 +150,11 @@
   width: 1.25em;
   min-height: 1.25em;
   line-height: 1.25em;
-  border-right: 1px solid rgba(0, 0, 0, 0.5);
+  border-right: 1px solid var(--cell);
   text-align: center;
 }
 .cell-game.marked {
-  background-color: black;
+  background-color: var(--cell);
 }
 .cell-clues-left {
   border: none;
@@ -135,7 +170,8 @@
   flex-direction: column;
   align-items: end;
   text-align: center;
-  background-color: #e6e6e6;
+  background-color: var(--clues-bg);
+  color: var(--clues-text);
 }
 
 .clues-top {
@@ -175,12 +211,13 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   text-align: center;
   gap: 20px;
   position: relative;
   border-radius: 10px;
   padding: 30px;
-  background: #bbe4ec;
+  background: var(--accent-color);
   max-width: 800px;
   min-width: 350px;
   height: -moz-max-content;
@@ -190,10 +227,12 @@
 .modal__btn {
   cursor: pointer;
   text-transform: uppercase;
-  padding: 10px;
+  padding: 8px;
+  width: 50%;
   border: none;
   border-radius: 10px;
   background-color: #fff;
+  color: var(--modal-btn-text);
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 
@@ -205,12 +244,14 @@
   display: flex;
   justify-content: center;
   gap: 15px;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 
 .score_column p {
   padding: 5px;
-  border-bottom: 1px solid black;
+  border: 1px solid var(--grid-background);
+  border-radius: 3px;
+  text-transform: uppercase;
 }
 
 * {
@@ -265,14 +306,18 @@ input {
 }
 
 button {
-  border: 1px solid #e6e6e6;
+  border: 1px solid var(--button-border);
   border-radius: 10px;
   padding: 5px;
-  background-color: #fff;
-  font-size: 1.2rem;
+  background-color: var(--color-background);
+  font-size: 1rem;
   font-weight: 400;
   margin: 5px;
-  box-shadow: -5px -5px 5px -5px rgba(34, 60, 80, 0.6) inset;
+  box-shadow: var(--box-shadow);
+}
+button:hover {
+  transform: translateY(-1px);
+  transition: 0.1s;
 }
 
 .btn-disabled {
@@ -293,8 +338,8 @@ button {
   border-radius: 10px;
   cursor: pointer;
   padding: 5px;
-  border: 1px solid #c1b6ad;
-  background: #fff;
+  border: 1px solid var(--button-border);
+  background: var(--color-background);
   transition: all 0.7s ease;
   font-size: 0.8rem;
   font-weight: 600;
@@ -312,8 +357,43 @@ button {
   border: 1px solid #d13939;
   color: #d13939;
 }
+.level:hover {
+  transform: translateY(-1px);
+  transition: 0.1s;
+}
 
 input[type=radio]:checked + label {
-  background-color: #bbe4ec;
-  border-color: #bbe4ec;
+  background-color: var(--levels);
+  border-color: var(--levels);
+  box-shadow: var(--box-shadow);
+}
+
+:root {
+  --accent-color-opacity: #87d6e4b2;
+  --accent-color: #bbe4ec;
+  --levels: #bbe4ec;
+  --button-border: #e6e6e6;
+  --modal-btn-text: #297491;
+  --text-color-accent: #297491;
+  --color-background: #fff;
+  --grid-background: #fff;
+  --clues-bg: #e6e6e6;
+  --clues-text: #297491;
+  --cell: #7a7a7a;
+  --box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6);
+}
+
+.dark-theme {
+  --accent-color-opacity: #25162996;
+  --accent-color: #251629;
+  --text-color-accent: #9cbac0;
+  --button-border: #000000;
+  --levels: #2c2e2f;
+  --cell: #000000;
+  --grid-background: #494949;
+  --clues-bg: #979797;
+  --clues-text: #000000;
+  --color-background: #000000;
+  --modal-btn-text: #222222;
+  --box-shadow: 5px 5px 5px -5px rgba(11, 11, 11, 0.6);
 }/*# sourceMappingURL=style.css.map */

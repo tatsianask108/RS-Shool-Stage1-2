@@ -1,8 +1,8 @@
 const sounds = {
-  audioMarkCell: new Audio("../assets/sounds/mark-cell.wav"),
-  audioCrossCell: new Audio("../assets/sounds/cross.wav"),
-  audioErase: new Audio("../assets/sounds/rub-scratch-sound.mp3"),
-  audioWinGame: new Audio("../assets/sounds/win-game.wav"),
+  audioMarkCell: new Audio("/assets/sounds/mark-cell.wav"),
+  audioCrossCell: new Audio("/assets/sounds/cross.wav"),
+  audioErase: new Audio("/assets/sounds/rub-scratch-sound.mp3"),
+  audioWinGame: new Audio("/assets/sounds/win-game.wav"),
 };
 const setSoundsVolume = (volume) => {
   Object.keys(sounds).map((key) => {

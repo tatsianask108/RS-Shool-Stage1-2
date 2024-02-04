@@ -10,6 +10,7 @@ import {
   formatTimeToSeconds,
 } from "./js/utilities.js";
 import { sounds, soundsHandler } from "./js/sounds.js";
+import { setTheme, changeTheme } from "./js/themes.js";
 
 let curLevel;
 let curPicture;
@@ -25,13 +26,16 @@ const renderPageTemplate = () => {
         <h3 id="score-table">Score Table</h3>
       </li>
       <li class="nav__item">
-      <div class="icon icon-theme" id="theme-icon"></div>
+      <input type="checkbox" name="theme" id="theme-state">
+      <label for="theme-state" class="nav__item-label">
+        <div class="icon icon-theme" id="theme-icon"></div>
+      </label>
       </li>
       <li class="nav__item">
       <input type="checkbox" name="sounds" id="sounds-state">
       <label for="sounds-state" class="nav__item-label">
-    <div class="icon icon-sound-on" id="sound-icon"></div>
-    </label>
+        <div class="icon icon-sound-on" id="sound-icon"></div>
+      </label>
       </li>
     </ul>
   </nav>
@@ -49,6 +53,7 @@ const renderPageTemplate = () => {
 
   document.body.insertAdjacentHTML("afterbegin", template);
   document.getElementById("score-table").addEventListener("click", renderScoreModal);
+  document.getElementById("theme-icon").addEventListener("click", changeTheme);
 };
 
 const playRandomGame = () => {
@@ -465,12 +470,11 @@ const addGridListeners = () => {
         sounds.audioMarkCell.play();
       }
 
-      if (e.target.classList.contains('crossed')) {
+      if (e.target.classList.contains("crossed")) {
         e.target.classList.remove("crossed");
-        e.target.textContent = '';
+        e.target.textContent = "";
         e.target.classList.add("marked");
         sounds.audioMarkCell.play();
-
       }
       checkWin();
     }
@@ -526,6 +530,11 @@ const initLocalStorage = () => {
   if (!scoreList) {
     localStorage.setItem("tatskScoreList", "[]");
   }
+
+  const theme = localStorage.getItem("tatskTheme");
+  if (!theme) {
+    localStorage.setItem("tatskTheme", "light");
+  }
 };
 
 const startGame = () => {
@@ -538,6 +547,7 @@ const startGame = () => {
   initLocalStorage();
   renderGameField(solution);
   soundsHandler();
+  setTheme();
 };
 
 startGame();
