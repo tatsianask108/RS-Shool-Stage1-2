@@ -22,7 +22,7 @@ html {
     top: 1;
     width: 100%;
     height: 100%;
-    background-image: url(/assets/img/bg.png);
+    background-image: url(/nonograms/assets/img/bg.png);
     z-index: -1;
   }
   &.dark-theme {
@@ -91,24 +91,24 @@ html {
   height: 40px;
   width: 40px;
   &-sound-on {
-    background: center / contain no-repeat url(/assets/img/sound-on.png);
+    background: center / contain no-repeat url(/nonograms/assets/img/sound-on.png);
   }
   &-sound-off {
-    background: center / contain no-repeat url(/assets/img/sound-off.png);
+    background: center / contain no-repeat url(/nonograms/assets/img/sound-off.png);
   }
   &-theme {
     .light-theme & {
-      background: center/contain no-repeat url(/assets/img/moon.png);
+      background: center/contain no-repeat url(/nonograms/assets/img/moon.png);
     }
     .dark-theme & {
-      background: center/contain no-repeat url(/assets/img/sun.png);
+      background: center/contain no-repeat url(/nonograms/assets/img/sun.png);
     }
 
-    background: center / contain no-repeat url(/assets/img/theme.png);
+    background: center / contain no-repeat url(/nonograms/assets/img/theme.png);
   }
   &-github {
     display: inline-block;
     margin-right: 10px;
-    background: center / contain no-repeat url(/assets/img/github.png);
+    background: center / contain no-repeat url(/nonograms/assets/img/github.png);
   }
 }

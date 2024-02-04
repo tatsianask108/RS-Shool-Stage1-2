@@ -26,10 +26,7 @@ const renderPageTemplate = () => {
         <h3 id="score-table">Score Table</h3>
       </li>
       <li class="nav__item">
-      <input type="checkbox" name="theme" id="theme-state">
-      <label for="theme-state" class="nav__item-label">
         <div class="icon icon-theme" id="theme-icon"></div>
-      </label>
       </li>
       <li class="nav__item">
       <input type="checkbox" name="sounds" id="sounds-state">

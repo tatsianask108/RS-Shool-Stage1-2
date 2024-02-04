@@ -19,18 +19,4 @@ const changeTheme = () => {
   }
 };
 
-
-// const themeHandler = () => {
-//   const themeState = document.getElementById("theme-state");
-//   const themeIcon = document.getElementById("theme-icon");
-//   themeState.addEventListener("change", (e) => {
-//     if (e.target.checked) {
-//       themeIcon.className = "icon icon-sound-off";
-//       setSoundsVolume(0);
-//     } else {
-//       soundIcon.className = "icon icon-sound-on";
-//       setSoundsVolume(1);
-//     }
-//   });
-// };
 export { setTheme, changeTheme };
