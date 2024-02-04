@@ -1,3 +1,9 @@
+@media (max-width: 600px) {
+  html {
+    font-size: 3vw;
+  }
+}
+
 .body {
   background-image: url(/nonograms/assets/img/bg.png);
   font-family: "Poppins";
@@ -73,9 +79,7 @@
 }
 
 .container {
-  font-size: 24px;
-  width: -moz-fit-content;
-  width: fit-content;
+  font-size: 1.1rem;
   display: grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto auto;
@@ -120,7 +124,8 @@
 .cell-clues-left {
   border: none;
 }
-.cell:nth-child(5n+5) {
+
+.grid .cell:nth-child(5n+5) {
   border-right: 2px black solid;
 }
 
@@ -264,7 +269,7 @@ button {
   border-radius: 10px;
   padding: 5px;
   background-color: #fff;
-  font-size: 20px;
+  font-size: 1.2rem;
   font-weight: 400;
   margin: 5px;
   box-shadow: -5px -5px 5px -5px rgba(34, 60, 80, 0.6) inset;
@@ -291,7 +296,7 @@ button {
   border: 1px solid #c1b6ad;
   background: #fff;
   transition: all 0.7s ease;
-  font-size: 14px;
+  font-size: 0.8rem;
   font-weight: 600;
   line-height: 150%;
 }

@@ -3,7 +3,7 @@ button {
   border-radius: 10px;
   padding: 5px;
   background-color: $color-background;
-  font-size: 20px;
+  font-size: 1.2rem;
   font-weight: 400;
   margin: 5px;
   box-shadow: -5px -5px 5px -5px rgba(34, 60, 80, 0.6) inset;
@@ -30,7 +30,7 @@ button {
   border: 1px solid #c1b6ad;
   background: $color-background;
   transition: all 0.7s ease;
-  font-size: 14px;
+  font-size: 0.8rem;
   font-weight: 600;
   line-height: 150%;
   &_easy {

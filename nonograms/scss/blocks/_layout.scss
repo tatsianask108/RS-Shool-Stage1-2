@@ -1,3 +1,9 @@
+html {
+  @media (max-width: 600px) {
+    font-size: 3vw;
+  }
+ 
+}
 .body {
   background-image: url(/nonograms/assets/img/bg.png);
   font-family: "Poppins";

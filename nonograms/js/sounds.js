@@ -15,10 +15,10 @@ const soundsHandler = () => {
   const soundIcon = document.getElementById("sound-icon");
   soundsState.addEventListener("change", (e) => {
     if (e.target.checked) {
-      soundIcon.className = "sound-off";
+      soundIcon.className = "icon icon-sound-off";
       setSoundsVolume(0);
     } else {
-      soundIcon.className = "sound-on";
+      soundIcon.className = "icon icon-sound-on";
       setSoundsVolume(1);
     }
   });

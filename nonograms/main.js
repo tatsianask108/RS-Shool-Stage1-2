@@ -16,13 +16,6 @@ let curPicture;
 let solution;
 let game;
 
-const sounds = {
-  audioMarkCell: new Audio("/nonograms/assets/sounds/mark-cell.wav"),
-  audioCrossCell: new Audio("/nonograms/assets/sounds/cross.wav"),
-  audioErase: new Audio("/nonograms/assets/sounds/rub-scratch-sound.mp3"),
-  audioWinGame: new Audio("/nonograms/assets/sounds/win-game.wav"),
-};
-
 const renderPageTemplate = () => {
   const template = `<header class="header">
   <h1>Nonograms</h1>
