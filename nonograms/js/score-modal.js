@@ -24,15 +24,15 @@ const renderScoreModal = () => {
     content.textContent = "No played games yet";
   } else {
     const pictureNameContainer = document.createElement("div");
-    pictureNameContainer.className = "score_column";
+    pictureNameContainer.className = "score-column";
     pictureNameContainer.textContent = "nonogram";
 
     const levelContainer = document.createElement("div");
-    levelContainer.className = "score_column";
+    levelContainer.className = "score-column";
     levelContainer.textContent = "level";
 
     const timeContainer = document.createElement("div");
-    timeContainer.className = "score_column";
+    timeContainer.className = "score-column";
     timeContainer.textContent = "time";
 
     const scoreData = JSON.parse(localStorage.getItem("tatskScoreList")).sort(
