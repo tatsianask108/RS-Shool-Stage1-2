@@ -1,7 +1,14 @@
-const blockAdditionalButtons = () => {
+const disableButtons = () => {
   const additionalButtons = document.getElementById("additional-buttons");
   additionalButtons.querySelectorAll("button").forEach((btn) => btn.classList.add("btn-disabled"));
 };
+const unDisableButtons = () => {
+  const additionalButtons = document.getElementById("additional-buttons");
+  additionalButtons.querySelectorAll("button").forEach((btn) => btn.classList.remove("btn-disabled"));
+};
+
+
+
 
 const setWinToLocalStorage = (gameTimer, curLevel, curPicture) => {
   const scoreList = JSON.parse(localStorage.getItem("tatskScoreList"));
@@ -28,4 +35,4 @@ const formatTimeToMinutes = (seconds) => {
   return `${min}:${sec}`;
 };
 
-export { blockAdditionalButtons, setWinToLocalStorage, formatTimeToSeconds, formatTimeToMinutes };
+export { disableButtons, unDisableButtons, setWinToLocalStorage, formatTimeToSeconds, formatTimeToMinutes };
