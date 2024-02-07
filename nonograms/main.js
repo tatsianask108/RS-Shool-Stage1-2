@@ -58,7 +58,6 @@ const playRandomGame = () => {
   curLevel = playedNonogramObj.level;
   curPicture = playedNonogramObj.title;
   solution = playedNonogramObj.scheme;
-  // console.log(curLevel, curPicture);
 
   document.querySelector(`#form-levels #${curLevel}`).checked = true;
 
@@ -81,6 +80,9 @@ const playSavedGame = () => {
   document.querySelector(`#form-titles #${curPicture}`).checked = true;
 
   resetTimer();
+  // const gameTimer = document.getElementById("game-timer");
+  // const savedTime = localStorage.getItem("savedGameTime");
+  // gameTimer.textContent = savedTime;
   renderGameField(solution, game);
   unDisableButtons();
 };
@@ -256,7 +258,7 @@ const createEmptyGrid = () => {
 const renderLevels = () => {
   const levelsContainer = createLevels();
   const gameContainer = document.getElementById("game-container");
-  gameContainer.append(levelsContainer);
+  gameContainer.prepend(levelsContainer);
 };
 
 const renderTitlesList = (value) => {
@@ -290,7 +292,7 @@ const renderTimer = () => {
   if (timer) {
     timer.remove();
   }
-  const gameField = document.getElementById("game-field");
+  const titlesForm = document.getElementById("form-titles");
   const timerContainer = document.createElement("div");
   timerContainer.id = "timer-container";
   timerContainer.textContent = "Timer: ";
@@ -298,7 +300,7 @@ const renderTimer = () => {
   gameTimer.id = "game-timer";
   gameTimer.textContent = "00:00";
   timerContainer.append(gameTimer);
-  gameField.before(timerContainer);
+  titlesForm.after(timerContainer);
 };
 
 const renderGameField = (solution, preset) => {
@@ -314,11 +316,9 @@ const renderGameField = (solution, preset) => {
   gameField.id = "game-field";
   gameField.className = "game-field";
 
-  const titlesForm = document.getElementById("form-titles");
-  titlesForm.after(gameField);
+  const timer = document.getElementById("timer-container");
+  timer.after(gameField);
 
-  // create empty game
-  // if (!game) {}
   game = solution.map((row) => {
     return Array(row.length).fill(0);
   });
@@ -335,8 +335,6 @@ const renderGameField = (solution, preset) => {
   gameField.appendChild(grid);
 
   addGridListeners();
-  renderTimer();
-  // renderAdditionalButtons();
 };
 
 const renderGameCreationButtons = () => {
@@ -392,66 +390,22 @@ const renderGameCreationButtons = () => {
   saveBtn.classList.add("btn");
   additionalButtons.append(saveBtn);
   saveBtn.addEventListener("click", () => {
-    console.log(game);
     document.getElementById("continue-game-btn").classList.remove("btn-disabled");
     localStorage.setItem("savedGameState", JSON.stringify(game));
     localStorage.setItem("savedGameSolution", JSON.stringify(solution));
     localStorage.setItem("savedGameLevel", curLevel);
     localStorage.setItem("savedGamePicture", curPicture);
+    const currTime = document.getElementById("game-timer").innerText;
+    localStorage.setItem("savedGameTime", currTime);
   });
 
   gameCreationButtonsContainer.append(randomGameBtn);
   gameCreationButtonsContainer.append(continueGameBtn);
-  // gameCreationButtonsContainer.append(additionalButtons);
   const main = document.getElementById("main-container");
   buttonsContainer.append(gameCreationButtonsContainer);
   buttonsContainer.append(additionalButtons);
   main.append(buttonsContainer);
 };
-
-// const renderAdditionalButtons = () => {
-//   // let additionalButtons = document.getElementById("additional-buttons");
-
-//   // if (additionalButtons) {
-//   //   additionalButtons.remove();
-//   // }
-
-//   additionalButtons = document.createElement("div");
-//   additionalButtons.classList.add("additional-buttons");
-//   additionalButtons.id = "additional-buttons";
-
-//   // const resetBtn = document.createElement("button");
-//   // resetBtn.id = "reset-btn";
-//   // resetBtn.textContent = "Reset Game";
-//   // resetBtn.classList.add("btn");
-//   // additionalButtons.append(resetBtn);
-//   // resetBtn.addEventListener("click", resetGame);
-
-//   // const showSolutionBtn = document.createElement("button");
-//   // showSolutionBtn.id = "show-solution-btn";
-//   // showSolutionBtn.textContent = "Show Solution";
-//   // showSolutionBtn.classList.add("btn");
-//   // additionalButtons.append(showSolutionBtn);
-//   // showSolutionBtn.addEventListener("click", showSolution);
-
-//   // const saveBtn = document.createElement("button");
-//   // saveBtn.id = "save-btn";
-//   // saveBtn.textContent = "Save Game";
-//   // saveBtn.classList.add("btn");
-//   // additionalButtons.append(saveBtn);
-//   // saveBtn.addEventListener("click", () => {
-//   //   console.log(game);
-//   //   document.getElementById("continue-game-btn").classList.remove("btn-disabled");
-//   //   localStorage.setItem("savedGameState", JSON.stringify(game));
-//   //   localStorage.setItem("savedGameSolution", JSON.stringify(solution));
-//   //   localStorage.setItem("savedGameLevel", curLevel);
-//   //   localStorage.setItem("savedGamePicture", curPicture);
-//   // });
-
-//   // const main = document.getElementById("main-container");
-//   // main.append(additionalButtons);
-// };
-// render page layout
 
 //check every game step
 const checkWin = () => {
@@ -480,11 +434,15 @@ const checkWin = () => {
 //check every game step
 
 const resetGame = () => {
+  const grid = document.getElementById("grid");
+  grid.classList.remove("grid-disabled");
+
   const cells = document.querySelectorAll(".cell.cell-game");
   cells.forEach((el) => {
     el.classList.remove("crossed", "marked");
     el.textContent = "";
   });
+  unDisableButtons();
   resetTimer();
 };
 export default resetGame;
@@ -548,6 +506,7 @@ const addGridListeners = () => {
         e.target.classList.add("crossed");
       }
     }
+    checkWin();
   });
 
   grid.addEventListener("pointerup", () => {
@@ -594,6 +553,7 @@ const startGame = () => {
   addFormListener();
   initGameOnLoad();
   initLocalStorage();
+  renderTimer();
   renderGameField(solution);
   soundsHandler();
   setTheme();
