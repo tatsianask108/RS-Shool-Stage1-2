@@ -3,12 +3,12 @@ import resetGame from "../main.js";
 let [milliseconds, seconds, minutes, hours] = [0, 0, 0, 0];
 let interval = null;
 
-const startTimer = () => {
-  if (interval !== null) {
-    clearInterval(interval);
-  }
-  interval = setInterval(updateTimer, 10);
-};
+// const startTimer = () => {
+//   if (interval !== null) {
+//     clearInterval(interval);
+//   }
+//   interval = setInterval(updateTimer, 10);
+// };
 
 const updateTimer = () => {
   const gameTimer = document.getElementById("game-timer");

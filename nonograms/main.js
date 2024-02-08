@@ -1,7 +1,7 @@
 import { DEFAULT_LEVEL } from "./js/constants.js";
 import nonograms from "./js/nonograms-source.js";
 import { leftCluesGenerator, topCluesGenerator } from "./js/clues-generators.js";
-import { startTimer, pauseTimer, resetTimer } from "./js/timer.js";
+// import { startTimer, pauseTimer, resetTimer } from "./js/timer.js";
 import renderScoreModal from "./js/score-modal.js";
 import renderModal from "./js/modal.js";
 import {
@@ -17,6 +17,59 @@ let curLevel;
 let curPicture;
 let solution;
 let game;
+
+
+let [milliseconds, seconds, minutes, hours] = [0, 0, 0, 0];
+let interval = null;
+
+// const startTimer = () => {
+//   if (interval !== null) {
+//     clearInterval(interval);
+//   }
+//   interval = setInterval(updateTimer, 10);
+// };
+
+const updateTimer = () => {
+  const gameTimer = document.getElementById("game-timer");
+
+  milliseconds += 10;
+  if (milliseconds === 1000) {
+    milliseconds = 0;
+    seconds++;
+
+    if (seconds === 60) {
+      seconds = 0;
+      minutes++;
+
+      if (minutes === 60) {
+        minutes = 0;
+        // hours++;
+        alert('Time to have a rest, you\'ve been playing nonograms too long...');
+         resetGame();
+      }
+    }
+  }
+
+  let min = String(minutes).padStart(2, "0");
+  let sec = String(seconds).padStart(2, "0");
+
+  gameTimer.textContent = `${min}:${sec}`;
+};
+
+const resetTimer = () => {
+  clearInterval(interval);
+  [milliseconds, seconds, minutes, hours] = [0, 0, 0, 0];
+  const gameTimer = document.getElementById("game-timer");
+  if(gameTimer) {
+    gameTimer.textContent = "00:00";
+  } 
+};
+
+const pauseTimer = () => {
+  clearInterval(interval);
+};
+
+
 
 const renderPageTemplate = () => {
   const template = `<header class="header">
@@ -80,9 +133,10 @@ const playSavedGame = () => {
   document.querySelector(`#form-titles #${curPicture}`).checked = true;
 
   resetTimer();
-  // const gameTimer = document.getElementById("game-timer");
-  // const savedTime = localStorage.getItem("savedGameTime");
-  // gameTimer.textContent = savedTime;
+ [minutes, seconds] = localStorage.getItem("savedGameTime").split(':');
+  const gameTimer = document.getElementById("game-timer");
+  const savedTime = localStorage.getItem("savedGameTime");
+  gameTimer.textContent = savedTime;
   renderGameField(solution, game);
   unDisableButtons();
 };
@@ -455,6 +509,13 @@ const showSolution = () => {
   disableButtons();
 };
 
+const handleClick = () => {
+  if (interval !== null) {
+        clearInterval(interval);
+      }
+      interval = setInterval(updateTimer, 10);
+}
+
 const addGridListeners = () => {
   const grid = document.getElementById("grid");
   grid.addEventListener("click", (e) => {
@@ -509,9 +570,9 @@ const addGridListeners = () => {
     checkWin();
   });
 
-  grid.addEventListener("pointerup", () => {
-    startTimer();
-  });
+  grid.addEventListener("mousedown", handleClick
+    // startTimer();
+  );
 };
 
 const addFormListener = () => {
