@@ -21,7 +21,7 @@
         "no-debugger": "off",
         "no-console": 0,
         "class-methods-use-this": "off",
-        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-explicit-any": "error",
         "@typescript-eslint/explicit-function-return-type": "error",
         "@typescript-eslint/no-unnecessary-type-assertion": "error"
     }
