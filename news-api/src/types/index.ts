@@ -1,7 +1,7 @@
 //general Response
 export interface IResponse {
     status: 'ok' | 'error';
-    sources: ISource[]; 
+    sources: ISource[];
 }
 
 export interface ISource {
@@ -18,10 +18,10 @@ export interface ISource {
 export interface INewsResponse {
     status: 'ok' | 'error';
     totalResults: number;
-    articles: IArticles[];
+    articles: INewsArticle[];
 }
 
-export interface IArticles {
+export interface INewsArticle {
     source: {
         id: string | null;
         name: string;
@@ -29,6 +29,7 @@ export interface IArticles {
     author: string | null;
     title: string;
     description: string | null;
+    url: string;
     urlToImage: string | null;
     publishedAt: string;
     content: string | null;
