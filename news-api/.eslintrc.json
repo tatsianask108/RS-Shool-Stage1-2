@@ -35,7 +35,9 @@
                     "parameterProperties": "explicit"
                 }
             }
-        ]
+        ],
+        "prettier/prettier": [ "error", { "endOfLine": "auto" } ] 
+
         // "@typescript-eslint/no-unnecessary-type-assertion": "error"
     }
 }
