@@ -34,3 +34,31 @@ export interface INewsArticle {
     publishedAt: string;
     content: string | null;
 }
+
+export enum HTTPMethods {
+    GET = 'GET',
+    POST = 'POST',
+    OPTIONS = 'OPTIONS',
+    PUT = 'PUT',
+}
+
+export type optionsObj = {
+    [key: string]: string;
+};
+export type responseObj = {
+    endpoint: string;
+    options?: {
+        [key: string]: string;
+    };
+};
+
+export interface Response {
+    body: ReadableStream;
+    bodyUsed: false;
+    headers: Headers;
+    ok: boolean;
+    status: number;
+    statusText: string;
+}
+
+export type CallBack = (data: IResponse | INewsResponse) => void;
