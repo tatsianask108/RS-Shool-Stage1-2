@@ -14,9 +14,10 @@ class News {
                     newsElement.classList.add('alt');
                 }
 
-                newsClone.querySelector<HTMLElement>('.news__meta-photo')!.style.backgroundImage = `url(${
-                    item.urlToImage || 'img/news_placeholder.jpg'
-                })`;
+                const urlToImg = newsClone.querySelector<HTMLElement>('.news__meta-photo');
+                if (urlToImg instanceof HTMLElement) {
+                    urlToImg.style.backgroundImage = `url(${item.urlToImage || 'img/news_placeholder.jpg'})`;
+                }
                 newsClone.querySelector<HTMLElement>('.news__meta-author')!.textContent =
                     item.author || item.source.name;
                 newsClone.querySelector<HTMLElement>('.news__meta-date')!.textContent = item.publishedAt
