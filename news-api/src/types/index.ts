@@ -61,4 +61,5 @@ export interface Response {
     statusText: string;
 }
 
-export type CallBack = (data: IResponse | INewsResponse) => void;
+// export type CallBack = (data: IResponse | INewsResponse) => void;
+export type CallBack<T> = (data: T) => void;

@@ -3,7 +3,7 @@ import { INewsArticle } from '../../../types/index';
 import { isDocumentFragment, isHTMLElement } from '../../../helpers/helpers';
 
 class News {
-    draw(data: INewsArticle[]): void {
+    public draw(data: INewsArticle[]): void {
         const news = data.length >= 10 ? data.filter((_item, idx) => idx < 10) : data;
         const fragment: DocumentFragment = document.createDocumentFragment();
         const newsItemTemp: HTMLTemplateElement | null = document.querySelector('#newsItemTemp');

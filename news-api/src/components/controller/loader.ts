@@ -10,7 +10,7 @@ class Loader {
 
     protected getResp(
         { endpoint, options = {} }: responseObj,
-        callback = (): void => {
+        callback: CallBack<IResponse | INewsResponse> = (): void => {
             console.error('No callback for GET response');
         }
     ): void {

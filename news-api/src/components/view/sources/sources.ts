@@ -3,7 +3,7 @@ import { ISource } from '../../../types/index';
 import { isDocumentFragment, isHTMLElement } from '../../../helpers/helpers';
 
 class Sources {
-    draw(data: ISource[]): void {
+    public draw(data: ISource[]): void {
         const fragment: DocumentFragment = document.createDocumentFragment();
         const sourceItemTemp: HTMLTemplateElement | null = document.querySelector('#sourceItemTemp');
         if (!sourceItemTemp) {
