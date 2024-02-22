@@ -10,7 +10,7 @@ class Loader {
 
     protected getResp(
         { endpoint, options = {} }: responseObj,
-        callback = () => {
+        callback = (): void => {
             console.error('No callback for GET response');
         }
     ): void {
@@ -38,12 +38,17 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    private load(method: HTTPMethods, endpoint: string, callback: CallBack, options = {}): void {
+    private load(
+        method: HTTPMethods,
+        endpoint: string,
+        callback: CallBack<IResponse | INewsResponse>,
+        options = {}
+    ): void {
         fetch(this.makeUrl(options, endpoint), { method })
-            .then(this.errorHandler)
+            .then((res) => this.errorHandler(res))
             .then((res) => res.json())
-            .then((data/*??*/) => callback(data))
-            .catch((err: Error /*??*/) => console.error(err));
+            .then((data) => callback(data))
+            .catch((err) => console.error(err));
     }
 }
 
