@@ -13,8 +13,6 @@ class App {
     public start(): void {
         document?.querySelector('.sources')?.addEventListener('click', (e) => {
             this.controller.getNews(e, (data) => {
-                console.log('typeof data', typeof data);
-
                 if ('articles' in data) {
                     this.view.drawNews(data);
                 }

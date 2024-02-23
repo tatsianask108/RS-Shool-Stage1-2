@@ -13,11 +13,15 @@ class AppController extends AppLoader {
     }
 
     public getNews(e: Event, callback: CallBack<INewsResponse | IResponse>): void {
+        if (!(isHTMLElement(e.currentTarget) && isHTMLElement(e.target))) {
+            return;
+        }
+
         let target = e.target;
         const newsContainer = e.currentTarget as HTMLElement;
 
         while (target !== newsContainer) {
-            if (isHTMLElement(target) && target?.classList.contains('source__item')) {
+            if (target?.classList.contains('source__item')) {
                 const sourceId = target.getAttribute('data-source-id');
                 if (sourceId && newsContainer.getAttribute('data-source') !== sourceId) {
                     newsContainer.setAttribute('data-source', sourceId);
@@ -34,7 +38,7 @@ class AppController extends AppLoader {
                 return;
             }
 
-            if (isHTMLElement(target)) {
+            if (isHTMLElement(target.parentNode)) {
                 target = target?.parentNode;
             }
         }

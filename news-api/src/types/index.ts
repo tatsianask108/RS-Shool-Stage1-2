@@ -53,7 +53,7 @@ export type responseObj = {
 };
 
 export interface Response {
-    body: ReadableStream;
+    // body: ReadableStream;
     bodyUsed: false;
     headers: Headers;
     ok: boolean;
