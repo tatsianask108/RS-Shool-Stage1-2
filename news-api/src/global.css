@@ -47,15 +47,19 @@ footer a:hover {
     color: #555;
 }
 
-footer img {
-    width: 30%;
-}
 
 .copyright {
     margin-right: 10px;
 }
 footer .copyright:before {
     content: '©';
+}
+
+.rs-logo {
+    display: inline-block;
+    width: 5rem;
+    height: 5rem;
+    background: no-repeat center url('./assets/rss.svg');
 }
 
 @media (max-width: 600px) {
