@@ -66,3 +66,24 @@ footer .copyright:before {
         padding: 5px 5px;
     }
 }
+
+.btn-top {
+    display: none;
+    position: fixed;
+    bottom: 1.5rem;
+    right: 2rem;
+    z-index: 2;
+    font-size: 1.3rem;
+    color: #fff;
+    background-color: #f10303;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.7s ease;
+}
+
+.btn-top:hover {
+    transition: background-color 0.7s ease;
+    background-color: #646464;
+}
