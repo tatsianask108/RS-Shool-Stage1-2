@@ -33,18 +33,26 @@ footer {
     height: 100px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 }
-footer .copyright {
+footer {
     font-size: 0.9rem;
     color: #333;
     text-align: center;
 }
-footer .copyright a {
+footer a {
     color: #444;
 }
-footer .copyright a:hover {
+footer a:hover {
     color: #555;
+}
+
+footer img {
+    width: 30%;
+}
+
+.copyright {
+    margin-right: 10px;
 }
 footer .copyright:before {
     content: '©';
