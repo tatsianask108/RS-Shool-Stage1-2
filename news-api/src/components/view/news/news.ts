@@ -25,7 +25,7 @@ class News {
             const readMore = newsClone.querySelector('.news__read-more a');
             isHTMLElement(newsItem) && idx % 2 ? newsItem.classList.add('alt') : new Error('error');
             isHTMLElement(newsMetaPhoto)
-                ? (newsMetaPhoto.style.backgroundImage = `url(${item.urlToImage || 'img/news_placeholder.jpg'})`)
+                ? (newsMetaPhoto.style.backgroundImage = `url(${item.urlToImage || 'assets/news_placeholder.jpg'})`)
                 : new Error('error');
 
             isHTMLElement(newsMetaAuthor)
