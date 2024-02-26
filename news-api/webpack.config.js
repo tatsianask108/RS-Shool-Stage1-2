@@ -19,7 +19,7 @@ const baseConfig = {
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
                 type: 'asset/resource',
-              },
+            },
         ],
     },
     resolve: {
@@ -45,7 +45,7 @@ const baseConfig = {
             patterns: [
                 {
                     from: 'src/assets',
-                    to: 'dist/assets',
+                    to: 'assets',
                 },
             ],
         }),
