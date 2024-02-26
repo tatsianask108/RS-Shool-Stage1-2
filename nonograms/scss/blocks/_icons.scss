@@ -1,0 +1,31 @@
+.icon {
+  height: 40px;
+  width: 40px;
+  .dark-theme & {
+    background-color: #ffffff8a;
+    border-radius: 50%;
+  }
+  &-sound-on {
+    background: center / contain no-repeat url(./../assets/img/sound-on.png);
+  }
+  &-sound-off {
+    background: center / contain no-repeat url(./../assets/img/sound-off.png);
+  }
+  &-theme {
+    .light-theme & {
+      background: center/contain no-repeat url(./../assets/img/moon.png);
+    }
+    .dark-theme & {
+      background: center/contain no-repeat url(./../assets/img/sun.png);
+      background-color: #ffffff8a;
+      border-radius: 50%;
+    }
+
+    background: center / contain no-repeat url(./../assets/img/theme.png);
+  }
+  &-github {
+    display: inline-block;
+    margin-right: 10px;
+    background: center / contain no-repeat url(./../assets/img/github.png);
+  }
+}

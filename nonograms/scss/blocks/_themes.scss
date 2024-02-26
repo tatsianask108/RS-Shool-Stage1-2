@@ -1,0 +1,41 @@
+:root {
+  --color-background: #fff;
+
+  --accent-color: #bbe4ec;
+  --accent-color-opacity: #87d6e4b2;
+  --text-color-accent: #297491;
+
+  --btn-container-bg: #e6e6e694;
+  --button-border: #e6e6e6;
+  --button-background: #fff;
+  --modal-btn-text: #297491;
+  --levels: #bbe4ec;
+
+  --grid-background: #fff;
+  --cell: #7a7a7a;
+  --clues-bg: #e6e6e6;
+  --clues-text: #297491;
+
+  --box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6);
+}
+
+.dark-theme {
+  --color-background: #000000;
+
+  --accent-color: #251629;
+  --accent-color-opacity: #25162996;
+  --text-color-accent: #9cbac0;
+
+  --btn-container-bg: #97979713;
+  --button-border: #494949;
+  --button-background: #494949;
+  --modal-btn-text: #222222;
+  --levels: #1c1d1d;
+
+  --grid-background: #494949;
+  --cell: #000000;
+  --clues-bg: #979797;
+  --clues-text: #000000;
+
+  --box-shadow: 5px 5px 5px -5px rgba(11, 11, 11, 0.6);
+}

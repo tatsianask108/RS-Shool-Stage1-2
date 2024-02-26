@@ -1,0 +1,55 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background-color: rgba(0, 0, 0, 0.568);
+  backdrop-filter: blur(5px);
+  z-index: 2;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+  padding: 30px;
+  background: var(--accent-color);
+  max-width: 800px;
+  min-width: 350px;
+  // height: max-content;
+  border-radius: 10px;
+  &__btn {
+    text-transform: uppercase;
+    width: 50%;
+    padding: 8px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+      rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.modal__content {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  text-transform: capitalize;
+}
+
+.score-column p {
+  padding: 5px;
+  border: 1px solid var(--grid-background);
+  border-radius: 3px;
+  text-transform: uppercase;
+}
