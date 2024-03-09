@@ -1,0 +1,24 @@
+.btn {
+    display: flex;
+
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid #665f55;
+    background: #ffffff;
+    cursor: pointer;
+
+    transition: all 0.7s ease;
+}
+
+.btn:hover {
+    background: #60ad7a;
+    border: 1px solid transparent;
+    color: #ffffff;
+}
+.disabled {
+    opacity: 0.48;
+    pointer-events: none;
+    cursor: not-allowed;
+}

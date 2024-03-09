@@ -1,0 +1,21 @@
+.login-page {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.form {
+    margin: 10px;
+    text-align: center;
+}
+
+.form > * {
+    margin-left: auto;
+    margin-right: auto;
+}
+.input {
+    display: block;
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 5px;
+}

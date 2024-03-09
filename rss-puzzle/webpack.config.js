@@ -2,12 +2,11 @@ const path = require('path');
 const { merge } = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const DotenvWebpackPlugin = require('dotenv-webpack');
 const EslingPlugin = require('eslint-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 const baseConfig = {
-    entry: path.resolve(__dirname, './src/index'),
+    entry: path.resolve(__dirname, './src/main.ts'),
     mode: 'development',
     module: {
         rules: [
@@ -24,9 +23,15 @@ const baseConfig = {
     },
     resolve: {
         extensions: ['.ts', '.js'],
+        alias: {
+            '@components': path.resolve(__dirname, 'src/app/components'),
+            '@pages': path.resolve(__dirname, 'src/app/pages'),
+            '@types': path.resolve(__dirname, 'src/app/types'),
+            // '@assets': path.resolve(__dirname, 'src/app/assets'),
+        },
     },
     output: {
-        filename: 'index.js',
+        filename: 'main.js',
         path: path.resolve(__dirname, './dist'),
         assetModuleFilename: (pathData) => {
             const filepath = path.dirname(pathData.filename).split('/').slice(1).join('/');
@@ -34,7 +39,6 @@ const baseConfig = {
         },
     },
     plugins: [
-        new DotenvWebpackPlugin(),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, './src/index.html'),
             filename: 'index.html',
@@ -46,6 +50,7 @@ const baseConfig = {
                 {
                     from: 'src/assets',
                     to: 'assets',
+                    noErrorOnMissing: true,
                 },
             ],
         }),

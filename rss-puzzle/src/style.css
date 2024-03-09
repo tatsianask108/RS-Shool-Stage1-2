@@ -1,0 +1,22 @@
+:root {
+    font-size: 30px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Forum', sans-serif;
+    letter-spacing: 1px;
+    font-size: 25px;
+    font-weight: bold;
+    color: rgb(59, 58, 58);
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
