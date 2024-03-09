@@ -12,15 +12,10 @@
         "ci:format": "prettier --check \"src/**/*.ts\"",
         "prepare": "cd .. && husky rss-puzzle/.husky"
     },
-    "husky": {
-        "hooks": {
-            "pre-commit": "npm run ci:format",
-            "pre-push": "npm run lint && npx validate-branch-name"
-        }
-    },
+
     "validate-branch-name": {
-        "pattern": "^(core|init|feat|fix|refactor)\/RSS-PZ-\\d{2}_\\w+$",
-        "errorMsg": "wrong branch name"
+        "pattern": "^(chore|init|feat|fix|refactor)\/RSS-PZ-\\d{2}_\\w+$",
+        "errorMsg": "Wrong branch name."
     },
     "repository": {
         "type": "git",
