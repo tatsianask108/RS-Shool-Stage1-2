@@ -26,3 +26,5 @@ export default class Button extends BaseComponent {
 //         e.preventDefault();
 //     },
 // });
+
+// console.log(button);
