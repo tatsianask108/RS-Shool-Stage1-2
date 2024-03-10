@@ -2,7 +2,7 @@ import PageComponent from '@pages/page';
 // import BaseComponent from '@components/base-component';
 import LoginPageComponent from '@pages/login/login';
 
-import { User } from 'src/types/types';
+import { User } from '@interfaces/interfaces';
 
 export class App {
     protected user: User | undefined;

@@ -32,7 +32,7 @@
         "paths": {
             "@components/*": ["src/app/components/*"],
             "@pages/*": ["src/app/pages/*"],
-            "@types/*": ["src/types/*"]
+            "@interfaces/*": ["src/interfaces/*"]
             // "@assets/*": ["src/assets/*"],
         }, // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
         // "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */

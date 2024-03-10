@@ -1,6 +1,7 @@
 import BaseComponent from '@components/base-component';
 import Button from '@components/button/button';
 import PageComponent from '@pages/page';
+import { User } from '@interfaces/interfaces';
 
 import './login.css';
 
@@ -112,6 +113,13 @@ export default class LoginPageComponent extends PageComponent {
     protected submitListener() {
         this.form.getNode().addEventListener('submit', (e) => {
             e.preventDefault();
+            localStorage.setItem(
+                'user',
+                JSON.stringify({
+                    name: this.inputName.getNode().value,
+                    surname: this.inputSurname.getNode().value,
+                } as User)
+            );
         });
     }
 }
