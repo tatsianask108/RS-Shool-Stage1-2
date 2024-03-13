@@ -27,7 +27,7 @@ const baseConfig = {
             '@components': path.resolve(__dirname, 'src/app/components'),
             '@pages': path.resolve(__dirname, 'src/app/pages'),
             '@types': path.resolve(__dirname, 'src/app/types'),
-            // '@assets': path.resolve(__dirname, 'src/app/assets'),
+            '@app': path.resolve(__dirname, 'src/app/'),
         },
     },
     output: {

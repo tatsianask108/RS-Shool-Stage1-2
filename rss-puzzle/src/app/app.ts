@@ -14,7 +14,11 @@ export class App {
 
     public init() {
         if (this.isAuth() && this.isStarted()) {
-            this.render(new GamePageComponent(this.user as User));
+            this.render(
+                new GamePageComponent(this.user as User, () => {
+                    this.init();
+                })
+            );
         } else {
             if (this.isAuth()) {
                 this.render(

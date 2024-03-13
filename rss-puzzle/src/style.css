@@ -24,3 +24,12 @@ body {
     background: content-box radial-gradient(rgb(231, 214, 57), rgb(72, 230, 151));
 
 }
+
+button {
+    padding: 0;
+    border: none;
+    font-family: inherit;
+    color: inherit;
+    background-color: transparent;
+    cursor: pointer;
+}

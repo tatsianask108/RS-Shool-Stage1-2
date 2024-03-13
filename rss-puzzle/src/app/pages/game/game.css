@@ -1,5 +1,10 @@
 .game-page {
-  width: 100%;
-  height: 100%;
-  position: relative;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.button-logout {
+    width: 30px;
+    height: 30px;
 }
