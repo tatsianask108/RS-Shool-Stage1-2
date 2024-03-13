@@ -1,8 +1,8 @@
 import PageComponent from '@pages/page';
-// import BaseComponent from '@components/base-component';
 import LoginPageComponent from '@pages/login/login';
 
 import { User } from '@interfaces/interfaces';
+import GamePageComponent from '@pages/game/game';
 
 export class App {
     protected user: User | undefined;
@@ -12,7 +12,15 @@ export class App {
     constructor(private root: HTMLElement) {}
 
     public init() {
-        this.render(new LoginPageComponent());
+        if (this.isAuth()) {
+            this.render(new GamePageComponent(this.user as User));
+        } else {
+            this.render(
+                new LoginPageComponent(() => {
+                    this.init();
+                })
+            );
+        }
     }
 
     protected render(page: PageComponent) {
@@ -21,6 +29,16 @@ export class App {
         }
         this.page = page;
         this.root.append(page.getNode());
+    }
+
+    protected isAuth(): boolean {
+        const userData = localStorage.getItem('user');
+        try {
+            this.user = JSON.parse(userData ?? '');
+            return true;
+        } catch {
+            return false;
+        }
     }
 }
 

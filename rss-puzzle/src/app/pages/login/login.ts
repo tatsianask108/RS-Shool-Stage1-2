@@ -46,7 +46,7 @@ export default class LoginPageComponent extends PageComponent {
         },
     });
 
-    constructor() {
+    constructor(private callback: () => void) {
         super({ className: 'login-page' });
         this.form = new BaseComponent<HTMLFormElement>(
             { tag: 'form', className: 'form', action: '#', autocomplete: 'off' },
@@ -120,6 +120,7 @@ export default class LoginPageComponent extends PageComponent {
                     surname: this.inputSurname.getNode().value,
                 } as User)
             );
+            this.callback();
         });
     }
 }
