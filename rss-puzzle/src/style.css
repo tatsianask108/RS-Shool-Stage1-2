@@ -1,6 +1,6 @@
-:root {
-    /* font-size: 30px; */
-}
+/* :root {
+    font-size: 30px;
+} */
 
 @media (max-width: 600px) {
     html {
@@ -21,8 +21,6 @@
 
 body {
     height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    background: content-box radial-gradient(rgb(231, 214, 57), rgb(72, 230, 151));
+
 }

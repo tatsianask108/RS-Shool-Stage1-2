@@ -9,14 +9,11 @@ export default class LoginPageComponent extends PageComponent {
     private formCallback: () => void;
 
     constructor(private callback: () => void) {
-        super({ className: 'login-page' });
+        super({ className: 'wrapper' });
         this.formCallback = callback;
     }
 
     protected render() {
-        const title = new BaseComponent<HTMLParagraphElement>({ tag: 'p', className: 'login-title' });
-        title.setTextContent('Welcome! Login to start learning!');
-
         const form = new BaseComponent<HTMLFormElement>(
             { tag: 'form', className: 'login-form', action: '#', autocomplete: 'off' },
             new BaseComponent<HTMLInputElement>({
@@ -58,11 +55,20 @@ export default class LoginPageComponent extends PageComponent {
             })
         );
 
+        const loginPage = new BaseComponent(
+            { className: 'login-page' },
+            new BaseComponent<HTMLParagraphElement>({
+                tag: 'p',
+                className: 'login-title',
+                textContent: 'Welcome! Login to start learning!',
+            }),
+            form
+        );
         form.getNode().addEventListener('keyup', this.handleKeyUp);
         form.getNode().addEventListener('submit', (e) => {
             this.handleSubmit(e);
         });
-        this.appendChildren([title, form]);
+        this.appendChildren([loginPage]);
     }
 
     protected handleKeyUp(e: Event) {
@@ -96,8 +102,8 @@ export default class LoginPageComponent extends PageComponent {
         e.preventDefault();
 
         const userData: User = {
-            name: form.name,
-            surname: form.surname,
+            name: form.getElementsByTagName('input')[0].value || '',
+            surname: form.getElementsByTagName('input')[1].value || '',
         };
 
         localStorage.setItem('user', JSON.stringify(userData));
