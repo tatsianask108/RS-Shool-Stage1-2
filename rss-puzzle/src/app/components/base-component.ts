@@ -1,5 +1,6 @@
 export type Props<T extends HTMLElement = HTMLElement> = Partial<T> & {
     tag?: keyof HTMLElementTagNameMap;
+    data?: DOMStringMap;
 };
 
 export default class BaseComponent<T extends HTMLElement = HTMLElement> {
@@ -10,6 +11,12 @@ export default class BaseComponent<T extends HTMLElement = HTMLElement> {
     constructor(props: Props<T>, ...children: (BaseComponent | HTMLElement | null)[]) {
         const node = document.createElement(props.tag ?? 'div') as T;
         Object.assign(node, props);
+
+        if (props.data) {
+            for (const name in props.data) {
+                node.dataset[name] = props.data[name];
+            }
+        }
 
         this.node = node;
 

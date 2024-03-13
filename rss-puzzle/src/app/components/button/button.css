@@ -1,24 +1,23 @@
-.btn {
+.button {
     display: flex;
-
-    padding: 10px;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
     border: 1px solid #665f55;
     background: #ffffff;
     cursor: pointer;
-
+    padding: 0.6rem;
+    margin-top: 0.6rem;
     transition: all 0.7s ease;
 }
 
-.btn:hover {
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.button:hover:not(:disabled) {
     background: #60ad7a;
     border: 1px solid transparent;
     color: #ffffff;
-}
-.disabled {
-    opacity: 0.48;
-    pointer-events: none;
-    cursor: not-allowed;
 }

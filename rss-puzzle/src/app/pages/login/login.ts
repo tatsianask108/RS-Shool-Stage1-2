@@ -6,121 +6,101 @@ import { User } from '@interfaces/interfaces';
 import './login.css';
 
 export default class LoginPageComponent extends PageComponent {
-    private form: BaseComponent<HTMLFormElement>;
-
-    private inputName = new BaseComponent<HTMLInputElement>({
-        className: 'input',
-        id: 'inputName',
-        tag: 'input',
-        type: 'text',
-        placeholder: 'Name',
-        required: true,
-        pattern: '[A-Z][A-Za-z\\-]{2,}',
-    });
-
-    private inputNameError = new BaseComponent<HTMLSpanElement>({
-        tag: 'span',
-        className: 'inputNameError',
-    });
-
-    private inputSurnameError = new BaseComponent<HTMLSpanElement>({
-        tag: 'span',
-        className: 'inputSurnameError',
-    });
-
-    private inputSurname = new BaseComponent<HTMLInputElement>({
-        className: 'input',
-        id: 'inputSurname',
-        tag: 'input',
-        type: 'text',
-        placeholder: 'Surname',
-        required: true,
-        pattern: '[A-Z][A-Za-z\\-]{3,}',
-    });
-
-    private button = new Button({
-        className: 'btn disabled',
-        textContent: 'Login',
-        onclick: () => {
-            // console.log('ff');
-        },
-    });
+    private formCallback: () => void;
 
     constructor(private callback: () => void) {
         super({ className: 'login-page' });
-        this.form = new BaseComponent<HTMLFormElement>(
-            { tag: 'form', className: 'form', action: '#', autocomplete: 'off' },
-            this.inputName,
-            this.inputNameError,
-            this.inputSurname,
-            this.inputSurnameError,
-            this.button
-        );
-
-        this.appendChildren([this.form]);
-        this.handleKeyUp();
-        this.submitListener();
+        this.formCallback = callback;
     }
 
     protected render() {
-        this.getNode().textContent = 'Welcome! Login to start learning!';
+        const title = new BaseComponent<HTMLParagraphElement>({ tag: 'p', className: 'login-title' });
+        title.setTextContent('Welcome! Login to start learning!');
+
+        const form = new BaseComponent<HTMLFormElement>(
+            { tag: 'form', className: 'login-form', action: '#', autocomplete: 'off' },
+            new BaseComponent<HTMLInputElement>({
+                tag: 'input',
+                type: 'text',
+                name: 'name',
+                className: 'login-form__input',
+                placeholder: 'Name',
+                pattern: '[A-Z][A-Za-z\\-]{2,}',
+                required: true,
+            }),
+            new BaseComponent<HTMLSpanElement>({
+                tag: 'span',
+                className: 'login-form__error',
+                data: {
+                    errorText: 'Enter your name starting with the capital letter, minimum 3 characters',
+                },
+            }),
+            new BaseComponent<HTMLInputElement>({
+                tag: 'input',
+                type: 'text',
+                name: 'surname',
+                className: 'login-form__input',
+                placeholder: 'Surname',
+                pattern: '[A-Z][A-Za-z\\-]{3,}',
+                required: true,
+            }),
+            new BaseComponent<HTMLSpanElement>({
+                tag: 'span',
+                className: 'login-form__error',
+                data: {
+                    errorText: 'Enter your name starting with the capital letter, minimum 4 characters',
+                },
+            }),
+            new Button({
+                className: 'button',
+                textContent: 'Login',
+                disabled: true,
+            })
+        );
+
+        form.getNode().addEventListener('keyup', this.handleKeyUp);
+        form.getNode().addEventListener('submit', (e) => {
+            this.handleSubmit(e);
+        });
+        this.appendChildren([title, form]);
     }
 
-    protected handleKeyUp() {
-        const regexNamePattern: RegExp = /^[A-Z][A-Za-z\\-]{2,}$/;
-        this.inputName.addListener('keyup', () => {
-            if (regexNamePattern.test(this.inputName.getNode().value)) {
-                this.inputName.removeClass('invalid');
-                this.inputName.addClass('valid');
-                this.inputNameError.setTextContent('');
-            } else {
-                this.inputName.removeClass('valid');
-                this.inputName.addClass('invalid');
-                this.inputNameError.setTextContent(
-                    'Enter your name, starting with the capital letter, minimum 3 characters'
-                );
-            }
+    protected handleKeyUp(e: Event) {
+        const input = e.target as HTMLInputElement;
+        if (!input || !input.form) {
+            return;
+        }
 
-            if (this.form.getNode().checkValidity()) {
-                this.button.removeClass('disabled');
-            } else {
-                this.button.addClass('disabled');
-            }
-        });
+        const form = input.form;
+        if (!input.checkValidity()) {
+            input.classList.remove('valid');
+            input.classList.add('invalid');
+        } else {
+            input.classList.remove('invalid');
+            input.classList.add('valid');
+        }
 
-        const regexSurnamePattern: RegExp = /^[A-Z][A-Za-z\\-]{3,}$/;
-        this.inputSurname.addListener('keyup', () => {
-            if (regexSurnamePattern.test(this.inputSurname.getNode().value)) {
-                this.inputSurname.removeClass('invalid');
-                this.inputSurname.addClass('valid');
-                this.inputSurnameError.setTextContent('');
-            } else {
-                this.inputSurname.removeClass('valid');
-                this.inputSurname.addClass('invalid');
-                this.inputSurnameError.setTextContent(
-                    'Enter your surname, starting with the capital letter, minimum 4 characters'
-                );
-            }
-
-            if (this.form.getNode().checkValidity()) {
-                this.button.removeClass('disabled');
-            } else {
-                this.button.addClass('disabled');
-            }
-        });
+        const button = form.querySelector('button');
+        if (!form.checkValidity()) {
+            button?.setAttribute('disabled', 'disabled');
+        } else {
+            button?.removeAttribute('disabled');
+        }
     }
 
-    protected submitListener() {
-        this.form.getNode().addEventListener('submit', (e) => {
-            e.preventDefault();
-            localStorage.setItem(
-                'user',
-                JSON.stringify({
-                    name: this.inputName.getNode().value,
-                    surname: this.inputSurname.getNode().value,
-                } as User)
-            );
-            this.callback();
-        });
+    protected handleSubmit(e: Event) {
+        const form = e.target as HTMLFormElement;
+        if (!form) {
+            return;
+        }
+        e.preventDefault();
+
+        const userData: User = {
+            name: form.name,
+            surname: form.surname,
+        };
+
+        localStorage.setItem('user', JSON.stringify(userData));
+        this.formCallback();
     }
 }

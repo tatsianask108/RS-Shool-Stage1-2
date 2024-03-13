@@ -33,10 +33,10 @@ export class App {
 
     protected isAuth(): boolean {
         const userData = localStorage.getItem('user');
-        try {
-            this.user = JSON.parse(userData ?? '');
+        if (userData) {
+            this.user = JSON.parse(userData);
             return true;
-        } catch {
+        } else {
             return false;
         }
     }

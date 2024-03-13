@@ -1,29 +1,27 @@
 .login-page {
+    max-width: 40%;
     border: 1px solid black;
     border-radius: 5px;
     padding: 10px;
     text-align: center;
 }
 
-.form {
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     margin: 10px;
-    text-align: center;
+    margin-top: 5%;
 }
 
-.form > * {
-    margin-left: auto;
-    margin-right: auto;
-}
-.input {
-    display: block;
-    margin-bottom: 10px;
+.login-form__input {
+    margin-top: 8px;
+    margin-bottom: 8px;
     padding: 5px;
     border-radius: 5px;
+    max-width: 90%;
 }
-
-/* .input:focus {
-    border: none;
-} */
 
 .valid {
     border: 1px solid green;
@@ -33,11 +31,18 @@
     border: 1px solid red;
 }
 
-.inputNameError,
-.inputSurnameError {
-    width: 60%;
-    display: inline-block;
-    /* height: 1rem; */
-    font-size: 12px;
+.login-form__error {
+    min-height: 1.2rem;
+    display: block;
+    font-size: 0.6rem;
+    letter-spacing: 0.8px;
     color: red;
+    position: relative;
 }
+
+input.invalid + span:after {
+    content: attr(data-error-text);
+    display: inline-block;
+    max-width: 80%;
+}
+
