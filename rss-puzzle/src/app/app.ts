@@ -3,6 +3,7 @@ import LoginPageComponent from '@pages/login/login';
 
 import { User } from '@interfaces/interfaces';
 import GamePageComponent from '@pages/game/game';
+import StartPageComponent from '@pages/start/start';
 
 export class App {
     protected user: User | undefined;
@@ -12,14 +13,22 @@ export class App {
     constructor(private root: HTMLElement) {}
 
     public init() {
-        if (this.isAuth()) {
+        if (this.isAuth() && this.isStarted()) {
             this.render(new GamePageComponent(this.user as User));
         } else {
-            this.render(
-                new LoginPageComponent(() => {
-                    this.init();
-                })
-            );
+            if (this.isAuth()) {
+                this.render(
+                    new StartPageComponent(() => {
+                        this.init();
+                    })
+                );
+            } else {
+                this.render(
+                    new LoginPageComponent(() => {
+                        this.init();
+                    })
+                );
+            }
         }
     }
 
@@ -39,6 +48,10 @@ export class App {
         } else {
             return false;
         }
+    }
+
+    protected isStarted(): boolean {
+        return Boolean(sessionStorage.getItem('started'));
     }
 }
 

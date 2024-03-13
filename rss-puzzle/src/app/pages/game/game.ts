@@ -1,4 +1,4 @@
-import ModalComponent from '@components/modal/modal';
+// import ModalComponent from '@components/modal/modal';
 import { User } from '@interfaces/interfaces';
 import PageComponent from '@pages/page';
 
@@ -10,6 +10,8 @@ export default class GamePageComponent extends PageComponent {
     }
 
     protected render(): void {
-        document.body.append(new ModalComponent().getNode());
+        // document.body.append(new ModalComponent().getNode());
+        // document.body.append('hello');
+        this.getNode().textContent = 'game page';
     }
 }
