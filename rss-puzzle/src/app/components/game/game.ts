@@ -2,6 +2,8 @@ import BaseComponent from '@components/base-component';
 import SelectComponent from '@components/select/select';
 import { Level } from '@interfaces/interfaces';
 import { LEVELS_COUNT } from '@app/constants';
+import Result from './result-block/result';
+import Source from './source-block/source';
 
 import './game.css';
 
@@ -13,15 +15,16 @@ export default class Game extends BaseComponent {
 
     protected level: number | undefined;
 
-    protected round: number | undefined;
+    protected round: number = 0;
 
     protected data: Level = {
         rounds: [
             {
                 levelData: {
-                    id: '1_01',
-                    cutSrc: 'level1/cut/deerhunt.jpg',
+                    name: 'Stag Hunt',
+                    imageSrc: 'level1/deerhunt.jpg',
                     author: "Niccolò dell'",
+                    year: '1550-52',
                 },
                 words: [
                     {
@@ -33,6 +36,9 @@ export default class Game extends BaseComponent {
             },
         ],
     };
+
+    //protected result: BaseComponent; //ResultComponent
+    //protected source: BaseComponent; //SourceComponent
 
     constructor() {
         super({ className: 'game-container' });
@@ -69,7 +75,29 @@ export default class Game extends BaseComponent {
             this.render();
         });
 
-        this.appendChildren([levelComponent, roundsComponent]);
+        const resultBlock = new Result(this.data.rounds[this.round]);
+
+        const currentSentence = resultBlock.getCurrentSentence();
+        console.log('CurrSentence', currentSentence);
+        if (!currentSentence) {
+            return;
+        }
+        const sourceBlock = new Source(currentSentence.getCorrect(), (word) => {
+            const sentence = resultBlock.getCurrentSentence();
+            if (!sentence) {
+                return;
+            }
+            sentence.add(word);
+            console.log(sentence.check());
+            if (sentence.check()) {
+                if (resultBlock.nextSentence()) {
+                    sourceBlock.setItems(resultBlock.getCurrentSentence()?.getCorrect() || []);
+                }
+                return 'Round is completed';
+            }
+        });
+
+        this.appendChildren([levelComponent, roundsComponent, resultBlock, sourceBlock]);
     }
 
     protected startLevel(level: string) {

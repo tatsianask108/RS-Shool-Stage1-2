@@ -1,5 +1,20 @@
 .game-field {
-    min-width: 450px;
     min-height: 300px;
     background-color: antiquewhite;
+}
+
+.result-block {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid black;
+}
+
+.sentence {
+    padding: 5px;
+}
+
+.puzzle {
+    padding: 5px;
+    border: 1px solid black;
+    cursor: pointer;
 }

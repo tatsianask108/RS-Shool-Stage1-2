@@ -15,9 +15,10 @@ export type Word = {
 
 export type Round = {
     levelData: {
+        name: string;
         author: string;
-        cutSrc: string;
-        id: string;
+        year: string;
+        imageSrc: string;
     };
     words: Word[];
 };
