@@ -2,7 +2,7 @@ const path = require('path');
 const { merge } = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const EslingPlugin = require('eslint-webpack-plugin');
+const EslintPlugin = require('eslint-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 const baseConfig = {
@@ -22,12 +22,13 @@ const baseConfig = {
         ],
     },
     resolve: {
-        extensions: ['.ts', '.js'],
+        extensions: ['.ts', '.js', '.json'],
         alias: {
             '@components': path.resolve(__dirname, 'src/app/components'),
             '@pages': path.resolve(__dirname, 'src/app/pages'),
             '@types': path.resolve(__dirname, 'src/app/types'),
             '@app': path.resolve(__dirname, 'src/app/'),
+            '@data': path.resolve(__dirname, 'src/app/data'),
         },
     },
     output: {
@@ -44,7 +45,7 @@ const baseConfig = {
             filename: 'index.html',
         }),
         new CleanWebpackPlugin(),
-        new EslingPlugin({ extensions: 'ts' }),
+        new EslintPlugin({ extensions: 'ts' }),
         new CopyPlugin({
             patterns: [
                 {

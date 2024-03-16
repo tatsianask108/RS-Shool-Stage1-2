@@ -34,6 +34,7 @@
             "@pages/*": ["src/app/pages/*"],
             "@interfaces/*": ["src/interfaces/*"],
             "@app/*": ["src/app/*"],
+            "@data/*": ["src/app/data/*"],
             // "@assets/*": ["src/assets/*"],
         }, // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
         // "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */

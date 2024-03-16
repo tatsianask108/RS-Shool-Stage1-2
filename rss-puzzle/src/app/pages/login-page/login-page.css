@@ -3,6 +3,7 @@
     height: 100%;
     display: grid;
     align-items: center;
+    background: center / cover no-repeat url('../../../assets/bg.jpg');
 }
 
 .login-page {

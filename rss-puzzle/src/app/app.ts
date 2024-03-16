@@ -1,9 +1,9 @@
 import PageComponent from '@pages/page';
-import LoginPageComponent from '@pages/login/login';
+import LoginPageComponent from '@pages/login-page/login-page';
 
 import { User } from '@interfaces/interfaces';
-import GamePageComponent from '@pages/game/game';
-import StartPageComponent from '@pages/start/start';
+import GamePageComponent from '@pages/game-page/game-page';
+import StartPageComponent from '@pages/start-page/start-page';
 
 export class App {
     protected user: User | undefined;
@@ -13,25 +13,20 @@ export class App {
     constructor(private root: HTMLElement) {}
 
     public init() {
+        document.addEventListener(
+            'auth',
+            () => {
+                this.init();
+            },
+            { once: true }
+        );
         if (this.isAuth() && this.isStarted()) {
-            this.render(
-                new GamePageComponent(this.user as User, () => {
-                    this.init();
-                })
-            );
+            this.render(new GamePageComponent(this.user as User));
         } else {
             if (this.isAuth()) {
-                this.render(
-                    new StartPageComponent(() => {
-                        this.init();
-                    })
-                );
+                this.render(new StartPageComponent());
             } else {
-                this.render(
-                    new LoginPageComponent(() => {
-                        this.init();
-                    })
-                );
+                this.render(new LoginPageComponent());
             }
         }
     }

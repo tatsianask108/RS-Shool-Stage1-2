@@ -2,14 +2,11 @@ import BaseComponent from '@components/base-component';
 import Button from '@components/button/button';
 import PageComponent from '@pages/page';
 
-import './start.css';
+import './start-page.css';
 
 export default class ModalComponent extends PageComponent {
-    // private startCallback: () => void;
-
-    constructor(private callback: () => void) {
+    constructor() {
         super({ className: 'modal' });
-        this.callback = callback;
     }
 
     protected render() {
@@ -34,7 +31,7 @@ export default class ModalComponent extends PageComponent {
             button.addEventListener('click', () => {
                 // this.closeModal();
                 sessionStorage.setItem('started', 'true');
-                this.callback();
+                document.dispatchEvent(new Event('auth'));
             });
         }
         this.appendChildren([modalBox]);

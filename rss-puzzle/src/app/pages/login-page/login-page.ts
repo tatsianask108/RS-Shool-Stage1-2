@@ -3,14 +3,11 @@ import Button from '@components/button/button';
 import PageComponent from '@pages/page';
 import { User } from '@interfaces/interfaces';
 
-import './login.css';
+import './login-page.css';
 
 export default class LoginPageComponent extends PageComponent {
-    private formCallback: () => void;
-
-    constructor(private callback: () => void) {
+    constructor() {
         super({ className: 'wrapper' });
-        this.formCallback = callback;
     }
 
     protected render() {
@@ -107,6 +104,6 @@ export default class LoginPageComponent extends PageComponent {
         };
 
         localStorage.setItem('user', JSON.stringify(userData));
-        this.formCallback();
+        document.dispatchEvent(new Event('auth'));
     }
 }

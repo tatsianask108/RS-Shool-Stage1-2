@@ -21,9 +21,7 @@
 
 body {
     height: 100vh;
-    background: content-box radial-gradient(rgb(231, 214, 57), rgb(72, 230, 151));
-
-}
+    }
 
 button {
     padding: 0;

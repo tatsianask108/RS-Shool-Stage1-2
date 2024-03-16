@@ -1,0 +1,5 @@
+.game-field {
+    min-width: 450px;
+    min-height: 300px;
+    background-color: antiquewhite;
+}
