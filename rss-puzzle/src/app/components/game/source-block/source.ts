@@ -1,28 +1,39 @@
 import BaseComponent from '@components/base-component';
+import Word from '../word';
+import Result from '../result-block/result';
 
 export default class Source extends BaseComponent {
+    protected words: Word[] = [];
+
     constructor(
-        protected words: string[],
-        protected callback: (word: string) => void
+        protected result: Result,
+        protected wordCallback: (word: Word) => void
     ) {
         super({ className: 'source-block' });
-        this.setItems(words);
     }
 
     public setItems(words: string[]) {
-        this.words = words.sort(() => 0.5 - Math.random());
+        this.words = words.sort(() => 0.5 - Math.random()).map((word) => new Word(word));
         this.render();
     }
 
     protected render() {
         this.destroyChildren();
         this.words.map((word) => {
-            const span = new BaseComponent<HTMLSpanElement>({ tag: 'span', className: 'puzzle', textContent: word });
-            span.getNode().addEventListener('click', () => {
-                this.callback(word);
-                span.destroy();
+            word.addListener('click', () => {
+                const sentence = this.result.getCurrentSentence();
+                if (!sentence) {
+                    throw new Error();
+                }
+                if (this.getNode().contains(word.getNode())) {
+                    sentence.add(word);
+                } else {
+                    sentence.remove(word);
+                    this.append(word);
+                }
+                this.wordCallback(word);
             });
-            this.append(span);
+            this.append(word);
         });
     }
 }

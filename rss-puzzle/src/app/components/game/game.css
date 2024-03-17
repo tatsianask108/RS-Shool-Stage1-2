@@ -4,17 +4,47 @@
 }
 
 .result-block {
-    padding: 10px;
+    min-height: 300px;
     margin-bottom: 10px;
     border: 1px solid black;
+    background: center / cover no-repeat
+        url(https://github.com/rolling-scopes-school/rss-puzzle-data/blob/main/images/level1/9th_wave.jpg);
+}
+
+.source-block {
+    padding: 5px;
 }
 
 .sentence {
-    padding: 5px;
+    display: flex;
+}
+
+.puzzle-wrapper {
+    flex: 1;
+    border: 1px solid blue;
 }
 
 .puzzle {
     padding: 5px;
     border: 1px solid black;
     cursor: pointer;
+    opacity: 0;
+    animation: ani 0.6s forwards;
+}
+
+.puzzle.error {
+    border: 1px solid red;
+}
+
+@keyframes ani {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.solved-sentence {
+    pointer-events: none;
 }

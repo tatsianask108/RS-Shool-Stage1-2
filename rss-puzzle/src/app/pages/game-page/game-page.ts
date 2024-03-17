@@ -1,4 +1,4 @@
-import { User } from '@interfaces/interfaces';
+import { IUser } from '@interfaces/interfaces';
 import PageComponent from '@pages/page';
 import HeaderComponent from '@components/header/header';
 import Game from '@components/game/game';
@@ -6,7 +6,7 @@ import Game from '@components/game/game';
 import './game-page.css';
 
 export default class GamePageComponent extends PageComponent {
-    constructor(protected userData: User) {
+    constructor(protected userData: IUser) {
         super({ className: 'game-page' });
     }
 

@@ -1,7 +1,7 @@
 import BaseComponent from '@components/base-component';
 import Button from '@components/button/button';
 import PageComponent from '@pages/page';
-import { User } from '@interfaces/interfaces';
+import { IUser } from '@interfaces/interfaces';
 
 import './login-page.css';
 
@@ -98,7 +98,7 @@ export default class LoginPageComponent extends PageComponent {
         }
         e.preventDefault();
 
-        const userData: User = {
+        const userData: IUser = {
             name: form.getElementsByTagName('input')[0].value || '',
             surname: form.getElementsByTagName('input')[1].value || '',
         };

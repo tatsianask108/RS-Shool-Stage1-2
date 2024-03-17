@@ -1,15 +1,15 @@
 import BaseComponent from '@components/base-component';
 import Sentence from './sentence';
-import { Round } from '@interfaces/interfaces';
+import { IRound } from '@interfaces/interfaces';
 
 import '../game.css';
 
 export default class Result extends BaseComponent {
-    protected currentSentence = 1;
+    protected currentSentence = 0;
 
     protected sentences: Sentence[] = [];
 
-    constructor(protected round: Round) {
+    constructor(protected round: IRound) {
         super({ className: 'result-block' });
         round.words.forEach((w) => {
             this.sentences.push(new Sentence(w.textExample));

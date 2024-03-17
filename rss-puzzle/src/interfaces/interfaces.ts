@@ -1,28 +1,28 @@
-export interface User {
+export interface IUser {
     name: string;
     surname: string;
 }
 
-export type GameConfiguration = {
+export interface IGameConfiguration {
     sound: boolean;
-};
+}
 
-export type Word = {
+export interface IWord {
     audioExample: string;
     id: number;
     textExample: string;
-};
+}
 
-export type Round = {
+export interface IRound {
     levelData: {
         name: string;
         author: string;
         year: string;
         imageSrc: string;
     };
-    words: Word[];
-};
+    words: IWord[];
+}
 
-export type Level = {
-    rounds: Round[];
-};
+export interface ILevel {
+    rounds: IRound[];
+}

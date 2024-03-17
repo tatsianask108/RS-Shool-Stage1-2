@@ -1,12 +1,12 @@
 import PageComponent from '@pages/page';
 import LoginPageComponent from '@pages/login-page/login-page';
 
-import { User } from '@interfaces/interfaces';
+import { IUser } from '@interfaces/interfaces';
 import GamePageComponent from '@pages/game-page/game-page';
 import StartPageComponent from '@pages/start-page/start-page';
 
 export class App {
-    protected user: User | undefined;
+    protected user: IUser | undefined;
 
     protected page: PageComponent | undefined;
 
@@ -21,7 +21,7 @@ export class App {
             { once: true }
         );
         if (this.isAuth() && this.isStarted()) {
-            this.render(new GamePageComponent(this.user as User));
+            this.render(new GamePageComponent(this.user as IUser));
         } else {
             if (this.isAuth()) {
                 this.render(new StartPageComponent());

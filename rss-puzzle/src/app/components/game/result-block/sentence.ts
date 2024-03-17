@@ -1,39 +1,61 @@
 import BaseComponent from '@components/base-component';
+import Word from '../word';
+
 import '../game.css';
 
 export default class Sentence extends BaseComponent {
-    protected userAnswers: string[] = [];
+    private correct: string[] = [];
 
-    public correct: string[] = [];
+    protected children: Word[] = [];
 
     constructor(protected sentence: string) {
         super({ className: 'sentence' });
         this.correct = sentence.split(' ');
     }
 
-    public add(word: string) {
-        this.userAnswers.push(word);
-        this.append(new BaseComponent<HTMLSpanElement>({ tag: 'span', className: 'puzzle', textContent: word }));
+    public add(word: Word) {
+        this.append(word);
     }
 
-    public remove(index: number) {
-        delete this.userAnswers[index];
-
-        this.children[index]?.destroy();
-        delete this.children[index];
+    public remove(word: Word) {
+        const index = this.children.indexOf(word);
+        if (index !== -1) {
+            this.children.splice(index, 1);
+        }
     }
 
     public check(): boolean {
         return this.correct.every((value, index) => {
-            return this.userAnswers[index] === value;
+            const word = this.children[index]?.getValue();
+            return word === value;
         });
     }
 
-    public showErrors() {}
+    public finish() {
+        const clonedElement = this.getNode().cloneNode(true) as HTMLElement;
+        console.log(clonedElement);
+        clonedElement.classList.add('solved-sentence');
+        this.getNode().parentNode?.replaceChild(clonedElement, this.getNode());
+    }
+
+    public showErrors() {
+        document.addEventListener(
+            'pointerdown',
+            () => {
+                this.children.map((word) => word.removeClass('error'));
+            },
+            { once: true }
+        );
+        return this.children.map((word, index) => {
+            if (this.correct[index] !== word.getValue()) {
+                word.addClass('error');
+            } else {
+                word.removeClass('error');
+            }
+        });
+    }
 
     public getCorrect() {
-        console.log('prop. correct', this.correct);
-        console.log('Object.values', Object.values(this.correct));
         return Object.values(this.correct);
     }
 }
