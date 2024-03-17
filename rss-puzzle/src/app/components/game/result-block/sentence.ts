@@ -24,6 +24,10 @@ export default class Sentence extends BaseComponent {
         }
     }
 
+    public checkLength() {
+        return this.children.length === this.correct.length;
+    }
+
     public check(): boolean {
         return this.correct.every((value, index) => {
             const word = this.children[index]?.getValue();
@@ -33,7 +37,6 @@ export default class Sentence extends BaseComponent {
 
     public finish() {
         const clonedElement = this.getNode().cloneNode(true) as HTMLElement;
-        console.log(clonedElement);
         clonedElement.classList.add('solved-sentence');
         this.getNode().parentNode?.replaceChild(clonedElement, this.getNode());
     }

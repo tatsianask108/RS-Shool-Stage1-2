@@ -6,6 +6,7 @@ import Result from './result-block/result';
 import Source from './source-block/source';
 
 import './game.css';
+import Button from '@components/button/button';
 
 export default class Game extends BaseComponent {
     protected LEVEL_COUNT = LEVELS_COUNT;
@@ -36,14 +37,31 @@ export default class Game extends BaseComponent {
             return;
         }
 
+        const checkButton = new Button({
+            className: 'button',
+            id: 'checkButton',
+            textContent: 'check',
+            disabled: true,
+        });
+
         const sourceBlock = new Source(resultBlock, () => {
             const sentence = resultBlock.getCurrentSentence();
             if (!sentence) {
                 return;
             }
-            sentence.showErrors();
+
+            if (resultBlock.getCurrentSentence()?.checkLength()) {
+                checkButton.getNode().removeAttribute('disabled');
+            }
+
+            checkButton.addListener('click', () => {
+                sentence.showErrors();
+                checkButton.getNode().setAttribute('disabled', '');
+            });
             if (sentence.check()) {
+                // checkButton.setTextContent('Continue');
                 sentence.finish();
+                checkButton.getNode().setAttribute('disabled', '');
                 if (resultBlock.nextSentence()) {
                     sourceBlock.setItems(resultBlock.getCurrentSentence()?.getCorrect() || []);
                 } else {
@@ -53,7 +71,7 @@ export default class Game extends BaseComponent {
         });
         sourceBlock.setItems(currentSentence.getCorrect());
 
-        this.appendChildren([...this.createControls(), resultBlock, sourceBlock]);
+        this.appendChildren([...this.createControls(), resultBlock, sourceBlock, checkButton]);
     }
 
     protected createControls(): SelectComponent[] {
