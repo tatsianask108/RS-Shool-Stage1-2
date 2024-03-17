@@ -37,6 +37,9 @@ export default class Game extends BaseComponent {
             return;
         }
 
+        const sourceBlock = new Source(resultBlock);
+        sourceBlock.setItems(currentSentence.getCorrect());
+
         const checkButton = new Button({
             className: 'button',
             id: 'checkButton',
@@ -48,40 +51,40 @@ export default class Game extends BaseComponent {
             className: 'button',
             id: 'continueButton',
             textContent: 'Continue',
-            disabled: true,
+        });
+        continueButton.hide();
+
+        checkButton.addListener('click', () => {
+            resultBlock.getCurrentSentence()?.showErrors();
+        });
+        continueButton.addListener('click', () => {
+            if (resultBlock.nextSentence()) {
+                sourceBlock.setItems(resultBlock.getCurrentSentence()?.getCorrect() as string[]);
+                continueButton.hide();
+                checkButton.show();
+            } else {
+                console.log('round ended');
+            }
         });
 
-        const sourceBlock = new Source(resultBlock, () => {
+        sourceBlock.addCallback(() => {
             const sentence = resultBlock.getCurrentSentence();
             if (!sentence) {
                 return;
             }
 
-            if (resultBlock.getCurrentSentence()?.checkLength()) {
-                checkButton.getNode().removeAttribute('disabled');
-            }
-
-            checkButton.addListener('click', () => {
-                sentence.showErrors();
-                checkButton.getNode().setAttribute('disabled', '');
-            });
-            if (sentence.check()) {
-                // checkButton.setTextContent('Continue');
-                continueButton.getNode().removeAttribute('disabled');
-                continueButton.addListener('click', () => {
+            if (sentence.isFilled()) {
+                if (sentence.isCorrect()) {
                     sentence.finish();
-                    if (resultBlock.nextSentence()) {
-                        sourceBlock.setItems(resultBlock.getCurrentSentence()?.getCorrect() as []);
-                        continueButton.getNode().setAttribute('disabled', '');
-                    } else {
-                        console.log('round ended');
-                    }
-                });
-
-                checkButton.getNode().setAttribute('disabled', '');
+                    checkButton.hide();
+                    continueButton.show();
+                } else {
+                    checkButton.enable();
+                }
+            } else {
+                checkButton.disable();
             }
         });
-        sourceBlock.setItems(currentSentence.getCorrect());
 
         this.appendChildren([...this.createControls(), resultBlock, sourceBlock, checkButton, continueButton]);
     }

@@ -11,6 +11,7 @@ export default class Result extends BaseComponent {
 
     constructor(protected round: IRound) {
         super({ className: 'result-block' });
+
         round.words.forEach((w) => {
             this.sentences.push(new Sentence(w.textExample));
         });

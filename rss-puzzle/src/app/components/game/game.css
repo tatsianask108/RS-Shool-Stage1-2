@@ -13,6 +13,7 @@
 
 .source-block {
     padding: 5px;
+    min-height: 50px;
 }
 
 .sentence {
@@ -45,6 +46,10 @@
     }
 }
 
-.solved-sentence {
+.solved {
     pointer-events: none;
+}
+
+.hidden {
+    display: none;
 }

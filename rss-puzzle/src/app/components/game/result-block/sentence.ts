@@ -10,7 +10,7 @@ export default class Sentence extends BaseComponent {
 
     constructor(protected sentence: string) {
         super({ className: 'sentence' });
-        this.correct = sentence.split(' ');
+        this.correct = sentence.split(/(?<!and)\s(?!and)/);
     }
 
     public add(word: Word) {
@@ -24,11 +24,11 @@ export default class Sentence extends BaseComponent {
         }
     }
 
-    public checkLength() {
+    public isFilled() {
         return this.children.length === this.correct.length;
     }
 
-    public check(): boolean {
+    public isCorrect(): boolean {
         return this.correct.every((value, index) => {
             const word = this.children[index]?.getValue();
             return word === value;
@@ -37,7 +37,7 @@ export default class Sentence extends BaseComponent {
 
     public finish() {
         const clonedElement = this.getNode().cloneNode(true) as HTMLElement;
-        clonedElement.classList.add('solved-sentence');
+        clonedElement.classList.add('solved');
         this.getNode().parentNode?.replaceChild(clonedElement, this.getNode());
     }
 

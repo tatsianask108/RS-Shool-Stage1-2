@@ -8,13 +8,4 @@ export default class Word extends BaseComponent {
     public getValue() {
         return this.value;
     }
-
-    public append(child: BaseComponent | HTMLElement): void {
-        if (child instanceof BaseComponent) {
-            this.children.push(child);
-            this.node.append(child.getNode());
-        } else {
-            this.node.append(child);
-        }
-    }
 }

@@ -2,14 +2,19 @@ import BaseComponent from '@components/base-component';
 import Word from '../word';
 import Result from '../result-block/result';
 
+type TCallback = (word: Word) => void;
+
 export default class Source extends BaseComponent {
     protected words: Word[] = [];
 
-    constructor(
-        protected result: Result,
-        protected wordCallback: (word: Word) => void
-    ) {
+    protected callbacks: TCallback[] = [];
+
+    constructor(protected result: Result) {
         super({ className: 'source-block' });
+    }
+
+    public addCallback(callback: TCallback) {
+        this.callbacks.push(callback);
     }
 
     public setItems(words: string[]) {
@@ -31,7 +36,7 @@ export default class Source extends BaseComponent {
                     sentence.remove(word);
                     this.append(word);
                 }
-                this.wordCallback(word);
+                this.callbacks.forEach((callback) => callback(word));
             });
             this.append(word);
         });
