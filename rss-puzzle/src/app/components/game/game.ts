@@ -40,7 +40,14 @@ export default class Game extends BaseComponent {
         const checkButton = new Button({
             className: 'button',
             id: 'checkButton',
-            textContent: 'check',
+            textContent: 'Check',
+            disabled: true,
+        });
+
+        const continueButton = new Button({
+            className: 'button',
+            id: 'continueButton',
+            textContent: 'Continue',
             disabled: true,
         });
 
@@ -60,18 +67,23 @@ export default class Game extends BaseComponent {
             });
             if (sentence.check()) {
                 // checkButton.setTextContent('Continue');
-                sentence.finish();
+                continueButton.getNode().removeAttribute('disabled');
+                continueButton.addListener('click', () => {
+                    sentence.finish();
+                    if (resultBlock.nextSentence()) {
+                        sourceBlock.setItems(resultBlock.getCurrentSentence()?.getCorrect() as []);
+                        continueButton.getNode().setAttribute('disabled', '');
+                    } else {
+                        console.log('round ended');
+                    }
+                });
+
                 checkButton.getNode().setAttribute('disabled', '');
-                if (resultBlock.nextSentence()) {
-                    sourceBlock.setItems(resultBlock.getCurrentSentence()?.getCorrect() || []);
-                } else {
-                    console.log('round ended');
-                }
             }
         });
         sourceBlock.setItems(currentSentence.getCorrect());
 
-        this.appendChildren([...this.createControls(), resultBlock, sourceBlock, checkButton]);
+        this.appendChildren([...this.createControls(), resultBlock, sourceBlock, checkButton, continueButton]);
     }
 
     protected createControls(): SelectComponent[] {
