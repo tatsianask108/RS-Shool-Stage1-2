@@ -24,13 +24,26 @@ export default class Game extends BaseComponent {
 
     constructor() {
         super({ className: 'game-container' });
-        this.startLevel(this.level.toString());
+        this.loadProgress();
+        this.fetchLevel();
     }
 
-    protected render() {
+    protected loadProgress() {
+        this.level = parseInt(localStorage.getItem('last-level') || '') || 1;
+        this.round = parseInt(localStorage.getItem('last-round') || '') || 0;
+    }
+
+    protected saveProgress() {
+        localStorage.setItem('last-level', this.level.toString());
+        localStorage.setItem('last-round', this.round.toString());
+    }
+
+    protected renderRound() {
+        this.saveProgress();
         this.destroyChildren();
 
         const round = this.data.rounds[this.round];
+
         const resultBlock = new Result(round);
 
         const currentSentence = resultBlock.getCurrentSentence();
@@ -70,7 +83,18 @@ export default class Game extends BaseComponent {
                 continueButton.hide();
                 checkButton.show();
             } else {
-                console.log('round ended');
+                if (this.data.rounds[this.round + 1]) {
+                    this.round++;
+                    this.renderRound();
+                } else if (this.level + 1 <= this.LEVEL_COUNT) {
+                    this.round = 0;
+                    this.level++;
+                    this.fetchLevel();
+                } else {
+                    this.round = 0;
+                    this.level = 1;
+                    this.fetchLevel();
+                }
             }
         });
 
@@ -128,7 +152,8 @@ export default class Game extends BaseComponent {
             })
         );
         levelComponent.addListener('change', () => {
-            this.startLevel(levelComponent.getNode().value);
+            this.level = parseInt(levelComponent.getNode().value);
+            this.fetchLevel();
         });
 
         const roundsComponent = new SelectComponent(
@@ -144,19 +169,17 @@ export default class Game extends BaseComponent {
         );
         roundsComponent.addListener('change', () => {
             this.round = +roundsComponent.getNode().value;
-            this.render();
+            this.renderRound();
         });
 
         return [levelComponent, roundsComponent];
     }
 
-    protected startLevel(level: string) {
-        this.level = parseInt(level);
-        this.round = 0;
-        fetch(this.URL_TEMPLATE.replace('%lvl%', level)).then(async (res) => {
+    protected fetchLevel() {
+        fetch(this.URL_TEMPLATE.replace('%lvl%', this.level.toString())).then(async (res) => {
             this.data = await res.json();
             console.log(this.data);
-            this.render();
+            this.renderRound();
         });
     }
 }
