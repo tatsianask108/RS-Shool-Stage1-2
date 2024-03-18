@@ -6,8 +6,9 @@
     background: center / cover no-repeat url('../../../assets/bg.jpg');
 }
 
-.login-page {
-    max-width: 400px;
+.login-block {
+    width: 350px;
+    height: 250px;
     border: 1px solid transparent;
     border-radius: 5px;
     padding: 10px;
@@ -42,9 +43,9 @@
 }
 
 .login-form__error {
-    min-height: 1.2rem;
+    min-height: 1.5rem;
     display: block;
-    font-size: 0.6rem;
+    font-size: 0.7rem;
     letter-spacing: 0.8px;
     color: red;
     position: relative;

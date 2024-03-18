@@ -53,7 +53,7 @@ export default class LoginPageComponent extends PageComponent {
         );
 
         const loginPage = new BaseComponent(
-            { className: 'login-page' },
+            { className: 'login-block' },
             new BaseComponent<HTMLParagraphElement>({
                 tag: 'p',
                 className: 'login-title',

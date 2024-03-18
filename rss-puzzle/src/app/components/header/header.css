@@ -1,5 +1,11 @@
 .header {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px 10px 10px;
+    max-width: 800px;
+    min-width: 700px;
+}
+
+.title {
+    font-size: 1.5rem;
 }

@@ -6,6 +6,7 @@ import './header.css';
 
 export default class HeaderComponent extends BaseComponent {
     constructor() {
+        const h1 = new BaseComponent<HTMLHeadElement>({ tag: 'h1', className: 'title', textContent: 'RSS-Puzzle' });
         const logout = new Button({
             className: ' button-logout',
             title: 'Logout',
@@ -17,6 +18,6 @@ export default class HeaderComponent extends BaseComponent {
             document.dispatchEvent(new Event('auth'));
         });
 
-        super({ tag: 'header' }, logout);
+        super({ tag: 'header', className: 'header' }, h1, logout);
     }
 }

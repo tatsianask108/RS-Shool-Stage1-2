@@ -6,8 +6,8 @@
     border: 1px solid #665f55;
     background: #ffffff;
     cursor: pointer;
-    padding: 0.3rem;
-    font-size: 0.8em;
+    padding: 0.8rem;
+    font-size: 1.2rem;
     margin-top: 0.3rem;
     transition: all 0.7s ease;
 }
@@ -21,4 +21,11 @@ button:disabled {
     background: #60ad7a;
     border: 1px solid transparent;
     color: #ffffff;
+}
+
+.button-game {
+    font-size: 0.8rem;
+    padding: 0.3rem;
+    margin-right: 20px;
+    width: 120px;
 }

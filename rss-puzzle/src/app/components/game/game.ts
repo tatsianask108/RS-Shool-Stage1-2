@@ -55,20 +55,20 @@ export default class Game extends BaseComponent {
         sourceBlock.initWords(currentSentence.getCorrect());
 
         const solutionButton = new Button({
-            className: 'button',
+            className: 'button button-game',
             id: 'solutionButton',
             textContent: 'Show solution',
         });
 
         const checkButton = new Button({
-            className: 'button',
+            className: 'button button-game',
             id: 'checkButton',
             textContent: 'Check',
             disabled: true,
         });
 
         const continueButton = new Button({
-            className: 'button',
+            className: 'button button-game',
             id: 'continueButton',
             textContent: 'Continue',
         });
@@ -133,14 +133,13 @@ export default class Game extends BaseComponent {
             checkButton.hide();
         });
 
-        this.appendChildren([
-            ...this.createControls(),
-            resultBlock,
-            sourceBlock,
+        const gameButtons = new BaseComponent(
+            { className: 'game-buttons' },
             solutionButton,
             checkButton,
-            continueButton,
-        ]);
+            continueButton
+        );
+        this.appendChildren([...this.createControls(), resultBlock, sourceBlock, gameButtons]);
     }
 
     protected createControls(): SelectComponent[] {
@@ -171,7 +170,6 @@ export default class Game extends BaseComponent {
             this.round = +roundsComponent.getNode().value;
             this.renderRound();
         });
-
         return [levelComponent, roundsComponent];
     }
 

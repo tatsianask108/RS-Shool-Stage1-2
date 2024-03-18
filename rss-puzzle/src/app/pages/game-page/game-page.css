@@ -3,9 +3,14 @@
     height: 100%;
     position: relative;
     padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .button-logout {
     width: 30px;
     height: 30px;
+    margin-right: 10%;
 }
