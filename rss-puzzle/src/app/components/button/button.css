@@ -6,8 +6,9 @@
     border: 1px solid #665f55;
     background: #ffffff;
     cursor: pointer;
-    padding: 0.6rem;
-    margin-top: 0.6rem;
+    padding: 0.3rem;
+    font-size: 0.8em;
+    margin-top: 0.3rem;
     transition: all 0.7s ease;
 }
 

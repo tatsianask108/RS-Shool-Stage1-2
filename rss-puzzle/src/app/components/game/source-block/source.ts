@@ -11,19 +11,74 @@ export default class Source extends BaseComponent {
 
     constructor(protected result: Result) {
         super({ className: 'source-block' });
+        window.addEventListener('resize', () => {
+            // @todo
+            Object.values(document.querySelectorAll('.puzzle-background')).map((el) => {
+                (el as HTMLElement).style.width = `${this.result.getNode().offsetWidth}px`;
+            });
+        });
     }
 
     public addCallback(callback: TCallback) {
         this.callbacks.push(callback);
     }
 
-    public setItems(words: string[]) {
-        this.words = words.map((word) => new Word(word));
+    public initWords(words: string[]) {
+        this.destroyChildren();
+
+        const length = words.reduce((sum, item) => sum + item.length, 0);
+        let left = 100;
+
+        // set size
+        this.words = words.map((item) => {
+            const size = Math.floor((item.length / length) * 100);
+            const word = new Word(item, size, this.result.getImage());
+            left -= size;
+            return word;
+        });
+
+        // correct size
+        const sortedWords = Object.values(this.words).sort((a, b) => a.getValue().length - b.getValue().length);
+        for (let i = 0; i < left; i++) {
+            const word = sortedWords[i];
+            if (!word) {
+                return;
+            }
+            word.setWidth(word.getWidth() + 1);
+        }
+
+        // set background size and position
+        left = 0;
+        const paddingY = (this.result.getCurrentSentenceNumber() / this.result.getSentencesCount()) * 100;
+        this.words.map((word) => {
+            word.setPadding(`-${left}%`, `-${paddingY * 10}%`);
+            left += word.getWidth();
+
+            word
+                .getNode()
+                .querySelector('img')
+                ?.addEventListener(
+                    'load',
+                    () => {
+                        this.updateWordBackground(word);
+                    },
+                    { once: true }
+                );
+        });
+
         this.render();
     }
 
-    public getItems() {
-        return this.words;
+    public updateWordBackground(word: Word) {
+        const backgroundSize = this.result.getNode().offsetWidth;
+        if (!backgroundSize) {
+            return;
+        }
+        word.setBackgroundWidth(`${backgroundSize}px`);
+    }
+
+    public getWords() {
+        return Object.values(this.words);
     }
 
     protected render() {
@@ -39,7 +94,6 @@ export default class Source extends BaseComponent {
                     if (this.getNode().contains(word.getNode())) {
                         sentence.add(word);
                     } else {
-                        sentence.remove(word);
                         this.append(word);
                     }
                     this.callbacks.forEach((callback) => callback(word));

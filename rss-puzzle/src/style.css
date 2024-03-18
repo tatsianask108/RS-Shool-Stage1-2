@@ -14,14 +14,14 @@
     box-sizing: border-box;
     font-family: 'Forum', sans-serif;
     letter-spacing: 1px;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: bold;
     color: rgb(59, 58, 58);
 }
 
 body {
     height: 100vh;
-    }
+}
 
 button {
     padding: 0;

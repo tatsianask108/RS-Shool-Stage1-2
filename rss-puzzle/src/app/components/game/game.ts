@@ -30,7 +30,8 @@ export default class Game extends BaseComponent {
     protected render() {
         this.destroyChildren();
 
-        const resultBlock = new Result(this.data.rounds[this.round]);
+        const round = this.data.rounds[this.round];
+        const resultBlock = new Result(round);
 
         const currentSentence = resultBlock.getCurrentSentence();
         if (!currentSentence) {
@@ -38,7 +39,7 @@ export default class Game extends BaseComponent {
         }
 
         const sourceBlock = new Source(resultBlock);
-        sourceBlock.setItems(currentSentence.getCorrect());
+        sourceBlock.initWords(currentSentence.getCorrect());
 
         const solutionButton = new Button({
             className: 'button',
@@ -65,7 +66,7 @@ export default class Game extends BaseComponent {
         });
         continueButton.addListener('click', () => {
             if (resultBlock.nextSentence()) {
-                sourceBlock.setItems(resultBlock.getCurrentSentence()?.getCorrect() as string[]);
+                sourceBlock.initWords(resultBlock.getCurrentSentence()?.getCorrect() as string[]);
                 continueButton.hide();
                 checkButton.show();
             } else {
@@ -98,7 +99,8 @@ export default class Game extends BaseComponent {
                 throw new Error();
             }
 
-            sourceBlock.getItems().map((word) => {
+            sentence.clearGaps();
+            sourceBlock.getWords().map((word) => {
                 sentence.add(word);
             });
             sentence.finish();
