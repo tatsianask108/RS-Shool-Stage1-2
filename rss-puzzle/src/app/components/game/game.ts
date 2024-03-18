@@ -40,6 +40,12 @@ export default class Game extends BaseComponent {
         const sourceBlock = new Source(resultBlock);
         sourceBlock.setItems(currentSentence.getCorrect());
 
+        const solutionButton = new Button({
+            className: 'button',
+            id: 'solutionButton',
+            textContent: 'Show solution',
+        });
+
         const checkButton = new Button({
             className: 'button',
             id: 'checkButton',
@@ -86,7 +92,29 @@ export default class Game extends BaseComponent {
             }
         });
 
-        this.appendChildren([...this.createControls(), resultBlock, sourceBlock, checkButton, continueButton]);
+        solutionButton.addListener('click', () => {
+            const sentence = resultBlock.getCurrentSentence();
+            if (!sentence) {
+                throw new Error();
+            }
+
+            sourceBlock.getItems().map((word) => {
+                sentence.add(word);
+            });
+            sentence.finish();
+
+            continueButton.show();
+            checkButton.hide();
+        });
+
+        this.appendChildren([
+            ...this.createControls(),
+            resultBlock,
+            sourceBlock,
+            solutionButton,
+            checkButton,
+            continueButton,
+        ]);
     }
 
     protected createControls(): SelectComponent[] {

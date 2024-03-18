@@ -18,27 +18,33 @@ export default class Source extends BaseComponent {
     }
 
     public setItems(words: string[]) {
-        this.words = words.sort(() => 0.5 - Math.random()).map((word) => new Word(word));
+        this.words = words.map((word) => new Word(word));
         this.render();
+    }
+
+    public getItems() {
+        return this.words;
     }
 
     protected render() {
         this.destroyChildren();
-        this.words.map((word) => {
-            word.addListener('click', () => {
-                const sentence = this.result.getCurrentSentence();
-                if (!sentence) {
-                    throw new Error();
-                }
-                if (this.getNode().contains(word.getNode())) {
-                    sentence.add(word);
-                } else {
-                    sentence.remove(word);
-                    this.append(word);
-                }
-                this.callbacks.forEach((callback) => callback(word));
+        Object.values(this.words)
+            .sort(() => 0.5 - Math.random())
+            .map((word) => {
+                word.addListener('click', () => {
+                    const sentence = this.result.getCurrentSentence();
+                    if (!sentence) {
+                        throw new Error();
+                    }
+                    if (this.getNode().contains(word.getNode())) {
+                        sentence.add(word);
+                    } else {
+                        sentence.remove(word);
+                        this.append(word);
+                    }
+                    this.callbacks.forEach((callback) => callback(word));
+                });
+                this.append(word);
             });
-            this.append(word);
-        });
     }
 }
