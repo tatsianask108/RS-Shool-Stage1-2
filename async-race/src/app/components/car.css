@@ -1,0 +1,28 @@
+.car__wrapper {
+    border: 1px solid var(--black-light);
+    border-radius: 1rem;
+    padding: 0.5rem;
+    margin: 0.5rem;
+}
+
+.button {
+    border: 1px solid var(--black-light);
+    border-radius: 0.5rem;
+    padding: 0.2rem;
+    margin: 0.2rem;
+}
+
+.car__lower-block {
+  border-bottom: 1px dashed var(--black);
+  position: relative;
+  margin-top: 1.5rem;
+}
+
+/* .car__svg {
+  height: 30px;
+} */
+
+svg {
+  position: absolute;
+  bottom: 0;
+}
