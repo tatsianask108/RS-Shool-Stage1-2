@@ -1,4 +1,4 @@
-import { createElement } from '../utils';
+import { createElement } from '../../utils';
 
 import './car.css';
 
@@ -23,8 +23,8 @@ export default function createCar(el: ICar) {
     const lowerBlock = createElement({
         className: 'car__lower-block',
         children: [
-            createElement({ tag: 'button', className: 'button', text: 'A' }),
-            createElement({ tag: 'button', className: 'button', text: 'B' }),
+            createElement({ tag: 'button', className: 'button', text: 'Start' }),
+            createElement({ tag: 'button', className: 'button', text: 'Stop' }),
             svg,
         ],
     });

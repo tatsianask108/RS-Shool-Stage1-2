@@ -1,2 +1,2 @@
 import './style.css';
-import './app/pages/garage';
+import './app/view/view';

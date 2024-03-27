@@ -1,0 +1,23 @@
+.wrapper {
+    /* max-width: 1440px; */
+    padding: 2rem;
+}
+.garage-page {
+    padding: 2rem;
+}
+
+.winners-table {
+    display: flex;
+    gap: 15px;
+    text-transform: capitalize;
+    border-top: 1px solid var(--black-light);
+}
+
+.column {
+    border-right: 1px solid var(--black-light);
+}
+.column p {
+    padding: 5px;
+    border-bottom: 1px solid var(--black-light);
+    text-transform: uppercase;
+}
