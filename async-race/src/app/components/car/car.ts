@@ -1,3 +1,4 @@
+import { deleteCar } from '../../fetch-api';
 import { createElement } from '../../utils';
 
 import './car.css';
@@ -10,13 +11,23 @@ export interface ICar {
 }
 
 export default function createCar(el: ICar) {
+    const selectButton = createElement({ tag: 'button', className: 'button', text: 'Select' });
+    const deleteButton = createElement({ tag: 'button', className: 'button', text: 'Delete' });
+    const carName = createElement({ tag: 'span', className: 'car__name', text: `${el.name}` });
+
+    deleteButton.addEventListener('click', () => {
+        const id = deleteButton.closest('.car__wrapper')?.id || '';
+        deleteCar(id);
+        // dispatch event renderPage();
+    });
+
+    selectButton.addEventListener('click', () => {
+        console.log('tets');
+    });
+
     const upperBlock = createElement({
         className: 'car__upper-block',
-        children: [
-            createElement({ tag: 'button', className: 'button', text: 'Select' }),
-            createElement({ tag: 'button', className: 'button', text: 'Delete' }),
-            createElement({ tag: 'span', className: 'car__name', text: `${el.name}` }),
-        ],
+        children: [selectButton, deleteButton, carName],
     });
     const svg = createElement({ tag: 'div', innerHTML: CAR_SVG });
     svg.style.fill = el.color;

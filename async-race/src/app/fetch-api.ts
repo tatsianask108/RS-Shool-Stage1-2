@@ -1,8 +1,14 @@
-import { ICar } from './components/car/car';
+// import { ICar } from './components/car/car';
 
 const GARAGE_URL = 'http://127.0.0.1:3000/garage';
 const FIRST_PAGE = '1';
 const CARS_PER_PAGE = '7';
+
+interface ICar {
+    name: string;
+    color: string;
+    id: number;
+}
 
 export interface ISearchParams extends Record<string, string> {
     _page: string;
@@ -49,6 +55,21 @@ export async function postCar(data: object) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
+        });
+        const result = response.body;
+        return result;
+    } catch (error) {
+        if (error instanceof Error) {
+            console.error(error.message);
+        }
+    }
+    return {};
+}
+
+export async function deleteCar(id: string) {
+    try {
+        const response = await fetch(`http://127.0.0.1:3000/garage/${id}`, {
+            method: 'DELETE',
         });
         const result = response.body;
         return result;

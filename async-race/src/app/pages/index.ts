@@ -2,7 +2,7 @@ import { createElement } from '../utils';
 import renderGarage from './garage';
 /* import renderWinners from './winners'; */
 
-import '../styles/view.css';
+import '../styles/index.css';
 
 const wrapper = createElement({ className: 'wrapper' });
 document.body.append(wrapper);

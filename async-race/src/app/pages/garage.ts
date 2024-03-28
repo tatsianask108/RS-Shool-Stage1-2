@@ -12,6 +12,7 @@ function renderForms() {
         e.preventDefault();
 
         const response = await postCar(Object.fromEntries(new FormData(formCreate)));
+        // dispatch event renderPage();
         return response;
     });
 
@@ -30,9 +31,9 @@ function renderButtons() {
 
 function renderCarsContainer(cars: ICar[]) {
     const carsContainer =
-        document.getElementById('cars-container') ||
+        document.getElementById('carsContainer') ||
         createElement({
-            id: 'cars-container',
+            id: 'carsContainer',
             className: 'cars-container',
         });
 
@@ -58,7 +59,7 @@ function renderPage(current = 1) {
 
     topElement.append(carsCountElement, currentPageElement);
 
-    function updateGarageState(data: { cars: ICar[]; count: number }) {
+    function updateGarageView(data: { cars: ICar[]; count: number }) {
         renderCarsContainer(data.cars);
         count = data.count;
         currentPageElement.textContent = `Page#${page}`;
@@ -70,15 +71,19 @@ function renderPage(current = 1) {
     const nextButton = createElement<HTMLButtonElement>({ tag: 'button', className: 'button', text: 'next' });
 
     getCars({ _page: page.toString(), _limit: limit.toString() }).then((data) => {
-        updateGarageState(data);
+        updateGarageView(data);
+        if (count <= CARS_PER_PAGE) {
+            nextButton.disabled = true;
+        }
     });
 
     prevButton.disabled = true;
+
     prevButton.addEventListener('click', async () => {
         if (page > 1) {
             page -= 1;
             const data = await getCars({ _page: page.toString(), _limit: limit.toString() });
-            updateGarageState(data);
+            updateGarageView(data);
             window.scrollTo({ top: topElement.offsetTop });
             nextButton.disabled = false;
         }
@@ -90,7 +95,7 @@ function renderPage(current = 1) {
     nextButton.addEventListener('click', async () => {
         page += 1;
         const data = await getCars({ _page: page.toString(), _limit: limit.toString() });
-        updateGarageState(data);
+        updateGarageView(data);
         window.scrollTo({ top: topElement.offsetTop });
 
         prevButton.disabled = false;
