@@ -13,6 +13,7 @@
 }
 
 .car__lower-block {
+  display: flex;
   border-bottom: 1px dashed var(--black);
   position: relative;
   margin-top: 1.5rem;

@@ -1,5 +1,4 @@
 .wrapper {
-    /* max-width: 1440px; */
     padding: 2rem;
 }
 .garage-page {
@@ -8,16 +7,29 @@
 
 .winners-table {
     display: flex;
-    gap: 15px;
+    /* gap: 15px; */
     text-transform: capitalize;
-    border-top: 1px solid var(--black-light);
 }
 
 .column {
+    border-top: 1px solid var(--black-light);
     border-right: 1px solid var(--black-light);
+    border-bottom: 1px solid var(--black-light);
+    padding: .5rem;
+    width: max-content;
 }
+
+.svg {
+    position: relative;
+    color: transparent;
+    min-width: 6rem;
+}
+
 .column p {
     padding: 5px;
-    border-bottom: 1px solid var(--black-light);
     text-transform: uppercase;
+}
+
+.svg {
+    position: relative;
 }

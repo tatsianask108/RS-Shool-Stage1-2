@@ -16,7 +16,7 @@ export function createElement(options: IOptions) {
     const element = document.createElement(tag);
     element.textContent = text;
     if (className) {
-        element.classList.add(className);
+        element.className = className;
     }
 
     if (innerHTML) {
@@ -48,3 +48,7 @@ export function createInputElement(options: IOptions) {
     element.name = name;
     return element;
 }
+
+// function getRandomName() {}
+// function getRandomColor() {}
+// function createRandomCars() {}

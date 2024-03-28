@@ -12,20 +12,32 @@ export interface IWinner {
 function createWinners(data: IWinner[]) {
     const winnersContainer = createElement({ text: `Winners (${data.length}) Page#1`, className: 'winners-page' });
 
-    // const numberContainer = createElement({ className: 'number-container', text: 'Number' });
-    // const carContainer = createElement({ className: 'car-container', text: 'Car' });
+    const numberContainer = createElement({ className: 'column', text: 'Number' });
+    const carImgContainer = createElement({ className: 'column', text: 'Car' });
+    const carContainer = createElement({ className: 'column', text: 'Model' });
     const winsContainer = createElement({ className: 'column', text: 'Wins' });
     const timeContainer = createElement({ className: 'column', text: 'Best time (seconds)' });
 
-    const winnersTable = createElement({ className: 'winners-table', children: [winsContainer, timeContainer] });
+    const winnersTable = createElement({
+        className: 'winners-table',
+        children: [numberContainer, carImgContainer, carContainer, winsContainer, timeContainer],
+    });
 
     if (data.length) {
-        data.forEach((el) => {
-            // const numberElement = createElement({ tag: 'p' });
-            // numberElement.textContent = el.index;
+        data.forEach((el, index) => {
+            const numberElement = createElement({ tag: 'p' });
+            numberElement.textContent = (index + 1).toString();
 
-            // const carElement = createElement({ tag: 'p' });
-            // carElement.textContent = el.;
+            const car = document.getElementById(`${el.id}`);
+            const carElement = createElement({ tag: 'p' });
+            const carModel = car?.querySelector('.car__name')?.textContent as string;
+            carElement.textContent = carModel;
+
+            const carImgElement = createElement({ tag: 'p', className: 'svg' });
+            carImgElement.textContent = 'p';
+            const svg = document.getElementById(`svg-${el.id}`) as HTMLElement;
+            const clonedNode = svg.cloneNode(true);
+            carImgElement.append(clonedNode);
 
             const winsElement = createElement({ tag: 'p' });
             winsElement.textContent = el.wins.toString();
@@ -33,6 +45,9 @@ function createWinners(data: IWinner[]) {
             const timeElement = createElement({ tag: 'p' });
             timeElement.textContent = el.time.toString();
 
+            numberContainer.append(numberElement);
+            carImgContainer.append(carImgElement);
+            carContainer.append(carElement);
             winsContainer.append(winsElement);
             timeContainer.append(timeElement);
         });

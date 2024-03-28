@@ -26,7 +26,7 @@ export async function getWinners(url: string) {
 
 const newCar = {
     name: 'Test',
-    color: 'Black Test',
+    color: '#FFF',
 };
 
 export async function fetchCar() {
@@ -38,7 +38,8 @@ export async function fetchCar() {
             },
             body: JSON.stringify(newCar),
         });
-        const result = await response.json();
+        const result = response.body;
+        console.log(result);
         return result;
     } catch (error) {
         if (error instanceof Error) {

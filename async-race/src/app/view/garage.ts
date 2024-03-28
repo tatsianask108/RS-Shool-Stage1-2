@@ -1,11 +1,11 @@
 import createCar, { ICar } from '../components/car/car';
 import createForm from '../components/forms/forms';
-import { getCars } from '../fetch-api';
+import { fetchCar, getCars } from '../fetch-api';
 import { createElement } from '../utils';
 
 function renderForms() {
-    const formCreate = createForm('POST', 'Create', 'formCreate');
-    const formUpdate = createForm('PUT', 'Update', 'formUpdate');
+    const formCreate = createForm('Create', 'formCreate');
+    const formUpdate = createForm('Update', 'formUpdate');
     return [formCreate, formUpdate];
 }
 
@@ -23,6 +23,7 @@ function renderCars(data: ICar[]) {
     if (data.length) {
         data.forEach((el) => {
             const car = createCar(el);
+            car.id = el.id.toString();
             carsContainer.append(car);
         });
     }
@@ -40,14 +41,10 @@ export default async function renderGarage() {
     return garagePage;
 }
 
-// function addListeners() {
-//     const formCreate = document.getElementById('formCreate') as HTMLFormElement;
-//     formCreate?.addEventListener('submit', (e) => {
-//         e.preventDefault();
+const formCreate = document.getElementById('formCreate') as HTMLFormElement;
+formCreate?.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-//         const response = fetchCar();
-//         console.log(response);
-//     });
-// }
-
-// addListeners();
+    const response = await fetchCar();
+    console.log(response);
+});

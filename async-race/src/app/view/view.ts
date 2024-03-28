@@ -28,8 +28,9 @@ function renderPaginationButtons() {
 (async () => {
     renderViewButtons();
     const garage = await renderGarage();
-    const winners = await renderWinners();
     wrapper.append(garage);
+    const winners = await renderWinners();
+
     renderPaginationButtons();
 
     const toWinnersButton = document.getElementById('winnersButton') as HTMLButtonElement;
