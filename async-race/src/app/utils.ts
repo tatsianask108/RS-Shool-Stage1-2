@@ -10,8 +10,10 @@ interface IOptions {
     action?: string;
     method?: string;
     id?: string;
+    disabled?: boolean;
+    required?: boolean;
 }
-export function createElement(options: IOptions) {
+export function createElement<T extends HTMLElement = HTMLElement>(options: IOptions): T {
     const { tag = 'div', text = '', className = '', children = [], innerHTML = '', id = '' } = options;
     const element = document.createElement(tag);
     element.textContent = text;
@@ -28,7 +30,7 @@ export function createElement(options: IOptions) {
     }
 
     element.append(...children);
-    return element;
+    return element as T;
 }
 
 export function createFormElement(options: IOptions) {
@@ -41,11 +43,12 @@ export function createFormElement(options: IOptions) {
 }
 
 export function createInputElement(options: IOptions) {
-    const { tag = 'input', type = '', value = '', name = '' } = options;
+    const { tag = 'input', type = '', value = '', name = '', required = false } = options;
     const element = document.createElement(tag) as HTMLInputElement;
     element.type = type;
     element.value = value;
     element.name = name;
+    element.required = required;
     return element;
 }
 

@@ -1,8 +1,6 @@
 import { getWinners } from '../fetch-api';
 import { createElement } from '../utils';
 
-import '../styles/view.css';
-
 export interface IWinner {
     id: number;
     wins: number;

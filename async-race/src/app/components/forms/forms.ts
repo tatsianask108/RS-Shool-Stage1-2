@@ -1,8 +1,8 @@
 import { createElement, createFormElement, createInputElement } from '../../utils';
 
-export default function createForm(buttonText: string, id: string) {
-    const textInput = createInputElement({ type: 'text', name: 'text-input' });
-    const colorInput = createInputElement({ type: 'color', name: 'color-input', value: '#ff0000' });
+export default function createGarageForm(buttonText: string, id: string) {
+    const textInput = createInputElement({ type: 'text', name: 'name', required: true });
+    const colorInput = createInputElement({ type: 'color', name: 'color', value: '#ff0000' });
     const button = createElement({ tag: 'button', type: 'submit', className: 'button', text: buttonText });
     const form = createFormElement({
         action: '#',

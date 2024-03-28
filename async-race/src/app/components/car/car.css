@@ -12,11 +12,15 @@
     margin: 0.2rem;
 }
 
+button:disabled {
+    opacity: 0.5;
+}
+
 .car__lower-block {
-  display: flex;
-  border-bottom: 1px dashed var(--black);
-  position: relative;
-  margin-top: 1.5rem;
+    display: flex;
+    border-bottom: 1px dashed var(--black);
+    position: relative;
+    margin-top: 1.5rem;
 }
 
 /* .car__svg {
@@ -24,6 +28,6 @@
 } */
 
 svg {
-  position: absolute;
-  bottom: 0;
+    position: absolute;
+    bottom: 0;
 }
