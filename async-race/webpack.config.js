@@ -21,14 +21,11 @@ const baseConfig = {
         ],
     },
     resolve: {
-        extensions: ['.ts', '.js'],
-        // alias: {
-        //     '@components': path.resolve(__dirname, 'src/app/components'),
-        //     '@pages': path.resolve(__dirname, 'src/app/pages'),
-        //     '@types': path.resolve(__dirname, 'src/app/types'),
-        //     '@app': path.resolve(__dirname, 'src/app/'),
-        //     '@data': path.resolve(__dirname, 'src/app/data'),
-        // },
+        extensions: ['.ts', '.js', '.svg'],
+        alias: {
+            '@app': path.resolve(__dirname, 'src/app'),
+            // '@assets': path.resolve(__dirname, 'src/assets'),
+        },
     },
     output: {
         filename: 'main.js',

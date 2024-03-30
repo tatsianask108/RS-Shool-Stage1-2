@@ -1,118 +1,158 @@
-import createCar, { ICar } from '../components/car/car';
+import createCarElement, { EventActionEnum, ICarElement } from '../components/car/car';
 import createGarageForm from '../components/forms/forms';
-import { postCar, getCars } from '../fetch-api';
+import { postCar, getCars, ICar, updateCar, deleteCar } from '../fetch-api';
 import { createElement } from '../utils';
 
 const CARS_PER_PAGE = 7;
 
-function renderForms() {
-    const formCreate = createGarageForm('Create', 'formCreate');
-
-    formCreate.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const response = await postCar(Object.fromEntries(new FormData(formCreate)));
-        // dispatch event renderPage();
-        return response;
-    });
-
-    const formUpdate = createGarageForm('Update', 'formUpdate');
-    return [formCreate, formUpdate];
+interface GarageInterface extends HTMLElement {
+    cars: ICarElement[];
+    page: number;
+    total: number;
+    load: (page?: number) => Promise<void>;
 }
 
-function renderButtons() {
-    return createElement({
-        children: [
-            createElement({ tag: 'button', className: 'button', text: 'Race' }),
-            createElement({ tag: 'button', className: 'button', text: 'Generate cars' }),
-        ],
-    });
-}
+function renderGarage(formUpdate: HTMLFormElement) {
+    const self =
+        (document.getElementById('garage') as GarageInterface) || createElement<GarageInterface>({ id: 'garage' });
 
-function renderCarsContainer(cars: ICar[]) {
-    const carsContainer =
+    if (self.hasAttribute('data-rendered')) {
+        return self;
+    }
+
+    self.page = 1;
+
+    const infoCountElement = createElement<HTMLSpanElement>({ tag: 'span' });
+    const infoCountPage = createElement<HTMLSpanElement>({ tag: 'span' });
+
+    const carsContainerElement =
         document.getElementById('carsContainer') ||
         createElement({
             id: 'carsContainer',
             className: 'cars-container',
         });
 
-    carsContainer.innerHTML = '';
-
-    cars.forEach((el: ICar) => {
-        const car = createCar(el);
-        car.id = el.id.toString();
-        carsContainer.append(car);
-    });
-
-    return carsContainer;
-}
-
-function renderPage(current = 1) {
-    let page = current;
-    let count = 0;
-    const limit = CARS_PER_PAGE;
-
-    const topElement = createElement<HTMLDivElement>({ tag: 'div' });
-    const carsCountElement = createElement<HTMLSpanElement>({ tag: 'span' });
-    const currentPageElement = createElement<HTMLSpanElement>({ tag: 'span' });
-
-    topElement.append(carsCountElement, currentPageElement);
-
-    function updateGarageView(data: { cars: ICar[]; count: number }) {
-        renderCarsContainer(data.cars);
-        count = data.count;
-        currentPageElement.textContent = `Page#${page}`;
-        carsCountElement.textContent = `Garage(${count}) `;
-    }
-
-    const containerElement = renderCarsContainer([]);
-    const prevButton = createElement<HTMLButtonElement>({ tag: 'button', className: 'button', text: 'prev' });
-    const nextButton = createElement<HTMLButtonElement>({ tag: 'button', className: 'button', text: 'next' });
-
-    getCars({ _page: page.toString(), _limit: limit.toString() }).then((data) => {
-        updateGarageView(data);
-        if (count <= CARS_PER_PAGE) {
-            nextButton.disabled = true;
-        }
-    });
+    const prevButton = createElement<HTMLButtonElement>({ tag: 'button', className: 'button', textContent: 'prev' });
+    const nextButton = createElement<HTMLButtonElement>({ tag: 'button', className: 'button', textContent: 'next' });
 
     prevButton.disabled = true;
 
-    prevButton.addEventListener('click', async () => {
-        if (page > 1) {
-            page -= 1;
-            const data = await getCars({ _page: page.toString(), _limit: limit.toString() });
-            updateGarageView(data);
-            window.scrollTo({ top: topElement.offsetTop });
-            nextButton.disabled = false;
-        }
-        if (page <= 1) {
-            prevButton.disabled = true;
+    self.load = async (page: number = self.page) => {
+        return getCars({ _page: page.toString(), _limit: CARS_PER_PAGE.toString() }).then(
+            (data: { cars: ICar[]; count: number }) => {
+                const carElements = data.cars.map((car) => {
+                    const el = createCarElement(car);
+                    el.addEventListener(EventActionEnum.DELETE, async () => {
+                        await deleteCar(car.id.toString());
+                        self.load();
+                    });
+                    el.addEventListener(EventActionEnum.SELECT, () => {
+                        formUpdate.classList.remove('form-disabled');
+                        // eslint-disable-next-line no-restricted-syntax
+                        for (const [key, value] of Object.entries(el.carData)) {
+                            const input = formUpdate.elements.namedItem(key) as HTMLInputElement;
+                            if (input) {
+                                input.value = value;
+                            }
+                        }
+                    });
+                    return el;
+                });
+                self.cars = carElements;
+
+                // add car events
+
+                // append
+                Array.from(carsContainerElement.children).forEach((el) => {
+                    el.remove();
+                });
+                carsContainerElement.append(...carElements);
+
+                self.total = data.count;
+                infoCountPage.textContent = `Page#${page}`;
+                infoCountElement.textContent = `Garage(${data.count}) `;
+
+                // next button
+                if (page * CARS_PER_PAGE >= self.total) {
+                    nextButton.disabled = true;
+                } else {
+                    nextButton.disabled = false;
+                }
+
+                // prev button
+                if (page > 1) {
+                    prevButton.disabled = false;
+                } else {
+                    prevButton.disabled = true;
+                }
+
+                self.page = page;
+            }
+        );
+    };
+
+    // set actions
+    nextButton.addEventListener('click', () => {
+        nextButton.disabled = true;
+        self.load(self.page + 1);
+    });
+    prevButton.addEventListener('click', () => {
+        prevButton.disabled = true;
+        if (self.page > 1) {
+            self.load(self.page - 1);
         }
     });
 
-    nextButton.addEventListener('click', async () => {
-        page += 1;
-        const data = await getCars({ _page: page.toString(), _limit: limit.toString() });
-        updateGarageView(data);
-        window.scrollTo({ top: topElement.offsetTop });
+    self.append(infoCountElement, infoCountPage, carsContainerElement, prevButton, nextButton);
 
-        prevButton.disabled = false;
-        if (page * limit >= count) {
-            nextButton.disabled = true;
-        }
-    });
+    self.setAttribute('data-rendered', '');
+    self.load();
 
-    const element = createElement({ children: [topElement, containerElement, prevButton, nextButton] });
-    return element;
+    return self;
 }
 
-export default async function renderGarage() {
+export default async function renderGaragePage() {
+    // page
     const garagePage = createElement({ className: 'garage-page' });
-    const forms = renderForms();
-    const buttons = renderButtons();
-    const page = renderPage();
-    garagePage.append(...forms, buttons, page);
+
+    // elements of the page
+    const formCreate = createGarageForm('Create');
+    const formUpdate = createGarageForm('Update');
+    formUpdate.classList.add('form-disabled');
+
+    const actions = createElement({
+        childrenProp: [
+            createElement({ tag: 'button', className: 'button', textContent: 'Race' }),
+            createElement({ tag: 'button', className: 'button', textContent: 'Generate cars' }),
+        ],
+    });
+    const garage = renderGarage(formUpdate);
+
+    formCreate.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        await postCar(Object.fromEntries(new FormData(formCreate)));
+        garage.load();
+        formCreate.reset();
+    });
+
+    formUpdate.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        formUpdate.classList.add('form-disabled');
+        const id = (formUpdate.elements.namedItem('id') as HTMLInputElement)?.value;
+        const name = (formUpdate.elements.namedItem('name') as HTMLInputElement)?.value;
+        const color = (formUpdate.elements.namedItem('color') as HTMLInputElement)?.value;
+
+        if (!id || !name || !color) {
+            return;
+        }
+
+        const car: ICar = { id: parseInt(id, 10), name, color };
+
+        await updateCar(parseInt(id, 10), car);
+        garage.load();
+        formUpdate.reset();
+    });
+
+    garagePage.append(formCreate, formUpdate, actions, garage);
     return garagePage;
 }

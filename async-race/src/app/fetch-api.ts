@@ -1,10 +1,8 @@
-// import { ICar } from './components/car/car';
-
 const GARAGE_URL = 'http://127.0.0.1:3000/garage';
 const FIRST_PAGE = '1';
 const CARS_PER_PAGE = '7';
 
-interface ICar {
+export interface ICar {
     name: string;
     color: string;
     id: number;
@@ -34,6 +32,19 @@ export async function getCars(
     return { cars: [], count: 0 };
 }
 
+export async function getCar(url: string) {
+    try {
+        const response = await fetch(url);
+        const json = await response.json();
+        return json;
+    } catch (error) {
+        if (error instanceof Error) {
+            console.error(error.message);
+        }
+    }
+    return {};
+}
+
 export async function getWinners(url: string) {
     try {
         const response = await fetch(url);
@@ -49,15 +60,14 @@ export async function getWinners(url: string) {
 
 export async function postCar(data: object) {
     try {
-        const response = await fetch('http://127.0.0.1:3000/garage', {
+        const response = await fetch(GARAGE_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
         });
-        const result = response.body;
-        return result;
+        return response.body;
     } catch (error) {
         if (error instanceof Error) {
             console.error(error.message);
@@ -68,11 +78,27 @@ export async function postCar(data: object) {
 
 export async function deleteCar(id: string) {
     try {
-        const response = await fetch(`http://127.0.0.1:3000/garage/${id}`, {
+        await fetch(`${GARAGE_URL}/${id}`, {
             method: 'DELETE',
         });
-        const result = response.body;
-        return result;
+    } catch (error) {
+        if (error instanceof Error) {
+            console.error(error.message);
+        }
+    }
+    return {};
+}
+
+export async function updateCar(id: ICar['id'], data: Partial<ICar>) {
+    try {
+        const response = await fetch(`${GARAGE_URL}/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        return response;
     } catch (error) {
         if (error instanceof Error) {
             console.error(error.message);

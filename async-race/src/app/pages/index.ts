@@ -1,6 +1,6 @@
 import { createElement } from '../utils';
-import renderGarage from './garage';
-/* import renderWinners from './winners'; */
+import renderGaragePage from './garage';
+import renderWinnersPage from './winners';
 
 import '../styles/index.css';
 
@@ -9,9 +9,10 @@ document.body.append(wrapper);
 
 function renderViewButtons() {
     const element = createElement({
-        children: [
-            createElement({ tag: 'button', className: 'button', text: 'To Garage', id: 'garageButton' }),
-            createElement({ tag: 'button', className: 'button', text: 'To Winners', id: 'winnersButton' }),
+        className: 'switch-pages-buttons',
+        childrenProp: [
+            createElement({ tag: 'button', className: 'button', textContent: 'To Garage', id: 'garageButton' }),
+            createElement({ tag: 'button', className: 'button', textContent: 'To Winners', id: 'winnersButton' }),
         ],
     });
     wrapper.append(element);
@@ -19,20 +20,19 @@ function renderViewButtons() {
 
 (async () => {
     renderViewButtons();
-    const garage = await renderGarage();
-    wrapper.append(garage);
-    // const winners = await renderWinners();
-    const winners = document.createElement('div');
+    const garagePage = await renderGaragePage();
+    wrapper.append(garagePage);
+    const winners = await renderWinnersPage();
 
     const toWinnersButton = document.getElementById('winnersButton') as HTMLButtonElement;
     toWinnersButton?.addEventListener('click', async () => {
-        garage?.remove();
+        garagePage?.remove();
         wrapper.insertBefore(winners, wrapper.children[1]);
     });
 
     const toGarageButton = document.getElementById('garageButton') as HTMLButtonElement;
     toGarageButton?.addEventListener('click', () => {
         winners?.remove();
-        wrapper.insertBefore(garage, wrapper.children[1]);
+        wrapper.insertBefore(garagePage, wrapper.children[1]);
     });
 })();
