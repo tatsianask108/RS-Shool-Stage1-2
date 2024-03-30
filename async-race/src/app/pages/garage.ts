@@ -1,7 +1,7 @@
 import createCarElement, { EventActionEnum, ICarElement } from '../components/car/car';
 import createGarageForm from '../components/forms/forms';
 import { postCar, getCars, ICar, updateCar, deleteCar } from '../fetch-api';
-import { createElement } from '../utils';
+import { createElement, getRandomColor, getRandomName } from '../utils';
 
 const CARS_PER_PAGE = 7;
 
@@ -120,12 +120,6 @@ export default async function renderGaragePage() {
     const formUpdate = createGarageForm('Update');
     formUpdate.classList.add('form-disabled');
 
-    const actions = createElement({
-        childrenProp: [
-            createElement({ tag: 'button', className: 'button', textContent: 'Race' }),
-            createElement({ tag: 'button', className: 'button', textContent: 'Generate cars' }),
-        ],
-    });
     const garage = renderGarage(formUpdate);
 
     formCreate.addEventListener('submit', async (e) => {
@@ -151,6 +145,31 @@ export default async function renderGaragePage() {
         await updateCar(parseInt(id, 10), car);
         garage.load();
         formUpdate.reset();
+    });
+
+    const generateBtn = createElement<HTMLButtonElement>({
+        tag: 'button',
+        className: 'button',
+        textContent: 'Generate cars',
+        id: 'generateCarsButton',
+    });
+    const actions = createElement({
+        childrenProp: [createElement({ tag: 'button', className: 'button', textContent: 'Race' }), generateBtn],
+    });
+
+    generateBtn.addEventListener('click', async () => {
+        const promises = [];
+        for (let index = 0; index < 100; index += 1) {
+            const carPromise = postCar({ name: getRandomName(), color: getRandomColor() });
+            promises.push(carPromise);
+        }
+        Promise.all(promises)
+            .then(() => {
+                garage.load();
+            })
+            .catch((error) => {
+                console.error('Error creating cars:', error);
+            });
     });
 
     garagePage.append(formCreate, formUpdate, actions, garage);

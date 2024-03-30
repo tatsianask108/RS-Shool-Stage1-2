@@ -21,18 +21,20 @@ function renderViewButtons() {
 (async () => {
     renderViewButtons();
     const garagePage = await renderGaragePage();
+    let winnersPage = await renderWinnersPage();
     wrapper.append(garagePage);
-    const winners = await renderWinnersPage();
 
     const toWinnersButton = document.getElementById('winnersButton') as HTMLButtonElement;
     toWinnersButton?.addEventListener('click', async () => {
         garagePage?.remove();
-        wrapper.insertBefore(winners, wrapper.children[1]);
+        winnersPage?.remove();
+        winnersPage = await renderWinnersPage();
+        wrapper.insertBefore(winnersPage, wrapper.children[1]);
     });
 
     const toGarageButton = document.getElementById('garageButton') as HTMLButtonElement;
     toGarageButton?.addEventListener('click', () => {
-        winners?.remove();
+        winnersPage?.remove();
         wrapper.insertBefore(garagePage, wrapper.children[1]);
     });
 })();

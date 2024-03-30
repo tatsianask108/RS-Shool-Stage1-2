@@ -1,4 +1,5 @@
 const GARAGE_URL = 'http://127.0.0.1:3000/garage';
+const WINNERS_URL = 'http://127.0.0.1:3000/winners';
 const FIRST_PAGE = '1';
 const CARS_PER_PAGE = '7';
 
@@ -58,6 +59,18 @@ export async function getWinners(url: string) {
     return {};
 }
 
+export async function getWinner(id: string) {
+    try {
+        const resp = await fetch(`${WINNERS_URL}/${id}`);
+        return resp;
+    } catch (error) {
+        if (error instanceof Error) {
+            console.error(error.message);
+        }
+    }
+    return {};
+}
+
 export async function postCar(data: object) {
     try {
         const response = await fetch(GARAGE_URL, {
@@ -79,6 +92,9 @@ export async function postCar(data: object) {
 export async function deleteCar(id: string) {
     try {
         await fetch(`${GARAGE_URL}/${id}`, {
+            method: 'DELETE',
+        });
+        await fetch(`${WINNERS_URL}/${id}`, {
             method: 'DELETE',
         });
     } catch (error) {
