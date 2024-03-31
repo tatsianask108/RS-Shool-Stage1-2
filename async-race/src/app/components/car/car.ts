@@ -8,6 +8,7 @@ export const CAR_SVG = `<svg width="120" height="60" viewBox="0 0 140 60" stroke
 export enum EventActionEnum {
     DELETE = 'delete',
     SELECT = 'select',
+    START = 'start',
 }
 
 export interface ICarElement extends HTMLElement {
@@ -38,7 +39,7 @@ export default function createCarElement(carData: ICar): ICarElement {
     });
 
     deleteButton.addEventListener('click', () => {
-        carElement.dispatchEvent(new CustomEvent(EventActionEnum.DELETE));
+        carElement.dispatchEvent(new Event(EventActionEnum.DELETE));
     });
 
     selectButton.addEventListener('click', () => {
@@ -51,15 +52,19 @@ export default function createCarElement(carData: ICar): ICarElement {
     });
     svgContainer.style.fill = carData.color;
     svgContainer.id = `svg-${carData.id}`;
+
     const lowerBlock = createElement({
         className: 'car__lower-block',
-        childrenProp: [
-            createElement({ tag: 'button', className: 'button', textContent: 'Start' }),
-            createElement({ tag: 'button', className: 'button', textContent: 'Stop' }),
-            svgContainer,
-        ],
     });
 
+    const startButton = createElement({ tag: 'button', className: 'button', textContent: 'Start' });
+    const stopButton = createElement({ tag: 'button', className: 'button', textContent: 'Stop' });
+
+    lowerBlock.append(startButton, stopButton, svgContainer);
+
+    startButton.addEventListener('click', () => {
+        carElement.dispatchEvent(new Event(EventActionEnum.START));
+    });
     carElement.append(actionsBlock, lowerBlock);
     return carElement;
 }

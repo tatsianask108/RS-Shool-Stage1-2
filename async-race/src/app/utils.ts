@@ -1,3 +1,5 @@
+import { ICarElement } from './components/car/car';
+
 export type IElementProps<T extends HTMLElement = HTMLElement> = Partial<T> & {
     tag?: keyof HTMLElementTagNameMap;
     childrenProp?: HTMLElement[];
@@ -26,4 +28,30 @@ export function getRandomName() {
 export function getRandomColor() {
     const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`.toUpperCase();
     return randomColor;
+}
+
+export function animateCar(carContainer: ICarElement, duration: number) {
+    const animationObject = {
+        currentRequestId: 0,
+    };
+
+    const timeStart = performance.now();
+    const carWidth = 100;
+    const carSVG = carContainer.querySelector('.svg-container') as HTMLElement;
+    const distance = carContainer.offsetWidth - carWidth - carWidth;
+
+    function start(movingDuration: number) {
+        const time = performance.now();
+        let timeFraction = (time - timeStart) / movingDuration;
+        if (timeFraction > 1) {
+            timeFraction = 1;
+        }
+        carSVG.style.left = `${100 + timeFraction * distance}px`;
+        if (timeFraction < 1) {
+            animationObject.currentRequestId = requestAnimationFrame(() => start(movingDuration));
+        }
+    }
+    start(duration);
+
+    return animationObject;
 }

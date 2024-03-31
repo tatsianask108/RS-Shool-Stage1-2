@@ -1,7 +1,7 @@
 import createCarElement, { EventActionEnum, ICarElement } from '../components/car/car';
 import createGarageForm from '../components/forms/forms';
-import { postCar, getCars, ICar, updateCar, deleteCar } from '../fetch-api';
-import { createElement, getRandomColor, getRandomName } from '../utils';
+import { postCar, getCars, ICar, updateCar, deleteCar, startEngine, drive } from '../fetch-api';
+import { animateCar, createElement, getRandomColor, getRandomName } from '../utils';
 
 const CARS_PER_PAGE = 7;
 
@@ -54,6 +54,21 @@ function renderGarage(formUpdate: HTMLFormElement) {
                             if (input) {
                                 input.value = value;
                             }
+                        }
+                    });
+                    el.addEventListener(EventActionEnum.START, async () => {
+                        const resp = await startEngine(car.id);
+                        const duration = resp.distance / resp.velocity;
+                        console.log(duration);
+                        const animation = animateCar(el, duration);
+                        try {
+                            const carStatus = await drive(car.id);
+                            console.log(carStatus);
+                            if (carStatus === 'engine broke') {
+                                cancelAnimationFrame(animation.currentRequestId);
+                            }
+                        } catch {
+                            // cancelAnimationFrame(requestId);
                         }
                     });
                     return el;

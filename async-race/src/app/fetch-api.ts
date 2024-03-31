@@ -122,3 +122,21 @@ export async function updateCar(id: ICar['id'], data: Partial<ICar>) {
     }
     return {};
 }
+
+export async function startEngine(id: number): Promise<{ velocity: number; distance: number }> {
+    const response = await fetch(`http://127.0.0.1:3000/engine?id=${id}&status=started`, { method: 'PATCH' });
+    const result = await response.json();
+    return result;
+}
+
+export async function drive(id: number) {
+    try {
+        const response = await fetch(`http://127.0.0.1:3000/engine?id=${id}&status=drive`, {
+            method: 'PATCH',
+        });
+        const result = await response.json();
+        return result;
+    } catch {
+        return 'engine broke';
+    }
+}

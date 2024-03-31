@@ -35,9 +35,12 @@ function createWinners(winners: IWinner[], cars: ICar[]) {
 
         const carImgElement = createElement({ tag: 'p', className: 'svg' });
         carImgElement.textContent = 'p';
+        carImgElement.style.position = 'relative';
         const svgContainer = createElement({});
         svgContainer.innerHTML = CAR_SVG;
         svgContainer.style.fill = car.color;
+        svgContainer.style.position = 'absolute';
+        svgContainer.style.bottom = '0';
         carImgElement.append(svgContainer);
 
         const winsElement = createElement({ tag: 'p' });
