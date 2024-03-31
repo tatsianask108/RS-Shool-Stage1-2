@@ -1,5 +1,5 @@
 import { CAR_SVG } from '@app/components/car/car';
-import { ICar, getCar, getWinners } from '@app/fetch-api';
+import { ICar, getCar, getWinners } from '@app/api';
 import { createElement } from '@app/utils';
 
 export interface IWinner {
@@ -61,7 +61,7 @@ function createWinners(winners: IWinner[], cars: ICar[]) {
 }
 
 export default async function renderWinnersPage() {
-    const response: IWinner[] = await getWinners('http://127.0.0.1:3000/winners?_pages=1&_limit=10');
+    const response: IWinner[] = await getWinners();
     const carsPromises = response.map((winner) => getCar(`http://127.0.0.1:3000/garage/${winner.id}`));
     const cars = await Promise.all(carsPromises);
     const winners = createWinners(response, cars);

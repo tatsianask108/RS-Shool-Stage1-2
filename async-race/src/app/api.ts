@@ -40,15 +40,15 @@ export async function getCar(url: string) {
         return json;
     } catch (error) {
         if (error instanceof Error) {
-            console.error(error.message);
+            console.warn(error.message);
         }
     }
     return {};
 }
 
-export async function getWinners(url: string) {
+export async function getWinners() {
     try {
-        const response = await fetch(url);
+        const response = await fetch('http://127.0.0.1:3000/winners?_pages=1&_limit=10');
         const json = await response.json();
         return json;
     } catch (error) {
@@ -89,11 +89,20 @@ export async function postCar(data: object) {
     return {};
 }
 
-export async function deleteCar(id: string) {
+export async function deleteCarFromGarage(id: string) {
     try {
         await fetch(`${GARAGE_URL}/${id}`, {
             method: 'DELETE',
         });
+    } catch (error) {
+        if (error instanceof Error) {
+            console.error(error.message);
+        }
+    }
+    return {};
+}
+export async function deleteWinner(id: string) {
+    try {
         await fetch(`${WINNERS_URL}/${id}`, {
             method: 'DELETE',
         });
@@ -128,6 +137,11 @@ export async function startEngine(id: number): Promise<{ velocity: number; dista
     const result = await response.json();
     return result;
 }
+export async function stopEngine(id: number) {
+    const response = await fetch(`http://127.0.0.1:3000/engine?id=${id}&status=stopped`, { method: 'PATCH' });
+    const result = await response.json();
+    return result;
+}
 
 export async function drive(id: number) {
     try {
@@ -135,6 +149,7 @@ export async function drive(id: number) {
             method: 'PATCH',
         });
         const result = await response.json();
+        console.log(result);
         return result;
     } catch {
         return 'engine broke';

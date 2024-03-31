@@ -1,7 +1,22 @@
 import createCarElement, { EventActionEnum, ICarElement } from '../components/car/car';
 import createGarageForm from '../components/forms/forms';
-import { postCar, getCars, ICar, updateCar, deleteCar, startEngine, drive } from '../fetch-api';
+import {
+    postCar,
+    getCars,
+    ICar,
+    updateCar,
+    deleteCarFromGarage,
+    startEngine,
+    drive,
+    stopEngine,
+    deleteWinner,
+    getWinners,
+    // getWinners,
+    // deleteWinner,
+} from '../api';
 import { animateCar, createElement, getRandomColor, getRandomName } from '../utils';
+import { IWinner } from './winners';
+// import { IWinner } from './winners';
 
 const CARS_PER_PAGE = 7;
 
@@ -43,7 +58,13 @@ function renderGarage(formUpdate: HTMLFormElement) {
                 const carElements = data.cars.map((car) => {
                     const el = createCarElement(car);
                     el.addEventListener(EventActionEnum.DELETE, async () => {
-                        await deleteCar(car.id.toString());
+                        const winners = await getWinners();
+                        const winner = winners.find((winnerCar: IWinner) => car.id === winnerCar.id);
+                        if (winner) {
+                            await deleteWinner(car.id.toString());
+                        }
+
+                        await deleteCarFromGarage(car.id.toString());
                         self.load();
                     });
                     el.addEventListener(EventActionEnum.SELECT, () => {
@@ -57,13 +78,26 @@ function renderGarage(formUpdate: HTMLFormElement) {
                         }
                     });
                     el.addEventListener(EventActionEnum.START, async () => {
-                        const resp = await startEngine(car.id);
-                        const duration = resp.distance / resp.velocity;
-                        console.log(duration);
-                        const animation = animateCar(el, duration);
+                        const startResp = await startEngine(car.id);
+                        const duration = startResp.distance / startResp.velocity;
+                        const carSVG = el.querySelector('.svg-container') as HTMLElement;
+                        const startButton = el.querySelector('#startBtn') as HTMLButtonElement;
+                        const stopButton = el.querySelector('#stopBtn') as HTMLButtonElement;
+                        startButton.disabled = true;
+                        stopButton.disabled = false;
+
+                        const animation = animateCar(el, carSVG, duration);
+
+                        el.addEventListener(EventActionEnum.STOP, async () => {
+                            cancelAnimationFrame(animation.currentRequestId);
+                            carSVG.style.left = '90px';
+                            stopEngine(car.id);
+                            stopButton.disabled = true;
+                            startButton.disabled = false;
+                        });
+
                         try {
                             const carStatus = await drive(car.id);
-                            console.log(carStatus);
                             if (carStatus === 'engine broke') {
                                 cancelAnimationFrame(animation.currentRequestId);
                             }

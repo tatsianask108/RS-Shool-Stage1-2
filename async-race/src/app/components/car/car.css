@@ -14,6 +14,7 @@
 
 button:disabled {
     opacity: 0.5;
+    cursor: default;
 }
 
 .car__lower-block {
@@ -23,25 +24,9 @@ button:disabled {
     margin-top: 1.5rem;
 }
 
-
 .svg-container {
     width: 100px;
-    /* position: relative; */
     position: absolute;
-    bottom: 0;
-    left: 100px;
+    bottom: -7px;
+    left: 90px;
 }
-svg {
-    /* position: absolute;
-    bottom: 0; */
-    /* animation: moveRight 3s linear; */
-}
-/* 
-@keyframes moveRight {
-    from {
-        left: 100px;
-    }
-    to {
-        left: calc(100% - 100px);
-    }
-} */

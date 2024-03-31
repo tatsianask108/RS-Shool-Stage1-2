@@ -38,18 +38,3 @@ function renderViewButtons() {
         wrapper.insertBefore(garagePage, wrapper.children[1]);
     });
 })();
-
-// const box = document.querySelector('#svg-1') as HTMLElement;
-// const carWrapper = document.querySelector('.car__wrapper') as HTMLDivElement;
-// let startPosition = 90;
-// const endPosition = carWrapper.offsetWidth - box.offsetWidth;
-// // const speed = 64;
-
-// async function move() {
-//     if (startPosition < endPosition) {
-//         startPosition += 1;
-//         box.style.left = `${startPosition}px`;
-//         requestAnimationFrame(move);
-//     }
-// }
-// await move();

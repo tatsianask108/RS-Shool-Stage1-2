@@ -1,4 +1,4 @@
-import { ICar } from '@app/fetch-api';
+import { ICar } from '@app/api';
 import { createElement } from '@app/utils';
 
 import './car.css';
@@ -9,6 +9,7 @@ export enum EventActionEnum {
     DELETE = 'delete',
     SELECT = 'select',
     START = 'start',
+    STOP = 'stop',
 }
 
 export interface ICarElement extends HTMLElement {
@@ -57,14 +58,33 @@ export default function createCarElement(carData: ICar): ICarElement {
         className: 'car__lower-block',
     });
 
-    const startButton = createElement({ tag: 'button', className: 'button', textContent: 'Start' });
-    const stopButton = createElement({ tag: 'button', className: 'button', textContent: 'Stop' });
+    const startButton = createElement<HTMLButtonElement>({
+        tag: 'button',
+        className: 'button',
+        id: 'startBtn',
+        textContent: 'Start',
+    });
+    const stopButton = createElement<HTMLButtonElement>({
+        tag: 'button',
+        className: 'button',
+        id: 'stopBtn',
+        textContent: 'Stop',
+        disabled: true,
+    });
 
     lowerBlock.append(startButton, stopButton, svgContainer);
 
     startButton.addEventListener('click', () => {
         carElement.dispatchEvent(new Event(EventActionEnum.START));
+        // startButton.disabled = true;
+        // stopButton.disabled = false;
     });
+    stopButton.addEventListener('click', () => {
+        carElement.dispatchEvent(new Event(EventActionEnum.STOP));
+        // startButton.disabled = false;
+        // stopButton.disabled = true;
+    });
+
     carElement.append(actionsBlock, lowerBlock);
     return carElement;
 }

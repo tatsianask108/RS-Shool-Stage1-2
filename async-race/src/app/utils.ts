@@ -30,14 +30,13 @@ export function getRandomColor() {
     return randomColor;
 }
 
-export function animateCar(carContainer: ICarElement, duration: number) {
+export function animateCar(carContainer: ICarElement, carSVG: HTMLElement, duration: number) {
     const animationObject = {
         currentRequestId: 0,
     };
 
     const timeStart = performance.now();
     const carWidth = 100;
-    const carSVG = carContainer.querySelector('.svg-container') as HTMLElement;
     const distance = carContainer.offsetWidth - carWidth - carWidth;
 
     function start(movingDuration: number) {
@@ -46,6 +45,7 @@ export function animateCar(carContainer: ICarElement, duration: number) {
         if (timeFraction > 1) {
             timeFraction = 1;
         }
+        // eslint-disable-next-line no-param-reassign
         carSVG.style.left = `${100 + timeFraction * distance}px`;
         if (timeFraction < 1) {
             animationObject.currentRequestId = requestAnimationFrame(() => start(movingDuration));
