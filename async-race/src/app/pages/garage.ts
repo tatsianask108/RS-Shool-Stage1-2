@@ -272,10 +272,6 @@ export default async function renderGaragePage() {
     });
     resetRaceButton.addEventListener('click', () => {
         resetRaceButton.disabled = true;
-        const controlButtons = document.querySelectorAll('.control-btn');
-        controlButtons.forEach((btn) => {
-            btn.classList.remove('btn-disabled');
-        });
         setTimeout(() => {
             startRaceButton.disabled = false;
             const buttons = document.querySelectorAll('button');
