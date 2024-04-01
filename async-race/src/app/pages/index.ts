@@ -10,13 +10,13 @@ document.body.append(wrapper);
 (async () => {
     const buttonGarage = createElement({
         tag: 'button',
-        className: 'button',
+        className: 'button control-btn',
         textContent: 'To Garage',
         id: 'garageButton',
     });
     const buttonWinner = createElement({
         tag: 'button',
-        className: 'button',
+        className: 'button control-btn',
         textContent: 'To Winners',
         id: 'winnersButton',
     });

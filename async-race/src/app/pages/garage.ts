@@ -97,15 +97,9 @@ function renderGarage(formUpdate: HTMLFormElement) {
                                 carSVG.style.left = '90px';
                                 abortStatusController.abort();
                                 await stopEngine(car.id);
+                                // carSVG.style.opacity = '1';
+                                // carSVG.style.transform = 'rotate(0)';
                                 startButton.disabled = false;
-
-                                // const startRaceBtn = document.getElementById('startRace') as HTMLButtonElement;
-                                // startRaceBtn.disabled = false;
-                                // const buttons = el.querySelectorAll('button');
-                                // buttons.forEach((btn) => btn.classList.remove('btn-disabled'));
-
-                                // carSVG.style.opacity = '';
-                                // carSVG.style.transform = '';
                             },
                             {
                                 once: true,
@@ -128,9 +122,6 @@ function renderGarage(formUpdate: HTMLFormElement) {
                     return el;
                 });
                 self.cars = carElements;
-                // self.addEventListener(EventActionEnum.START, async () => {
-                //     console.log('t');
-                // });
                 // add car events
 
                 // append
@@ -234,7 +225,7 @@ export default async function renderGaragePage() {
     });
     const generateBtn = createElement<HTMLButtonElement>({
         tag: 'button',
-        className: 'button',
+        className: 'button control-btn',
         textContent: 'Generate cars',
         id: 'generateCarsButton',
     });
@@ -261,18 +252,19 @@ export default async function renderGaragePage() {
         document.body.append(winAnnouncement);
         setTimeout(() => {
             winAnnouncement.remove();
-        }, 4000);
+        }, 5000);
         sendWinner(car.carData.id, Math.ceil(car.lastResult / 1000));
         garage.cars.forEach((el) => {
             el.removeEventListener(EventActionEnum.FINISHED, handleWinner);
         });
         resetRaceButton.disabled = false;
+        resetRaceButton.classList.remove('btn-disabled');
     }
 
     startRaceButton.addEventListener('click', () => {
         startRaceButton.disabled = true;
         garage.cars.forEach((car) => {
-            const buttons = car.querySelectorAll('button');
+            const buttons = document.querySelectorAll('button');
             buttons.forEach((btn) => btn.classList.add('btn-disabled'));
             car.addEventListener(EventActionEnum.FINISHED, handleWinner);
             car.dispatchEvent(new Event(EventActionEnum.START));
@@ -280,17 +272,20 @@ export default async function renderGaragePage() {
     });
     resetRaceButton.addEventListener('click', () => {
         resetRaceButton.disabled = true;
+        const controlButtons = document.querySelectorAll('.control-btn');
+        controlButtons.forEach((btn) => {
+            btn.classList.remove('btn-disabled');
+        });
         setTimeout(() => {
             startRaceButton.disabled = false;
-            const buttons = garage.querySelectorAll('.car-btn');
+            const buttons = document.querySelectorAll('button');
             buttons.forEach((btn) => {
-                btn.removeAttribute('disabled');
                 btn.classList.remove('btn-disabled');
             });
-        }, 3000);
+        }, 2000);
 
-        garage.cars.forEach((car) => car.dispatchEvent(new Event(EventActionEnum.STOP)));
         winAnnouncement.remove();
+        garage.cars.forEach((car) => car.dispatchEvent(new Event(EventActionEnum.STOP)));
     });
 
     actions.append(generateBtn, startRaceButton, resetRaceButton);

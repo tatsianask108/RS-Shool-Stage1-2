@@ -69,7 +69,7 @@ export default function createCarElement(carData: ICar): ICarElement {
     });
     const stopButton = createElement<HTMLButtonElement>({
         tag: 'button',
-        className: 'button button-disabled car-btn',
+        className: 'button car-btn',
         id: 'stopBtn',
         textContent: 'Stop',
         disabled: true,

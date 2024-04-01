@@ -8,7 +8,7 @@ export default function createGarageForm(buttonText: string) {
     const button = createElement<HTMLButtonElement>({
         tag: 'button',
         type: 'submit',
-        className: 'button',
+        className: 'button control-btn',
         textContent: buttonText,
     });
 
