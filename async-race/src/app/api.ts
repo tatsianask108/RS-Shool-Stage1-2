@@ -1,3 +1,6 @@
+import { ICarElement } from './components/car/car';
+import { IWinner } from './pages/winners';
+
 const GARAGE_URL = 'http://127.0.0.1:3000/garage';
 const WINNERS_URL = 'http://127.0.0.1:3000/winners';
 const FIRST_PAGE = '1';
@@ -48,7 +51,7 @@ export async function getCar(url: string) {
 
 export async function getWinners() {
     try {
-        const response = await fetch('http://127.0.0.1:3000/winners?_pages=1&_limit=10');
+        const response = await fetch('http://127.0.0.1:3000/winners?_pages=1&_sort=time&_order=ASC');
         const json = await response.json();
         return json;
     } catch (error) {
@@ -59,16 +62,18 @@ export async function getWinners() {
     return {};
 }
 
-export async function getWinner(id: string) {
+export async function getWinner(id: string): Promise<IWinner | undefined> {
     try {
         const resp = await fetch(`${WINNERS_URL}/${id}`);
-        return resp;
+        if (resp.ok) {
+            return await resp.json();
+        }
     } catch (error) {
         if (error instanceof Error) {
             console.error(error.message);
         }
     }
-    return {};
+    return undefined;
 }
 
 export async function postCar(data: object) {
@@ -149,9 +154,56 @@ export async function drive(id: number) {
             method: 'PATCH',
         });
         const result = await response.json();
-        console.log(result);
         return result;
     } catch {
         return 'engine broke';
     }
+}
+
+export async function postWinner(winner: IWinner): Promise<IWinner | undefined> {
+    try {
+        const response = await fetch(WINNERS_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(winner),
+        });
+        return await response.json();
+    } catch (error) {
+        if (error instanceof Error) {
+            console.error(error.message);
+        }
+    }
+    return undefined;
+}
+
+export async function sendWinner(id: ICarElement['carData']['id'], result: number) {
+    const winner = await getWinner(id.toString());
+
+    if (!winner) {
+        return postWinner({
+            id,
+            time: result,
+            wins: 1,
+        });
+    }
+
+    winner.wins += 1;
+    winner.time = Math.min(winner.time, result);
+
+    try {
+        const response = await fetch(`${WINNERS_URL}/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(winner),
+        });
+        return await response.json();
+    } catch (err) {
+        console.log(err);
+    }
+
+    return undefined;
 }

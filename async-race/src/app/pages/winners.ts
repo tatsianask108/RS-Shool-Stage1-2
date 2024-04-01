@@ -3,7 +3,7 @@ import { ICar, getCar, getWinners } from '@app/api';
 import { createElement } from '@app/utils';
 
 export interface IWinner {
-    id: number;
+    id?: number;
     wins: number;
     time: number;
 }
@@ -44,10 +44,10 @@ function createWinners(winners: IWinner[], cars: ICar[]) {
         carImgElement.append(svgContainer);
 
         const winsElement = createElement({ tag: 'p' });
-        winsElement.textContent = el.wins.toString();
+        winsElement.textContent = el.wins?.toString();
 
         const timeElement = createElement({ tag: 'p' });
-        timeElement.textContent = el.time.toString();
+        timeElement.textContent = el.time?.toString();
 
         numberContainer.append(numberElement);
         carImgContainer.append(carImgElement);

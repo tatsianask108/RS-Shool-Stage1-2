@@ -11,12 +11,10 @@ import {
     stopEngine,
     deleteWinner,
     getWinners,
-    // getWinners,
-    // deleteWinner,
+    sendWinner,
 } from '../api';
 import { animateCar, createElement, getRandomColor, getRandomName } from '../utils';
 import { IWinner } from './winners';
-// import { IWinner } from './winners';
 
 const CARS_PER_PAGE = 7;
 
@@ -88,18 +86,26 @@ function renderGarage(formUpdate: HTMLFormElement) {
 
                         const animation = animateCar(el, carSVG, duration);
 
+                        el.lastResult = duration;
+
                         el.addEventListener(EventActionEnum.STOP, async () => {
                             cancelAnimationFrame(animation.currentRequestId);
                             carSVG.style.left = '90px';
                             stopEngine(car.id);
                             stopButton.disabled = true;
                             startButton.disabled = false;
+                            carSVG.style.opacity = '';
+                            carSVG.style.transform = '';
                         });
 
                         try {
                             const carStatus = await drive(car.id);
                             if (carStatus === 'engine broke') {
                                 cancelAnimationFrame(animation.currentRequestId);
+                                carSVG.style.opacity = '0.5';
+                                carSVG.style.transform = 'rotate(-8deg)';
+                            } else {
+                                el.dispatchEvent(new Event(EventActionEnum.FINISHED));
                             }
                         } catch {
                             // cancelAnimationFrame(requestId);
@@ -108,7 +114,9 @@ function renderGarage(formUpdate: HTMLFormElement) {
                     return el;
                 });
                 self.cars = carElements;
-
+                // self.addEventListener(EventActionEnum.START, async () => {
+                //     console.log('t');
+                // });
                 // add car events
 
                 // append
@@ -196,14 +204,15 @@ export default async function renderGaragePage() {
         formUpdate.reset();
     });
 
+    const actions = createElement({});
+
+    const startRaceButton = createElement({ tag: 'button', className: 'button', textContent: 'Race' });
+    const resetRaceButton = createElement({ tag: 'button', className: 'button', textContent: 'Reset' });
     const generateBtn = createElement<HTMLButtonElement>({
         tag: 'button',
         className: 'button',
         textContent: 'Generate cars',
         id: 'generateCarsButton',
-    });
-    const actions = createElement({
-        childrenProp: [createElement({ tag: 'button', className: 'button', textContent: 'Race' }), generateBtn],
     });
 
     generateBtn.addEventListener('click', async () => {
@@ -217,10 +226,33 @@ export default async function renderGaragePage() {
                 garage.load();
             })
             .catch((error) => {
-                console.error('Error creating cars:', error);
+                console.error('Error while creating cars:', error);
             });
     });
 
+    const winAnnouncement = createElement({ className: 'win-announcement' });
+    function handleWinner(e: Event) {
+        const car = e.target as ICarElement;
+        winAnnouncement.textContent = `${car.carData.name} won with the result ${Math.ceil(car.lastResult / 1000)}`;
+        document.body.append(winAnnouncement);
+        sendWinner(car.carData.id, Math.ceil(car.lastResult / 1000));
+        garage.cars.forEach((el) => {
+            el.removeEventListener(EventActionEnum.FINISHED, handleWinner);
+        });
+    }
+
+    startRaceButton.addEventListener('click', () => {
+        garage.cars.forEach((car) => {
+            car.addEventListener(EventActionEnum.FINISHED, handleWinner);
+            car.dispatchEvent(new Event(EventActionEnum.START));
+        });
+    });
+    resetRaceButton.addEventListener('click', () => {
+        garage.cars.forEach((car) => car.dispatchEvent(new Event(EventActionEnum.STOP)));
+        winAnnouncement.remove();
+    });
+
+    actions.append(generateBtn, startRaceButton, resetRaceButton);
     garagePage.append(formCreate, formUpdate, actions, garage);
     return garagePage;
 }

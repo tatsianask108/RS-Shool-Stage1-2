@@ -10,10 +10,12 @@ export enum EventActionEnum {
     SELECT = 'select',
     START = 'start',
     STOP = 'stop',
+    FINISHED = 'finished',
 }
 
 export interface ICarElement extends HTMLElement {
     carData: ICar;
+    lastResult: number;
 }
 
 export default function createCarElement(carData: ICar): ICarElement {
@@ -76,13 +78,9 @@ export default function createCarElement(carData: ICar): ICarElement {
 
     startButton.addEventListener('click', () => {
         carElement.dispatchEvent(new Event(EventActionEnum.START));
-        // startButton.disabled = true;
-        // stopButton.disabled = false;
     });
     stopButton.addEventListener('click', () => {
         carElement.dispatchEvent(new Event(EventActionEnum.STOP));
-        // startButton.disabled = false;
-        // stopButton.disabled = true;
     });
 
     carElement.append(actionsBlock, lowerBlock);

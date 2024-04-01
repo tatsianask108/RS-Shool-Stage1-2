@@ -29,4 +29,5 @@ button:disabled {
     position: absolute;
     bottom: -7px;
     left: 90px;
+    transition: transform 0.4s ease;
 }

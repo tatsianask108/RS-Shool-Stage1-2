@@ -7,34 +7,40 @@ import '../styles/index.css';
 const wrapper = createElement({ className: 'wrapper' });
 document.body.append(wrapper);
 
-function renderViewButtons() {
-    const element = createElement({
-        className: 'switch-pages-buttons',
-        childrenProp: [
-            createElement({ tag: 'button', className: 'button', textContent: 'To Garage', id: 'garageButton' }),
-            createElement({ tag: 'button', className: 'button', textContent: 'To Winners', id: 'winnersButton' }),
-        ],
-    });
-    wrapper.append(element);
-}
-
 (async () => {
-    renderViewButtons();
-    const garagePage = await renderGaragePage();
-    let winnersPage = await renderWinnersPage();
-    wrapper.append(garagePage);
+    const buttonGarage = createElement({
+        tag: 'button',
+        className: 'button',
+        textContent: 'To Garage',
+        id: 'garageButton',
+    });
+    const buttonWinner = createElement({
+        tag: 'button',
+        className: 'button',
+        textContent: 'To Winners',
+        id: 'winnersButton',
+    });
 
-    const toWinnersButton = document.getElementById('winnersButton') as HTMLButtonElement;
-    toWinnersButton?.addEventListener('click', async () => {
-        garagePage?.remove();
-        winnersPage?.remove();
-        winnersPage = await renderWinnersPage();
-        wrapper.insertBefore(winnersPage, wrapper.children[1]);
+    const viewButtonsElement = createElement({
+        className: 'switch-pages-buttons',
+        childrenProp: [buttonGarage, buttonWinner],
+    });
+
+    const page = createElement({});
+    const garage = await renderGaragePage();
+
+    wrapper.append(viewButtonsElement, page);
+    page.append(garage);
+
+    buttonWinner?.addEventListener('click', async () => {
+        const winners = await renderWinnersPage();
+        Array.from(page.children).forEach((el) => el.remove());
+        page.append(winners);
     });
 
     const toGarageButton = document.getElementById('garageButton') as HTMLButtonElement;
     toGarageButton?.addEventListener('click', () => {
-        winnersPage?.remove();
-        wrapper.insertBefore(garagePage, wrapper.children[1]);
+        Array.from(page.children).forEach((el) => el.remove());
+        page.append(garage);
     });
 })();
