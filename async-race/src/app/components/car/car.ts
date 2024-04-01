@@ -16,6 +16,7 @@ export enum EventActionEnum {
 export interface ICarElement extends HTMLElement {
     carData: ICar;
     lastResult: number;
+    mode: 'drive' | 'stop';
 }
 
 export default function createCarElement(carData: ICar): ICarElement {
@@ -26,12 +27,12 @@ export default function createCarElement(carData: ICar): ICarElement {
 
     const selectButton = createElement<HTMLButtonElement>({
         tag: 'button',
-        className: 'button',
+        className: 'button car-btn',
         textContent: 'Select',
     });
     const deleteButton = createElement<HTMLButtonElement>({
         tag: 'button',
-        className: 'button',
+        className: 'button car-btn',
         textContent: 'Delete',
     });
     const carName = createElement({ tag: 'span', className: 'car__name', textContent: `${carData.name}` });
@@ -62,13 +63,13 @@ export default function createCarElement(carData: ICar): ICarElement {
 
     const startButton = createElement<HTMLButtonElement>({
         tag: 'button',
-        className: 'button',
+        className: 'button car-btn',
         id: 'startBtn',
         textContent: 'Start',
     });
     const stopButton = createElement<HTMLButtonElement>({
         tag: 'button',
-        className: 'button',
+        className: 'button button-disabled car-btn',
         id: 'stopBtn',
         textContent: 'Stop',
         disabled: true,

@@ -12,10 +12,13 @@
     margin: 0.2rem;
 }
 
+.btn-disabled,
 button:disabled {
     opacity: 0.5;
     cursor: default;
 }
+
+
 
 .car__lower-block {
     display: flex;

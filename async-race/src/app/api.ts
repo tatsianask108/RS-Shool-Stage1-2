@@ -148,10 +148,11 @@ export async function stopEngine(id: number) {
     return result;
 }
 
-export async function drive(id: number) {
+export async function drive(id: number, abortController?: AbortController) {
     try {
         const response = await fetch(`http://127.0.0.1:3000/engine?id=${id}&status=drive`, {
             method: 'PATCH',
+            signal: abortController?.signal,
         });
         const result = await response.json();
         return result;
