@@ -248,12 +248,12 @@ export default async function renderGaragePage() {
     const winAnnouncement = createElement({ className: 'win-announcement' });
     function handleWinner(e: Event) {
         const car = e.target as ICarElement;
-        winAnnouncement.textContent = `${car.carData.name} won with the result ${Math.ceil(car.lastResult / 1000)}sec`;
+        winAnnouncement.textContent = `${car.carData.name} won with the result ${Math.round((car.lastResult / 1000) * 100) / 100}sec`;
         document.body.append(winAnnouncement);
         setTimeout(() => {
             winAnnouncement.remove();
         }, 5000);
-        sendWinner(car.carData.id, Math.ceil(car.lastResult / 1000));
+        sendWinner(car.carData.id, Math.round((car.lastResult / 1000) * 100) / 100);
         garage.cars.forEach((el) => {
             el.removeEventListener(EventActionEnum.FINISHED, handleWinner);
         });
