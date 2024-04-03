@@ -51,7 +51,7 @@ export async function getCar(url: string) {
 
 export async function getWinners() {
     try {
-        const response = await fetch('http://127.0.0.1:3000/winners?_pages=1&_sort=time&_order=ASC');
+        const response = await fetch(`${WINNERS_URL}?_pages=1&_sort=time&_order=ASC`);
         const json = await response.json();
         return json;
     } catch (error) {

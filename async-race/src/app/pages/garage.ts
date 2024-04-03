@@ -16,7 +16,10 @@ import {
 import { animateCar, createElement, getRandomColor, getRandomName } from '../utils';
 import { IWinner } from './winners';
 
+const FIRST_PAGE = 1;
 const CARS_PER_PAGE = 7;
+const GENERATE_NEW_CARS_COUNT = 100;
+const CAR_LEFT_MARGIN = '90px';
 
 interface GarageInterface extends HTMLElement {
     cars: ICarElement[];
@@ -33,7 +36,7 @@ function renderGarage(formUpdate: HTMLFormElement) {
         return self;
     }
 
-    self.page = 1;
+    self.page = FIRST_PAGE;
 
     const infoCountElement = createElement<HTMLSpanElement>({ tag: 'span' });
     const infoCountPage = createElement<HTMLSpanElement>({ tag: 'span' });
@@ -67,13 +70,12 @@ function renderGarage(formUpdate: HTMLFormElement) {
                     });
                     el.addEventListener(EventActionEnum.SELECT, () => {
                         formUpdate.classList.remove('form-disabled');
-                        // eslint-disable-next-line no-restricted-syntax
-                        for (const [key, value] of Object.entries(el.carData)) {
+                        Object.entries(el.carData).forEach(([key, value]) => {
                             const input = formUpdate.elements.namedItem(key) as HTMLInputElement;
                             if (input) {
                                 input.value = value;
                             }
-                        }
+                        });
                     });
                     el.addEventListener(EventActionEnum.START, async () => {
                         const abortStatusController = new AbortController();
@@ -94,11 +96,10 @@ function renderGarage(formUpdate: HTMLFormElement) {
                             async () => {
                                 cancelAnimationFrame(animation.currentRequestId);
                                 stopButton.disabled = true;
-                                carSVG.style.left = '90px';
+                                carSVG.style.left = CAR_LEFT_MARGIN;
+
                                 abortStatusController.abort();
                                 await stopEngine(car.id);
-                                // carSVG.style.opacity = '1';
-                                // carSVG.style.transform = 'rotate(0)';
                                 startButton.disabled = false;
                             },
                             {
@@ -110,19 +111,16 @@ function renderGarage(formUpdate: HTMLFormElement) {
                             const observeStatusRequest = await drive(car.id, abortStatusController);
                             if (observeStatusRequest === 'engine broke') {
                                 cancelAnimationFrame(animation.currentRequestId);
-                                // carSVG.style.opacity = '0.5';
-                                // carSVG.style.transform = 'rotate(-8deg)';
                             } else {
                                 el.dispatchEvent(new Event(EventActionEnum.FINISHED));
                             }
                         } catch {
-                            // cancelAnimationFrame(requestId);
+                            console.warn('');
                         }
                     });
                     return el;
                 });
                 self.cars = carElements;
-                // add car events
 
                 // append
                 Array.from(carsContainerElement.children).forEach((el) => {
@@ -232,7 +230,7 @@ export default async function renderGaragePage() {
 
     generateBtn.addEventListener('click', async () => {
         const promises = [];
-        for (let index = 0; index < 100; index += 1) {
+        for (let index = 0; index < GENERATE_NEW_CARS_COUNT; index += 1) {
             const carPromise = postCar({ name: getRandomName(), color: getRandomColor() });
             promises.push(carPromise);
         }

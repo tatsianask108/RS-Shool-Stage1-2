@@ -1,5 +1,8 @@
 import { ICarElement } from './components/car/car';
 
+const COLORS_UPPER_LIMIT = 16777215;
+const CAR_WIDTH = 100;
+
 export type IElementProps<T extends HTMLElement = HTMLElement> = Partial<T> & {
     tag?: keyof HTMLElementTagNameMap;
     childrenProp?: HTMLElement[];
@@ -26,7 +29,7 @@ export function getRandomName() {
 }
 
 export function getRandomColor() {
-    const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`.toUpperCase();
+    const randomColor = `#${Math.floor(Math.random() * COLORS_UPPER_LIMIT).toString(16)}`.toUpperCase();
     return randomColor;
 }
 
@@ -36,7 +39,7 @@ export function animateCar(carContainer: ICarElement, carSVG: HTMLElement, durat
     };
 
     const timeStart = performance.now();
-    const carWidth = 100;
+    const carWidth = CAR_WIDTH;
     const distance = carContainer.offsetWidth - carWidth - carWidth;
 
     function start(movingDuration: number) {
@@ -46,7 +49,7 @@ export function animateCar(carContainer: ICarElement, carSVG: HTMLElement, durat
             timeFraction = 1;
         }
         // eslint-disable-next-line no-param-reassign
-        carSVG.style.left = `${100 + timeFraction * distance}px`;
+        carSVG.style.left = `${CAR_WIDTH + timeFraction * distance}px`;
         if (timeFraction < 1) {
             animationObject.currentRequestId = requestAnimationFrame(() => start(movingDuration));
         }

@@ -19,8 +19,6 @@ button:disabled {
     pointer-events: none;
 }
 
-
-
 .car__lower-block {
     display: flex;
     border-bottom: 1px dashed var(--black);
@@ -33,5 +31,4 @@ button:disabled {
     position: absolute;
     bottom: -7px;
     left: 90px;
-    /* transition: transform 0.4s ease; */
 }
