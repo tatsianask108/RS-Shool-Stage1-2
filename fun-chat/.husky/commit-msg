@@ -1,0 +1,7 @@
+message="$(cat $1)"
+commitPattern="^(feat|fix|refactor|chore|docs|init): .*$"
+if ! [[ $message =~ $commitPattern ]];
+then
+  echo "Invalid commit message"
+  exit 1
+fi
