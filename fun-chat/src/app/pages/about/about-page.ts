@@ -1,4 +1,5 @@
 import BaseComponent from '@app/components/base-component';
+
 import Page from '../page';
 
 export default class AboutPage extends Page {

@@ -1,6 +1,7 @@
 import BaseComponent from '@app/components/base-component';
 import { IUserLoginDto } from '@app/interfaces/interfaces';
 import Page from '@pages/page';
+import buttonAbout from '@app/components/button-about';
 
 import './login-page.css';
 
@@ -54,15 +55,15 @@ export default class LoginPage extends Page {
             })
         );
 
-        const aboutBtn = new BaseComponent<HTMLButtonElement>({
-            tag: 'button',
-            className: 'about-btn',
-            textContent: 'About',
-        });
+        // const aboutBtn = new BaseComponent<HTMLButtonElement>({
+        //     tag: 'button',
+        //     className: 'about-btn',
+        //     textContent: 'About',
+        // });
 
-        aboutBtn.addListener('click', () => {
-            window.location.href = '#/about';
-        });
+        // aboutBtn.addListener('click', () => {
+        //     window.location.href = '#/about';
+        // });
 
         const loginPage = new BaseComponent(
             { className: 'login-block' },
@@ -72,7 +73,7 @@ export default class LoginPage extends Page {
                 textContent: 'Enter your name and password',
             }),
             form,
-            aboutBtn
+            buttonAbout
         );
         form.getNode().addEventListener('keyup', this.handleKeyUp);
         form.getNode().addEventListener('submit', (e) => {

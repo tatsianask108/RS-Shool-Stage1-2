@@ -99,7 +99,6 @@ const ROUTES = new Map([
                 window.location.href = '#/login';
             }
             app.renderPage(new MainPage());
-            console.log('main');
         },
     ],
 ]);
