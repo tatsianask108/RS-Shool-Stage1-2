@@ -19,12 +19,11 @@
         "project": "./tsconfig.json"
     },
     "plugins": ["prettier", "import", "@typescript-eslint"],
-    "linterOptions": {
-        "noInlineConfig": true
-    },
     "rules": {
         "no-console": "off",
         "@typescript-eslint/no-explicit-any": "error",
+        "class-methods-use-this": "off",
         "prettier/prettier": ["error", { "endOfLine": "auto" }]
-    }
+    },
+    "noInlineConfig": true
 }

@@ -21,10 +21,12 @@ const baseConfig = {
         ],
     },
     resolve: {
-        extensions: ['.ts', '.js', '.svg'],
+        extensions: ['.ts', '.js', '.json'],
         alias: {
-            '@app': path.resolve(__dirname, 'src/app'),
-            // '@assets': path.resolve(__dirname, 'src/assets'),
+            '@app': path.resolve(__dirname, 'src/app/'),
+            '@components': path.resolve(__dirname, 'src/app/components'),
+            '@pages': path.resolve(__dirname, 'src/app/pages'),
+            '@services': path.resolve(__dirname, 'src/app/services'),
         },
     },
     output: {
