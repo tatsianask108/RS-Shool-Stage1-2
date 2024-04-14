@@ -12,6 +12,14 @@ export class EventEmitter {
             this.eventList[event] = [];
         }
         this.eventList[event].push(handler);
+        return () => this.off(event, handler);
+    }
+
+    public once(event: string, handler: HandlerType): void {
+        const remove = this.on(event, (...args) => {
+            remove();
+            handler(...args);
+        });
     }
 
     public off(event: string, handler?: HandlerType) {

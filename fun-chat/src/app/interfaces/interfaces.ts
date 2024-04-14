@@ -15,12 +15,16 @@ export interface IResponse<T extends IDto> {
     payload: T;
 }
 
-export interface IUserLoginDto {
-    user: {
-        login: string;
-        password: string;
-    };
+export interface IUser {
+    login: string;
+    password: string;
 }
+
+export interface IUserLoginDto {
+    user: IUser;
+}
+
+export interface IUserLogoutDto extends IUserLoginDto {}
 
 export interface IUserLoginResultDto {
     error?: string;

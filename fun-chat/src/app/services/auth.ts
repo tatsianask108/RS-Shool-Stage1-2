@@ -1,4 +1,4 @@
-import { IDto, IUserLoginDto, IUserLoginResultDto } from '@app/interfaces/interfaces';
+import { IDto, IUser, IUserLoginDto, IUserLoginResultDto, IUserLogoutDto } from '@app/interfaces/interfaces';
 import WsService from '@services/websocket';
 
 export interface AuthResult {
@@ -9,20 +9,32 @@ export interface AuthResult {
 export default class AuthService {
     protected storage = sessionStorage;
 
-    protected wss: WsService;
+    protected wsService: WsService;
 
     protected isAuthorized: boolean = false;
 
-    constructor(wss: WsService) {
-        this.wss = wss;
+    constructor(wsService: WsService) {
+        this.wsService = wsService;
     }
 
     public isAuth() {
         return this.isAuthorized;
     }
 
+    public getUserData(): IUser | null {
+        const user = this.storage.getItem('user');
+        if (user) {
+            return JSON.parse(user);
+        }
+        return null;
+    }
+
+    public setUserData(user: IUser) {
+        this.storage.setItem('user', JSON.stringify(user));
+    }
+
     public async auth(data: IUserLoginDto): Promise<AuthResult> {
-        const response = await this.wss.message<IDto, IUserLoginResultDto>('USER_LOGIN', data);
+        const response = await this.wsService.message<IDto, IUserLoginResultDto>('USER_LOGIN', data);
         const result = {
             authorized: false,
             message: '',
@@ -30,7 +42,7 @@ export default class AuthService {
 
         if (response.user && response.user.isLogined) {
             this.isAuthorized = true;
-            this.storage.setItem('user', JSON.stringify(data));
+            this.setUserData(data.user);
         } else if (response.error) {
             result.message = response.error;
         }
@@ -39,15 +51,18 @@ export default class AuthService {
     }
 
     public async logout() {
-        this.storage.clear();
-        this.isAuthorized = false;
+        const user = this.getUserData();
+        if (user) {
+            await this.wsService.message<IUserLogoutDto>('USER_LOGOUT', { user });
+            this.storage.clear();
+            this.isAuthorized = false;
+        }
     }
 
     public async loginStorage() {
-        const userData = this.storage.getItem('user');
-        if (userData) {
-            const userObject = JSON.parse(userData) as IUserLoginDto;
-            const response = await this.wss.message<IDto, IUserLoginResultDto>('USER_LOGIN', userObject);
+        const user = this.getUserData();
+        if (user) {
+            const response = await this.wsService.message<IDto, IUserLoginResultDto>('USER_LOGIN', { user });
 
             if (response.user && response.user.isLogined) {
                 this.isAuthorized = true;

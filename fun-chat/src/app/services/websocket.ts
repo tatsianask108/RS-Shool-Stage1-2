@@ -3,6 +3,7 @@ import { EventEmitter } from '@app/utils/event-emitter';
 
 export default class WsService extends EventEmitter {
     protected options = {
+        server: 'ws://localhost:4000',
         timeout: 30,
     };
 
@@ -10,13 +11,18 @@ export default class WsService extends EventEmitter {
 
     constructor() {
         super();
-        this.socket = new WebSocket('ws://localhost:4000');
+        this.socket = new WebSocket(this.options.server);
+        this.addListeners();
+    }
 
+    protected addListeners() {
         this.socket.addEventListener('open', () => {
             this.emit('open');
         });
         this.socket.addEventListener('close', () => {
             this.emit('close');
+            this.socket = new WebSocket(this.options.server);
+            this.addListeners();
         });
         this.socket.addEventListener('error', () => {
             this.emit('error');

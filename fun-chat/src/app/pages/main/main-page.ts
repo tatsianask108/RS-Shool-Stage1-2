@@ -12,8 +12,8 @@ export default class MainPage extends Page {
         page.textContent = 'main';
         buttonLogout.textContent = 'logout';
 
-        buttonLogout.addEventListener('click', () => {
-            this.app.authService.logout();
+        buttonLogout.addEventListener('click', async () => {
+            await this.app.authService.logout();
             window.location.href = '#/';
         });
         page.append(buttonLogout);

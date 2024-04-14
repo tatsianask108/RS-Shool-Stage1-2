@@ -11,13 +11,38 @@ export default class App {
 
     protected page: Page | undefined;
 
+    protected loader: HTMLDivElement;
+
     public authService: AuthService;
 
-    public wss: WsService;
+    public wsService: WsService;
 
     constructor(private root: HTMLElement) {
-        this.wss = new WsService();
-        this.authService = new AuthService(this.wss);
+        const loader = document.createElement('div');
+        loader.textContent = 'Connecting ...';
+
+        this.loader = loader;
+        this.root.append(this.loader);
+
+        this.wsService = new WsService();
+        this.authService = new AuthService(this.wsService);
+
+        this.wsService.on('open', async () => {
+            this.loader.style.display = 'none';
+            await this.authService.loginStorage();
+            if (this.page) {
+                this.page.getNode().style.display = '';
+            } else {
+                window.location.href = '#/login';
+            }
+        });
+
+        this.wsService.on('close', () => {
+            this.loader.style.display = 'block';
+            if (this.page) {
+                this.page.getNode().style.display = 'none';
+            }
+        });
     }
 
     public static getInstance() {
@@ -27,7 +52,7 @@ export default class App {
         return App.instance;
     }
 
-    public render(page: Page) {
+    public renderPage(page: Page) {
         if (this.page) {
             this.page.destroy();
         }
@@ -43,7 +68,7 @@ const ROUTES = new Map([
         '/not-found',
         () => {
             window.location.href = '#/not-found';
-            app.render(new NotFoundPage());
+            app.renderPage(new NotFoundPage());
         },
     ],
     [
@@ -58,13 +83,13 @@ const ROUTES = new Map([
             if (app.authService.isAuth()) {
                 window.location.href = '#/main';
             }
-            app.render(new LoginPage());
+            app.renderPage(new LoginPage());
         },
     ],
     [
         '/about',
         () => {
-            app.render(new AboutPage());
+            app.renderPage(new AboutPage());
         },
     ],
     [
@@ -73,7 +98,7 @@ const ROUTES = new Map([
             if (!app.authService.isAuth()) {
                 window.location.href = '#/login';
             }
-            app.render(new MainPage());
+            app.renderPage(new MainPage());
             console.log('main');
         },
     ],
@@ -86,13 +111,11 @@ const router = () => {
         routerHandle();
     }
 };
+
 window.addEventListener('hashchange', router);
 window.addEventListener('load', async () => {
-    app.wss.on('open', async () => {
+    app.wsService.once('open', async () => {
         await app.authService.loginStorage();
         router();
-    });
-    app.wss.on('close', async () => {
-        // TBD
     });
 });

@@ -1,5 +1,4 @@
 import BaseComponent from '@app/components/base-component';
-// import aboutBtn from '@app/components/about-btn';
 import { IUserLoginDto } from '@app/interfaces/interfaces';
 import Page from '@pages/page';
 
