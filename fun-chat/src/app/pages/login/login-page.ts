@@ -2,9 +2,9 @@ import BaseComponent from '@app/components/base-component';
 import { IUserLoginDto } from '@app/interfaces/interfaces';
 import Page from '@pages/page';
 import buttonAbout from '@app/components/button-about';
+import Modal from '@app/components/modal';
 
 import './login-page.css';
-import Modal from '@app/components/modal';
 
 export default class LoginPage extends Page {
     constructor() {
@@ -28,7 +28,7 @@ export default class LoginPage extends Page {
                 tag: 'span',
                 className: 'login-form__error',
                 data: {
-                    errorText: 'Enter your name starting with the capital letter, minimum 3 characters',
+                    errorText: 'Enter your name starting with the capital letter, minimal length is 3',
                 },
             }),
             new BaseComponent<HTMLInputElement>({
@@ -38,14 +38,14 @@ export default class LoginPage extends Page {
                 autocomplete: 'current-password',
                 className: 'login-form__input',
                 placeholder: 'Password',
-                pattern: '[A-Za-z0-9]{4,}',
+                pattern: '(?=.*[0-9]).{4,}',
                 required: true,
             }),
             new BaseComponent<HTMLSpanElement>({
                 tag: 'span',
                 className: 'login-form__error',
                 data: {
-                    errorText: 'Password should contain minimum 4 symbols',
+                    errorText: 'Password should contain at least one digit, minimal length is 4',
                 },
             }),
             new BaseComponent<HTMLButtonElement>({

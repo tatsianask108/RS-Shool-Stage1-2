@@ -5,11 +5,11 @@ export default class Modal extends BaseComponent {
 
     constructor(config: string) {
         super({ className: 'overlay' });
-        const btn = new BaseComponent<HTMLButtonElement>({ tag: 'button', textContent: 'close' });
+        const btn = new BaseComponent<HTMLButtonElement>({ tag: 'button', textContent: 'Close' });
         btn.addListener('click', this.close.bind(this));
         this.modalContent = new BaseComponent(
             {
-                className: 'modal',
+                className: 'block-centered',
                 textContent: config,
             },
             btn
@@ -20,9 +20,9 @@ export default class Modal extends BaseComponent {
 
     public open() {
         document.body.append(this.node);
-        setTimeout(() => {
-            this.close();
-        }, 4000);
+        // setTimeout(() => {
+        //     this.close();
+        // }, 4000);
     }
 
     private close() {

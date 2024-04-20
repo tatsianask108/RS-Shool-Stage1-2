@@ -1,0 +1,39 @@
+.container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.main {
+    border: 1px solid blanchedalmond;
+}
+
+header,
+.footer {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #87d6e4b2;
+
+    justify-content: space-between;
+}
+
+.footer {
+    justify-content: center;
+    font-size: 12px;
+    gap: 10px;
+}
+.footer p {
+    width: 80px;
+}
+
+.footer__rss {
+    display: block;
+    width: 100px;
+    height: 30px;
+    background-image: url('/src/assets/rs_school_js.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.7;
+}
