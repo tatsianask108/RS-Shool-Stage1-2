@@ -4,6 +4,7 @@ import Page from '@pages/page';
 import buttonAbout from '@app/components/button-about';
 
 import './login-page.css';
+import Modal from '@app/components/modal';
 
 export default class LoginPage extends Page {
     constructor() {
@@ -54,16 +55,6 @@ export default class LoginPage extends Page {
                 disabled: true,
             })
         );
-
-        // const aboutBtn = new BaseComponent<HTMLButtonElement>({
-        //     tag: 'button',
-        //     className: 'about-btn',
-        //     textContent: 'About',
-        // });
-
-        // aboutBtn.addListener('click', () => {
-        //     window.location.href = '#/about';
-        // });
 
         const loginPage = new BaseComponent(
             { className: 'login-block' },
@@ -124,9 +115,12 @@ export default class LoginPage extends Page {
             .auth(loginDto)
             .then((result) => {
                 if (result.authorized) {
+                    // sessionStorage.setItem('user', JSON.stringify(loginDto));
                     window.location.href = '#/main';
                 } else {
                     console.log('result', result.message);
+                    const modal = new Modal(result.message);
+                    modal.open();
                 }
             })
             .catch((err) => {

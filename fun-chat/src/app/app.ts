@@ -22,25 +22,29 @@ export default class App {
         loader.textContent = 'Connecting ...';
 
         this.loader = loader;
-        this.root.append(this.loader);
+        // this.root.append(this.loader);
 
         this.wsService = new WsService();
         this.authService = new AuthService(this.wsService);
 
         this.wsService.on('open', async () => {
-            this.loader.style.display = 'none';
+            // this.loader.style.display = 'none';
+            this.loader.remove();
             await this.authService.loginStorage();
             if (this.page) {
-                this.page.getNode().style.display = '';
+                // this.page.getNode().style.display = '';
+                this.root.append(this.page.getNode());
             } else {
                 window.location.href = '#/login';
             }
         });
 
         this.wsService.on('close', () => {
-            this.loader.style.display = 'block';
+            this.root.append(this.loader);
+            // this.loader.style.display = 'block';
             if (this.page) {
-                this.page.getNode().style.display = 'none';
+                // this.page.getNode().style.display = 'none';
+                this.page.getNode().remove();
             }
         });
     }

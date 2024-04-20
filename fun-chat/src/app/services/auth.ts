@@ -3,7 +3,7 @@ import WsService from '@services/websocket';
 
 export interface AuthResult {
     authorized: boolean;
-    message?: string;
+    message: string;
 }
 
 export default class AuthService {
