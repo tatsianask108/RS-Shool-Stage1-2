@@ -17,7 +17,6 @@ export default class ChatService {
             payload: null,
         };
         const response = (await this.wsService.message('USER_ACTIVE', data)) as { users: [{ login: string }] };
-        console.log(response.users);
         return response.users;
     }
 
@@ -26,7 +25,6 @@ export default class ChatService {
             payload: null,
         };
         const response = (await this.wsService.message('USER_INACTIVE', data)) as { users: [{ login: string }] };
-        console.log(response.users);
         return response.users;
     }
 }

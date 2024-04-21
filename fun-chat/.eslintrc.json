@@ -23,7 +23,8 @@
         "no-console": "off",
         "@typescript-eslint/no-explicit-any": "error",
         "class-methods-use-this": "off",
-        "prettier/prettier": ["error", { "endOfLine": "auto" }]
+        "prettier/prettier": ["error", { "endOfLine": "auto" }],
+        "max-lines-per-function": ["error", 40]
     },
     "noInlineConfig": true
 }

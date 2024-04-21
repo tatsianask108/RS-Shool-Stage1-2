@@ -1,6 +1,7 @@
 import BaseComponent from '@app/components/base-component';
 import { IUserLoginDto } from '@app/interfaces/interfaces';
 import Page from '@pages/page';
+import formComponent from '@app/components/login-form';
 import buttonAbout from '@app/components/button-about';
 import Modal from '@app/components/modal';
 
@@ -12,50 +13,6 @@ export default class LoginPage extends Page {
     }
 
     protected render() {
-        const form = new BaseComponent<HTMLFormElement>(
-            { tag: 'form', className: 'login-form', action: '#', autocomplete: 'off' },
-            new BaseComponent<HTMLInputElement>({
-                tag: 'input',
-                type: 'text',
-                name: 'name',
-                autocomplete: 'username',
-                className: 'login-form__input',
-                placeholder: 'Name',
-                pattern: '[A-Z][A-Za-z\\-]{2,}',
-                required: true,
-            }),
-            new BaseComponent<HTMLSpanElement>({
-                tag: 'span',
-                className: 'login-form__error',
-                data: {
-                    errorText: 'Enter your name starting with the capital letter, minimal length is 3',
-                },
-            }),
-            new BaseComponent<HTMLInputElement>({
-                tag: 'input',
-                type: 'password',
-                name: 'password',
-                autocomplete: 'current-password',
-                className: 'login-form__input',
-                placeholder: 'Password',
-                pattern: '(?=.*[0-9]).{4,}',
-                required: true,
-            }),
-            new BaseComponent<HTMLSpanElement>({
-                tag: 'span',
-                className: 'login-form__error',
-                data: {
-                    errorText: 'Password should contain at least one digit, minimal length is 4',
-                },
-            }),
-            new BaseComponent<HTMLButtonElement>({
-                tag: 'button',
-                className: 'button',
-                textContent: 'Login',
-                disabled: true,
-            })
-        );
-
         const loginPage = new BaseComponent(
             { className: 'login-block' },
             new BaseComponent<HTMLParagraphElement>({
@@ -63,11 +20,11 @@ export default class LoginPage extends Page {
                 className: 'login-title',
                 textContent: 'Enter your name and password',
             }),
-            form,
+            formComponent,
             buttonAbout
         );
-        form.getNode().addEventListener('keyup', this.handleKeyUp);
-        form.getNode().addEventListener('submit', (e) => {
+        formComponent.addEventListener('keyup', this.handleKeyUp);
+        formComponent.addEventListener('submit', (e) => {
             this.handleSubmit(e);
         });
         this.appendChildren([loginPage]);
