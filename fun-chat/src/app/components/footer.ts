@@ -15,8 +15,7 @@ const footer = new BaseComponent(
         href: 'https://rs.school/',
         target: '_blank',
         className: 'footer__rss',
-    }),
-    new BaseComponent({ tag: 'p', textContent: 'The Rolling Scopes School' })
+    })
 );
 
 export default footer.getNode();

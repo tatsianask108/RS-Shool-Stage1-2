@@ -5,17 +5,12 @@
     justify-content: space-between;
 }
 
-.main {
-    border: 1px solid blanchedalmond;
-}
-
 header,
 .footer {
     display: flex;
     align-items: center;
     padding: 10px;
-    background-color: #87d6e4b2;
-
+    background-color: #98c1d9;
     justify-content: space-between;
 }
 

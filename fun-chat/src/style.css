@@ -2,6 +2,7 @@
     margin: 0;
     box-sizing: border-box;
     font-family: 'Poppins';
+    color: #293241;
 }
 
 body {
@@ -20,10 +21,21 @@ button {
     cursor: pointer;
     width: 80px;
     text-transform: capitalize;
+    background-color: #e0fbfc;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    transition: 0.3s linear;
+}
+
+button:hover:not(:disabled) {
+    background-color: #ee6c4d;
+    transition: 0.3s linear;
 }
 
 button:disabled {
     cursor: not-allowed;
+    opacity: 0.7;
 }
 
 .wrapper {
@@ -31,6 +43,7 @@ button:disabled {
     display: grid;
     align-items: center;
     justify-content: center;
+    background-color: #3d5a80;
 }
 
 .overlay {
@@ -54,8 +67,8 @@ button:disabled {
     gap: 20px;
     padding: 20px;
     margin: 10px;
-    border: 1px solid blanchedalmond;
-    background-color: white;
+    border: 1px solid #3d5a80;
+    background-color: #98c1d9;
     max-width: 450px;
     min-width: 250px;
     border-radius: 10px;

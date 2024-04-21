@@ -24,7 +24,6 @@ export default class MainPage extends Page {
             const name = data.login;
             const userName = new BaseComponent({ tag: 'p', textContent: `username: ${name}` });
             header.appendChildren([userName]);
-            // header.getNode().textContent = `username: ${name}`;
         }
         buttonLogout.textContent = 'Logout';
 

@@ -118,7 +118,6 @@ export default class LoginPage extends Page {
                     // sessionStorage.setItem('user', JSON.stringify(loginDto));
                     window.location.href = '#/main';
                 } else {
-                    console.log('result', result.message);
                     const modal = new Modal(result.message);
                     modal.open();
                 }
