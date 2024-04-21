@@ -17,6 +17,10 @@ a:visited {
     color: inherit;
 }
 
+li {
+    list-style-type: none;
+}
+
 button {
     cursor: pointer;
     width: 80px;
@@ -43,7 +47,6 @@ button:disabled {
     display: grid;
     align-items: center;
     justify-content: center;
-    background-color: #3d5a80;
 }
 
 .overlay {

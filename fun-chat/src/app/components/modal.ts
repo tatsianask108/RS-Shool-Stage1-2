@@ -20,9 +20,9 @@ export default class Modal extends BaseComponent {
 
     public open() {
         document.body.append(this.node);
-        // setTimeout(() => {
-        //     this.close();
-        // }, 4000);
+        setTimeout(() => {
+            this.close();
+        }, 4000);
     }
 
     private close() {

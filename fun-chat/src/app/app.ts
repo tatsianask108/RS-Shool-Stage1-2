@@ -63,6 +63,10 @@ export default class App {
         this.page = page;
         this.root.append(page.getNode());
     }
+
+    public getWs() {
+        return this.wsService;
+    }
 }
 
 const app = App.getInstance();

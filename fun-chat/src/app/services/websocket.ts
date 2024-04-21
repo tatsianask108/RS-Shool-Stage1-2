@@ -29,7 +29,7 @@ export default class WsService extends EventEmitter {
         });
     }
 
-    public message<T extends IDto = IDto, R extends IDto = IDto>(type: RequestTypes, payload: T): Promise<R> {
+    public message<T, R extends IDto = IDto>(type: RequestTypes, payload: T): Promise<R> {
         return new Promise((resolve, reject) => {
             const requestId = Date.now();
             const request = {

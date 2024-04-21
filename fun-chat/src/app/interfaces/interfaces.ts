@@ -1,15 +1,15 @@
-export type RequestTypes = 'USER_LOGIN' | 'USER_LOGOUT';
+export type RequestTypes = 'USER_LOGIN' | 'USER_LOGOUT' | 'USER_ACTIVE' | 'USER_INACTIVE';
 export type ResponseTypes = 'USER_LOGIN';
 
 export interface IDto {}
 
-export interface IRequest<T extends IDto> {
+export interface IRequest<T> {
     id: string;
     type: RequestTypes;
     payload: T;
 }
 
-export interface IResponse<T extends IDto> {
+export interface IResponse<T> {
     id: string;
     type: ResponseTypes;
     payload: T;
