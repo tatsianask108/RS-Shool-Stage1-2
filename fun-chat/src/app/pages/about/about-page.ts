@@ -31,7 +31,5 @@ export default class AboutPage extends Page {
 
         content.appendChildren([p, ghLink, back]);
         this.append(content);
-
-        // this.getNode().textContent = 'about';
     }
 }

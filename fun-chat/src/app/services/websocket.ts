@@ -1,10 +1,18 @@
 import { IDto, IRequest, RequestTypes } from '@app/interfaces/interfaces';
 import { EventEmitter } from '@app/utils/event-emitter';
 
+const TIMEOUT = 30000;
+
+export enum SocketEvents {
+    OPEN = 'open',
+    CLOSE = 'close',
+    ERROR = 'error',
+}
+
 export default class WsService extends EventEmitter {
     protected options = {
         server: 'ws://localhost:4000',
-        timeout: 30,
+        timeout: TIMEOUT,
     };
 
     private socket: WebSocket;
@@ -17,15 +25,15 @@ export default class WsService extends EventEmitter {
 
     protected addListeners() {
         this.socket.addEventListener('open', () => {
-            this.emit('open');
+            this.emit(SocketEvents.OPEN);
         });
         this.socket.addEventListener('close', () => {
-            this.emit('close');
+            this.emit(SocketEvents.CLOSE);
             this.socket = new WebSocket(this.options.server);
             this.addListeners();
         });
         this.socket.addEventListener('error', () => {
-            this.emit('error');
+            this.emit(SocketEvents.ERROR);
         });
     }
 
@@ -55,10 +63,14 @@ export default class WsService extends EventEmitter {
             setTimeout(() => {
                 reject(new Error('Timeout'));
                 this.socket.removeEventListener('message', onMessage);
-            }, this.options.timeout * 1000);
+            }, this.options.timeout);
 
             this.socket.addEventListener('message', onMessage);
             this.socket.send(JSON.stringify(request));
         });
+    }
+
+    public getWebsocket() {
+        return this.socket;
     }
 }

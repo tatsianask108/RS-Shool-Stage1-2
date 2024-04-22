@@ -3,14 +3,14 @@ import BaseComponent from './base-component';
 export default class Modal extends BaseComponent {
     private readonly modalContent: BaseComponent;
 
-    constructor(config: string) {
+    constructor(modalContent: string) {
         super({ className: 'overlay' });
         const btn = new BaseComponent<HTMLButtonElement>({ tag: 'button', textContent: 'Close' });
         btn.addListener('click', this.close.bind(this));
         this.modalContent = new BaseComponent(
             {
                 className: 'block-centered',
-                textContent: config,
+                textContent: modalContent,
             },
             btn
         );

@@ -1,5 +1,5 @@
 export type RequestTypes = 'USER_LOGIN' | 'USER_LOGOUT' | 'USER_ACTIVE' | 'USER_INACTIVE';
-export type ResponseTypes = 'USER_LOGIN';
+export type ResponseTypes = 'USER_LOGIN' | 'USER_EXTERNAL_LOGIN' | 'USER_EXTERNAL_LOGOUT';
 
 export interface IDto {}
 
@@ -20,16 +20,26 @@ export interface IUser {
     password: string;
 }
 
+export interface IParticipant {
+    login: string;
+    isLogined: string;
+}
+
 export interface IUserLoginDto {
     user: IUser;
 }
 
 export interface IUserLogoutDto extends IUserLoginDto {}
 
+export interface IUserListDto {
+    users: IParticipant[];
+}
+
+export interface IUserExternalDto {
+    user: IParticipant;
+}
+
 export interface IUserLoginResultDto {
     error?: string;
-    user?: {
-        login: string;
-        isLogined: string;
-    };
+    user?: IParticipant;
 }

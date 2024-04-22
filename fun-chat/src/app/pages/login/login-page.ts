@@ -72,7 +72,6 @@ export default class LoginPage extends Page {
             .auth(loginDto)
             .then((result) => {
                 if (result.authorized) {
-                    // sessionStorage.setItem('user', JSON.stringify(loginDto));
                     window.location.href = '#/main';
                 } else {
                     const modal = new Modal(result.message);

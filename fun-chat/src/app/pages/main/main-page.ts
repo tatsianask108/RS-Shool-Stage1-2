@@ -6,13 +6,12 @@ import ChatService from '@app/services/chat';
 import WsService from '@app/services/websocket';
 
 import './main.css';
+import Participant, { ParticipantEvents } from '@app/models/participant';
 
 export default class MainPage extends Page {
     protected wsService: WsService;
 
     public chatService: ChatService;
-
-    // private main: HTMLElement = document.createElement('main');
 
     constructor() {
         super({ className: 'container' });
@@ -39,11 +38,11 @@ export default class MainPage extends Page {
 
         const buttonLogout = document.createElement('button');
 
-        const userName = this.getCurrUserLogin();
+        const userLogin = this.getCurrUserLogin();
 
-        const userNameP = new BaseComponent({ tag: 'p', textContent: `username: ${userName}` });
+        const userName = new BaseComponent({ tag: 'p', textContent: `username: ${userLogin}` });
 
-        header.appendChildren([userNameP]);
+        header.appendChildren([userName]);
         buttonLogout.textContent = 'Logout';
 
         buttonLogout.addEventListener('click', async () => {
@@ -59,38 +58,40 @@ export default class MainPage extends Page {
 
     private async renderUserList() {
         const userList = new BaseComponent({ tag: 'ul', className: 'user-list' });
-        const activeUsers = await this.chatService.getActiveUsers();
-        const unauthorizedUsers = await this.chatService.getUnauthorizedUsers();
-        const usersArr: Node[] = [];
-        activeUsers
-            .filter((user) => user.login !== this.getCurrUserLogin())
-            .forEach((user) => {
-                const line = document.createElement('li');
-                line.classList.add('line');
-                const circle = document.createElement('span');
-                const userLogin = document.createElement('span');
-                userLogin.className = 'userLogin';
-                circle.className = 'status-online';
-                userLogin.textContent = user.login;
-                line.append(circle, userLogin);
-                usersArr.push(line);
+        const participants = (await this.chatService.getParticipants())
+            .filter((el) => el.login !== this.getCurrUserLogin())
+            .map((el) => {
+                return this.createParticipantElement(el);
             });
-        unauthorizedUsers.forEach((user) => {
-            const line = document.createElement('li');
-            line.classList.add('line');
-            const circle = document.createElement('span');
-            const userLogin = document.createElement('span');
-            userLogin.className = 'userLogin';
-            circle.className = 'status-offline';
-            userLogin.textContent = user.login;
-            line.append(circle, userLogin);
-            usersArr.push(line);
-        });
 
         const main = this.getNode().querySelector('main');
         if (main) {
-            userList.getNode().append(...usersArr);
+            userList.getNode().append(...participants);
             main.append(userList.getNode());
         }
+    }
+
+    private createParticipantElement(user: Participant) {
+        const element = document.createElement('li');
+        const status = document.createElement('span');
+        const login = document.createElement('span');
+
+        element.id = `user-${user.login}`;
+        element.classList.add('line');
+
+        login.textContent = user.login;
+        login.className = 'userLogin';
+
+        status.className = user.isLogined ? 'status-online' : 'status-offline';
+
+        element.append(status, login);
+
+        user.on(ParticipantEvents.LOGIN, () => {
+            status.className = 'status-online';
+        });
+        user.on(ParticipantEvents.LOGOUT, () => {
+            status.className = 'status-offline';
+        });
+        return element;
     }
 }
