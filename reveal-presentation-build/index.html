@@ -1,20 +1,10 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="./style.css" />
     <title>reveal.js</title>
-
-    <link rel="stylesheet" href="dist/reset.css" />
-    <link rel="stylesheet" href="dist/reveal.css" />
-    <link rel="stylesheet" href="dist/theme/solarized.css" />
-
-    <!-- Theme used for syntax highlighted code -->
-    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
   </head>
   <body>
     <div class="reveal">
@@ -27,7 +17,7 @@
         <section>
           <section>
             What is CI/CD?
-            <img src="./assets/0_7Ug0sGytwhy94O3Z.webp" alt="ci-cd" />
+            <img src="./public/0_7Ug0sGytwhy94O3Z.webp" alt="ci-cd" />
             <aside class="notes">
               Continuous integration (CI) and continuous delivery (CD), are principles and practices
               that are used to deliver code changes more frequently. CI/CD is a best practice for
@@ -38,7 +28,7 @@
             </aside>
           </section>
           <section>
-            <img src="./assets/WcVq6JIUjX.png" alt="scripts" />
+            <img src="./public/WcVq6JIUjX.png" alt="scripts" />
             <aside class="notes">
               He manually runs all nessesary scripts such as app build, types checkers, linters and
               code formatters. But how can we automatize this process?
@@ -48,7 +38,7 @@
         <section>
           <section>
             <h2>Continuous Integration</h2>
-            <img src="./assets/ci.png" alt="ci" />
+            <img src="./public/ci.png" alt="ci" />
             <aside class="notes">
               Its accomplished by CI. CI is an automation process for merging of code changes back
               to a shared branch. These changes are validated by creating a bundle and running
@@ -83,7 +73,7 @@
         <section>
           <section>
             <h2>Continuous delivery</h2>
-            <img src="./assets/cdel.png" alt="c-del" />
+            <img src="./public/cdel.png" alt="c-del" />
             <aside class="notes">
               Continuous delivery is an extension of continuous integration. It automatically
               deploys all code changes to a testing or production environment. This means that after
@@ -114,7 +104,7 @@
         <section>
           <section>
             <h2>continuous deployment</h2>
-            <img src="./assets/c-dep.png" alt="c-dep" />
+            <img src="./public/c-dep.png" alt="c-dep" />
             <aside class="notes">
               The final stage is continuous deployment. With this practice, every change that passes
               all stages of your production pipeline is released to customers. There's no human
@@ -149,7 +139,7 @@
         </section>
         <section>
           <h2>CI/CD tools</h2>
-          <img class="tools" src="./assets/tools.png" alt="tools" />
+          <img class="tools" src="./public/tools.png" alt="tools" />
           <aside class="notes">
             There's a lot of tools, but these tools are pretty similar. Jenkins, GitHub Actions.
           </aside>
@@ -157,7 +147,7 @@
         <section>
           <h2>GitHub Actions</h2>
           <p>GitHub Actions is a CI/CD platform</p>
-          <img src="./assets/ghactions.png" alt="actions" />
+          <img src="./public/ghactions.png" alt="actions" />
           <aside class="notes">
             GitHub Actions is a (CI/CD) platform that allows you to automate your app building,
             testing, and deployment. /* You can create workflows that build and test every pull
@@ -165,7 +155,7 @@
           </aside>
         </section>
         <section>
-          <img src="./assets/overview-actions-simple.webp" alt="" />
+          <img src="./public/overview-actions-simple.webp" alt="" />
           <aside class="notes">
             You can configure a GitHub Actions workflow to be triggered when an event occurs in your
             repository. An event is a for example when someone creates a pull request, opens an
@@ -179,7 +169,7 @@
         </section>
         <section>
           <h2>workflow</h2>
-          <img class="my-img" src="./assets/workflow2.png" alt="" />
+          <img class="my-img" src="./public/workflow2.png" alt="" />
           <aside class="notes">
             A workflow is a configurable automated process that will run one or more jobs. Workflows
             are defined by a YAML file in repository. Workflows are defined in the .github/workflows
@@ -188,7 +178,7 @@
         </section>
         <section>
           <h2>Understanding the workflow file</h2>
-          <img class="my-img" src="./assets/yml.png" alt="yml" />
+          <img class="my-img" src="./public/yml.png" alt="yml" />
           <aside class="notes">
             Optional - The name of the workflow as it will appear in the "Actions" tab of the GitHub
             repository. Specifies the trigger for this workflow. This example uses the push event,
@@ -201,20 +191,20 @@
           </aside>
         </section>
         <section>
-          <img src="./assets/1.webp" alt="" />
-          <img src="./assets/2.webp" alt="" />
-          <img src="./assets/3.webp" alt="" />
+          <img src="./public/1.webp" alt="" />
+          <img src="./public/2.webp" alt="" />
+          <img src="./public/3.webp" alt="" />
           <aside class="notes">follow these steps to View your workflow results</aside>
         </section>
         <section>
-          <img src="./assets/merge.png" alt="merge" />
+          <img src="./public/merge.png" alt="merge" />
           <aside class="notes">
             The log shows you how each of the steps was processed. If some of the test fail no merge
             is performed
           </aside>
         </section>
         <section>
-          <img src="./assets/success.png" alt="" />
+          <img src="./public/success.png" alt="" />
           <aside class="notes">
             if succsess you see all checks passed. All that's left is to choose where you're going
             to deploy your app. And every time the changes are succsessfully pushed the main branch,
@@ -225,20 +215,6 @@
       </div>
     </div>
 
-    <script src="dist/reveal.js"></script>
-    <script src="plugin/notes/notes.js"></script>
-    <script src="plugin/markdown/markdown.js"></script>
-    <script src="plugin/highlight/highlight.js"></script>
-    <script>
-      // More info about initialization & config:
-      // - https://revealjs.com/initialization/
-      // - https://revealjs.com/config/
-      Reveal.initialize({
-        hash: true,
-
-        // Learn about plugins: https://revealjs.com/plugins/
-        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
-      });
-    </script>
+    <script type="module" src="/main.js"></script>
   </body>
 </html>
