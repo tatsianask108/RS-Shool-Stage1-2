@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>reveal.js</title>
+    <script type="module" crossorigin src="./assets/index-Ct8Gtsgz.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DCYoKlxm.css">
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>CI/CD</h1>
+          <aside class="notes">
+          </aside>
+        </section>
+        <section>
+          <section>
+            What is CI/CD?
+            <img src="./assets/0_7Ug0sGytwhy94O3Z-B9AscLgs.webp" alt="ci-cd" />
+            <aside class="notes">
+              Continuous integration (CI) and continuous delivery (CD), are principles and practices
+              that are used to deliver code changes more frequently. CI/CD is a best practice for
+              devops teams and agile methodOlogy. Taken together, these practices are often called
+              as a "CI/CD pipeline".To define CI, lets imagine, a dev is working on new feature in
+              sepearate branch. After he completed development on this feature he needs to merge
+              changes in the main branch.
+            </aside>
+          </section>
+          <section>
+            <img src="./assets/WcVq6JIUjX-CTH-wClb.png" alt="scripts" />
+            <aside class="notes">
+              He manually runs all nessesary scripts such as app build, types checkers, linters and
+              code formatters. But how can we automatize this process?
+            </aside>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Continuous Integration</h2>
+            <img src="./assets/ci-BD_HPatu.png" alt="ci" />
+            <aside class="notes">
+              Its accomplished by CI. CI is an automation process for merging of code changes back
+              to a shared branch. These changes are validated by creating a bundle and running
+              automated tests. Basically, CI helps to check that the application is not broken when
+              new commits are integrated into the main branch.
+            </aside>
+          </section>
+          <section>
+            <h2>What you need (cost)</h2>
+            <ul>
+              <li>Your team will need to write automated tests for each new feature, bug fix.</li>
+              <li>
+                You need a continuous integration server that can monitor the main repository and
+                run the tests automatically for every new commits pushed.
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h2>What you gain</h2>
+            <ul>
+              <li>Less bugs appear on production</li>
+              <li>Building the release is easy</li>
+              <li>Testing costs are reduced – your CI server can run tests</li>
+              <li>
+                Less context switching as developers are warned as soon as they break the build and
+                can work on fixing it before they move to another task.
+              </li>
+              <li>QA team spends less time testing</li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Continuous delivery</h2>
+            <img src="./assets/cdel-C2jyyXEn.png" alt="c-del" />
+            <aside class="notes">
+              Continuous delivery is an extension of continuous integration. It automatically
+              deploys all code changes to a testing or production environment. This means that after
+              automated testing, you have an automated release process and you can deploy your
+              application any time by clicking a button.
+            </aside>
+          </section>
+          <section>
+            <h2>What you need (cost)</h2>
+            <ul>
+              <li>
+                You need a strong foundation in continuous integration and your test suite needs to
+                cover enough of your codebase.
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h2>What you gain</h2>
+            <ul>
+              <li>
+                Easier deployments. Your team doesn't have to spend days preparing for a release
+                anymore.
+              </li>
+              <li>You can release more often, and get the feedback from customers faster.</li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>continuous deployment</h2>
+            <img src="./assets/c-dep-C7Gop65u.png" alt="c-dep" />
+            <aside class="notes">
+              The final stage is continuous deployment. With this practice, every change that passes
+              all stages of your production pipeline is released to customers. There's no human
+              intervention, and only a failed test will prevent a new change to be deployed to
+              production. CD makes it much easier to continuously receive user feedback.
+            </aside>
+          </section>
+          <!-- <section>
+            <h2>What you need (cost)</h2>
+            <ul>
+              <li>
+                Your testing culture needs to be at its best. The quality of your test suite will
+                determine the quality of your releases.
+              </li>
+              <li>Your documentation process will need to keep up with the pace of deployments.</li>
+            </ul>
+          </section> -->
+          <section>
+            <h2>What you gain</h2>
+            <ul>
+              <li>
+                You can develop faster as there's no need to pause development for releases.
+                Deployments pipelines are triggered automatically for every change.
+              </li>
+              <li>
+                Releases are less risky and easier to fix in case of problem as you deploy small
+                changes.
+              </li>
+              <li>Customers see a continuous stream of improvements.</li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <h2>CI/CD tools</h2>
+          <img class="tools" src="./assets/tools-DtCkD6u3.png" alt="tools" />
+          <aside class="notes">
+            There's a lot of tools, but these tools are pretty similar. Jenkins, GitHub Actions.
+          </aside>
+        </section>
+        <section>
+          <h2>GitHub Actions</h2>
+          <p>GitHub Actions is a CI/CD platform</p>
+          <img src="./assets/ghactions-HUANRVU9.png" alt="actions" />
+          <aside class="notes">
+            GitHub Actions is a (CI/CD) platform that allows you to automate your app building,
+            testing, and deployment. /* You can create workflows that build and test every pull
+            request to your repository, or deploy merged pull requests to production. */
+          </aside>
+        </section>
+        <section>
+          <img src="./assets/overview-actions-simple-DgYsy4Qb.webp" alt="" />
+          <aside class="notes">
+            You can configure a GitHub Actions workflow to be triggered when an event occurs in your
+            repository. An event is a for example when someone creates a pull request, opens an
+            issue, or pushes a commit to a repository. You can also trigger a workflow to run on a
+            schedule or manually. Your workflow contains one or more jobs which can run in
+            sequential order or in parallel. Each job runs inside its own virtual machine and has
+            one or more steps that run scripts. You can configure a job's dependencies with other
+            jobs; by default, jobs have no dependencies. When a job takes a dependency on another
+            job, it will wait for the dependent job to complete before it can run.
+          </aside>
+        </section>
+        <section>
+          <h2>workflow</h2>
+          <img class="my-img" src="./assets/workflow2-CeQvY5Nh.png" alt="" />
+          <aside class="notes">
+            A workflow is a configurable automated process that will run one or more jobs. Workflows
+            are defined by a YAML file in repository. Workflows are defined in the .github/workflows
+            directory in a repository. Repository can have multiple workflows.
+          </aside>
+        </section>
+        <section>
+          <h2>Understanding the workflow file</h2>
+          <img class="my-img" src="./assets/yml-rYWcKGrH.png" alt="yml" />
+          <aside class="notes">
+            Optional - The name of the workflow as it will appear in the "Actions" tab of the GitHub
+            repository. Specifies the trigger for this workflow. This example uses the push event,
+            so a workflow run is triggered every time someone pushes a change to the master branch
+            or creating PR to it .Groups together all the jobs that run in the current workflow. Job
+            name.Configures the job to run on the latest version of an Ubuntu Linux runner. This
+            means that the job will execute on a fresh virtual machine hosted by GitHub. All the
+            steps that run in the current job. Node.js intallisation. Names of the script and script
+            execution commands.
+          </aside>
+        </section>
+        <section>
+          <img src="./assets/1-DPqm_pLE.webp" alt="" />
+          <img src="./assets/2-7mczQeln.webp" alt="" />
+          <img src="./assets/3-DiVhwXaa.webp" alt="" />
+          <aside class="notes">follow these steps to View your workflow results</aside>
+        </section>
+        <section>
+          <img src="./assets/merge-BnzSnJGl.png" alt="merge" />
+          <aside class="notes">
+            The log shows you how each of the steps was processed. If some of the test fail no merge
+            is performed
+          </aside>
+        </section>
+        <section>
+          <img src="./assets/success-YriMPGro.png" alt="" />
+          <aside class="notes">
+            if succsess you see all checks passed. All that's left is to choose where you're going
+            to deploy your app. And every time the changes are succsessfully pushed the main branch,
+            the deploy will be automatically updated. That's pretty much it. Thank you for
+            attention.
+          </aside>
+        </section>
+      </div>
+    </div>
+
+  </body>
+</html>
